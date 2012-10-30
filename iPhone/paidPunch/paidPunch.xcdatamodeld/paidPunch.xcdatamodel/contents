@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="864" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="PunchCard" representedClassName="PunchCard">
+        <attribute name="actual_price" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="business_id" optional="YES" attributeType="String"/>
+        <attribute name="business_logo_img" optional="YES" attributeType="Binary"/>
+        <attribute name="business_logo_url" optional="YES" attributeType="String"/>
+        <attribute name="business_name" optional="YES" attributeType="String"/>
+        <attribute name="discount" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="discount_value_of_each_punch" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="each_punch_value" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="expiry_date" optional="YES" attributeType="Date"/>
+        <attribute name="flag" optional="YES" attributeType="Boolean"/>
+        <attribute name="punch_card_desc" optional="YES" attributeType="String"/>
+        <attribute name="punch_card_download_id" optional="YES" attributeType="String"/>
+        <attribute name="punch_card_id" optional="YES" attributeType="String"/>
+        <attribute name="punch_card_name" optional="YES" attributeType="String"/>
+        <attribute name="punch_expire" optional="YES" attributeType="Boolean"/>
+        <attribute name="selling_price" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="total_punches" optional="YES" attributeType="Integer 16" defaultValueString="0.0"/>
+        <attribute name="total_punches_used" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+    </entity>
+    <entity name="Registration" representedClassName="Registration">
+        <attribute name="confirm_password" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="mobile" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <attribute name="zipcode" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="PunchCard" positionX="160" positionY="192" width="128" height="315"/>
+        <element name="Registration" positionX="160" positionY="192" width="128" height="135"/>
+    </elements>
+</model>

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	font-family:Helvetica, Geneva, Verdana;
+}
+
+p	{
+	font-size:15px;
+	color:#333;
+}

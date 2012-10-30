@@ -1,0 +1,40 @@
+/* 
+  Localizable.strings
+  paidPunch
+
+  Created by mobimedia technologies on 29/11/11.
+  Copyright (c) 2011 mobimedia. All rights reserved.
+*/
+
+"AppRegistrationUrl"="/app_registration";
+"FeedBackUrl"="/feedback";
+"PaidPunchUrl"="/punch";
+"UpdateUrl"="/updation";
+"ForgotPasswordUrl"="/forgotpassword";
+"FBLoginUrl"="/FB_login";
+"MysteryPunchUrl"="/mysterypunch";
+"FeedsUrl"="/Feeds";
+"ProfileCreationUrl"="/payment_detail";
+"BuyPunchUrl"="/payment";
+"DeleteProfileUrl"="/payment_detail";
+
+
+/*"ProfileCreationUrl"="https://122.179.131.164:8186/paid_punch/payment_detail";
+"BuyPunchUrl"="https://122.179.131.164:8186/paid_punch/payment";*/
+
+ /*"ProfileCreationUrl"="https://192.168.1.28:8443/paid_punch/payment_detail";
+ "BuyPunchUrl"="https://192.168.1.28:8443/paid_punch/payment";*/
+
+/*"AppRegistrationUrl" = "http://63.247.83.219/paid_punch/app_registration";
+"FeedBackUrl"="http://63.247.83.219/paid_punch/feedback";
+"PaidPunchUrl"="http://63.247.83.219/paid_punch/punch";
+"UpdateUrl"="http://63.247.83.219/paid_punch/updation";
+"ForgotPasswordUrl"="http://63.247.83.219/paid_punch/forgotpassword";*/
+
+"HowToUseTxtUrl"="/HOW.html";
+"FaqUrl"="/FAQ.html";
+"FBShareLogoUrl"="http://paidpunch.com/img/pp_logo_fb.jpg"; //"http://paidpunch.com/paid_punch_test/paidpunch/images/pp_logo_fb.jpg";
+
+"AppIPURL"="https://s3.amazonaws.com/active_server/PPConf.txt";
+//"AppIPURL"="https://s3.amazonaws.com/active_server/Test.txt";
+//"AppIPURL"="https://s3.amazonaws.com/active_server/Test1.txt";
