@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "SignInViewController.h"
+#import "StartPageViewController.h"
 #import "iRate.h"
 
 @implementation AppDelegate

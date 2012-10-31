@@ -33,11 +33,11 @@
 		11D4D99015C9094300FEF636 /* NoPunches@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D98E15C9094300FEF636 /* NoPunches@2x.png */; };
 		11D4D99315C9F82400FEF636 /* MyPunchesInstructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D99115C9F82400FEF636 /* MyPunchesInstructions.png */; };
 		11D4D99415C9F82400FEF636 /* MyPunchesInstructions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D99215C9F82400FEF636 /* MyPunchesInstructions@2x.png */; };
-		11D4D9BE15CB983F00FEF636 /* MarqueeLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 11D4D9BC15CB968900FEF636 /* MarqueeLabel.h */; };
 		11D4D9BF15CB983F00FEF636 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D4D9BD15CB968A00FEF636 /* MarqueeLabel.m */; };
 		11D4D9C615CBA3D800FEF636 /* FAQ.html in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C415CBA3D800FEF636 /* FAQ.html */; };
 		11D4D9C715CBA3D800FEF636 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C515CBA3D800FEF636 /* style.css */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
+		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
 		8A03AE9D151B47CD004BEDC3 /* CancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A03AE9B151B47CD004BEDC3 /* CancelBtn@2x.png */; };
@@ -462,11 +462,9 @@
 		8B9FECBE15D1B8D200D559DB /* FeedSegmentedControlOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9FECBA15D1B8D200D559DB /* FeedSegmentedControlOne@2x.png */; };
 		8B9FECBF15D1B8D200D559DB /* FeedSegmentedControlTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9FECBB15D1B8D200D559DB /* FeedSegmentedControlTwo.png */; };
 		8B9FECC015D1B8D200D559DB /* FeedSegmentedControlTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B9FECBC15D1B8D200D559DB /* FeedSegmentedControlTwo@2x.png */; };
-		8BAE652615D48B720075E5D8 /* AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE652515D48B720075E5D8 /* AppIcon@2x.png */; };
 		8BAE652815D48B7D0075E5D8 /* AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE652715D48B7D0075E5D8 /* AppIcon@2x.png */; };
 		8BD3D34515D230F10024B079 /* DoneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3D34315D230F10024B079 /* DoneButton.png */; };
 		8BD3D34615D230F10024B079 /* DoneButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3D34415D230F10024B079 /* DoneButton@2x.png */; };
-		B93FD3FE15CCBE870013FBBB /* MBProgressHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 11FF086615CC715600A7177A /* MBProgressHUD.h */; };
 		B93FD3FF15CCBE870013FBBB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FF086715CC715600A7177A /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
@@ -525,6 +523,7 @@
 		11FF086615CC715600A7177A /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		11FF086715CC715600A7177A /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -1120,6 +1119,7 @@
 		8A77DE2B147E677100E05277 = {
 			isa = PBXGroup;
 			children = (
+				3842B26E1641D37D009203D0 /* Default-568h@2x.png */,
 				8BAE652515D48B720075E5D8 /* AppIcon@2x.png */,
 				117F069A15CF667B003C3EC3 /* StartPageViewcontroller.xib */,
 				8A3B1D0C154006F200BD0AAE /* SocialNetworkLibrary.xcodeproj */,
@@ -3021,8 +3021,8 @@
 				8B9FECC015D1B8D200D559DB /* FeedSegmentedControlTwo@2x.png in Resources */,
 				8BD3D34515D230F10024B079 /* DoneButton.png in Resources */,
 				8BD3D34615D230F10024B079 /* DoneButton@2x.png in Resources */,
-				8BAE652615D48B720075E5D8 /* AppIcon@2x.png in Resources */,
 				8BAE652815D48B7D0075E5D8 /* AppIcon@2x.png in Resources */,
+				3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3033,9 +3033,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B93FD3FE15CCBE870013FBBB /* MBProgressHUD.h in Sources */,
 				B93FD3FF15CCBE870013FBBB /* MBProgressHUD.m in Sources */,
-				11D4D9BE15CB983F00FEF636 /* MarqueeLabel.h in Sources */,
 				11D4D9BF15CB983F00FEF636 /* MarqueeLabel.m in Sources */,
 				8A77DE45147E677100E05277 /* main.m in Sources */,
 				8A77DE80147E6A8400E05277 /* paidPunch.xcdatamodeld in Sources */,
@@ -3170,10 +3168,7 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../fb/lib/facebook-ios-sdk\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -3261,10 +3256,7 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../fb/lib/facebook-ios-sdk\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -3299,10 +3291,7 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../fb/lib/facebook-ios-sdk\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

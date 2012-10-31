@@ -22,11 +22,10 @@
 	if ((self=[super init]))
 	{
         self.view = parentView;
-//        activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//        activityIndicator = [[UIActivityIndicatorView alloc] init];
 		xmlParser=[[ServerResponseXmlParser alloc]init];
         popupHUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:popupHUD];
+        uniqueID = nil;
 	}
 	return self;	
 }
@@ -36,13 +35,12 @@
 
 -(void)dealloc{
 	if(self.webData)
-		[webData release];
+    [webData release];
     [requestType release];
 	[xmlParser release];
-//    [activity release];
     [view release];
-//    [activityView release];
-//    activityView=nil;
+    [uniqueID release];
+    uniqueID = nil;
 	[super dealloc];
      NSLog(@"In dealloc of NetworkManager");
 }
@@ -1071,9 +1069,17 @@ response
 
 -(NSString *)getUniqueId
 {
-    UIDevice *device=[UIDevice currentDevice];
-	NSString *uniqueIdentifier=[device uniqueIdentifier];
-    return uniqueIdentifier;
+    if (!uniqueID)
+    {
+        // Create universally unique identifier (object)
+        CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
+        
+        // Get the string representation of CFUUID object.
+        uniqueID = (NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObject);
+        CFRelease(uuidObject);
+    }
+    
+    return uniqueID;
 }
 
 #pragma mark -

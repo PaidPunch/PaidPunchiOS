@@ -35,7 +35,7 @@
 - (void)dealloc {
     [headingLabel release];
     [valueTextField release];
-    //[super dealloc];
+    [super dealloc];
      NSLog(@"In dealloc of CustomTextFieldCell");
 }
 

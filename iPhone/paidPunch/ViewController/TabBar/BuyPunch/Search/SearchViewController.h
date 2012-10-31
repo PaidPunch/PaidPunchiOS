@@ -49,6 +49,4 @@
 @property (nonatomic, retain) IBOutlet UITableView *searchTable;
 @property (nonatomic, retain) IBOutlet  UIImageView *noBusinessesErrorImage;
 
-@property(nonatomic, retain) MKReverseGeocoder *geoCoder;
-
 @end

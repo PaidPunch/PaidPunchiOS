@@ -52,17 +52,10 @@
 	NSMutableData *webData;
 
 	id <NetworkManagerDelegate> delegate;
-	
-//    UIActivityIndicatorView *activity;
-    
     NSString *requestType;
-    
+    NSString *uniqueID;
     ServerResponseXmlParser *xmlParser;
-    
-//    UIView *activityView;
     MBProgressHUD *popupHUD;
-    
-//    UIActivityIndicatorView *activityIndicator;
 }
 
 //@property(nonatomic,retain) IBOutlet UIView *activity;

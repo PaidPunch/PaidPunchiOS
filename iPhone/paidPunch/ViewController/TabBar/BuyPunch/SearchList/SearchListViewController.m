@@ -1289,6 +1289,7 @@
             return biz;
         }
     }
+    return nil;
 }
 
 -(void) getBusinessOffer
