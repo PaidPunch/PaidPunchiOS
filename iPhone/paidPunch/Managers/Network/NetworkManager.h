@@ -21,7 +21,7 @@
 @class ServerResponseXmlParser;
 
 //custom delegate
-@protocol NetworkManagerDelegate
+@protocol NetworkManagerDelegate<NSObject>
 
 @optional
 -(void) didFinishLoadingAppURL:(NSString *)url;
@@ -46,7 +46,6 @@
 -(void) didConnectionFailed :(NSString *)responseStatus;
 
 @end
-
 
 @interface NetworkManager : NSObject {
     

@@ -420,7 +420,7 @@ static DatabaseManager *sharedInstance=nil;
                 CLLocation *item1 =location;
                 CLLocation *item2 = [[CLLocation alloc] initWithLatitude:[bObj.latitude doubleValue] longitude:[bObj.longitude doubleValue]];
         
-                CLLocationDistance meters = [item1 getDistanceFrom:item2]; 
+                CLLocationDistance meters = [item1 distanceFromLocation:item2]; 
                 NSLog(@"Distance in metres: %f", meters);
                 double distanceInMiles=meters/kOneMileMeters;
                 NSLog(@"%@ Distance in miles: %f", bObj.business_name , distanceInMiles);
@@ -447,7 +447,7 @@ static DatabaseManager *sharedInstance=nil;
             CLLocation *item1 =location;
             CLLocation *item2 = [[CLLocation alloc] initWithLatitude:[bObj.latitude doubleValue] longitude:[bObj.longitude doubleValue]];
                 
-            CLLocationDistance meters = [item1 getDistanceFrom:item2]; 
+            CLLocationDistance meters = [item1 distanceFromLocation:item2]; 
             //NSLog(@"Distance in metres: %f", meters);
             double distanceInMiles=meters/kOneMileMeters;
             //NSLog(@"%@ Distance in miles: %f", bObj.business_name,distanceInMiles);

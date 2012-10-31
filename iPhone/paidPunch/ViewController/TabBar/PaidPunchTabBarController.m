@@ -92,6 +92,33 @@
     [[InfoExpert sharedInstance] setAppUrl:url];
 }
 
+#pragma mark Facebook delegates
+
+- (void)fbDidLogin
+{
+    // TODO: Still needs to be implemented
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    // TODO: Still needs to be implemented
+}
+
+- (void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt
+{
+    // TODO: Still needs to be implemented
+}
+
+- (void)fbDidLogout
+{
+    // TODO: Still needs to be implemented
+}
+
+- (void)fbSessionInvalidated
+{
+    // TODO: Still needs to be implemented
+}
+
 #pragma mark -
 
 -(void) requestAppIp

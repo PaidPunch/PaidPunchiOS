@@ -640,7 +640,7 @@ static FacebookFacade *sharedInstance=nil;
                                                         data:friends action:@""];
                 [self.navigationController pushViewController:controller animated:YES];
                 [controller release];*/
-                [self.feedsViewController getFeeds:result];
+                [[self feedsViewController] getFeeds:result];
             } else {
                 [self showMessage:@"You have no friends."];
                 [self.feedsViewController getFeeds:nil];

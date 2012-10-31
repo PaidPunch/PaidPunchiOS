@@ -460,7 +460,6 @@
 
 -(BOOL) validate
 {
-//    [self populateFields];
     if(usernameTF.text.length==0)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

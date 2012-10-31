@@ -37,7 +37,7 @@
 	
 	pageControlBeingUsed = NO;
 	
-    NSArray *placardFiles = [NSArray arrayWithObjects:[NSString stringWithString:@"InformationPlacardThree.png"], [NSString stringWithString:@"InformationPlacardTwo.png"], [NSString stringWithString:@"InformationPlacardOne.png"], nil];
+    NSArray *placardFiles = [NSArray arrayWithObjects:@"InformationPlacardThree.png", @"InformationPlacardTwo.png", @"InformationPlacardOne.png", nil];
     for (int i = 0; i < placardFiles.count; i++) {
 		CGRect frame;
 		frame.origin.x = self.scrollView.frame.size.width * i;

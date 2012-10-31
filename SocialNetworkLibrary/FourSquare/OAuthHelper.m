@@ -112,7 +112,7 @@
 }
 
 + (NSString *)generateTimestamp {
-	return [[NSString stringWithFormat:@"%d", time(NULL)] retain];
+	return [[NSString stringWithFormat:@"%ld", time(NULL)] retain];
 }
 
 + (NSString *)generateNonce {

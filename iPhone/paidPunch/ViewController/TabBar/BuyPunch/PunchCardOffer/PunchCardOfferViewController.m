@@ -501,9 +501,10 @@
         totalPunches-=1;
     }
     
-    double eachPunchValue = [self.punchCardDetails.each_punch_value doubleValue];
-    double actualPrice = [self.punchCardDetails.actual_price doubleValue];
-    double discountPercent = 100*(1.0 - (eachPunchValue / actualPrice));
+    // TODO: Are these needed?
+    //double eachPunchValue = [self.punchCardDetails.each_punch_value doubleValue];
+    //double actualPrice = [self.punchCardDetails.actual_price doubleValue];
+    //double discountPercent = 100*(1.0 - (eachPunchValue / actualPrice));
     
     double savingsValue = ([self.punchCardDetails.each_punch_value doubleValue] * totalPunches) - [self.punchCardDetails.selling_price doubleValue];
     

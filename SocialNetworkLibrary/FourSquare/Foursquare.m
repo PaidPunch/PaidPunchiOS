@@ -46,7 +46,9 @@
 + (void)initialize
 {
 	[self setFormat:HRDataFormatJSON];
-	[self setDelegate:self];
+	
+    // TODO: Fix delegate assignment properly someday if we use Foursquare
+    //[self setDelegate:self];
 	[self setBaseURL:[NSURL URLWithString:@"http://api.foursquare.com/v1/"]];
 	
 }

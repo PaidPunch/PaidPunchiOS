@@ -45,7 +45,6 @@
 - (BOOL) validate;
 - (BOOL) validateEmail: (NSString *) emailId;
 - (Registration *)populate;
-- (void) populateFields;
 - (void)dismissKeyboard;
 
 -(void) goToTermsAndConditionsView;

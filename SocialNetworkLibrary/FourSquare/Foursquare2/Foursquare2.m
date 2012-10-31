@@ -47,7 +47,8 @@
 + (void)initialize
 {
 	[self setFormat:HRDataFormatJSON];
-	[self setDelegate:self];
+	// TODO: Fix delegate assignment properly someday if we use Foursquare
+    //[self setDelegate:self];
 	[self setBaseURL:[NSURL URLWithString:@"https://api.foursquare.com/v2/"]];
 	NSUserDefaults *usDef = [NSUserDefaults standardUserDefaults];
 	if ([usDef objectForKey:@"access_token"] != nil) {
@@ -960,8 +961,8 @@
 #endif
 	 
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",@"0xKhTmLbOuNdArY"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data\"; filename=\"photo.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[@"Content-Disposition: form-data; name=\"data\"; filename=\"photo.jpeg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[NSData dataWithData:data]];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",@"0xKhTmLbOuNdArY"] dataUsingEncoding:NSUTF8StringEncoding]];
 	

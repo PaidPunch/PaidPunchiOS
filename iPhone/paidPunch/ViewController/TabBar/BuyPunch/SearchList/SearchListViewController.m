@@ -434,7 +434,7 @@
         item1=self.reverseGeoLocation;
     CLLocation *item2 = [[CLLocation alloc] initWithLatitude:[business.latitude doubleValue] longitude:[business.longitude doubleValue]];
     
-    CLLocationDistance meters = [item1 getDistanceFrom:item2]; 
+    CLLocationDistance meters = [item1 distanceFromLocation:item2]; 
     //NSLog(@"Distance in metres: %f", meters);
     double distanceInMiles=meters/kOneMileMeters;
     //NSLog(@"Distance in miles: %f", distanceInMiles);
@@ -606,7 +606,7 @@
             locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
             locationMgr.distanceFilter = kCLDistanceFilterNone;
             self.currentLocation=nil;
-            if(locationMgr.locationServicesEnabled)
+            if([CLLocationManager locationServicesEnabled])
             {
                 [self.locationMgr startUpdatingLocation];
             }
@@ -1055,7 +1055,7 @@
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
         locationMgr.distanceFilter = kCLDistanceFilterNone;
         self.currentLocation=nil;
-        if(locationMgr.locationServicesEnabled)
+        if([CLLocationManager locationServicesEnabled])
         {
             [self.locationMgr startUpdatingLocation];
         }
@@ -1208,7 +1208,7 @@
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
         locationMgr.distanceFilter = kCLDistanceFilterNone;
         self.currentLocation=nil;
-        if(locationMgr.locationServicesEnabled)
+        if([CLLocationManager locationServicesEnabled])
         {
             [self.locationMgr startUpdatingLocation];
         }

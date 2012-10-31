@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NetworkManager.h"
 #import "PunchCard.h"
 #import "SDWebImageManager.h"
 #import "SDWebImageManagerDelegate.h"
@@ -16,7 +17,7 @@
 
 @class NetworkManager;
 @protocol NetworkManagerDelegate;
-@interface SlideToConfirmDialog : UIViewController<SDWebImageManagerDelegate,NetworkManagerDelegate,SlideToCancelDelegate>
+@interface SlideToConfirmDialog : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate,SlideToCancelDelegate>
 {
     NetworkManager *networkManager;
     SlideToCancelViewController *slideToCancel;

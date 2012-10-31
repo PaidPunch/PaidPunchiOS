@@ -292,7 +292,7 @@
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
         locationMgr.distanceFilter = kCLDistanceFilterNone;
         self.currentLocation=nil;
-        if(locationMgr.locationServicesEnabled)
+        if([CLLocationManager locationServicesEnabled])
         {
             [self.locationMgr startUpdatingLocation];
         }
@@ -593,7 +593,7 @@
     locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
     locationMgr.distanceFilter = kCLDistanceFilterNone;
     self.currentLocation=nil;
-    if(locationMgr.locationServicesEnabled)
+    if([CLLocationManager locationServicesEnabled])
     {
         [self.locationMgr startUpdatingLocation];
     }
@@ -648,7 +648,7 @@
 	/*NSArray *xibUIObjects =[[NSBundle mainBundle] loadNibNamed:@"NetworkActivity" owner:self options:nil];
 	self.activity= [xibUIObjects objectAtIndex:0];
 	[self.view addSubview:self.activity];
-	/*NSString *msg=@"Fetching Location";
+	NSString *msg=@"Fetching Location";
 	UILabel *lbl= ((UILabel *)[self.activity viewWithTag:1]);
     lbl.text=msg;
     UIImage *imageGradient = [[Utility sharedInstance]gradientImage:lbl];
