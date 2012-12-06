@@ -19,9 +19,9 @@
 }
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic, retain) NSString          *title;
-@property (nonatomic, retain) NSString          *subtitle;
-@property (nonatomic, retain) PunchCard         *punchCard;
+@property (nonatomic, strong) NSString          *title;
+@property (nonatomic, strong) NSString          *subtitle;
+@property (nonatomic, strong) PunchCard         *punchCard;
 
 - (id)initWithCoord:(CLLocationCoordinate2D)coord;
 

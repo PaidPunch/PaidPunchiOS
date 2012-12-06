@@ -59,13 +59,13 @@
 }
 
 //@property(nonatomic,retain) IBOutlet UIView *activity;
-@property(nonatomic,retain) IBOutlet UIView *view;
-@property(nonatomic,retain) NSString *requestType;
+@property(nonatomic,strong) IBOutlet UIView *view;
+@property(nonatomic,strong) NSString *requestType;
 
-@property(nonatomic,retain) id <NetworkManagerDelegate> delegate;
-@property(nonatomic,retain) NSMutableData *webData;
+@property(nonatomic,strong) id <NetworkManagerDelegate> delegate;
+@property(nonatomic,strong) NSMutableData *webData;
 
-@property(nonatomic,retain) ServerResponseXmlParser *xmlParser;
+@property(nonatomic,strong) ServerResponseXmlParser *xmlParser;
 
 -(id) initWithView:(UIView *)parentView;
 

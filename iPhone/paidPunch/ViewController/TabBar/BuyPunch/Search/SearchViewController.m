@@ -73,7 +73,6 @@
 		view.delegate = self;
 		[searchTable addSubview:view];
 		_refreshHeaderView = view;
-		[view release];
 	}
     [_refreshHeaderView refreshLastUpdatedDate];
     
@@ -161,7 +160,6 @@
     }
     BusinessLocatorViewController *businessMapViewController = [[BusinessLocatorViewController alloc] init:cardArray];
     [self.navigationController pushViewController:businessMapViewController animated:YES];
-    [businessMapViewController release];
 }
 
 #pragma mark - Alertview Delegate methods
@@ -207,7 +205,6 @@
             [locationMgr stopUpdatingLocation];
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch."delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
-            [alertView release];
         }
     }
     else if(buttonIndex == 1) {
@@ -225,7 +222,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     [locationMgr stopUpdatingLocation];
-    currentLocation = [newLocation retain];
+    currentLocation = newLocation;
     
     //Use the location to get a zipcode
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -297,7 +294,6 @@
         myLocation.latitude = [latString doubleValue];     // the json parser uses NSArrays which don't support "doubleValue"
         myLocation.longitude = [lngString doubleValue];
         
-        [parser release];
         if(myLocation.latitude==0)
         {
             
@@ -349,7 +345,6 @@
     //Sort by diff_in_miles
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"diff_in_miles" ascending:YES]];
     businessList = [businessList sortedArrayUsingDescriptors:dateSortDescriptors];
-    [cloc release];
     
     //Separate businesses in different miles: 1,2,5,10,15,20
     NSMutableArray *diffOneMile = [NSMutableArray array];
@@ -366,7 +361,6 @@
                 tempNetManager.delegate = self;
                 [tempNetManager getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
                 [networkManagerBusinessOfferDict setObject:tempNetManager forKey:bizObj.business_name];
-                [tempNetManager release];
 //                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
             }
             else {
@@ -427,16 +421,15 @@
     
     PunchCardOfferViewController *punchCardOfferView = [[PunchCardOfferViewController alloc] init:business.business_name punchCardDetails:punchCard];
     [self.navigationController pushViewController:punchCardOfferView animated:YES];
-    [punchCardOfferView release];
 }
 
 #pragma mark Table view methods
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, tableView.bounds.size.width, 20)] autorelease];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, tableView.bounds.size.width, 20)];
     [headerView setBackgroundColor:[UIColor colorWithRed:0.0 green:190.0/255.0 blue:243.0/255.0 alpha:1.0]];
     
-    UILabel *headerLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, tableView.bounds.size.width, 20)] autorelease];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, tableView.bounds.size.width, 20)];
     NSString *labelText = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
     [headerLabel setText:labelText];
     [headerLabel setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
@@ -480,7 +473,7 @@
     static NSString *CellIdentifier = @"Cell";  
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
     for(UIView *eachView in [cell subviews]) {
         if (eachView.tag > 100) {
@@ -502,12 +495,11 @@
     MarqueeLabel *businessLabel = [[MarqueeLabel alloc] initWithFrame:CGRectMake(5.0, 0.0, cell.bounds.size.width - 95, cell.bounds.size.height - 2) rate:20.0f andFadeLength:10.0f];
     [businessLabel setFont:[UIFont systemFontOfSize:17.0]];
     [businessLabel setTextColor:[UIColor blackColor]];
-    Business *business = [[[listOfRanges objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] retain];
+    Business *business = [[listOfRanges objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     NSString *cellValue = business.business_name;
     businessLabel.text = cellValue;
     businessLabel.tag = 101;
     [cell addSubview:businessLabel];
-    [businessLabel release];
     
     UILabel *savingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(-5.0, 0.0, cell.bounds.size.width, cell.bounds.size.height - 2)];
     [savingsLabel setTextAlignment:UITextAlignmentRight];
@@ -528,7 +520,6 @@
         activityIndicator.tag = 103;
         [cell addSubview:activityIndicator];
     }
-    [savingsLabel release];
     
     return cell;
 }
@@ -593,7 +584,6 @@
 	//EGO tells us that it has been pulled
     SearchByCategoryViewController *searchByCategoryController = [[SearchByCategoryViewController alloc] init];
     [self.navigationController pushViewController:searchByCategoryController animated:YES];
-    [searchByCategoryController release];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{

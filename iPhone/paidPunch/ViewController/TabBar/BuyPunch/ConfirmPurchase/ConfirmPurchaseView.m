@@ -42,19 +42,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [totalSavingsLbl release];
-    [totalSavingsValueLbl release];
-    [totalCostOfPunchesLbl release];
-    [totalCostOfPunchesValueLbl release];
-    [totalRedeemablePunchesValueLbl release];
-    [totalCostOfRedeemablePunches release];
-    [payBtn release];
-    [expiryDateLbl release];
-    [minimumPurchaseLbl release];
-    [timeDiffLbl release];
-    [super dealloc];
-}
 
 #pragma mark -
 

@@ -39,21 +39,21 @@
     //int searchCriteria; //1. current location 2.city 3.zipcode 
 }
 
-@property (retain, nonatomic) IBOutlet UITableView *searchTableView;
-@property (retain, nonatomic) IBOutlet UIView *locateView;
-@property (retain, nonatomic) IBOutlet UIView *settingsView;
-@property (retain, nonatomic) IBOutlet UITextField *totalMilesTxtField;
-@property (retain, nonatomic) NSArray *businessList;
-@property (retain, nonatomic) IBOutlet UITextField *cityTxtField;
-@property (nonatomic,retain) CLLocationManager *locationMgr;
-@property (nonatomic,retain) CLLocation *currentLocation;
+@property (strong, nonatomic) IBOutlet UITableView *searchTableView;
+@property (strong, nonatomic) IBOutlet UIView *locateView;
+@property (strong, nonatomic) IBOutlet UIView *settingsView;
+@property (strong, nonatomic) IBOutlet UITextField *totalMilesTxtField;
+@property (strong, nonatomic) NSArray *businessList;
+@property (strong, nonatomic) IBOutlet UITextField *cityTxtField;
+@property (nonatomic,strong) CLLocationManager *locationMgr;
+@property (nonatomic,strong) CLLocation *currentLocation;
 //@property(retain,nonatomic) UIView *activity;
 
-@property (nonatomic, retain) UIImage *numberPadDoneImageNormal;
-@property (nonatomic, retain) UIImage *numberPadDoneImageHighlighted;
-@property (nonatomic, retain) UIButton *numberPadDoneButton;
+@property (nonatomic, strong) UIImage *numberPadDoneImageNormal;
+@property (nonatomic, strong) UIImage *numberPadDoneImageHighlighted;
+@property (nonatomic, strong) UIButton *numberPadDoneButton;
 
-@property (retain, nonatomic) NSDate *lastRefreshTime;
+@property (strong, nonatomic) NSDate *lastRefreshTime;
 
 - (IBAction)goBack:(id)sender;
 

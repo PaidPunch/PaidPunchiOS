@@ -66,10 +66,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [faqWebView release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UIWebViewDelegate methods Implementation
@@ -92,7 +88,6 @@
 	
 	UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];
-	[alert release];
     
 }
 

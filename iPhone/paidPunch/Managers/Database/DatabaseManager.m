@@ -23,31 +23,13 @@ static DatabaseManager *sharedInstance=nil;
 }
 
 +(id)allocWithZone:(NSZone *)zone{
-	return [[self sharedInstance]retain];
+	return [self sharedInstance];
 }
 
 -(id)copyWithZone:(NSZone *)zone{
 	return self;
 }
 
--(id)retain{
-	return self;
-}
-
--(NSUInteger)retainCount{
-	return NSUIntegerMax;
-}
-
--(oneway void)release{
-}
-
--(id)autorelease{
-	return self;
-}
-
--(void)dealloc{
-    [super dealloc];
-}
 
 
 
@@ -68,7 +50,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:YES]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 }
 
@@ -91,7 +72,6 @@ static DatabaseManager *sharedInstance=nil;
 
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
 }
 
 -(void)deleteAllUsedPunches
@@ -122,7 +102,6 @@ static DatabaseManager *sharedInstance=nil;
     
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
 
 }
 -(void) deleteOtherPunchCards
@@ -151,7 +130,6 @@ static DatabaseManager *sharedInstance=nil;
     
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
 
 }
 -(void)deleteMyPunches
@@ -175,7 +153,6 @@ static DatabaseManager *sharedInstance=nil;
     
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
 }
 
 -(void)deleteBusinesses
@@ -198,7 +175,6 @@ static DatabaseManager *sharedInstance=nil;
     
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
 
 }
 
@@ -255,7 +231,6 @@ static DatabaseManager *sharedInstance=nil;
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"punch_card_download_id=%@",pid];
     request.predicate=predicate;
     NSArray *objects=[context executeFetchRequest:request error:&error];
-    [request release];
     if([objects count]>0)
     {
         return [objects objectAtIndex:0];
@@ -301,7 +276,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:YES]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 }
 
@@ -352,7 +326,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:YES]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 }
 
@@ -367,7 +340,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:YES]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 }
 
@@ -382,7 +354,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"time_stamp" ascending:NO]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 }
 
@@ -399,7 +370,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"time_stamp" ascending:NO]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     return objects;
 
 }
@@ -409,7 +379,7 @@ static DatabaseManager *sharedInstance=nil;
 
 -(NSArray *)getBusinessesNearMe:(CLLocation *)location withMiles:(NSNumber *)miles withCategory:(NSString *)category
 {
-    NSMutableArray *retList=[[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *retList=[[NSMutableArray alloc] init];
     NSArray *businesses=[self getAllBusinesses];
     if([businesses count]>0)
     {
@@ -429,7 +399,6 @@ static DatabaseManager *sharedInstance=nil;
                 {
                     [retList addObject:bObj];
                 }
-                [item2 release];
             }
         }
 
@@ -439,7 +408,7 @@ static DatabaseManager *sharedInstance=nil;
 
 -(NSArray *)getBusinessesByCurrentLocation:(NSArray *)businessList withCurrentLocation:(CLLocation *)location withMiles:(NSNumber *)miles
 {
-    NSMutableArray *retList=[[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *retList=[[NSMutableArray alloc] init];
     if([businessList count]>0)
     {
         for(Business *bObj in businessList)
@@ -456,7 +425,6 @@ static DatabaseManager *sharedInstance=nil;
             {
                 [retList addObject:bObj];
             }
-            [item2 release];
         }
         
     }
@@ -476,7 +444,6 @@ static DatabaseManager *sharedInstance=nil;
     NSArray *objects=[context executeFetchRequest:request error:&error];
     NSArray *dateSortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:YES]];
     objects=[objects sortedArrayUsingDescriptors:dateSortDescriptors];
-	[request release];
     if(objects!=nil && [objects count]>0)
         return [objects objectAtIndex:0];
     return nil;
@@ -493,7 +460,6 @@ static DatabaseManager *sharedInstance=nil;
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"zip_code=%@",zipcode];
     request.predicate=predicate;
     NSArray *objects=[context executeFetchRequest:request error:&error];
-	[request release];
     if(objects!=nil && [objects count]>0)
         return [objects objectAtIndex:0];
     return nil;
@@ -520,7 +486,6 @@ static DatabaseManager *sharedInstance=nil;
     
     if(![context save:&error])
         NSLog(@"%@",[error localizedDescription]);
-	[request release];
     
 }
 @end

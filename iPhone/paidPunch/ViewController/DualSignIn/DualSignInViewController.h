@@ -18,7 +18,7 @@
 //    UIView *activityView;
     MBProgressHUD *popupHUD;
 }
-@property (retain, nonatomic) IBOutlet UILabel *highlyrecommendedLbl;
+@property (strong, nonatomic) IBOutlet UILabel *highlyrecommendedLbl;
 
 - (IBAction)signInWithFacebookBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)signInWithoutFacebookBtnTouchUpInsideHandler:(id)sender;

@@ -33,12 +33,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [businessMarqueeLabel release];
-    [punchId release];
-    [super dealloc];
-    //NSLog(@"In dealloc of MyPunchViewCell");
-}
 
 #pragma mark -
 

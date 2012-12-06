@@ -32,20 +32,20 @@
     UITextField *passwordTextField;
     UIActivityIndicatorView *activityIndicator;
 }
-@property (retain, nonatomic) IBOutlet UILabel *punchDiscountValueLbl;
-@property(nonatomic,assign) NSString *punchId;
-@property(nonatomic,retain) PunchCard *punchCardDetails;
-@property(retain,nonatomic) IBOutlet UIImageView *buisnesslogoImageView;
-@property(retain,nonatomic) IBOutlet UITableView *punchesListTableView;
-@property (nonatomic, retain) MarqueeLabel *businessNameMarqueeLabel;
-@property(nonatomic,retain) IBOutlet UILabelStrikethrough *eachPunchValueLbl;
-@property(nonatomic,retain) IBOutlet UILabel *remainingPunchesLbl;
-@property(nonatomic, retain) IBOutlet UILabel *remainingMysterPunchesLbl;
+@property (strong, nonatomic) IBOutlet UILabel *punchDiscountValueLbl;
+@property(nonatomic,copy) NSString *punchId;
+@property(nonatomic,strong) PunchCard *punchCardDetails;
+@property(strong,nonatomic) IBOutlet UIImageView *buisnesslogoImageView;
+@property(strong,nonatomic) IBOutlet UITableView *punchesListTableView;
+@property (nonatomic, strong) MarqueeLabel *businessNameMarqueeLabel;
+@property(nonatomic,strong) IBOutlet UILabelStrikethrough *eachPunchValueLbl;
+@property(nonatomic,strong) IBOutlet UILabel *remainingPunchesLbl;
+@property(nonatomic, strong) IBOutlet UILabel *remainingMysterPunchesLbl;
 //@property(nonatomic,retain) IBOutlet UILabel *usedPunchesLbl;
-@property(nonatomic,retain) IBOutlet UILabel *expiryLbl;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, retain) IBOutlet UIImageView *usingPunchesInstructionsImage;
-@property (nonatomic, retain) IBOutlet UIButton *doneUsingPunchesInstructionsButton;
+@property(nonatomic,strong) IBOutlet UILabel *expiryLbl;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) IBOutlet UIImageView *usingPunchesInstructionsImage;
+@property (nonatomic, strong) IBOutlet UIButton *doneUsingPunchesInstructionsButton;
 
 - (IBAction)doneWithUsingPunchesInstructions:(id)sender;
 

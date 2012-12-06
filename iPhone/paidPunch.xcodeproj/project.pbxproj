@@ -59,7 +59,7 @@
 		8A77DE60147E67F700E05277 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A77DE5F147E67F700E05277 /* CoreData.framework */; };
 		8A77DE80147E6A8400E05277 /* paidPunch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A77DE7E147E6A8400E05277 /* paidPunch.xcdatamodeld */; };
 		8A7808E71484CF1C00726DAD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A7808E81484CF1C00726DAD /* Localizable.strings */; };
-		8A7871CC14E10E43003992B3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7871CB14E10E43003992B3 /* Reachability.m */; };
+		8A7871CC14E10E43003992B3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7871CB14E10E43003992B3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A7871D014E10F64003992B3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7871CF14E10F64003992B3 /* SystemConfiguration.framework */; };
 		8A789F9B1498A06F00407B2A /* Terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 8A789F9A1498A06F00407B2A /* Terms.html */; };
 		8A78D245153C163A00F1EA1A /* MyAccountsBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A78D243153C163A00F1EA1A /* MyAccountsBg.png */; };
@@ -124,7 +124,7 @@
 		8A7BC57015205B3B0052A0E6 /* UsePunchInstructions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7BC56E15205B3B0052A0E6 /* UsePunchInstructions@2x.png */; };
 		8A7BC57115205B3B0052A0E6 /* UsePunchInstructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7BC56F15205B3B0052A0E6 /* UsePunchInstructions.png */; };
 		8A7BC57515205E660052A0E6 /* InstructionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BC57415205E660052A0E6 /* InstructionsView.m */; };
-		8A7BD1F1156668D3003E77CB /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BD1EE156668D3003E77CB /* GTMNSString+HTML.m */; };
+		8A7BD1F1156668D3003E77CB /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BD1EE156668D3003E77CB /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A7BD1F2156668D3003E77CB /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BD1F0156668D3003E77CB /* NSString+HTML.m */; };
 		8A7C0E291534185A002C0C19 /* viewpunchoverlayimage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C0E2715341859002C0C19 /* viewpunchoverlayimage@2x.png */; };
 		8A7C0E2A1534185A002C0C19 /* viewpunchoverlayimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C0E2815341859002C0C19 /* viewpunchoverlayimage.png */; };
@@ -3153,6 +3153,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PaidPunch, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PaidPunch, LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3176,6 +3177,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
@@ -3241,6 +3243,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3265,6 +3268,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3276,6 +3280,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PaidPunch, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PaidPunch, LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3299,6 +3304,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

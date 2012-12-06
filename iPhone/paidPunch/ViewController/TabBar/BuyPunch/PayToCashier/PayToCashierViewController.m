@@ -104,18 +104,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [offerQrCode release];
-    [punchCardValueLbl release];
-    [punchCardNameLbl release];
-    [noOfPunchesLbl release];
-    [imageView release];
-    [networkManager release];
-    [orangeCodeAlert release];
-    [orangeCodeTextField release];
-    [punchId release];
-    [businessName release];
-    [punchCardDetails release];
-    [super dealloc];
     NSLog(@"In dealloc of PayToCashierViewController");
 }
 
@@ -133,7 +121,6 @@
         attempts++;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -149,7 +136,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
     }
     else
@@ -172,7 +158,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     {
@@ -245,7 +230,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Maximum Attempts Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else    

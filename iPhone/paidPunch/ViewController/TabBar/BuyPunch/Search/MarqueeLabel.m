@@ -65,7 +65,7 @@ NSString *const kMarqueeLabelShouldAnimateNotification = @"MarqueeLabelShouldAni
 
 @property (nonatomic, assign, readwrite) BOOL awayFromHome;
 
-@property (nonatomic, retain) UILabel *subLabel;
+@property (nonatomic, strong) UILabel *subLabel;
 @property (nonatomic, copy) NSString *labelText;
 @property (nonatomic, assign) NSUInteger animationOptions;
 
@@ -73,7 +73,7 @@ NSString *const kMarqueeLabelShouldAnimateNotification = @"MarqueeLabelShouldAni
 @property (nonatomic, assign) NSTimeInterval lengthOfScroll;
 @property (nonatomic, assign) CGFloat rate;
 @property (nonatomic, assign, readonly) BOOL labelShouldScroll;
-@property (nonatomic, assign) UITapGestureRecognizer *tapRecognizer;
+@property (nonatomic, weak) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, assign) CGRect homeLabelFrame;
 @property (nonatomic, assign) CGRect awayLabelFrame;
 @property (nonatomic, assign, readwrite) BOOL isPaused;
@@ -643,7 +643,6 @@ NSString *const kMarqueeLabelShouldAnimateNotification = @"MarqueeLabelShouldAni
         UITapGestureRecognizer *newTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelWasTapped:)];
         [self addGestureRecognizer:newTapRecognizer];
         self.tapRecognizer = newTapRecognizer;
-        [newTapRecognizer release];
     } else {
         [self removeGestureRecognizer:self.tapRecognizer];
         self.tapRecognizer = nil;
@@ -716,10 +715,7 @@ NSString *const kMarqueeLabelShouldAnimateNotification = @"MarqueeLabelShouldAni
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [labelText release];
     [self.subLabel removeFromSuperview];
-    [_subLabel release];
-    [super dealloc];
 }
 
 

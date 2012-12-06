@@ -59,7 +59,6 @@
     UIBarButtonItem *doneButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveBtnTouchUpInsideHandler:)];
     doneButton.title=@"Save";
     self.navigationItem.rightBarButtonItem=doneButton;
-    [doneButton release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTap:) name:@"scrollViewTouchEvent" object:nil];
     
@@ -75,7 +74,6 @@
     for (int i=year; i<year+25; i++) {
         [self.yearsDataSource addObject:[NSString stringWithFormat:@"%d",i]];
     }
-    [gregorian release];
 
     
     numberToolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -129,16 +127,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [secureNetworkLbl release];
-    [cardDetailsTableView release];
-    [scrollView release];
-    [addCardDetailsTableView release];
-    [punchCardDetails release];
-    [monthsDataSource release];
-    [yearsDataSource release];
-    [super dealloc];
-}
 
 
 #pragma mark -
@@ -176,14 +164,14 @@
         {
             cell.valueTxtField.placeholder=@"Name";
             cell.valueTxtField.tag=1;
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]] autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]];
         }
         if(indexPath.row==1)
         {
             cell.valueTxtField.placeholder=@"Email";
             cell.valueTxtField.tag=2;
             cell.valueTxtField.keyboardType=UIKeyboardTypeEmailAddress;
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]];
         }
     }
     if(indexPath.section==1)
@@ -194,14 +182,14 @@
             cell.valueTxtField.tag=3;
             //cell.valueTxtField.secureTextEntry=YES;
             cell.valueTxtField.keyboardType=UIKeyboardTypeNumberPad;
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]];
         }
         if(indexPath.row==1)
         {
             cell.valueTxtField.placeholder=@"Expiration Date (MM-YYYY)";
             cell.valueTxtField.tag=4;
             cell.valueTxtField.keyboardType=UIKeyboardTypeDefault;
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MiddleLinkBox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MiddleLinkBox.png"]];
         }
         if(indexPath.row==2)
         {
@@ -210,7 +198,7 @@
             cell.valueTxtField.keyboardType=UIKeyboardTypeNumberPad;
             cell.valueTxtField.returnKeyType = UIReturnKeyDone;
             cell.valueTxtField.inputAccessoryView = numberToolBar;
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]];
         }
     }
     return cell;
@@ -236,7 +224,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,38)] autorelease];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,38)];
     UIImageView *imageView =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"AddCartSmallBgStrip.png"]];
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -10, headerView.frame.size.width,headerView.frame.size.height)];
     headerLabel.textAlignment = UITextAlignmentCenter;
@@ -250,8 +238,6 @@
     headerLabel.textColor=[UIColor colorWithRed:139.0/255.0 green:137.0/255.0 blue:139.0/255.0 alpha:1];
     [headerView addSubview:imageView];
     [headerView addSubview:headerLabel];
-    [headerLabel release];
-    [imageView release];
     return headerView;
     
 }
@@ -386,7 +372,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
 
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
@@ -399,7 +384,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -414,7 +398,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -428,14 +411,12 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter Name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(email.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter Email Id" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(email.length!=0)
@@ -444,7 +425,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return NO;
         }
     }
@@ -453,7 +433,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter Card Number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(cardNumber.length!=0)
@@ -462,7 +441,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter Valid Card Number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             return NO;
         }
     }
@@ -470,14 +448,12 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter Expiry Date" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(cvv.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Card Error" message:@"Enter CVV" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
 
@@ -751,11 +727,6 @@
 	[actionSheet showInView:[self.view superview]];
 	[actionSheet setBounds:CGRectMake(0, 0, 320, 464)];
 	
-	[pickerToolBar release];
-	[flexSpace release];
-	[doneBtn release];
-	[baritems release];
-	[actionSheet release];
     
     NSCalendar *gregorian=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components=[gregorian components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:[NSDate date]];
@@ -767,7 +738,6 @@
     [pickerView selectRow:0 inComponent:1 animated:YES];
     [pickerView reloadAllComponents];
     
-    [gregorian release];
 }
 
 #pragma mark -
@@ -777,7 +747,6 @@
     [[InfoExpert sharedInstance] setMaskedId:maskedId];
     ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
     [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
-    [confirmPaymentViewController release];
 }
 
 

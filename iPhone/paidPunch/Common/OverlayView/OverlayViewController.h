@@ -15,6 +15,6 @@
 	SearchListViewController *rvController;
 }
 
-@property (nonatomic, retain) SearchListViewController *rvController;
+@property (nonatomic, strong) SearchListViewController *rvController;
 
 @end

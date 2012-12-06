@@ -10,6 +10,6 @@
 
 @interface TermsAndConditionsViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIWebView *termsAndConditionsWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *termsAndConditionsWebView;
 
 @end

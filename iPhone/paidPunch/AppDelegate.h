@@ -37,15 +37,15 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIViewController *viewController;
-@property (nonatomic,retain) UINavigationController *navigationController;
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic,retain) NSMutableArray *permissions;
-@property (nonatomic, retain) Facebook *facebook;
-@property (nonatomic, retain) NSMutableDictionary *userPermissions;
-@property(nonatomic,retain) CLLocationManager *locationManager;
-@property(nonatomic,retain) CLLocation *currentLocation;
+@property (nonatomic,strong) UINavigationController *navigationController;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic,strong) NSMutableArray *permissions;
+@property (nonatomic, strong) Facebook *facebook;
+@property (nonatomic, strong) NSMutableDictionary *userPermissions;
+@property(nonatomic,strong) CLLocationManager *locationManager;
+@property(nonatomic,strong) CLLocation *currentLocation;
 
 - (NSURL*)applicationDocumentsDirectory;
 - (void) saveContext;

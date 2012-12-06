@@ -95,18 +95,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [businessLogoImageView release];
-    [descriptionLbl release];
-    [valueLbl release];
-    [pinLbl release];
-    [creditCardLbl release];
-    [punchCardDetails release];
-    [maskedId release];
-    [paymentId release];
-    [activityIndicator release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark SDWebImageManagerDelegate methods Implementation
@@ -132,7 +120,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         [[DatabaseManager sharedInstance] deleteEntity:self.punchCardDetails.business];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
@@ -140,7 +127,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -172,7 +158,6 @@
 {
     CongratulationsViewController *congratulationsView = [[CongratulationsViewController alloc] init:self.punchCardDetails.business_name isFreePunchUnlocked:NO];
     [self.navigationController pushViewController:congratulationsView animated:YES];
-    [congratulationsView release];
 }
 
 #pragma mark -

@@ -72,10 +72,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [usingPaidPunchWebView release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UIWebViewDelegate methods Implementation
@@ -98,7 +94,6 @@
 	
 	UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Whoops!" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];
-	[alert release];
     
 }
 

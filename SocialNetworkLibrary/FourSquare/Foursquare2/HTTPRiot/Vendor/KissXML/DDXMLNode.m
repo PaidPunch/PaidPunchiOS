@@ -32,17 +32,17 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 
 + (id)elementWithName:(NSString *)name
 {
-	return [[[DDXMLElement alloc] initWithName:name] autorelease];
+	return [[DDXMLElement alloc] initWithName:name];
 }
 
 + (id)elementWithName:(NSString *)name stringValue:(NSString *)string
 {
-	return [[[DDXMLElement alloc] initWithName:name stringValue:string] autorelease];
+	return [[DDXMLElement alloc] initWithName:name stringValue:string];
 }
 
 + (id)elementWithName:(NSString *)name children:(NSArray *)children attributes:(NSArray *)attributes
 {
-	DDXMLElement *result = [[[DDXMLElement alloc] initWithName:name] autorelease];
+	DDXMLElement *result = [[DDXMLElement alloc] initWithName:name];
 	[result setChildren:children];
 	[result setAttributes:attributes];
 	
@@ -51,7 +51,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 
 + (id)elementWithName:(NSString *)name URI:(NSString *)URI
 {
-	return [[[DDXMLElement alloc] initWithName:name URI:URI] autorelease];
+	return [[DDXMLElement alloc] initWithName:name URI:URI];
 }
 
 + (id)attributeWithName:(NSString *)name stringValue:(NSString *)stringValue
@@ -60,7 +60,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(attr == NULL) return nil;
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)attr] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)attr];
 }
 
 + (id)attributeWithName:(NSString *)name URI:(NSString *)URI stringValue:(NSString *)stringValue
@@ -69,7 +69,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(attr == NULL) return nil;
 	
-	DDXMLNode *result = [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)attr] autorelease];
+	DDXMLNode *result = [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)attr];
 	[result setURI:URI];
 	
 	return result;
@@ -84,7 +84,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(ns == NULL) return nil;
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)ns] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)ns];
 }
 
 + (id)processingInstructionWithName:(NSString *)name stringValue:(NSString *)stringValue
@@ -93,7 +93,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(procInst == NULL) return nil;
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)procInst] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)procInst];
 }
 
 + (id)commentWithStringValue:(NSString *)stringValue
@@ -102,7 +102,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(comment == NULL) return nil;
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)comment] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)comment];
 }
 
 + (id)textWithStringValue:(NSString *)stringValue
@@ -111,7 +111,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	
 	if(text == NULL) return nil;
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)text] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:(xmlKindPtr)text];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 		xmlNsPtr ns = (xmlNsPtr)kindPtr;
 		if(ns->_private != NULL)
 		{
-			return [[((DDXMLNode *)(ns->_private)) retain] autorelease];
+			return ((__bridge DDXMLNode *)(ns->_private));
 		}
 	}
 	else
@@ -159,11 +159,11 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 		xmlStdPtr node = (xmlStdPtr)kindPtr;
 		if(node->_private != NULL)
 		{
-			return [[((DDXMLNode *)(node->_private)) retain] autorelease];
+			return ((__bridge DDXMLNode *)(node->_private));
 		}
 	}
 	
-	return [[[DDXMLNode alloc] initWithCheckedPrimitive:kindPtr] autorelease];
+	return [[DDXMLNode alloc] initWithCheckedPrimitive:kindPtr];
 }
 
 /**
@@ -195,9 +195,9 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	// If a wrapper object already exists, the _private variable is pointing to it.
 	
 	if(ns->_private == NULL)
-		return [[[DDXMLNode alloc] initWithCheckedPrimitive:ns nsParent:parent] autorelease];
+		return [[DDXMLNode alloc] initWithCheckedPrimitive:ns nsParent:parent];
 	else
-		return [[((DDXMLNode *)(ns->_private)) retain] autorelease];
+		return ((__bridge DDXMLNode *)(ns->_private));
 }
 
 /**
@@ -225,7 +225,6 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	{
 		[self nodeRelease];
 	}
-	[super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -555,7 +554,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 		child = child->next;
 	}
 	
-	return [[result copy] autorelease];
+	return [result copy];
 }
 
 /**
@@ -821,7 +820,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 		node = (xmlStdPtr)node->parent;
 	}
 	
-	return [[result copy] autorelease];
+	return [result copy];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1483,7 +1482,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	// We also have to nullify the nsParentPtr, which is in the cocoa wrapper object (if one exists)
 	if(ns->_private != NULL)
 	{
-		DDXMLNode *node = (DDXMLNode *)ns->_private;
+		DDXMLNode *node = (__bridge DDXMLNode *)ns->_private;
 		node->nsParentPtr = NULL;
 	}
 }
@@ -1521,7 +1520,7 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 		// We manage the nsParent pointer, which is in the cocoa wrapper object, so we have to nullify it ourself
 		if(ns->_private != NULL)
 		{
-			DDXMLNode *node = (DDXMLNode *)ns->_private;
+			DDXMLNode *node = (__bridge DDXMLNode *)ns->_private;
 			node->nsParentPtr = NULL;
 		}
 		
@@ -1696,9 +1695,9 @@ static void MyErrorHandler(void * userData, xmlErrorPtr error);
 	// Warning: The _private variable is in a different location in the xmlNsPtr
 	
 	if([self isXmlNsPtr])
-		((xmlNsPtr)genericPtr)->_private = self;
+		((xmlNsPtr)genericPtr)->_private = (__bridge void *)(self);
 	else
-		((xmlStdPtr)genericPtr)->_private = self;
+		((xmlStdPtr)genericPtr)->_private = (__bridge void *)(self);
 }
 
 /**

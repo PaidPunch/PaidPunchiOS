@@ -98,7 +98,6 @@
 	[rightButton addTarget:self action:@selector(settingsBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *rightBtnOnNavigation = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 	self.navigationItem.rightBarButtonItem = rightBtnOnNavigation;
-	[rightBtnOnNavigation release];
     
     
 	UIImage *leftBtnImage = [UIImage imageNamed:@"SearchSettingsBtn.png"];
@@ -108,7 +107,6 @@
 	[leftButton addTarget:self action:@selector(locateBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *leftBtnOnNavigation = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 	self.navigationItem.leftBarButtonItem = leftBtnOnNavigation;
-	[leftBtnOnNavigation release];
     
     self.noBusinessFoundLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39.0/255.0 alpha:1];
     
@@ -136,7 +134,6 @@
             CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
             self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
             self.reverseGeoLocation=cloc;
-            [cloc release];
         }
     }
     if(self.searchType == SEARCH_BY_ZIPCODE) 
@@ -155,7 +152,6 @@
             CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
             self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
             self.reverseGeoLocation=cloc;
-            [cloc release];
         }
     }
     if(self.searchType == SEARCH_BY_NAME)
@@ -185,7 +181,6 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 self.businessList=[[DatabaseManager sharedInstance] getBusinessesByCurrentLocation:arr withCurrentLocation:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue]];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 
             }
             else //by zipcode
@@ -205,7 +200,6 @@
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                     self.businessList=[[DatabaseManager sharedInstance] getBusinessesByCurrentLocation:arr withCurrentLocation:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue]];
                     self.reverseGeoLocation=cloc;
-                    [cloc release];
                 }
                 else
                 {
@@ -326,30 +320,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [businessListTableView release];
-    [searchType release];
-    [category release];
-    [businessName release];
-    [businessList release];
-    [categoryImageView release];
-    [searchBar release];
-    [locateView release];
-    [settingsView release];
-    [categoryLbl release];
-    [backImageView release];
-    [userLocation release];
-    [backView release];
-    [totalMilesTxtField release];
-    [cityTxtField release];
-    [searchFilterType release];
-    [locationMgr release];
-    [currentLocation release];
-    [activity release];
-    [noBusinessFoundLbl release];
-    [reverseGeoLocation release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods Implementation
@@ -441,7 +411,6 @@
     if(distanceInMiles<[[[InfoExpert sharedInstance] totalMilesValue] doubleValue])
     {
     }
-    [item2 release];
     
     cell.businessNameLbl.text=[NSString stringWithFormat:@"%d.  %@",indexPath.row+1,business.business_name];
     cell.businessNameLbl.adjustsFontSizeToFitWidth=NO;
@@ -520,7 +489,6 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
-                [alert release];
             }
         }
         else {
@@ -600,7 +568,7 @@
         if(self.currentLocation==nil)
         {
             [self showPopup];
-            self.locationMgr = [[[CLLocationManager alloc] init] autorelease];
+            self.locationMgr = [[CLLocationManager alloc] init];
             self.locationMgr.delegate = self; // send loc updates to myself
             
             locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
@@ -615,7 +583,6 @@
                 [self removePopup];
                 UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alertView show];
-                [alertView release]; 
             }
         }
         else
@@ -632,7 +599,7 @@
                 NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
                 arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.currentLocation withMiles:sMiles withCategory:self.category];
                 
-                NSMutableArray *businessesByName=[[[NSMutableArray alloc] init] autorelease];
+                NSMutableArray *businessesByName=[[NSMutableArray alloc] init];
                 for(Business *bObj in arr)
                 {
                     //if([bObj.business_name.lowercaseString isEqualToString:self.searchBar.text.lowercaseString])
@@ -669,9 +636,8 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 
-                NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
+                NSMutableArray *businessesByCity=[[NSMutableArray alloc] init];
                 for(Business *bObj in arr)
                 {
                     if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
@@ -699,9 +665,8 @@
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                     arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                     self.reverseGeoLocation=cloc;
-                    [cloc release];
                     
-                    NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
+                    NSMutableArray *businessesByZipCode=[[NSMutableArray alloc] init];
                     for(Business *bObj in arr)
                     {
                         if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
@@ -735,9 +700,8 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 
-                NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
+                NSMutableArray *businessesByCity=[[NSMutableArray alloc] init];
                 for(Business *bObj in arr)
                 {
                     if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
@@ -765,9 +729,8 @@
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                     arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                     self.reverseGeoLocation=cloc;
-                    [cloc release];
                     
-                    NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
+                    NSMutableArray *businessesByZipCode=[[NSMutableArray alloc] init];
                     for(Business *bObj in arr)
                     {
                         if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
@@ -844,7 +807,6 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 self.searchFilterType=SEARCH_BY_ZIPCODE;
             }
             /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
@@ -875,7 +837,6 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 self.searchFilterType=SEARCH_BY_CITY;
             }
             /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
@@ -990,7 +951,7 @@
             NSArray *arr;
             arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.currentLocation withMiles:sMiles withCategory:self.category];
             
-            NSMutableArray *businessesByName=[[[NSMutableArray alloc] init] autorelease];
+            NSMutableArray *businessesByName=[[NSMutableArray alloc] init];
             for(Business *bObj in arr)
             {
                 //if([bObj.business_name.lowercaseString isEqualToString:self.searchBar.text.lowercaseString])
@@ -1028,7 +989,6 @@
     [self.locationMgr stopUpdatingLocation];
     UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alertView show];
-    [alertView release]; 
 }
 
 #pragma mark -
@@ -1049,7 +1009,7 @@
     if(self.currentLocation==nil && [[InfoExpert sharedInstance] searchCriteria]==1)
     {
         [self showPopup];
-        self.locationMgr = [[[CLLocationManager alloc] init] autorelease];
+        self.locationMgr = [[CLLocationManager alloc] init];
         self.locationMgr.delegate = self; // send loc updates to myself
         
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
@@ -1064,7 +1024,6 @@
             [self removePopup];
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
-            [alertView release]; 
             currentBtnClicked=NO;
         }
         
@@ -1098,7 +1057,6 @@
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                 NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                [cloc release];
                 
                 /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
                  for(Business *bObj in arr)
@@ -1128,7 +1086,6 @@
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                     NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                     self.reverseGeoLocation=cloc;
-                    [cloc release];
                     
                     /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
                      for(Business *bObj in arr)
@@ -1202,7 +1159,7 @@
     if(self.currentLocation==nil && [[InfoExpert sharedInstance] searchCriteria]==1)
     {
         [self showPopup];
-        self.locationMgr = [[[CLLocationManager alloc] init] autorelease];
+        self.locationMgr = [[CLLocationManager alloc] init];
         self.locationMgr.delegate = self; // send loc updates to myself
         
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
@@ -1217,7 +1174,6 @@
             [self removePopup];
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
-            [alertView release]; 
             currentBtnClicked=NO;
         }
         
@@ -1248,7 +1204,6 @@
     
     PunchCardOfferViewController *punchCardOfferView = [[PunchCardOfferViewController alloc] init:business.business_name punchCardDetails:punchCard];
     [self.navigationController pushViewController:punchCardOfferView animated:YES];
-    [punchCardOfferView release];
 }
 
 #pragma mark -
@@ -1276,7 +1231,6 @@
     if(allBizsHaveCards == YES){
         BusinessLocatorViewController *businessMapViewController = [[BusinessLocatorViewController alloc] init:cardArray];
         [self.navigationController pushViewController:businessMapViewController animated:YES];
-        [businessMapViewController release];
     }
     else {
         //Skip, still need to load punch cards
@@ -1360,7 +1314,6 @@
         myLocation.longitude = [lngString doubleValue];
         
         [self removePopup];
-        [parser release];
         if(myLocation.latitude==0)
         {
             

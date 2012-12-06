@@ -26,25 +26,25 @@
     int cnt;
     CGFloat initialScreenBrightness;
 }
-@property (retain, nonatomic) IBOutlet UIWebView *contentsWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *contentsWebView;
 
-@property(nonatomic,retain)PunchCard *punchCardDetails;
-@property (retain, nonatomic) IBOutlet UILabel *offerLbl;
+@property(nonatomic,strong)PunchCard *punchCardDetails;
+@property (strong, nonatomic) IBOutlet UILabel *offerLbl;
 
-@property (retain, nonatomic) IBOutlet UIImageView *barcodeImageView;
-@property (nonatomic,retain) NSData *barcodeImageData;
-@property (nonatomic,retain) NSString *barcodeValue;
+@property (strong, nonatomic) IBOutlet UIImageView *barcodeImageView;
+@property (nonatomic,strong) NSData *barcodeImageData;
+@property (nonatomic,strong) NSString *barcodeValue;
 
-@property (retain, nonatomic) IBOutlet UIImageView *businessLogoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
 
-@property (retain, nonatomic) IBOutlet UILabel *businessNameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *businessNameLbl;
 
-@property (retain, nonatomic) IBOutlet UILabel *timeLbl;
-@property (retain, nonatomic) IBOutlet UILabel *totalMinsLbl;
-@property (retain, nonatomic) IBOutlet UILabel *totalSecsLbl;
-@property (retain, nonatomic) IBOutlet UILabel *secLbl;
-@property (retain, nonatomic) IBOutlet UILabel *minLbl;
-@property (retain, nonatomic) NSDate *lastRefreshTime;
+@property (strong, nonatomic) IBOutlet UILabel *timeLbl;
+@property (strong, nonatomic) IBOutlet UILabel *totalMinsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *totalSecsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *secLbl;
+@property (strong, nonatomic) IBOutlet UILabel *minLbl;
+@property (strong, nonatomic) NSDate *lastRefreshTime;
 
 - (id)init:(PunchCard *)punchCard barcodeImageData:(NSData *)imageData barcodeValue:(NSString *)bValue;
 - (void)setUpUI;

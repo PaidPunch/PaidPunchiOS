@@ -121,21 +121,7 @@
 
 - (void)dealloc {
     
-    [punchesListTableView release];
-    [buisnesslogoImageView release];
-    [businessNameMarqueeLabel release];
-    [eachPunchValueLbl release];
-    [remainingMysterPunchesLbl release];
-    [remainingPunchesLbl release];
 //    [usedPunchesLbl release];
-    [expiryLbl release];
-    [networkManager release];
-    [passwordAlert release];
-    [passwordTextField release];
-    [activityIndicator release];
-    [punchDiscountValueLbl release];
-    [punchId release];
-    [super dealloc];
     NSLog(@"In dealloc of PunchViewController");
 }
 
@@ -357,7 +343,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Incorrect password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     [passwordTextField resignFirstResponder];
     passwordTextField.text=@"";
@@ -381,7 +366,6 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
     }
 }
 
@@ -398,7 +382,6 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
     }
 }
 
@@ -443,7 +426,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mystery Punch" message:@"Use all your regular Punches to unlock the Mystery Punch." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
     }
     else
@@ -470,7 +452,6 @@
     SlideToConfirmDialog *confirmViewController = [[SlideToConfirmDialog alloc] init:self.punchCardDetails withMysteryOffer:moffer];
     confirmViewController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:confirmViewController animated:YES];
-    [confirmViewController release];
 }
 
 -(void) goToPunchUsedView:(PunchCard *)punchCard barcodeImage:(NSData *)imageData barcodeValue:(NSString *)barcode;
@@ -478,7 +459,6 @@
     PunchUsedViewController *punchView = [[PunchUsedViewController alloc] init:punchCard barcodeImageData:imageData barcodeValue:barcode];
     punchView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:punchView animated:YES];
-    [punchView release];
 }
 
 -(void) gotoRootView
@@ -558,7 +538,6 @@
         self.eachPunchValueLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39/255.0 alpha:1];
     }
     self.expiryLbl.textColor=[UIColor colorWithRed:139.0/255.0 green:137.0/255.0 blue:139.0/255.0 alpha:1];
-    [dateFormat release];
     usedCnt=[punchCardDetails.total_punches_used intValue];
     [self.punchesListTableView reloadData];
 }

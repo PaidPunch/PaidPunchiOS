@@ -35,12 +35,12 @@ UITableViewDataSource,NetworkManagerDelegate>
     FeedSearchSetting selectedSearchSetting;
 }
 
-@property(nonatomic,retain) UISegmentedControl *filterSegementedControl;
-@property (retain, nonatomic) NSArray *feedsList;
-@property (nonatomic, retain) UIImageView *topBar;
-@property (nonatomic, retain) IBOutlet UITableView *feedsTableView;
-@property (nonatomic, retain) IBOutlet UIButton *refreshButton;
-@property (nonatomic, retain) IBOutlet UIImageView *segmentedControl;
+@property(nonatomic,strong) UISegmentedControl *filterSegementedControl;
+@property (strong, nonatomic) NSArray *feedsList;
+@property (nonatomic, strong) UIImageView *topBar;
+@property (nonatomic, strong) IBOutlet UITableView *feedsTableView;
+@property (nonatomic, strong) IBOutlet UIButton *refreshButton;
+@property (nonatomic, strong) IBOutlet UIImageView *segmentedControl;
 
 - (IBAction)setSearchByFriend:(id)sender;
 - (IBAction)setSearchByEveryone:(id)sender;

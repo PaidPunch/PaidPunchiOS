@@ -15,7 +15,7 @@
     NetworkManager *networkManager;
 }
 
-@property (retain, nonatomic) IBOutlet UITextView *feedbackTextView;
+@property (strong, nonatomic) IBOutlet UITextView *feedbackTextView;
 
 - (IBAction)submitFeedBackBtnTouchUpInsideHandler:(id)sender;
 

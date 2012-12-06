@@ -20,8 +20,8 @@
     UITabBarController *tabBarController;  
     NetworkManager *networkManager;
 }
-@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, retain) IBOutlet UINavigationController *myPunchesNavigationController;
+@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, strong) IBOutlet UINavigationController *myPunchesNavigationController;
 
 
 -(void) requestAppIp;

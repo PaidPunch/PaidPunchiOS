@@ -24,11 +24,11 @@
     NetworkManager *networkManager;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *context;
-@property (nonatomic,retain) IBOutlet UITableView *punchesListTableView;
-@property (retain, nonatomic) NSDate *lastRefreshTime;
-@property (nonatomic, retain) IBOutlet UIImageView *noCardsAvailableImage;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic,strong) IBOutlet UITableView *punchesListTableView;
+@property (strong, nonatomic) NSDate *lastRefreshTime;
+@property (nonatomic, strong) IBOutlet UIImageView *noCardsAvailableImage;
 
 -(void)getMyPunches;
 -(void)goToPunchView:(PunchCard *)punchCard;

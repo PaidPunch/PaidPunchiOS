@@ -53,7 +53,6 @@
     
     UIBarButtonItem *doneButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneBtnTouchUpInsideHandler:)];
     self.navigationItem.rightBarButtonItem=doneButton;
-    [doneButton release];
     [self setUpUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -84,10 +83,6 @@
 
 - (void)dealloc {
 
-    [congratulationsLbl release];
-    [punchCardDetailedLbl release];
-    [punchCardName release];
-    [super dealloc];
     NSLog(@"In dealloc of CongratulationsViewController");
 }
 

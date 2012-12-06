@@ -22,26 +22,26 @@
     // a hack to fetch punchcards after buying
     bool buyFlag;
 }
-@property(nonatomic,retain) NSString *appUrl;
-@property(nonatomic,retain) NSString *userId;
-@property(nonatomic,retain) NSString *username;
-@property(nonatomic,retain) NSString *zipcode;
-@property(nonatomic,retain) NSString *email;
-@property(nonatomic,retain) NSString *mobileNumber;
-@property(nonatomic,retain) NSString *password;
+@property(nonatomic,strong) NSString *appUrl;
+@property(nonatomic,strong) NSString *userId;
+@property(nonatomic,strong) NSString *username;
+@property(nonatomic,strong) NSString *zipcode;
+@property(nonatomic,strong) NSString *email;
+@property(nonatomic,strong) NSString *mobileNumber;
+@property(nonatomic,strong) NSString *password;
 @property(nonatomic,assign) bool buyFlag;
 @property(nonatomic,assign) bool isProfileCreated;
 
 //global settings parameters set
-@property(nonatomic,retain) NSNumber *totalMilesValue;
-@property(nonatomic,retain) NSString *cityOrZipCodeValue;
-@property(nonatomic,retain) NSString *searchByNameValue;
+@property(nonatomic,strong) NSNumber *totalMilesValue;
+@property(nonatomic,strong) NSString *cityOrZipCodeValue;
+@property(nonatomic,strong) NSString *searchByNameValue;
 
 //current search Criteria
 @property int searchCriteria;
 
-@property(nonatomic,retain)NSString *maskedId;
-@property(nonatomic,retain) NSString *searchType;
+@property(nonatomic,strong)NSString *maskedId;
+@property(nonatomic,strong) NSString *searchType;
 
 +(id)sharedInstance;
 

@@ -12,11 +12,11 @@
 
 @interface Registration : NSManagedObject
 
-@property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSString * confirm_password;
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * mobile;
-@property (nonatomic, retain) NSString * zipcode;
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSString * password;
+@property (nonatomic, strong) NSString * confirm_password;
+@property (nonatomic, strong) NSString * email;
+@property (nonatomic, strong) NSString * mobile;
+@property (nonatomic, strong) NSString * zipcode;
 
 @end

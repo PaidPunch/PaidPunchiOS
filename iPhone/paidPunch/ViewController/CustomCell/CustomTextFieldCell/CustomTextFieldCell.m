@@ -33,9 +33,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [headingLabel release];
-    [valueTextField release];
-    [super dealloc];
      NSLog(@"In dealloc of CustomTextFieldCell");
 }
 

@@ -159,22 +159,6 @@ BOOL UNLOCKED = NO;
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [slideToCancel release];
-    [businessLogoImageView release];
-    [businessNameLbl release];
-//    [punchLbl release];
-    [valueLbl release];
-    [purchaseLbl release];
-    [slideToUnlock release];
-    [activityIndicator release];
-    [showSlideLbl release];
-    [slideBgImageView release];
-    [instructionsImageView release];
-    [mysteryoffer release];
-    [orangeStripImageView release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark SDWebImageManagerDelegate methods Implementation
@@ -213,14 +197,12 @@ BOOL UNLOCKED = NO;
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Not so fast!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
         }
         else
         if([statusCode isEqualToString:@"401"])
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
             self.punchCardDetails.punch_expire=[NSNumber numberWithBool:YES];
             [[DatabaseManager sharedInstance] saveEntity:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
@@ -229,7 +211,6 @@ BOOL UNLOCKED = NO;
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Whoops!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
         }
         [self lockSlider];
     }
@@ -384,7 +365,6 @@ BOOL UNLOCKED = NO;
     PunchUsedViewController *punchView = [[PunchUsedViewController alloc] init:self.punchCardDetails barcodeImageData:imageData barcodeValue:self.mysteryoffer];
     punchView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:punchView animated:YES];
-    [punchView release];
 }
 
 @end

@@ -64,7 +64,6 @@
         [tempBtn setTintColor:[UIColor colorWithRed:60.0/255.0 green:144.0/255.0 blue:220.0/255.0 alpha:1]];
     }
     self.navigationItem.rightBarButtonItem = tempBtn;
-    [tempBtn release];
     
     
     usernameTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
@@ -189,13 +188,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [registrationFieldsTableView release];
-    [scrollView release];
-    [networkManager release];
-    [agreeBtn release];
-    [registerBtn release];
-    [scrollView release];
-    [super dealloc];
     NSLog(@"In dealloc of RegistrationViewController");
 }
 
@@ -238,7 +230,7 @@
     static NSString *CellIdentifier = @"RegCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 //    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
         if(indexPath.section == 0){
             [usernameTF setEnabled:YES];
@@ -356,7 +348,6 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         CATransition *transition = [CATransition animation];
         transition.duration = 0.5;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
@@ -370,7 +361,6 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
 }
 
@@ -464,14 +454,12 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(emailTF.text.length==0)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Email Id" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(emailTF.text.length!=0)
@@ -480,7 +468,6 @@
         {
             UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [logInAlert show];
-            [logInAlert release];
             return NO;
         }
     }
@@ -489,28 +476,24 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(confirmPasswordTF.text.length==0)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Confirm Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(![passwordTF.text isEqualToString:confirmPasswordTF.text])
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Password and Confirm Password should be same" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(regFlag==0)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Please Accept the Terms and Conditions to Register" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     return YES;
@@ -535,7 +518,6 @@
 {
     TermsAndConditionsViewController *termsAndConditionsViewController = [[TermsAndConditionsViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:termsAndConditionsViewController animated:YES];
-    [termsAndConditionsViewController release];
 }
 
 @end

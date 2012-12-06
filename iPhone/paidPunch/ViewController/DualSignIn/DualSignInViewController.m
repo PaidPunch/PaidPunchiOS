@@ -67,10 +67,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [highlyrecommendedLbl release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UIAlertViewDelegate methods Implementation
@@ -177,7 +173,6 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
     }
 }
 
@@ -200,7 +195,6 @@
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"You really should sign in with Facebook. If you do, you'll have the ability to unlock free Punches, see what your friends are doing, and brag to friends when you win awesome prizes!" delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Continue" ,nil];
     [alert show];
-    [alert release];
 }
 
 - (IBAction)goBack:(id)sender {
@@ -286,7 +280,6 @@
 {
     PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController presentModalViewController:tabBarViewController animated:NO];
-    [tabBarViewController release];
 }
 
 -(void) goToSignView
@@ -297,7 +290,6 @@
     
     SignInViewController *signInViewController = [[SignInViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:signInViewController animated:YES];
-    [signInViewController release];
 }
 
 

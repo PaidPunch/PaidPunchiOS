@@ -63,9 +63,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [feedbackTextView release];
-    [networkManager release];
-    [super dealloc];
     NSLog(@"In dealloc of FeedBackViewController");
 }
 
@@ -106,13 +103,11 @@
         self.feedbackTextView.text=@"Type your feedback here";
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
     else
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
 }
 
@@ -124,7 +119,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Enter Feedback" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     {

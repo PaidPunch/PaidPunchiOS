@@ -46,7 +46,7 @@
 - (void)refreshBusinessList;
 - (void)goToPunchCardOfferView:(NSString *)offerQrCode punchCardDetails:(PunchCard *)punchCard selectedIndex:(NSIndexPath *)index;
 
-@property (nonatomic, retain) IBOutlet UITableView *searchTable;
-@property (nonatomic, retain) IBOutlet  UIImageView *noBusinessesErrorImage;
+@property (nonatomic, strong) IBOutlet UITableView *searchTable;
+@property (nonatomic, strong) IBOutlet  UIImageView *noBusinessesErrorImage;
 
 @end

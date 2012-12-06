@@ -35,13 +35,8 @@
 
 -(void)dealloc{
 	if(self.webData)
-    [webData release];
-    [requestType release];
-	[xmlParser release];
-    [view release];
-    [uniqueID release];
+    ;
     uniqueID = nil;
-	[super dealloc];
      NSLog(@"In dealloc of NetworkManager");
 }
 
@@ -54,13 +49,19 @@
 -(void) appIpRequest{
     
     self.requestType=APP_IP_REQ;
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", NSLocalizedString(@"AppIPURL", @"")]]];  
     [request setHTTPMethod:@"GET"];      
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in appIpRequest!");
+    }
     [self showPopup];
 }
 
@@ -93,16 +94,22 @@
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"DeleteProfileUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in deleteProfile!");
+    }
     [self showPopup];
 
 }
@@ -137,16 +144,23 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"MysteryPunchUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+    
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in getMysteryOffer!");
+    }
     [self showPopup];
 }
 
@@ -183,17 +197,23 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"ProfileCreationUrl", @"")]]];
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]]; 
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in getProfileRequest!");
+    }
     [self showPopup];
 
 }
@@ -222,17 +242,23 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"ProfileCreationUrl", @"")]]];
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]]; 
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in createProfile!");
+    }
     [self showPopup];
 }
 
@@ -259,16 +285,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FBLoginUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in fbLogin!");
+    }
     [self showPopup];
 }
 
@@ -286,7 +318,7 @@ response
 -(void) loadFeeds:(NSString *)fbid withFriendsList:(NSDictionary *)dict
 {
     self.requestType=GET_FEEDS_REQ;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     NSString *jsonRequest =[jsonWriter stringWithObject:dict];// @"{\"username\":\"user\",\"password\":\"letmein\"}";
     if(dict==nil)
     {
@@ -297,7 +329,7 @@ response
         //jsonRequest=[NSString stringWithFormat:@"{\"data\":%@}",jsonRequest];
     }
     //NSLog(@"Request: %@", jsonRequest);
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FeedsUrl", @"")]]]; 
     NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
     
@@ -306,11 +338,16 @@ response
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody: requestData];
-    
-    [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in loadFeeds!");
+    }
     [self showPopup];
 }
           
@@ -336,16 +373,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in login!");
+    }
     [self showPopup];
 }
 
@@ -370,16 +413,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release];
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in logout!");
+    }
     [self showPopup];
 }
 
@@ -406,16 +455,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl],NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in signUp!");
+    }
     [self showPopup];
 }
 
@@ -440,16 +495,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FeedBackUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in sendFeedBack!");
+    }
     [self showPopup];
 }
 
@@ -489,16 +550,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];  
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in markPunchUsed!");
+    }
     [self showPopup];
 
 }
@@ -525,16 +592,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in update!");
+    }
     [self showPopup];
 }
 
@@ -562,16 +635,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+	[request setHTTPBody:postData];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in changePassword!");
+    }
     [self showPopup];
 
 }
@@ -599,16 +678,22 @@ response
 	NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in getBusinessOffer!");
+    }
     [self showPopup];
 }
 
@@ -646,17 +731,23 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"BuyPunchUrl", @"")]]];   
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"BuyPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in buy!");
+    }
     [self showPopup];
 }
 
@@ -681,16 +772,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl],NSLocalizedString(@"PaidPunchUrl", @"")]]];    
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in searchByName!");
+    }
     [self showPopup];
 }
 
@@ -714,16 +811,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in getUserPunches!");
+    }
     [self showPopup];
 }
 
@@ -746,16 +849,22 @@ response
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ForgotPasswordUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
 	[request setHTTPBody:postData];  
-	[[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-	NSMutableData *data = [[NSMutableData alloc] init];
-	self.webData =data;
-    [data release]; 
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (connection)
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        self.webData = data;
+    }
+    else
+    {
+        NSLog(@"Connection creation failed in forgotPassword!");
+    }
     [self showPopup];
 
 }
@@ -791,7 +900,6 @@ response
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"Could not connect to server. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     if([(UIViewController *)delegate respondsToSelector:@selector(didConnectionFailed:)])
     {
@@ -853,7 +961,6 @@ response
                 [business setValue:[obj objectForKey:@"country"] forKey:@"country"];
                 [business setValue:[obj objectForKey:@"pincode"] forKey:@"pincode"];
                 [business setValue:[obj objectForKey:@"address"] forKey:@"address"];
-                [formatter release];
             }
             else
             {
@@ -885,13 +992,11 @@ response
                 {
                     
                 }
-                [formatter release];
             }
             
             [[DatabaseManager sharedInstance] saveEntity:nil];
         }
         [delegate didFinishSearchByName:xmlParser.statusCode];
-        [parser release];
     }
     if([self.requestType isEqualToString:GET_FEEDS_REQ])
     {
@@ -927,11 +1032,9 @@ response
             NSDate *date = [formatter dateFromString:mdateStr];
             [feedsObj setValue:date forKey:@"time_stamp"];
             
-            [formatter release];
             [[DatabaseManager sharedInstance] saveEntity:nil];
         }
         [delegate didFinishLoadingFeeds:xmlParser.statusCode statusMessage:xmlParser.statusMessage];
-        [parser release];
     }
    
     if([self.requestType isEqualToString:APP_IP_REQ])
@@ -942,7 +1045,6 @@ response
             [delegate didFinishLoadingAppURL:[arr objectAtIndex:1]];
         }
     }
-    [temp release];
     [self removePopup];
     
     if ([xmlParser.statusCode rangeOfString:@"400"].location == NSNotFound) {
@@ -1075,7 +1177,7 @@ response
         CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
         
         // Get the string representation of CFUUID object.
-        uniqueID = (NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObject);
+        uniqueID = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuidObject));
         CFRelease(uuidObject);
     }
     
@@ -1088,7 +1190,6 @@ response
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:xmlParser.statusMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
-    [alert release];
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     [ud setObject:@"NO" forKey:@"loggedIn"];

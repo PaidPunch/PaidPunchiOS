@@ -92,14 +92,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [businessList release];
-    [searchBar release];
-    [businessListTableView release];
-    [filteredListOfItems release];
-    [ovController release];
-    [networkManager release];
-    [qrCode release];
-    [super dealloc];
     NSLog(@"In dealloc of SearchByBusinessViewController");
 }
 
@@ -122,7 +114,7 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell==nil)
     {
-        cell=[[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier]autorelease];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
 	}	
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -200,9 +192,9 @@
 	self.businessListTableView.scrollEnabled = NO;
 	
 	//Add the done button.
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
 											   initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-											   target:self action:@selector(doneSearching_Clicked:)] autorelease];
+											   target:self action:@selector(doneSearching_Clicked:)];
 }
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
@@ -248,7 +240,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -315,7 +306,6 @@
 	self.businessListTableView.scrollEnabled = YES;
 	
 	[ovController.view removeFromSuperview];
-	[ovController release];
 	ovController = nil;
 	
 	[self.businessListTableView reloadData];
@@ -339,7 +329,6 @@
 {
     PunchCardOfferViewController *punchCardOfferView = [[PunchCardOfferViewController alloc] init:offerQrCode punchCardDetails:punchCard];
     [self.navigationController pushViewController:punchCardOfferView animated:YES];
-    [punchCardOfferView release];
 }
 
 

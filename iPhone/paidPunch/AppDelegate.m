@@ -29,22 +29,6 @@ static NSString* kAppId = @"159848747459550";
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc
-{
-    [managedObjectContext_ release];
-    [managedObjectModel_ release];
-    [persistentStoreCoordinator_ release];
-    [_window release];
-    //[_viewController release];
-    [navigationController release];
-    [facebook release];
-    [userPermissions release];
-    [permissions release];
-    
-    [locationManager release];
-    [currentLocation release];
-    [super dealloc];
-}
 
 #pragma mark -
 
@@ -92,7 +76,6 @@ static NSString* kAppId = @"159848747459550";
         PaidPunchTabBarController *tabBarController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
         self.window.rootViewController=tabBarController;
         [self.window makeKeyAndVisible];
-        [tabBarController release];
     }
     else
     {
@@ -112,8 +95,6 @@ static NSString* kAppId = @"159848747459550";
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];
         self.window.rootViewController=self.navigationController;
         [self.window makeKeyAndVisible];
-        [startPageViewController release];
-        [navController release];
     }
     [ud synchronize];
 }
@@ -149,7 +130,6 @@ static NSString* kAppId = @"159848747459550";
                                   otherButtonTitles:nil,
                                   nil];
         [alertView show];
-        [alertView release];
     } else {
         // Now check that the URL scheme fb[app_id]://authorize is in the .plist and can
         // be opened, doing a simple check without local app id factored in here
@@ -182,7 +162,6 @@ static NSString* kAppId = @"159848747459550";
                                       otherButtonTitles:nil,
                                       nil];
             [alertView show];
-            [alertView release];
         }
         else
         {
@@ -222,7 +201,7 @@ static NSString* kAppId = @"159848747459550";
 	NSLog(@"Current Locale: %@", [[NSLocale currentLocale] localeIdentifier]);
 	NSLog(@"Current language: %@", currentLanguage);
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    
     permissions=[[NSMutableArray alloc] initWithObjects:@"read_friendlists", @"user_about_me", @"publish_stream",@"email", nil];
     
@@ -238,10 +217,8 @@ static NSString* kAppId = @"159848747459550";
     
     CLLocation *loc=[[CLLocation alloc] init];
     self.currentLocation=loc;
-    [loc release];
     CLLocationManager *locMgr=[[CLLocationManager alloc] init];
     self.locationManager=locMgr;
-    [locMgr release];
     self.locationManager.delegate=self;
     if([CLLocationManager locationServicesEnabled])
         [self.locationManager startUpdatingLocation];
@@ -406,10 +383,8 @@ static NSString* kAppId = @"159848747459550";
          
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        [options release];
         abort();
     }    
-    [options release];
     return persistentStoreCoordinator_;
 }
 
@@ -460,7 +435,6 @@ static NSString* kAppId = @"159848747459550";
         {
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Error" message:[error description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
         }
             break;
     }

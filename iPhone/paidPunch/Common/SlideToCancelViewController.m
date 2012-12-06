@@ -130,7 +130,6 @@ static const int animationFramesPerSec = 8;
 	self.view = view;
 	
 	// The view is retained by the superclass, so release our copy
-	[view release];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,9 +142,9 @@ static const int animationFramesPerSec = 8;
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	[self stopTimer];
-	[sliderBackground release], sliderBackground = nil;
-	[slider release], slider = nil;
-	[label release], label = nil;
+	sliderBackground = nil;
+	slider = nil;
+	label = nil;
 }
 
 // UISlider actions
@@ -214,19 +213,19 @@ static const int animationFramesPerSec = 8;
 	if (!animationTimer) {
 		animationTimerCount = 0;
 		[self setGradientLocations:0];
-		animationTimer = [[NSTimer 
+		animationTimer = [NSTimer 
 						   scheduledTimerWithTimeInterval:1.0/animationFramesPerSec 
 						   target:self 
 						   selector:@selector(animationTimerFired:) 
 						   userInfo:nil 
-						   repeats:YES] retain];
+						   repeats:YES];
 	}
 }
 
 - (void) stopTimer {
 	if (animationTimer) {
 		[animationTimer invalidate];
-		[animationTimer release], animationTimer = nil;
+		animationTimer = nil;
 	}
 }
 
@@ -334,7 +333,6 @@ static const int animationFramesPerSec = 8;
 - (void)dealloc {
 	[self stopTimer];
 	[self viewDidUnload];
-    [super dealloc];
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

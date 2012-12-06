@@ -33,15 +33,6 @@
 #pragma mark Cleanup
 
 -(void)dealloc{
-    [currentValue release];
-    [statusCode release];
-    [statusMessage release];
-    [barcodeImage release];
-    [barcodeValue release];
-    [maskedId release];
-    [paymentId release];
-    [offer release];
-    [super dealloc];
     NSLog(@"In dealloc of ServerResponseXmlParser");
     
 }
@@ -85,7 +76,7 @@
 	NSString *newCurrentValue;
 	if (currentValue==nil)
 	{
-        newCurrentValue= [[NSString alloc] initWithString:@""];
+        newCurrentValue= @"";
 	}
 	else
 	{
@@ -194,7 +185,6 @@
         NSDateFormatter *df=[[NSDateFormatter alloc] init];
         [df setDateFormat:@"MM-dd-yyyy"];
         [punchCardDetails setValue:[df dateFromString:newCurrentValue] forKey:@"expiry_date"];
-        [df release];
     }
     if([elementName isEqualToString:BUSINESS_LOGO])
     {
@@ -288,9 +278,7 @@
         self.offer=newCurrentValue;
     }
 	//releasing variables
-	[newCurrentValue release];
 	newCurrentValue =nil;
-	[currentValue release];
 	currentValue = nil;
 }
 
@@ -305,7 +293,6 @@
     // Kick off file parsing
     [parser parse];
 	[parser setDelegate:nil];
-    [parser release];
     return TRUE;
 }
 @end

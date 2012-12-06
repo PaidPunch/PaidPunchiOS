@@ -16,13 +16,13 @@
     NetworkManager *networkManager;
 }
 
-@property (retain, nonatomic) IBOutlet UITextField *oldPasswordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *oldPasswordTextField;
 
-@property (retain, nonatomic) IBOutlet UITextField *nwPasswordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *nwPasswordTextField;
 
-@property (retain, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 
-@property(retain,nonatomic) IBOutlet CustomScrollView *scrollView;
+@property(strong,nonatomic) IBOutlet CustomScrollView *scrollView;
 
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;
 - (BOOL)validate;

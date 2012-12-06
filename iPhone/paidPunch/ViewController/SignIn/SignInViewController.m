@@ -79,10 +79,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [signInTableView release];
-    [scrollView release];
-    [networkManager release];
-    [super dealloc];
     NSLog(@"In dealloc of SignInViewController");
 }
 
@@ -162,7 +158,6 @@
         passwordTextField.text=@"";
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
 }
 
@@ -180,13 +175,11 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         
     }
 }
@@ -202,7 +195,6 @@
     if (usernameTextField.text.length==0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     {
@@ -210,7 +202,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
         else
         {
@@ -267,21 +258,18 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"Enter Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(![self validateEmail:usernameTextField.text])
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     if(password.length==0)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"Enter Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         return NO;
     }
     return YES;
@@ -314,7 +302,6 @@
     [passwordTextField resignFirstResponder];
     PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController presentModalViewController:tabBarViewController animated:NO];
-    [tabBarViewController release];
 }
 
 -(void) goToSignUpView
@@ -324,7 +311,6 @@
     
     RegistrationViewController *signUpViewController = [[RegistrationViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:signUpViewController animated:YES];
-    [signUpViewController release];
 }
 
 #pragma mark -
@@ -354,7 +340,7 @@
     static NSString *CellIdentifier = @"SignCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     if(indexPath.section == 0){
         UITextField *inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
@@ -388,7 +374,6 @@
         
         [inputTextField setEnabled:YES];
         [cell addSubview:inputTextField];
-        [inputTextField release];
     }
     else if(indexPath.section == 1){
         /*UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];

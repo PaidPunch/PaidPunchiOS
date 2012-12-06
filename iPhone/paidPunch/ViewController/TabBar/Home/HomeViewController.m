@@ -69,11 +69,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [homeOptionsTableView release];
-    [watchVideoImageView release];
-    [playVideoOptionsView release];
-    [homeView release];
-    [super dealloc];
      NSLog(@"In dealloc of HomeViewController");
 }
 
@@ -106,7 +101,7 @@
 	UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell==nil)
 	{
-		cell=[[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+		cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
 	cell.selectionStyle=UITableViewCellSelectionStyleNone;   
     cell.textLabel.textAlignment=UITextAlignmentCenter;
@@ -117,12 +112,12 @@
         if (indexPath.row==0) 
         {
             cell.textLabel.text=@"How to use PaidPunch";
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]];
         }
         if(indexPath.row==1)
         {
             cell.textLabel.text=@"FAQ";
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]];
         }
     }
     if(indexPath.section==1)
@@ -130,12 +125,12 @@
         if (indexPath.row==0) 
         {
             cell.textLabel.text=@"My Account";
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkUpbox.png"]];
         }
         if(indexPath.row==1)
         {
             cell.textLabel.text=@"Sign Out";
-            cell.backgroundView=[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]]autorelease];
+            cell.backgroundView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HomeLinkDownbox.png"]];
         }
     }
     return cell;
@@ -211,7 +206,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -318,7 +312,6 @@
     [UIView transitionWithView:self.view.window duration:1.0f options:UIViewAnimationOptionTransitionCurlDown animations:^{[self presentMoviePlayerViewControllerAnimated:playerViewController];} completion:nil];
     //[self presentMoviePlayerViewControllerAnimated:playerViewController];
     [player play];
-    [playerViewController release];
     
 }
 
@@ -335,14 +328,12 @@
 {
     SettingsViewController *settingsViewController= [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:settingsViewController animated:YES];
-    [settingsViewController release];
 }
 
 -(void)goToFAQView
 {
     FAQViewController *faqViewController= [[FAQViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:faqViewController animated:YES];
-    [faqViewController release];
 
 }
 
@@ -350,7 +341,6 @@
 {
     UsingPaidPunchViewController *usingPaidPunchViewController= [[UsingPaidPunchViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:usingPaidPunchViewController animated:YES];
-    [usingPaidPunchViewController release];
 
 }
 

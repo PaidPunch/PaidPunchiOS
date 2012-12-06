@@ -779,7 +779,6 @@
 {
 	Foursquare2Callback callback = (Foursquare2Callback)object;
     callback(NO, error);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection 
@@ -789,7 +788,6 @@
 {
 	Foursquare2Callback callback = (Foursquare2Callback)object;
     callback(NO, error);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection
@@ -799,7 +797,6 @@
 {
 	Foursquare2Callback callback = (Foursquare2Callback)object;
     callback(NO, error);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection 
@@ -811,7 +808,6 @@
 	
 	Foursquare2Callback callback = (Foursquare2Callback)object;
     callback(YES, resource);
-	[callback release];
 }
 
 

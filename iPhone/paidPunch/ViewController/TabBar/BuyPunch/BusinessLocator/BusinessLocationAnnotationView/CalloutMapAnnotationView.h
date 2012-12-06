@@ -11,8 +11,8 @@
 	CGFloat _contentHeight;
 }
 
-@property (nonatomic, retain) MKAnnotationView *parentAnnotationView;
-@property (nonatomic, retain) MKMapView *mapView;
+@property (nonatomic, strong) MKAnnotationView *parentAnnotationView;
+@property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, readonly) UIView *contentView;
 @property (nonatomic) CGPoint offsetFromParent;
 @property (nonatomic) CGFloat contentHeight;

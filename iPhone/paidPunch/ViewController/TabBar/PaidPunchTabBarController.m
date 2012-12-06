@@ -70,9 +70,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {	
-    [myPunchesNavigationController release];
-	[tabBarController release];
-    [super dealloc];
     NSLog(@"In dealloc of PaidPunchTabBarController");
 }
 

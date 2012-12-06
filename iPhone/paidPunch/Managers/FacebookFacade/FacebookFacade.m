@@ -6,7 +6,10 @@
 //  Copyright (c) 2012 mobimedia. All rights reserved.
 //
 
+#import "DualSignInViewController.h"
 #import "FacebookFacade.h"
+#import "FeedsTableViewController.h"
+#import "PunchCardOfferViewController.h"
 
 @implementation FacebookFacade
 @synthesize savedAPIResult;
@@ -23,37 +26,19 @@ static FacebookFacade *sharedInstance=nil;
 	{
 		sharedInstance=[[super allocWithZone:NULL]init];
         //childIndex = index;
-        sharedInstance.savedAPIResult = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
+        sharedInstance.savedAPIResult = [[NSMutableArray alloc] initWithCapacity:1];
 	}
 	return sharedInstance;
 }
 
 +(id)allocWithZone:(NSZone *)zone{
-	return [[self sharedInstance]retain];
+	return [self sharedInstance];
 }
 
 -(id)copyWithZone:(NSZone *)zone{
 	return self;
 }
 
--(id)retain{
-	return self;
-}
-
--(NSUInteger)retainCount{
-	return NSUIntegerMax;
-}
-
--(oneway void)release{
-}
-
--(id)autorelease{
-	return self;
-}
-
--(void)dealloc{
-    [super dealloc];
-}
 
 
 
@@ -99,7 +84,6 @@ static FacebookFacade *sharedInstance=nil;
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray *checkinPermissions = [[NSArray alloc] initWithObjects:@"user_checkins", @"publish_checkins", nil];
     [[delegate facebook] authorize:checkinPermissions];
-    [checkinPermissions release];
 }
 
 /*
@@ -141,7 +125,6 @@ static FacebookFacade *sharedInstance=nil;
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray *extendedPermissions = [[NSArray alloc] initWithObjects:@"user_likes", nil];
     [[delegate facebook] authorize:extendedPermissions];
-    [extendedPermissions release];
 }
 
 /**
@@ -155,7 +138,7 @@ static FacebookFacade *sharedInstance=nil;
  */
 - (void)apiDialogFeedUser {
     currentAPICall = kDialogFeedUser;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     
     // The action links to be shown with the post in the feed
     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -193,7 +176,7 @@ static FacebookFacade *sharedInstance=nil;
  */
 - (void)apiDialogFeedFriend:(NSString *)friendID {
     currentAPICall = kDialogFeedFriend;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     
     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
                                                       @"Get Started",@"name",@"http://m.facebook.com/apps/hackbookios/",@"link", nil], nil];
@@ -227,7 +210,7 @@ static FacebookFacade *sharedInstance=nil;
  */
 - (void)apiDialogRequestsSendToMany {
     currentAPICall = kDialogRequestsSendToMany;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     NSDictionary *gift = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"5", @"social_karma",
                           @"1", @"badge_of_awesomeness",
@@ -406,7 +389,6 @@ static FacebookFacade *sharedInstance=nil;
                                    centerLocation, @"center",
                                    @"1000",  @"distance",
                                    nil];
-    [centerLocation release];
     [[delegate facebook] requestWithGraphPath:@"search" andParams:params andDelegate:self];
 }
 
@@ -445,7 +427,6 @@ static FacebookFacade *sharedInstance=nil;
                                     andParams:params
                                 andHttpMethod:@"POST"
                                   andDelegate:self];
-    [img release];
 }
 
 /*
@@ -529,7 +510,6 @@ static FacebookFacade *sharedInstance=nil;
         case kAPIGetAppUsersFriendsNotUsing:
         {
             // Save friend results
-            [savedAPIResult release];
             savedAPIResult = nil;
             // Many results
             if ([result isKindOfClass:[NSArray class]]) {
@@ -557,7 +537,6 @@ static FacebookFacade *sharedInstance=nil;
             } else {
                 [self showMessage:@"None of your friends are using the app."];
             }
-            [friendsWithApp release];
             break;
         }
         case kAPIFriendsForDialogRequests:
@@ -585,7 +564,6 @@ static FacebookFacade *sharedInstance=nil;
                 } else {
                     [self showMessage:@"All your friends are using the app."];
                 }
-                [friendsWithoutApp release];
             }
             break;
         }
@@ -622,8 +600,6 @@ static FacebookFacade *sharedInstance=nil;
                                                     action:@""];
             [self.navigationController pushViewController:controller animated:YES];
             [controller release];*/
-            [userData release];
-            [nameID release];
             break;
         }
         case kAPIGraphUserFriends:
@@ -645,7 +621,6 @@ static FacebookFacade *sharedInstance=nil;
                 [self showMessage:@"You have no friends."];
                 [self.feedsViewController getFeeds:nil];
             }
-            [friends release];
             break;
         }
         case kAPIGraphUserCheckins:
@@ -670,7 +645,6 @@ static FacebookFacade *sharedInstance=nil;
                                                     action:@"recentcheckins"];
             [self.navigationController pushViewController:controller animated:YES];
             [controller release];*/
-            [places release];
             break;
         }
         case kAPIGraphSearchPlace:
@@ -687,7 +661,6 @@ static FacebookFacade *sharedInstance=nil;
                                                     action:@"places"];
             [self.navigationController pushViewController:controller animated:YES];
             [controller release];*/
-            [places release];
             break;
         }
         case kAPIGraphUserPhotosPost:
@@ -747,7 +720,7 @@ static FacebookFacade *sharedInstance=nil;
             // Successful requests return one or more request_ids.
             // Get any request IDs, will be in the URL in the form
             // request_ids[0]=1001316103543&request_ids[1]=10100303657380180
-            NSMutableArray *requestIDs = [[[NSMutableArray alloc] init] autorelease];
+            NSMutableArray *requestIDs = [[NSMutableArray alloc] init];
             for (NSString *paramKey in params) {
                 if ([paramKey hasPrefix:@"request_ids"]) {
                     [requestIDs addObject:[params objectForKey:paramKey]];
@@ -859,7 +832,6 @@ static FacebookFacade *sharedInstance=nil;
                               otherButtonTitles:nil,
                               nil];
     [alertView show];
-    [alertView release];
     [self showActivityIndicator];
     [self fbDidLogout];
     
@@ -971,7 +943,7 @@ static FacebookFacade *sharedInstance=nil;
  */
 - (NSDictionary *)parseURLParams:(NSString *)query {
 	NSArray *pairs = [query componentsSeparatedByString:@"&"];
-	NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
+	NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 	for (NSString *pair in pairs) {
 		NSArray *kv = [pair componentsSeparatedByString:@"="];
 		NSString *val =

@@ -32,30 +32,30 @@
     int cnt;
     
 }
-@property (retain, nonatomic) IBOutlet UIScrollView *contentsScrollView;
-@property (retain, nonatomic) IBOutlet UILabel *freePunchLbl;
-@property (retain, nonatomic) IBOutlet UIImageView *buisnesslogoImageView;
-@property(nonatomic,retain) PunchCard *punchCardDetails;
-@property(nonatomic,retain) NSString *qrCode;
+@property (strong, nonatomic) IBOutlet UIScrollView *contentsScrollView;
+@property (strong, nonatomic) IBOutlet UILabel *freePunchLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *buisnesslogoImageView;
+@property(nonatomic,strong) PunchCard *punchCardDetails;
+@property(nonatomic,strong) NSString *qrCode;
 
-@property (retain, nonatomic) IBOutlet UILabel *expiryLbl;
-@property (nonatomic, retain) IBOutlet UIWebView *finePrintView;
-@property (nonatomic, retain) UIImageView *finePrintDivider;
+@property (strong, nonatomic) IBOutlet UILabel *expiryLbl;
+@property (nonatomic, strong) IBOutlet UIWebView *finePrintView;
+@property (nonatomic, strong) UIImageView *finePrintDivider;
 
-@property (retain, nonatomic) IBOutlet UILabel *punchCardNameLbl;
-@property (nonatomic, retain) IBOutlet UIWebView *payValueView;
-@property (nonatomic, retain) IBOutlet UIWebView *getValueView;
-@property (nonatomic, retain) IBOutlet UILabel *totalValueLabel;
-@property (nonatomic, retain) IBOutlet UILabel *savingsValueLabel;
-@property (nonatomic, retain) IBOutlet UILabel *punchCardContentsLabel;
-@property (nonatomic, retain) IBOutlet UIWebView *punchCardContentsView;
-@property (nonatomic, retain) IBOutlet UIImageView *punchCardContentsBG;
+@property (strong, nonatomic) IBOutlet UILabel *punchCardNameLbl;
+@property (nonatomic, strong) IBOutlet UIWebView *payValueView;
+@property (nonatomic, strong) IBOutlet UIWebView *getValueView;
+@property (nonatomic, strong) IBOutlet UILabel *totalValueLabel;
+@property (nonatomic, strong) IBOutlet UILabel *savingsValueLabel;
+@property (nonatomic, strong) IBOutlet UILabel *punchCardContentsLabel;
+@property (nonatomic, strong) IBOutlet UIWebView *punchCardContentsView;
+@property (nonatomic, strong) IBOutlet UIImageView *punchCardContentsBG;
 
-@property (retain, nonatomic) IBOutlet UITableView *punchesListTableView;
-@property (retain, nonatomic) IBOutlet UIButton *getFreePunchBtn;
-@property (retain, nonatomic) IBOutlet UIImageView *lockImageView;
-@property (retain, nonatomic) IBOutlet UIView *cardView;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UITableView *punchesListTableView;
+@property (strong, nonatomic) IBOutlet UIButton *getFreePunchBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *lockImageView;
+@property (strong, nonatomic) IBOutlet UIView *cardView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)buyBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)getFreePunchBtnTouchUpInsideHandler:(id)sender;

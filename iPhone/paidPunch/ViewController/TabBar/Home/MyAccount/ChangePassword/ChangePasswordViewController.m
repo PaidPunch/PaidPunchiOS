@@ -75,12 +75,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [oldPasswordTextField release];
-    [nwPasswordTextField release];
-    [confirmPasswordTextField release];
-    [scrollView release];
-    [networkManager release];
-    [super dealloc];
     NSLog(@"In dealloc of ChangePasswordViewController");
 }
 
@@ -132,7 +126,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     {
@@ -147,7 +140,6 @@
        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
 
     }
 
@@ -198,42 +190,36 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(![oldPasswordTextField.text isEqualToString:[[InfoExpert sharedInstance]password]])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter correct Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(nwPasswordTextField.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter New Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if([nwPasswordTextField.text isEqualToString:oldPasswordTextField.text])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Old Password and New Password should be different" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(confirmPasswordTextField.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Confirm Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     if(![nwPasswordTextField.text isEqualToString:confirmPasswordTextField.text])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"New Password and Confirm password should be same" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return NO;
     }
     return YES;

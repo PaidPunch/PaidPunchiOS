@@ -42,7 +42,7 @@ typedef enum{
 @protocol EGORefreshTableHeaderDelegate;
 @interface EGORefreshTableHeaderView : UIView {
 	
-	id _delegate;
+	id __weak _delegate;
 	EGOPullRefreshState _state;
 
 	UILabel *_lastUpdatedLabel;
@@ -54,7 +54,7 @@ typedef enum{
     EGOType egoType;
 }
 
-@property(nonatomic,assign) id <EGORefreshTableHeaderDelegate> delegate;
+@property(nonatomic,weak) id <EGORefreshTableHeaderDelegate> delegate;
 //@property(nonatomic) BOOL isUsedForSearchView;
 @property (nonatomic) EGOType egoType;
 

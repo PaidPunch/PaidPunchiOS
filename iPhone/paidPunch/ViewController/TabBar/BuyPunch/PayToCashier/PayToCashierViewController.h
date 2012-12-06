@@ -23,14 +23,14 @@
     UITextField *orangeCodeTextField;
     int attempts;
 }
-@property(nonatomic,retain) NSString *offerQrCode;
-@property(nonatomic,retain) NSString *punchId;
-@property(nonatomic,retain) NSString *businessName;
-@property(nonatomic,retain) PunchCard *punchCardDetails;
-@property (retain, nonatomic) IBOutlet UILabel *punchCardValueLbl;
-@property (retain, nonatomic) IBOutlet UILabel *punchCardNameLbl;
-@property (retain, nonatomic) IBOutlet UILabel *noOfPunchesLbl;
-@property (retain, nonatomic) IBOutlet UIImageView *imageView;
+@property(nonatomic,strong) NSString *offerQrCode;
+@property(nonatomic,strong) NSString *punchId;
+@property(nonatomic,strong) NSString *businessName;
+@property(nonatomic,strong) PunchCard *punchCardDetails;
+@property (strong, nonatomic) IBOutlet UILabel *punchCardValueLbl;
+@property (strong, nonatomic) IBOutlet UILabel *punchCardNameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *noOfPunchesLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 - (IBAction)nextBtnTouchUpInsideHandler:(id)sender;
 

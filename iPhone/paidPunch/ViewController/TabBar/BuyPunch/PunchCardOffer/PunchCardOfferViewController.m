@@ -99,7 +99,6 @@
 	[leftButton addTarget:self action:@selector(backBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *leftBtnOnNavigation = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 	self.navigationItem.leftBarButtonItem = leftBtnOnNavigation;
-	[leftBtnOnNavigation release];
 
     self.punchesListTableView.backgroundColor = [UIColor clearColor];
 	self.punchesListTableView.sectionFooterHeight = 0;
@@ -117,7 +116,6 @@
     UIBarButtonItem *mapButton=[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStylePlain target:self action:@selector(mapBtnTouchUpInsideHandler:)];
     mapButton.title=@"Map";
     self.navigationItem.rightBarButtonItem=mapButton;
-    [mapButton release];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -154,20 +152,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [qrCode release];
-    [buisnesslogoImageView release];
-    [expiryLbl release];
-    [punchCardNameLbl release];
-    [punchesListTableView release];
-    NSLog(@"Retain Count %d",[self.punchCardDetails retainCount]);
-    [punchCardDetails release];
-    [getFreePunchBtn release];
-    [freePunchLbl release];
-    [contentsScrollView release];
-    [lockImageView release];
-    [cardView release];
-    [activityIndicator release];
-    [super dealloc];
     NSLog(@"In dealloc of PunchCardOfferViewController");
 }
 
@@ -291,7 +275,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         [[DatabaseManager sharedInstance] deleteEntity:self.punchCardDetails.business];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
@@ -299,7 +282,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -314,7 +296,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -375,7 +356,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"Could not connect to server. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
    
 }
@@ -435,7 +415,7 @@
 
 - (void)shareOnFacebook {
     cnt++;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     
     // The action links to be shown with the post in the feed
     NSString *url=@"http://itunes.apple.com/us/app/paidpunch/id501977872?mt=8";
@@ -602,14 +582,12 @@
 {
     AddCardViewController *addCardViewController = [[AddCardViewController alloc] init:self.punchCardDetails];
     [self.navigationController pushViewController:addCardViewController animated:YES];
-    [addCardViewController release];
 }
 
 - (void)goToPayToCashierView
 {
     PayToCashierViewController *payToCashierView = [[PayToCashierViewController alloc] init:self.qrCode punchCardDetailsObj:self.punchCardDetails punchCardId:self.punchCardDetails.punch_card_id businessName:self.punchCardDetails.business_name];
     [self.navigationController pushViewController:payToCashierView animated:YES];
-    [payToCashierView release];
 }
 
 -(void) gotoRootView
@@ -629,7 +607,6 @@
 {
     CongratulationsViewController *congratulationsView = [[CongratulationsViewController alloc] init:self.punchCardDetails.business_name isFreePunchUnlocked:isFreePunch];
     [self.navigationController pushViewController:congratulationsView animated:YES];
-    [congratulationsView release];
     isFreePunch=NO;
 }
 
@@ -637,7 +614,6 @@
 {
     ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
     [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
-    [confirmPaymentViewController release];
 }
 
 -(void)goToMapView
@@ -648,7 +624,6 @@
     BusinessLocatorViewController *businessMapViewController = [[BusinessLocatorViewController alloc] init:cardArray];
     //BusinessLocatorViewController *businessMapViewController = [[BusinessLocatorViewController alloc] init:self.punchCardDetails];
     [self.navigationController pushViewController:businessMapViewController animated:YES];
-    [businessMapViewController release];
 }
 
 @end

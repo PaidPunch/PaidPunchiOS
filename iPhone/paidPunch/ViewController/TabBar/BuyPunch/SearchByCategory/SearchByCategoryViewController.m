@@ -60,7 +60,6 @@
 	[rightButton addTarget:self action:@selector(settingsBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *rightBtnOnNavigation = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 	self.navigationItem.rightBarButtonItem = rightBtnOnNavigation;
-	[rightBtnOnNavigation release];
 
     
 	UIImage *leftBtnImage = [UIImage imageNamed:@"SearchSettingsBtn.png"];
@@ -70,7 +69,6 @@
 	[leftButton addTarget:self action:@selector(locateBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *leftBtnOnNavigation = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 	self.navigationItem.leftBarButtonItem = leftBtnOnNavigation;
-	[leftBtnOnNavigation release];
 
     self.searchTableView.backgroundColor = [UIColor clearColor];
 	self.searchTableView.sectionFooterHeight = 0;
@@ -92,7 +90,6 @@
 		view.delegate = self;
 		[searchTableView addSubview:view];
 		_refreshHeaderView = view;
-		[view release];
 	}
     [_refreshHeaderView refreshLastUpdatedDate];
     
@@ -192,21 +189,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [searchTableView release];
-    [locateView release];
-    [settingsView release];
-    [totalMilesTxtField release];
-    [businessList release];
-    [cityTxtField release];
-    [locationMgr release];
-    [currentLocation release];
-//    [activity release];
-    [lastRefreshTime release];
-    [locationMgr release];
-    [currentLocation release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods Implementation
@@ -228,7 +210,7 @@
 	UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell==nil)
 	{
-		cell=[[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+		cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
 	
 	cell.selectionStyle=UITableViewCellSelectionStyleNone;    
@@ -257,7 +239,6 @@
     }
     cell.backgroundView=bgImageView;
     cell.textLabel.textColor=[UIColor whiteColor];
-    [bgImageView release];
    	return cell;
 }
 
@@ -286,7 +267,7 @@
     if([[InfoExpert sharedInstance] searchType]==SEARCH_BY_CURRENT_LOCATION)
     {
         [self showPopup];
-        self.locationMgr = [[[CLLocationManager alloc] init] autorelease];
+        self.locationMgr = [[CLLocationManager alloc] init];
         self.locationMgr.delegate = self; // send loc updates to myself
     
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest; 
@@ -301,7 +282,6 @@
             [self removePopup];
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
-            [alertView release]; 
         }
     }
     else
@@ -372,7 +352,6 @@
     [self.locationMgr stopUpdatingLocation];
     UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch."delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alertView show];
-    [alertView release]; 
 }
 
 #pragma mark -
@@ -585,7 +564,7 @@
     [[InfoExpert sharedInstance] setSearchCriteria:1];
     [self.cityTxtField resignFirstResponder];
     [self showPopup];
-    self.locationMgr = [[[CLLocationManager alloc] init] autorelease];
+    self.locationMgr = [[CLLocationManager alloc] init];
     self.locationMgr.delegate = self; // send loc updates to myself
     
     currentBtnClicked=YES;
@@ -602,7 +581,6 @@
         [self removePopup];
         UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
-        [alertView release]; 
     }
 }
 
@@ -627,7 +605,6 @@
     [totalMilesTxtField resignFirstResponder];
     SearchListViewController *searchListViewController= [[SearchListViewController alloc] init:searchType withCategory:category withTotalMiles:sMiles withCurrentlocation:self.currentLocation withBusinessName:@"" withCityOrZipCode:cityTxtField.text];
     [self.navigationController pushViewController:searchListViewController animated:YES];
-    [searchListViewController release];
 }
 
 - (IBAction)goBack:(id)sender {

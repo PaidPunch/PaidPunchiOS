@@ -59,9 +59,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [qrCode release];
-    [networkManager release];
-    [super dealloc];
     NSLog(@"In dealloc of BuyPunchViewController");
 }
 
@@ -94,7 +91,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -115,14 +111,12 @@
     SearchByBusinessViewController *searchByBusinessView = [[SearchByBusinessViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:searchByBusinessView animated:YES];
     //[searchByBusinessView loadBusinessList];
-    [searchByBusinessView release];
 }
 
 - (void)goToPunchCardOfferView:(NSString *)offerQrCode punchCardDetails:(PunchCard *)punchCard
 {
     PunchCardOfferViewController *punchCardOfferView = [[PunchCardOfferViewController alloc] init:offerQrCode punchCardDetails:punchCard];
     [self.navigationController pushViewController:punchCardOfferView animated:YES];
-    [punchCardOfferView release];
 }
 
 -(void)goToScanQRCodeView

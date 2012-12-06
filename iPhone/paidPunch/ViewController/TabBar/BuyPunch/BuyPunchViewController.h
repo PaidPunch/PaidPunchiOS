@@ -20,7 +20,7 @@
     NetworkManager *networkManager;
 }
 
-@property(nonatomic,retain)NSString *qrCode;
+@property(nonatomic,strong)NSString *qrCode;
 
 - (IBAction)searchByQrCodeBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)searchByBusinessBtnTouchUpInsideHandler:(id)sender;

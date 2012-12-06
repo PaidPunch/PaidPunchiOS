@@ -42,7 +42,6 @@
 		view.delegate = self;
 		[self.feedsTableView addSubview:view];
 		_refreshHeaderView = view;
-		[view release];
 		
 	}
 
@@ -88,9 +87,7 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [feedsList release];
 	_refreshHeaderView = nil;
-    [super dealloc];
 }
 
 
@@ -384,7 +381,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"To View what your friends are doing sign in with facebook" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             self.feedsList=[[DatabaseManager sharedInstance] getFriendsFeeds];
             
         }

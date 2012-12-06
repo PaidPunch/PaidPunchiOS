@@ -27,8 +27,8 @@
     NSString *password;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *signInTableView;
-@property(retain,nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UITableView *signInTableView;
+@property(strong,nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)forgotPasswordTouchUpInsideHandler:(id)sender;
 - (IBAction)signInBtnTouchUpInsideHandler:(id)sender;

@@ -84,15 +84,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    [deleteCardBtn release];
-    [addCardBtn release];
-    [cardMaskedCodeLbl release];
-    [linkAddCardLbl release];
-    [creditCardPinImageView release];
-    [maskedId release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UIAlertViewDelegate methods Implementation
@@ -115,7 +106,6 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         [[InfoExpert sharedInstance] setIsProfileCreated:NO];
         if([[InfoExpert sharedInstance] isProfileCreated])
@@ -133,7 +123,6 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
     
 }
@@ -181,7 +170,6 @@
 - (IBAction)deleteCardBtnTouchUpInsideHandler:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Do you want to delete this card ?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
     [alert show];
-    [alert release];
     
 }
 
@@ -202,6 +190,5 @@
 {
     AddCardViewController *addCardViewController = [[AddCardViewController alloc] init:nil];
     [self.navigationController pushViewController:addCardViewController animated:YES];
-    [addCardViewController release];
 }
 @end

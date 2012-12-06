@@ -15,12 +15,12 @@
     NetworkManager *networkManager;
 }
 
-@property (retain, nonatomic) IBOutlet UIButton *deleteCardBtn;
-@property (retain, nonatomic) IBOutlet UIButton *addCardBtn;
-@property (retain, nonatomic) IBOutlet UILabel *cardMaskedCodeLbl;
-@property (retain, nonatomic) IBOutlet UILabel *linkAddCardLbl;
-@property (retain, nonatomic) IBOutlet UIImageView *creditCardPinImageView;
-@property (nonatomic,retain) NSString *maskedId;
+@property (strong, nonatomic) IBOutlet UIButton *deleteCardBtn;
+@property (strong, nonatomic) IBOutlet UIButton *addCardBtn;
+@property (strong, nonatomic) IBOutlet UILabel *cardMaskedCodeLbl;
+@property (strong, nonatomic) IBOutlet UILabel *linkAddCardLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *creditCardPinImageView;
+@property (nonatomic,strong) NSString *maskedId;
 
 - (id)init:(NSString *)creditCardMaskedId;
 - (void)setUpUI;

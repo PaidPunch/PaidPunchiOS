@@ -19,15 +19,15 @@
 {
     NetworkManager *networkManager;
 }
-@property (retain, nonatomic) IBOutlet UIImageView *businessLogoImageView;
-@property (retain, nonatomic) IBOutlet UILabel *descriptionLbl;
-@property (retain, nonatomic) IBOutlet UILabel *valueLbl;
-@property (retain, nonatomic) IBOutlet UILabel *pinLbl;
-@property (retain, nonatomic) IBOutlet UILabel *creditCardLbl;
-@property (nonatomic,retain) PunchCard *punchCardDetails;
-@property (nonatomic,retain) NSString *maskedId;
-@property (nonatomic,retain) NSString *paymentId;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLbl;
+@property (strong, nonatomic) IBOutlet UILabel *valueLbl;
+@property (strong, nonatomic) IBOutlet UILabel *pinLbl;
+@property (strong, nonatomic) IBOutlet UILabel *creditCardLbl;
+@property (nonatomic,strong) PunchCard *punchCardDetails;
+@property (nonatomic,strong) NSString *maskedId;
+@property (nonatomic,strong) NSString *paymentId;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id)init:(PunchCard *)punchCard withMaskedId:(NSString *)mid withPaymentId:(NSString *)pid;
 

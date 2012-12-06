@@ -27,8 +27,4 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc {
-    [valueTxtField release];
-    [super dealloc];
-}
 @end

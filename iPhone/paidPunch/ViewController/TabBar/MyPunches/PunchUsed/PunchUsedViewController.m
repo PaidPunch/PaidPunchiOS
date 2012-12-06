@@ -98,19 +98,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [barcodeImageView release];
-    [businessLogoImageView release];
-    [businessNameLbl release];
-    [timeLbl release];
-    [barcodeImageData release];
-    [barcodeValue release];
-    [totalMinsLbl release];
-    [totalSecsLbl release];
-    [secLbl release];
-    [minLbl release];
-    [contentsWebView release];
-    [lastRefreshTime release];
-    [super dealloc];
     NSLog(@"In dealloc of PunchUsedViewController");
 }
 
@@ -168,7 +155,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"Could not connect to server. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 
 }
@@ -284,7 +270,6 @@
         NSString *msg=[NSString stringWithFormat:@"You have unlocked your %@ Mystery Punch!",self.punchCardDetails.business_name];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     else
     { 
@@ -344,12 +329,11 @@
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray *postToWallPermissions = [[NSArray alloc] initWithObjects:@"publish_stream", nil];
     [[delegate facebook] authorize:postToWallPermissions];
-    [postToWallPermissions release];
 }
 
 - (void)shareOnFacebook {
     cnt++;
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    SBJSON *jsonWriter = [SBJSON new];
     
     // The action links to be shown with the post in the feed
     NSString *url=@"http://itunes.apple.com/us/app/paidpunch/id501977872?mt=8";

@@ -43,7 +43,7 @@
 		858D1366150488DA00ED48E9 /* NSDictionary+ParamUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 858D12FE150488DA00ED48E9 /* NSDictionary+ParamUtils.h */; };
 		858D1367150488DA00ED48E9 /* NSDictionary+ParamUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 858D12FF150488DA00ED48E9 /* NSDictionary+ParamUtils.m */; };
 		858D1368150488DA00ED48E9 /* NSObject+InvocationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 858D1300150488DA00ED48E9 /* NSObject+InvocationUtils.h */; };
-		858D1369150488DA00ED48E9 /* NSObject+InvocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 858D1301150488DA00ED48E9 /* NSObject+InvocationUtils.m */; };
+		858D1369150488DA00ED48E9 /* NSObject+InvocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 858D1301150488DA00ED48E9 /* NSObject+InvocationUtils.m */; settings = {COMPILER_FLAGS = ""; }; };
 		858D136A150488DA00ED48E9 /* NSString+EscapingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 858D1302150488DA00ED48E9 /* NSString+EscapingUtils.h */; };
 		858D136B150488DA00ED48E9 /* NSString+EscapingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 858D1303150488DA00ED48E9 /* NSString+EscapingUtils.m */; };
 		858D136C150488DA00ED48E9 /* HRFormatJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 858D1305150488DA00ED48E9 /* HRFormatJSON.h */; };
@@ -668,6 +668,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Sinha (U2RSLMEERT)";
 				DSTROOT = /tmp/SocialNetworkLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -689,6 +690,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Sinha (U2RSLMEERT)";
 				DSTROOT = /tmp/SocialNetworkLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

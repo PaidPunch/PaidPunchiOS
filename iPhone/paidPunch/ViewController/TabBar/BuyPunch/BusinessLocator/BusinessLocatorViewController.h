@@ -20,16 +20,16 @@
     IBOutlet UIImageView    *paidPunchLogo;
     NSMutableArray          *annotationArray;
 }
-@property (retain, nonatomic) IBOutlet MKMapView *businessLocatorMapView;
+@property (strong, nonatomic) IBOutlet MKMapView *businessLocatorMapView;
 //@property(nonatomic,retain) PunchCard *punchCardDetails;
-@property (retain, nonatomic) NSArray *punchCardDetailsArray;
-@property (retain, nonatomic) IBOutlet UIImageView *paidPunchLogo;
-@property (nonatomic, retain) IBOutlet UIButton *getDirectionsButton;
-@property (nonatomic, retain) MarqueeLabel *businessNameMarqueeLabel;
+@property (strong, nonatomic) NSArray *punchCardDetailsArray;
+@property (strong, nonatomic) IBOutlet UIImageView *paidPunchLogo;
+@property (nonatomic, strong) IBOutlet UIButton *getDirectionsButton;
+@property (nonatomic, strong) MarqueeLabel *businessNameMarqueeLabel;
 
-@property (nonatomic, retain) BusinessLocationAnnotation *calloutAnnotation;
+@property (nonatomic, strong) BusinessLocationAnnotation *calloutAnnotation;
 //@property (nonatomic, retain) BusinessLocationAnnotation *customAnnotation;
-@property (nonatomic, retain) MKAnnotationView *selectedAnnotationView;
+@property (nonatomic, strong) MKAnnotationView *selectedAnnotationView;
 
 //- (id)init:(PunchCard *)punchCard;
 - (id)init:(NSArray *)punchCardArray;

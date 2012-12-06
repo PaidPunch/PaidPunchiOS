@@ -24,19 +24,19 @@
     
 
 }
-@property(nonatomic,retain) PunchCard *punchCardDetails;
-@property (retain, nonatomic) IBOutlet UIImageView *businessLogoImageView;
-@property (retain, nonatomic) IBOutlet UILabel *businessNameLbl;
+@property(nonatomic,strong) PunchCard *punchCardDetails;
+@property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
+@property (strong, nonatomic) IBOutlet UILabel *businessNameLbl;
 //@property (retain, nonatomic) IBOutlet UILabel *punchLbl;
-@property (retain, nonatomic) IBOutlet UILabel *valueLbl;
-@property (retain, nonatomic) IBOutlet UILabel *purchaseLbl;
-@property (retain, nonatomic) IBOutlet UISlider *slideToUnlock;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (retain, nonatomic) IBOutlet UILabel *showSlideLbl;
-@property (retain, nonatomic) IBOutlet UIImageView *slideBgImageView;
-@property (retain, nonatomic) IBOutlet UIImageView *instructionsImageView;
-@property (retain, nonatomic) NSString *mysteryoffer;
-@property (retain, nonatomic) IBOutlet UIImageView *orangeStripImageView;
+@property (strong, nonatomic) IBOutlet UILabel *valueLbl;
+@property (strong, nonatomic) IBOutlet UILabel *purchaseLbl;
+@property (strong, nonatomic) IBOutlet UISlider *slideToUnlock;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UILabel *showSlideLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *slideBgImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *instructionsImageView;
+@property (strong, nonatomic) NSString *mysteryoffer;
+@property (strong, nonatomic) IBOutlet UIImageView *orangeStripImageView;
 
 -(id)init:(PunchCard *)punchCard withMysteryOffer:(NSString *)mOffer;
 

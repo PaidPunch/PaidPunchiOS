@@ -10,6 +10,6 @@
 
 @interface AddCardViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UITextField *valueTxtField;
+@property (strong, nonatomic) IBOutlet UITextField *valueTxtField;
 
 @end

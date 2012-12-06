@@ -37,34 +37,34 @@
     
     MBProgressHUD *popupHUD;
 }
-@property (retain, nonatomic) IBOutlet UIView *locateView;
-@property (retain, nonatomic) IBOutlet UIView *settingsView;
-@property (retain, nonatomic) IBOutlet UILabel *categoryLbl;
-@property (retain, nonatomic) IBOutlet UIImageView *backImageView;
-@property (retain, nonatomic) IBOutlet UIView *backView;
-@property (retain, nonatomic) IBOutlet UITextField *totalMilesTxtField;
-@property (retain, nonatomic) IBOutlet UITextField *cityTxtField;
-@property (retain, nonatomic) IBOutlet UILabel *noBusinessFoundLbl;
+@property (strong, nonatomic) IBOutlet UIView *locateView;
+@property (strong, nonatomic) IBOutlet UIView *settingsView;
+@property (strong, nonatomic) IBOutlet UILabel *categoryLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *backImageView;
+@property (strong, nonatomic) IBOutlet UIView *backView;
+@property (strong, nonatomic) IBOutlet UITextField *totalMilesTxtField;
+@property (strong, nonatomic) IBOutlet UITextField *cityTxtField;
+@property (strong, nonatomic) IBOutlet UILabel *noBusinessFoundLbl;
 
-@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (retain, nonatomic) IBOutlet UITableView *businessListTableView;
-@property (retain, nonatomic) NSString *searchType;
-@property (retain, nonatomic) NSString *category;
-@property (retain, nonatomic) NSString *businessName;
-@property (retain, nonatomic) NSString *cityOrZipCode;
-@property (retain, nonatomic) NSArray *businessList;
-@property (retain, nonatomic) IBOutlet UIImageView *categoryImageView;
-@property (retain, nonatomic) CLLocation *userLocation;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITableView *businessListTableView;
+@property (strong, nonatomic) NSString *searchType;
+@property (strong, nonatomic) NSString *category;
+@property (strong, nonatomic) NSString *businessName;
+@property (strong, nonatomic) NSString *cityOrZipCode;
+@property (strong, nonatomic) NSArray *businessList;
+@property (strong, nonatomic) IBOutlet UIImageView *categoryImageView;
+@property (strong, nonatomic) CLLocation *userLocation;
 
-@property (nonatomic, retain) UIImage *numberPadDoneImageNormal;
-@property (nonatomic, retain) UIImage *numberPadDoneImageHighlighted;
-@property (nonatomic, retain) UIButton *numberPadDoneButton;
+@property (nonatomic, strong) UIImage *numberPadDoneImageNormal;
+@property (nonatomic, strong) UIImage *numberPadDoneImageHighlighted;
+@property (nonatomic, strong) UIButton *numberPadDoneButton;
 
-@property (nonatomic,retain) CLLocationManager *locationMgr;
-@property (nonatomic,retain) CLLocation *currentLocation;
-@property (nonatomic,retain) CLLocation *reverseGeoLocation;
-@property (retain, nonatomic) NSString *searchFilterType;
-@property(retain,nonatomic) UIView *activity;
+@property (nonatomic,strong) CLLocationManager *locationMgr;
+@property (nonatomic,strong) CLLocation *currentLocation;
+@property (nonatomic,strong) CLLocation *reverseGeoLocation;
+@property (strong, nonatomic) NSString *searchFilterType;
+@property(strong,nonatomic) UIView *activity;
 
 - (IBAction)currentLocationBtnTouchUpInsideHandler:(id)sender;
 

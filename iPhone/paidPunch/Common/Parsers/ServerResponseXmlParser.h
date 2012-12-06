@@ -28,19 +28,19 @@
     
     NSString *offer;
     
-    PunchCard *punchCardDetails;
+    PunchCard *__weak punchCardDetails;
     
 }
 
-@property (nonatomic,retain) NSMutableString *currentValue;
-@property (nonatomic,retain) NSString *statusCode;
-@property (nonatomic,retain) NSString *statusMessage;
-@property (nonatomic,retain) NSData *barcodeImage;
-@property (nonatomic,retain) NSString *barcodeValue;
-@property (nonatomic,assign) PunchCard *punchCardDetails;
-@property (nonatomic,retain) NSString *maskedId;
-@property (nonatomic,retain) NSString *paymentId;
-@property (nonatomic,retain) NSString *offer;
+@property (nonatomic,strong) NSMutableString *currentValue;
+@property (nonatomic,strong) NSString *statusCode;
+@property (nonatomic,strong) NSString *statusMessage;
+@property (nonatomic,strong) NSData *barcodeImage;
+@property (nonatomic,strong) NSString *barcodeValue;
+@property (nonatomic,weak) PunchCard *punchCardDetails;
+@property (nonatomic,strong) NSString *maskedId;
+@property (nonatomic,strong) NSString *paymentId;
+@property (nonatomic,strong) NSString *offer;
 
 - (BOOL) parse:(NSString*)responseXml; 
 - (id)init;

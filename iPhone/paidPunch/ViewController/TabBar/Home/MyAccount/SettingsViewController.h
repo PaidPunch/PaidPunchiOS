@@ -20,17 +20,17 @@
 {
     NetworkManager *networkManager;
 }
-@property (retain, nonatomic) IBOutlet UILabel *usernameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLbl;
 
-@property (retain, nonatomic) IBOutlet UITextField *mobileNoTextField;
-@property (retain, nonatomic) IBOutlet UITextField *emailTextField;
-@property (retain, nonatomic) IBOutlet UILabel *emailLbl;
-@property (retain, nonatomic) IBOutlet UILabel *mobileNoLbl;
-@property (retain, nonatomic) IBOutlet UIButton *updateBtn;
-@property (retain, nonatomic) IBOutlet UIButton *changePwdBtn;
-@property (retain, nonatomic) IBOutlet UIButton *creditCardBtn;
-@property (retain, nonatomic) IBOutlet UIButton *signOutBtn;
-@property (retain, nonatomic) IBOutlet UIImageView *myAccountsBg;
+@property (strong, nonatomic) IBOutlet UITextField *mobileNoTextField;
+@property (strong, nonatomic) IBOutlet UITextField *emailTextField;
+@property (strong, nonatomic) IBOutlet UILabel *emailLbl;
+@property (strong, nonatomic) IBOutlet UILabel *mobileNoLbl;
+@property (strong, nonatomic) IBOutlet UIButton *updateBtn;
+@property (strong, nonatomic) IBOutlet UIButton *changePwdBtn;
+@property (strong, nonatomic) IBOutlet UIButton *creditCardBtn;
+@property (strong, nonatomic) IBOutlet UIButton *signOutBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *myAccountsBg;
 
 - (IBAction)changePwdBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;

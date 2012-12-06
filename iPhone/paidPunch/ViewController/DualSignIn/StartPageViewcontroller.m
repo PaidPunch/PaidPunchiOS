@@ -47,7 +47,6 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
         [imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [placardFiles objectAtIndex:i]]]];
         [self.scrollView addSubview:imageView];
-        [imageView release];
     }
     	
 	self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * placardFiles.count, self.scrollView.frame.size.height);
@@ -55,7 +54,7 @@
 	self.pageControl.currentPage = 0;
 	self.pageControl.numberOfPages = placardFiles.count;
     
-    pagingTimer = [[NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(autoChangePage) userInfo:nil repeats:YES] retain];
+    pagingTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(autoChangePage) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidUnload
@@ -184,19 +183,16 @@
     [UIView transitionWithView:self.view.window duration:1.0f options:0 animations:^{[self presentMoviePlayerViewControllerAnimated:playerViewController];} completion:nil];
     //[self presentMoviePlayerViewControllerAnimated:playerViewController];
     [player play];
-    [playerViewController release];
 }
 
 - (IBAction)showFAQ:(id)sender {
     FAQViewController *faqViewController= [[FAQViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:faqViewController animated:YES];
-    [faqViewController release];
 }
 
 - (IBAction)signIn:(id)sender {
     DualSignInViewController *dualSignInViewController = [[DualSignInViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:dualSignInViewController animated:YES];
-    [dualSignInViewController release];
 }
 
 - (void)autoChangePage {

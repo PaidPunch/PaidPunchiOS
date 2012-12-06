@@ -11,7 +11,7 @@
 
 @interface FeedsViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UIWebView *contentsWebView;
-@property (retain, nonatomic) IBOutlet OHAttributedLabel *contentsLbl;
+@property (strong, nonatomic) IBOutlet UIWebView *contentsWebView;
+@property (strong, nonatomic) IBOutlet OHAttributedLabel *contentsLbl;
 
 @end

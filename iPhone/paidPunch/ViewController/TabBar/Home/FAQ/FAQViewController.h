@@ -15,7 +15,7 @@
 //    UIView *activityView;
     MBProgressHUD *popupHUD;
 }
-@property (retain, nonatomic) IBOutlet UIWebView *faqWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *faqWebView;
 
 - (IBAction)goBack:(id)sender;
 

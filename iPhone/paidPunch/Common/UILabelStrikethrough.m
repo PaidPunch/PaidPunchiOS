@@ -5,10 +5,6 @@
 @synthesize xOffset, yOffset, widthOffset, stroke;
 @synthesize strokeColor;
 
--(void) dealloc {
-    [super dealloc];
-    [strokeColor release];
-}
 
 -(id) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

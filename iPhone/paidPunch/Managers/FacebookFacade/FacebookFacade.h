@@ -52,12 +52,12 @@ typedef enum apiCall {
     MBProgressHUD *popupHUD;
 }
 
-@property (nonatomic, retain) NSMutableArray *savedAPIResult;
+@property (nonatomic, strong) NSMutableArray *savedAPIResult;
 
-@property (nonatomic, assign) FeedsTableViewController *feedsViewController;
-@property (nonatomic, assign) PunchUsedViewController *punchUsedViewController;
-@property (nonatomic, assign) PunchCardOfferViewController *punchCardOfferViewController;
-@property (nonatomic, assign) DualSignInViewController *dualSignInViewController;
+@property (nonatomic, weak) FeedsTableViewController *feedsViewController;
+@property (nonatomic, weak) PunchUsedViewController *punchUsedViewController;
+@property (nonatomic, weak) PunchCardOfferViewController *punchCardOfferViewController;
+@property (nonatomic, weak) DualSignInViewController *dualSignInViewController;
 
 + (id)sharedInstance;
 

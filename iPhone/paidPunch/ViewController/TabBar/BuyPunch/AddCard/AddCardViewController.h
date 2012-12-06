@@ -35,13 +35,13 @@
     
     UIToolbar *numberToolBar;
 }
-@property (retain, nonatomic) IBOutlet UITableView *addCardDetailsTableView;
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (retain, nonatomic) IBOutlet UILabel *secureNetworkLbl;
-@property (retain, nonatomic) IBOutlet UITableView *cardDetailsTableView;
-@property (nonatomic,retain) PunchCard *punchCardDetails;
-@property(nonatomic,retain)NSMutableArray *monthsDataSource;
-@property(nonatomic,retain)NSMutableArray *yearsDataSource;
+@property (strong, nonatomic) IBOutlet UITableView *addCardDetailsTableView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UILabel *secureNetworkLbl;
+@property (strong, nonatomic) IBOutlet UITableView *cardDetailsTableView;
+@property (nonatomic,strong) PunchCard *punchCardDetails;
+@property(nonatomic,strong)NSMutableArray *monthsDataSource;
+@property(nonatomic,strong)NSMutableArray *yearsDataSource;
 
 - (id)init:(PunchCard *)punchCard;
 - (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId;

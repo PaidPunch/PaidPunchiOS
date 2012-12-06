@@ -18,7 +18,7 @@ NSString *const SDWebImageDownloadStartNotification = @"SDWebImageDownloadStartN
 NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNotification";
 
 @interface SDWebImageDownloader ()
-@property (nonatomic, retain) NSURLConnection *connection;
+@property (nonatomic, strong) NSURLConnection *connection;
 @end
 
 @implementation SDWebImageDownloader
@@ -52,7 +52,7 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
                                                      name:SDWebImageDownloadStopNotification object:nil];
     }
 
-    SDWebImageDownloader *downloader = [[[SDWebImageDownloader alloc] init] autorelease];
+    SDWebImageDownloader *downloader = [[SDWebImageDownloader alloc] init];
     downloader.url = url;
     downloader.delegate = delegate;
     downloader.userInfo = userInfo;
@@ -70,7 +70,7 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
 {
     // In order to prevent from potential duplicate caching (NSURLCache + SDImageCache) we disable the cache for image requests
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
-    self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO] autorelease];
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
 
     // If not in low priority mode, ensure we aren't blocked by UI manipulations (default runloop mode for NSURLConnection is NSEventTrackingRunLoopMode)
     if (!lowPriority)
@@ -78,7 +78,6 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
         [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     }
     [connection start];
-    [request release];
 
     if (connection)
     {
@@ -132,7 +131,6 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
 #else
         [delegate performSelector:@selector(imageDownloader:didFinishWithImage:) withObject:self withObject:image];
 #endif
-        [image release];
     }
 }
 
@@ -163,11 +161,10 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [url release], url = nil;
-    [connection release], connection = nil;
-    [imageData release], imageData = nil;
-    [userInfo release], userInfo = nil;
-    [super dealloc];
+    url = nil;
+    connection = nil;
+    imageData = nil;
+    userInfo = nil;
 }
 
 

@@ -32,11 +32,11 @@
     UITextField *mobileNumberTF;
     UITextField *zipcodeTF;
 }
-@property (retain, nonatomic) IBOutlet UIButton *registerBtn;
+@property (strong, nonatomic) IBOutlet UIButton *registerBtn;
 
-@property (retain, nonatomic) IBOutlet UIButton *agreeBtn;
-@property (retain, nonatomic) IBOutlet UITableView *registrationFieldsTableView;
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIButton *agreeBtn;
+@property (strong, nonatomic) IBOutlet UITableView *registrationFieldsTableView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)agreeBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)continueBtnTouchUpInsideHandler:(id)sender;

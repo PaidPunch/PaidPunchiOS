@@ -26,10 +26,10 @@
     NSString *qrCode;
     int flag;
 }
-@property (retain, nonatomic) IBOutlet UITableView *businessListTableView;
-@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (retain,nonatomic) NSArray *businessList;
-@property(nonatomic,retain) NSMutableArray *filteredListOfItems;
+@property (strong, nonatomic) IBOutlet UITableView *businessListTableView;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong,nonatomic) NSArray *businessList;
+@property(nonatomic,strong) NSMutableArray *filteredListOfItems;
 
 -(void) searchTableView;
 -(void) doneSearching_Clicked:(id)sender;

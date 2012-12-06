@@ -25,7 +25,6 @@
     }
     
     [self performSelectorOnMainThread:selector withObjectArray:objects];
-    [objects release];
 }
 
 - (void)performSelectorOnMainThread:(SEL)selector withObjectArray:(NSArray *)objects {
@@ -36,8 +35,8 @@
         [invocation setSelector:selector];
         
         for(size_t i = 0; i < objects.count; ++i) {
-            id obj = [objects objectAtIndex:i];
-            [invocation setArgument:&obj atIndex:(i + 2)];
+            //id obj = [objects objectAtIndex:i];
+            //[invocation setArgument:&obj atIndex:(i + 2)];
         }
         
         [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];   

@@ -15,13 +15,13 @@
 
 @interface MyPunchViewCell : UITableViewCell<SDWebImageManagerDelegate>
 {
-    PunchCard *punchCardDetails;
+    PunchCard *__weak punchCardDetails;
     UIActivityIndicatorView *activityIndicator;
 }
 
-@property (nonatomic, retain) MarqueeLabel *businessMarqueeLabel;
-@property (retain, nonatomic) IBOutlet UILabel *remainingPunchesLabel;
-@property (assign, nonatomic) PunchCard *punchCardDetails;
-@property (nonatomic,retain) NSString *punchId;
+@property (nonatomic, strong) MarqueeLabel *businessMarqueeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *remainingPunchesLabel;
+@property (weak, nonatomic) PunchCard *punchCardDetails;
+@property (nonatomic,strong) NSString *punchId;
 -(void) setData;
 @end

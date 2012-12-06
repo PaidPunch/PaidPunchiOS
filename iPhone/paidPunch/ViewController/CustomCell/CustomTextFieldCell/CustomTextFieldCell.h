@@ -13,6 +13,6 @@
     UILabel *headingLabel;
     UITextField *valueTextField;
 }
-@property(nonatomic,retain) IBOutlet UILabel *headingLabel;
-@property(nonatomic,retain) IBOutlet UITextField *valueTextField;
+@property(nonatomic,strong) IBOutlet UILabel *headingLabel;
+@property(nonatomic,strong) IBOutlet UITextField *valueTextField;
 @end

@@ -17,17 +17,17 @@ extern NSString *const SDWebImageDownloadStopNotification;
 {
     @private
     NSURL *url;
-    id<SDWebImageDownloaderDelegate> delegate;
+    id<SDWebImageDownloaderDelegate> __unsafe_unretained delegate;
     NSURLConnection *connection;
     NSMutableData *imageData;
     id userInfo;
     BOOL lowPriority;
 }
 
-@property (nonatomic, retain) NSURL *url;
-@property (nonatomic, assign) id<SDWebImageDownloaderDelegate> delegate;
-@property (nonatomic, retain) NSMutableData *imageData;
-@property (nonatomic, retain) id userInfo;
+@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, unsafe_unretained) id<SDWebImageDownloaderDelegate> delegate;
+@property (nonatomic, strong) NSMutableData *imageData;
+@property (nonatomic, strong) id userInfo;
 @property (nonatomic, readwrite) BOOL lowPriority;
 
 + (id)downloaderWithURL:(NSURL *)url delegate:(id<SDWebImageDownloaderDelegate>)delegate userInfo:(id)userInfo lowPriority:(BOOL)lowPriority;

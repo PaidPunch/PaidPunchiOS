@@ -111,13 +111,6 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    self.fetchedResultsController = nil;
-    self.context = nil;
-    [lastRefreshTime release];
-    [noCardsAvailableImage release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods Implementation
@@ -264,9 +257,6 @@
     self.fetchedResultsController = theFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
-    [fetchRequest release];
-    [theFetchedResultsController release];
-    [sort release];
     
     return _fetchedResultsController;    
     
@@ -286,7 +276,6 @@
     punchView.punchId=punchCard.punch_card_download_id;
     [self.navigationController pushViewController:punchView animated:YES];
     [punchView setUpUI];
-    [punchView release];
 }
 
 #pragma mark -

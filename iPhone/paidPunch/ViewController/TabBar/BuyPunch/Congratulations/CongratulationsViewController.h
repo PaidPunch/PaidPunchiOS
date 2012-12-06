@@ -13,9 +13,9 @@
 {
     NSString *punchCardName;
 }
-@property (retain, nonatomic) IBOutlet UILabel *congratulationsLbl;
-@property (retain, nonatomic) IBOutlet UILabel *punchCardDetailedLbl;
-@property (retain, nonatomic) NSString *punchCardName;
+@property (strong, nonatomic) IBOutlet UILabel *congratulationsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *punchCardDetailedLbl;
+@property (strong, nonatomic) NSString *punchCardName;
 @property (nonatomic) BOOL isFreePunch;
 
 - (IBAction)doneBtnTouchUpInsideHandler:(id)sender;

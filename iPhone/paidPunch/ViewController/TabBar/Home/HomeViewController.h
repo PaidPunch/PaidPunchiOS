@@ -17,11 +17,11 @@
 {
     NetworkManager *networkManager;    
 }
-@property (retain, nonatomic) IBOutlet UITableView *homeOptionsTableView;
-@property (retain, nonatomic) IBOutlet UIImageView *watchVideoImageView;
+@property (strong, nonatomic) IBOutlet UITableView *homeOptionsTableView;
+@property (strong, nonatomic) IBOutlet UIImageView *watchVideoImageView;
 
-@property (retain, nonatomic) IBOutlet UIView *playVideoOptionsView;
-@property (retain, nonatomic) IBOutlet UIView *homeView;
+@property (strong, nonatomic) IBOutlet UIView *playVideoOptionsView;
+@property (strong, nonatomic) IBOutlet UIView *homeView;
 
 -(void)goToMyAccountView;
 -(void)goToFAQView;

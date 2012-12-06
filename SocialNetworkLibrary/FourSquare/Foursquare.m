@@ -64,8 +64,8 @@
 
 + (void)setOAuthAccessToken:(NSString *)token secret:(NSString *)secret
 {
-    [self setAttributeValue:[[token copy] autorelease]  forKey:@"oauth_access_token"];
-    [self setAttributeValue:[[secret copy] autorelease] forKey:@"oauth_access_secret"];
+    [self setAttributeValue:[token copy]  forKey:@"oauth_access_token"];
+    [self setAttributeValue:[secret copy] forKey:@"oauth_access_secret"];
 
 }
 
@@ -227,7 +227,7 @@
 			   forKey:@"geolong"];
 	
 	if (keywordSearch)
-		[params setObject:[[keywordSearch copy] autorelease] forKey:@"q"];
+		[params setObject:[keywordSearch copy] forKey:@"q"];
 	
 	if (limit)
 		[params setObject:[limit stringValue] forKey:@"l"];
@@ -432,7 +432,6 @@
 {
 	FoursquareCallback callback = (FoursquareCallback)object;
     callback(NO, error);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection 
@@ -442,7 +441,6 @@
 {
 	FoursquareCallback callback = (FoursquareCallback)object;
     callback(NO, response);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection
@@ -452,7 +450,6 @@
 {
 	FoursquareCallback callback = (FoursquareCallback)object;
     callback(NO, error);
-	[callback release];
 }
 
 + (void)restConnection:(NSURLConnection *)connection 
@@ -464,7 +461,6 @@
 	
 	FoursquareCallback callback = (FoursquareCallback)object;
     callback(YES, resource);
-	[callback release];
 }
 
 

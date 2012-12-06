@@ -107,17 +107,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-    [emailTextField release];
-    [mobileNoTextField release];
-    [networkManager release];
-    [usernameLbl release];
-    [emailLbl release];
-    [mobileNoLbl release];
-    [updateBtn release];
-    [changePwdBtn release];
-    [creditCardBtn release];
-    [myAccountsBg release];
-    [super dealloc];
     NSLog(@"In dealloc of SettingsViewController");
 }
 
@@ -152,7 +141,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -162,13 +150,11 @@
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
     else
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
-        [logInAlert release];
     }
     
 }
@@ -201,7 +187,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -245,14 +230,12 @@
 {
     ChangePasswordViewController *changePasswordView = [[ChangePasswordViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:changePasswordView animated:YES];
-    [changePasswordView release];
 }
 
 -(void) goToCreditCardSettingsView:(NSString *)maskedId
 {
     CreditCardSettingsViewController *creditCardSettingsView = [[CreditCardSettingsViewController alloc] init:maskedId];
     [self.navigationController pushViewController:creditCardSettingsView animated:YES];
-    [creditCardSettingsView release];
 }
 
 #pragma mark -

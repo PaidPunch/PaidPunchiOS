@@ -16,6 +16,6 @@
     UIView *activityView;
     MBProgressHUD *popupHUD;
 }
-@property (retain, nonatomic) IBOutlet UIWebView *usingPaidPunchWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *usingPaidPunchWebView;
 
 @end

@@ -55,8 +55,4 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [termsAndConditionsWebView release];
-    [super dealloc];
-}
 @end

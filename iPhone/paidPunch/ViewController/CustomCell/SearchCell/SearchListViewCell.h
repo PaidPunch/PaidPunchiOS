@@ -10,7 +10,7 @@
 
 @interface SearchListViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UILabel *businessNameLbl;
-@property (retain, nonatomic) IBOutlet UILabel *milesLbl;
+@property (strong, nonatomic) IBOutlet UILabel *businessNameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *milesLbl;
 
 @end

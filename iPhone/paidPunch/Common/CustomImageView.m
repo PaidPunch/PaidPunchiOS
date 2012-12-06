@@ -22,7 +22,6 @@
                            [UIImage imageNamed:@"8.png"],
                            nil];
         [self setAnimationImages:myImages];
-        [myImages release];
         [self setAnimationDuration:0.50];
         self.animationRepeatCount=0;
         [self startAnimating];

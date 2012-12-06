@@ -13,20 +13,20 @@
 
 @interface Business : NSManagedObject
 
-@property (nonatomic, retain) NSString * address;
-@property (nonatomic, retain) NSString * business_id;
-@property (nonatomic, retain) NSString * business_name;
-@property (nonatomic, retain) NSString * category;
-@property (nonatomic, retain) NSString * city;
-@property (nonatomic, retain) NSString * country;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSDate * modified_date;
-@property (nonatomic, retain) NSString * pincode;
-@property (nonatomic, retain) NSString * qrcode;
-@property (nonatomic, retain) NSString * state;
-@property (nonatomic, retain) NSDate * time;
-@property (nonatomic, retain) NSNumber * diff_in_miles;
-@property (nonatomic, retain) PunchCard *punchCard;
+@property (nonatomic, strong) NSString * address;
+@property (nonatomic, strong) NSString * business_id;
+@property (nonatomic, strong) NSString * business_name;
+@property (nonatomic, strong) NSString * category;
+@property (nonatomic, strong) NSString * city;
+@property (nonatomic, strong) NSString * country;
+@property (nonatomic, strong) NSNumber * latitude;
+@property (nonatomic, strong) NSNumber * longitude;
+@property (nonatomic, strong) NSDate * modified_date;
+@property (nonatomic, strong) NSString * pincode;
+@property (nonatomic, strong) NSString * qrcode;
+@property (nonatomic, strong) NSString * state;
+@property (nonatomic, strong) NSDate * time;
+@property (nonatomic, strong) NSNumber * diff_in_miles;
+@property (nonatomic, strong) PunchCard *punchCard;
 
 @end

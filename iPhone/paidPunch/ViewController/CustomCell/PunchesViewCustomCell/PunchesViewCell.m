@@ -35,15 +35,5 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
-    
-    [button1 release];
-    [button2 release];
-    [button3 release];
-    [button4 release];
-    [button5 release];
-    [super dealloc];
-    //NSLog(@"In dealloc of PunchesViewCell");
-}
 
 @end

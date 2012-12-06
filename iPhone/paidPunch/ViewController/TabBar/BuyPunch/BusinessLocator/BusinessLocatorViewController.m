@@ -104,7 +104,6 @@
         tempAnn.punchCard = card;
         
         [annotationArray addObject:tempAnn];
-        [tempAnn release];
     }
 //    customAnnotation = [[BusinessLocationAnnotation alloc] initWithLatitude:[self.punchCardDetails.business.latitude doubleValue] andLongitude:[self.punchCardDetails.business.longitude doubleValue]];
     [self.businessLocatorMapView addAnnotations:annotationArray];
@@ -114,7 +113,6 @@
     UIBarButtonItem *mapButton=[[UIBarButtonItem alloc] initWithTitle:@"Directions" style:UIBarButtonItemStylePlain target:self action:@selector(directionsBtnTouchUpInsideHandler:)];
     mapButton.title=@"Directions";
     self.navigationItem.rightBarButtonItem=mapButton;
-    [mapButton release];
     
     if ([punchCardDetailsArray count] == 1) {
         getDirectionsButton.hidden = NO;
@@ -139,15 +137,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [businessLocatorMapView release];
-//    [punchCardDetails release];
-    [punchCardDetailsArray release];
-    [selectedAnnotationView release];
-//    [customAnnotation release];
-    
-    [super dealloc];
-}
 
 
 #pragma mark -
@@ -232,7 +221,7 @@
         pinView = (MKPinAnnotationView *)[businessLocatorMapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         if(pinView == nil){
             //the view for the annotation has not been created, set up here
-            pinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
+            pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID];
 
             [pinView setPinColor:MKPinAnnotationColorRed];
             [pinView setCanShowCallout:YES];
@@ -257,7 +246,6 @@
     NSLog(@"Card Details: %@", card);
     PunchCardOfferViewController *punchCardOfferViewController = [[PunchCardOfferViewController alloc] init:card.business_name punchCardDetails:card];
     [self.navigationController pushViewController:punchCardOfferViewController animated:YES];
-    [punchCardOfferViewController release];
 }
 
 /*- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {

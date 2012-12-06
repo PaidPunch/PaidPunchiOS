@@ -28,9 +28,4 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc {
-    [contentsWebView release];
-    [contentsLbl release];
-    [super dealloc];
-}
 @end

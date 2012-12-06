@@ -8,14 +8,15 @@
 
 #import "OverlayViewController.h"
 #import "SearchByBusinessViewController.h"
+#import "SearchListViewController.h"
 
 @implementation OverlayViewController
 
 @synthesize rvController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	[rvController doneSearching_Clicked:nil];
+	// TODO: Validate that SearchListViewController doesn't have doneSearching_Clicked as a function
+    //[rvController doneSearching_Clicked:nil];
 }
 
 #pragma mark -
@@ -30,8 +31,6 @@
 #pragma mark Cleanup
 
 - (void)dealloc {
-	[rvController release];
-    [super dealloc];
     NSLog(@"In dealloc of OverlayViewController");
 }
 
