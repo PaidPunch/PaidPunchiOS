@@ -584,6 +584,7 @@ static FacebookFacade *sharedInstance=nil;
         }
         case kAPIGraphMe:
         {
+            /*
             NSString *nameID = [[NSString alloc] initWithFormat: @"%@ (%@)", 
                                 [result objectForKey:@"name"], 
                                 [result objectForKey:@"id"]];
@@ -594,7 +595,7 @@ static FacebookFacade *sharedInstance=nil;
                                          [result objectForKey:@"picture"], @"details",
                                          nil], nil];
             // Show the basic user information in a new view controller
-            /*APIResultsViewController *controller = [[APIResultsViewController alloc]
+            APIResultsViewController *controller = [[APIResultsViewController alloc]
                                                     initWithTitle:@"Your Information"
                                                     data:userData
                                                     action:@""];
