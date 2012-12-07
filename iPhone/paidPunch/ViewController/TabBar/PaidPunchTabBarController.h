@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyPunchesViewController.h"
 #import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 #import "FBConnect.h"
 
 @class MyPunchesViewController;

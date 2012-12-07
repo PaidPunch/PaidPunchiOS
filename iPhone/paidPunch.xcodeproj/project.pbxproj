@@ -524,6 +524,7 @@
 		11FF086715CC715600A7177A /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -1325,6 +1326,7 @@
 			children = (
 				8A78E1D314976B2D00F79380 /* NetworkManager.h */,
 				8A78E1D414976B2D00F79380 /* NetworkManager.m */,
+				38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */,
 			);
 			path = Network;
 			sourceTree = "<group>";

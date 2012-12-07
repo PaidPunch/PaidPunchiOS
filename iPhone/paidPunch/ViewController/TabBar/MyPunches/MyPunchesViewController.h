@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PunchCard.h"
 #import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 #import "SDWebImageManagerDelegate.h"
 #import "SDImageCache.h"
 #import "MyPunchViewCell.h"

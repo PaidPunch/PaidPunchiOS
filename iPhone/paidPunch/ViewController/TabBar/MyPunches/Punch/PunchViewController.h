@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 #import "PunchCard.h"
 #import "InfoExpert.h"
 #import "PunchUsedViewController.h"
