@@ -8,7 +8,7 @@
 
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "AFClientManager.h"
-#import "AFJSONRequestOperation.h"
+#import "AFXMLRequestOperation.h"
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
 static NSString* const kTraderPogBaseURLString = @"safe-chamber-1004.herokuapp.com";
@@ -36,7 +36,7 @@ static NSString* const kTraderPogPort = @"80";
 
 - (void) dealloc
 {
-    [_traderPog unregisterHTTPOperationClass:[AFJSONRequestOperation class]];
+    [_traderPog unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
 }
 
 - (NSString*) getTraderPogURL
@@ -48,7 +48,7 @@ static NSString* const kTraderPogPort = @"80";
 {
     if(_traderPog)
     {
-        [_traderPog unregisterHTTPOperationClass:[AFJSONRequestOperation class]];
+        [_traderPog unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
     }
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
@@ -59,7 +59,7 @@ static NSString* const kTraderPogPort = @"80";
     NSLog(@"traderpog client reset with server ip %@", urlString);
     
     _traderPog = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    [_traderPog registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [_traderPog registerHTTPOperationClass:[AFXMLRequestOperation class]];
     
     //  Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
     [_traderPog setDefaultHeader:@"Accept" value:@"application/json"];
