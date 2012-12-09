@@ -12,7 +12,7 @@
 #import "UsingPaidPunchViewController.h"
 #import "FAQViewController.h"
 
-@interface StartPageViewController : UIViewController <UIScrollViewDelegate> 
+@interface StartPageViewController : UIViewController <UIScrollViewDelegate,UITextFieldDelegate>
 {
 	UIScrollView* scrollView;
 	UIPageControl* pageControl;
@@ -20,7 +20,9 @@
 	BOOL pageControlBeingUsed;
     
     NSTimer     *pagingTimer;
-    BOOL        *userHasIntereacted;
+    BOOL        userHasInteracted;
+    
+    int totalContentCount;
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView  *scrollView;

@@ -1264,10 +1264,10 @@
 		8A77DE3E147E677100E05277 /* paidPunch */ = {
 			isa = PBXGroup;
 			children = (
-				38AAE8431672636100BF4922 /* External */,
-				8A77DE62147E680D00E05277 /* Classes */,
 				8A77DE47147E677100E05277 /* AppDelegate.h */,
 				8A78E1FA1497709E00F79380 /* AppDelegate.m */,
+				38AAE8431672636100BF4922 /* External */,
+				8A77DE62147E680D00E05277 /* Classes */,
 				8A77DE3F147E677100E05277 /* Supporting Files */,
 				8A77DE7E147E6A8400E05277 /* paidPunch.xcdatamodeld */,
 				8A7142571510B37900052F57 /* Model.xcmappingmodel */,
