@@ -53,6 +53,7 @@
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441A167435890068D3C3 /* DualSignInViewController.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
+		38B8443016744CD30068D3C3 /* SigninView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SigninView.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
 		8A03AE9D151B47CD004BEDC3 /* CancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A03AE9B151B47CD004BEDC3 /* CancelBtn@2x.png */; };
@@ -571,6 +572,8 @@
 		38B8441A167435890068D3C3 /* DualSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualSignInViewController.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		38B8441D1674391A0068D3C3 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		38B8442E16744CD30068D3C3 /* SigninView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninView.h; sourceTree = "<group>"; };
+		38B8442F16744CD30068D3C3 /* SigninView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninView.m; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -1494,6 +1497,8 @@
 				8A78E207149770BC00F79380 /* SignInViewController.m */,
 				38B8441C1674391A0068D3C3 /* LoginView.h */,
 				38B8441D1674391A0068D3C3 /* LoginView.m */,
+				38B8442E16744CD30068D3C3 /* SigninView.h */,
+				38B8442F16744CD30068D3C3 /* SigninView.m */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -3203,6 +3208,7 @@
 				38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */,
 				38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */,
 				38B8441E1674391A0068D3C3 /* LoginView.m in Sources */,
+				38B8443016744CD30068D3C3 /* SigninView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

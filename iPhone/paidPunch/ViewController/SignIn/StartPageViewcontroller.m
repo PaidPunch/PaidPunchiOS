@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 mobimedia. All rights reserved.
 //
 
-#import "LoginView.h"
 #import "StartPageViewController.h"
 
 @implementation StartPageViewController
@@ -20,6 +19,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        loginView = NULL;
+        signinView = NULL;
+        containerView = NULL;
         totalContentCount = 0;
         userHasInteracted = NO;
     }
@@ -58,10 +60,14 @@
     return count;
 }
 
-- (int) initializeLoginPlacard:(int)currentIndex
+- (int) initializeUserPlacards:(int)currentIndex
 {
-    LoginView *loginView = [[LoginView alloc] initWithFrame:[self getPlacardFrame:currentIndex]];
-    [self.scrollView addSubview:loginView];
+    containerView = [[UIView alloc] initWithFrame:[self getPlacardFrame:currentIndex]];
+    loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
+    signinView = [[SigninView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
+    
+    [containerView addSubview:loginView];
+    [self.scrollView addSubview:containerView];
     
     return (currentIndex+1);
 }
@@ -72,7 +78,7 @@
     totalContentCount = [self initializeInfoPlacards:totalContentCount];
 
     // Add login page
-    totalContentCount = [self initializeLoginPlacard:totalContentCount];
+    totalContentCount = [self initializeUserPlacards:totalContentCount];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * totalContentCount, self.scrollView.frame.size.height);
 	
@@ -245,6 +251,8 @@
     //[self.navigationController pushViewController:dualSignInViewController animated:YES];
     pageControl.currentPage = 3;
     [self switchPage:self.pageControl.currentPage];
+
+    [UIView commitAnimations];
     
     userHasInteracted = YES;
 }

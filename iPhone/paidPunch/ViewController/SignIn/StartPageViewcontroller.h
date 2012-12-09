@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DualSignInViewController.h"
 #import "CustomMoviePlayer.h"
-#import "UsingPaidPunchViewController.h"
+#import "DualSignInViewController.h"
 #import "FAQViewController.h"
+#import "LoginView.h"
+#import "SigninView.h"
+#import "UsingPaidPunchViewController.h"
 
 @interface StartPageViewController : UIViewController <UIScrollViewDelegate>
 {
+    LoginView* loginView;
+    SigninView* signinView;
+    UIView* containerView;
+    
 	UIScrollView* scrollView;
 	UIPageControl* pageControl;
 	
