@@ -20,7 +20,6 @@
 		119509EA15C1D9140039876A /* InformationPlacardTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 119509DA15C1D9140039876A /* InformationPlacardTwo@2x.png */; };
 		119509EF15C1D9140039876A /* TopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 119509DF15C1D9140039876A /* TopBar.png */; };
 		119509F015C1D9140039876A /* TopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 119509E015C1D9140039876A /* TopBar@2x.png */; };
-		119509F415C1DC710039876A /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 119509F215C1DC710039876A /* StartPageViewcontroller.m */; };
 		11AAA29015C4D9CB00D6FAEE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AAA28F15C4D9CB00D6FAEE /* SearchViewController.m */; };
 		11D4D96015C5BAE900FEF636 /* PaidPunchLogoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D95C15C5BAE900FEF636 /* PaidPunchLogoBG.png */; };
 		11D4D96115C5BAE900FEF636 /* PaidPunchLogoBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D95D15C5BAE900FEF636 /* PaidPunchLogoBG@2x.png */; };
@@ -51,6 +50,8 @@
 		38AAE861167263A400BF4922 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE855167263A400BF4922 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
+		38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441A167435890068D3C3 /* DualSignInViewController.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
 		8A03AE9D151B47CD004BEDC3 /* CancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A03AE9B151B47CD004BEDC3 /* CancelBtn@2x.png */; };
@@ -173,7 +174,6 @@
 		8A7C771D1525C7F60068DDC1 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C771B1525C7F60068DDC1 /* Back.png */; };
 		8A7C77201525EA310068DDC1 /* Greenbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C771E1525EA2F0068DDC1 /* Greenbutton.png */; };
 		8A7C77211525EA310068DDC1 /* Greenbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C771F1525EA300068DDC1 /* Greenbutton@2x.png */; };
-		8A7C8FDB151067A700F99863 /* DualSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C8FD9151067A700F99863 /* DualSignInViewController.m */; };
 		8A7C8FE11510715F00F99863 /* TermsAndConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C8FDF1510715F00F99863 /* TermsAndConditionsViewController.m */; };
 		8A7C8FE915107B1000F99863 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */; };
 		8A7C8FEA15107B1000F99863 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C8FE815107B1000F99863 /* SettingsViewController.m */; };
@@ -514,8 +514,6 @@
 		119509DA15C1D9140039876A /* InformationPlacardTwo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InformationPlacardTwo@2x.png"; sourceTree = "<group>"; };
 		119509DF15C1D9140039876A /* TopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopBar.png; sourceTree = "<group>"; };
 		119509E015C1D9140039876A /* TopBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TopBar@2x.png"; sourceTree = "<group>"; };
-		119509F115C1DC710039876A /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartPageViewcontroller.h; path = paidPunch/ViewController/DualSignIn/StartPageViewcontroller.h; sourceTree = SOURCE_ROOT; };
-		119509F215C1DC710039876A /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartPageViewcontroller.m; path = paidPunch/ViewController/DualSignIn/StartPageViewcontroller.m; sourceTree = SOURCE_ROOT; };
 		11AAA28E15C4D9CB00D6FAEE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		11AAA28F15C4D9CB00D6FAEE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		11D4D95C15C5BAE900FEF636 /* PaidPunchLogoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PaidPunchLogoBG.png; sourceTree = "<group>"; };
@@ -566,6 +564,10 @@
 		38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		38AAE858167263A400BF4922 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
+		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
+		38B84419167435890068D3C3 /* DualSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualSignInViewController.h; sourceTree = "<group>"; };
+		38B8441A167435890068D3C3 /* DualSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualSignInViewController.m; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -737,8 +739,6 @@
 		8A7C771B1525C7F60068DDC1 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		8A7C771E1525EA2F0068DDC1 /* Greenbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Greenbutton.png; sourceTree = "<group>"; };
 		8A7C771F1525EA300068DDC1 /* Greenbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Greenbutton@2x.png"; sourceTree = "<group>"; };
-		8A7C8FD8151067A700F99863 /* DualSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualSignInViewController.h; sourceTree = "<group>"; };
-		8A7C8FD9151067A700F99863 /* DualSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualSignInViewController.m; sourceTree = "<group>"; };
 		8A7C8FDE1510715F00F99863 /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
 		8A7C8FDF1510715F00F99863 /* TermsAndConditionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsAndConditionsViewController.m; sourceTree = "<group>"; };
 		8A7C8FE515107B1000F99863 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -1097,15 +1097,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1110B8E915C375F300F6B6EB /* Landing Page */ = {
-			isa = PBXGroup;
-			children = (
-				119509F115C1DC710039876A /* StartPageViewcontroller.h */,
-				119509F215C1DC710039876A /* StartPageViewcontroller.m */,
-			);
-			name = "Landing Page";
-			sourceTree = "<group>";
-		};
 		118E23FB15CC3F5800C943F5 /* SearchByCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -1471,7 +1462,6 @@
 			isa = PBXGroup;
 			children = (
 				8A7C8FDD1510714200F99863 /* TermsAndConditions */,
-				8A7C8FD71510677700F99863 /* DualSignIn */,
 				8A78E267149774C600F79380 /* CustomCell */,
 				8A78E201149770BC00F79380 /* Registration */,
 				8A78E205149770BC00F79380 /* SignIn */,
@@ -1493,6 +1483,10 @@
 		8A78E205149770BC00F79380 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				38B84419167435890068D3C3 /* DualSignInViewController.h */,
+				38B8441A167435890068D3C3 /* DualSignInViewController.m */,
+				38B84416167434390068D3C3 /* StartPageViewcontroller.h */,
+				38B84417167434390068D3C3 /* StartPageViewcontroller.m */,
 				8A78E206149770BC00F79380 /* SignInViewController.h */,
 				8A78E207149770BC00F79380 /* SignInViewController.m */,
 			);
@@ -2044,16 +2038,6 @@
 				8A7C54D415497F46002854FF /* CalloutMapAnnotationView.m */,
 			);
 			path = BusinessLocationAnnotationView;
-			sourceTree = "<group>";
-		};
-		8A7C8FD71510677700F99863 /* DualSignIn */ = {
-			isa = PBXGroup;
-			children = (
-				1110B8E915C375F300F6B6EB /* Landing Page */,
-				8A7C8FD8151067A700F99863 /* DualSignInViewController.h */,
-				8A7C8FD9151067A700F99863 /* DualSignInViewController.m */,
-			);
-			path = DualSignIn;
 			sourceTree = "<group>";
 		};
 		8A7C8FDD1510714200F99863 /* TermsAndConditions */ = {
@@ -3162,7 +3146,6 @@
 				8A9D2C4F14C42E210034BD16 /* CustomImageView.m in Sources */,
 				8A76292514CD69A30069925F /* CustomMoviePlayer.m in Sources */,
 				8A7871CC14E10E43003992B3 /* Reachability.m in Sources */,
-				8A7C8FDB151067A700F99863 /* DualSignInViewController.m in Sources */,
 				8A7C8FE11510715F00F99863 /* TermsAndConditionsViewController.m in Sources */,
 				8A7C8FE915107B1000F99863 /* ChangePasswordViewController.m in Sources */,
 				8A7C8FEA15107B1000F99863 /* SettingsViewController.m in Sources */,
@@ -3197,7 +3180,6 @@
 				8A7BD1F1156668D3003E77CB /* GTMNSString+HTML.m in Sources */,
 				8A7BD1F2156668D3003E77CB /* NSString+HTML.m in Sources */,
 				848F468F156F61DC00332D31 /* iRate.m in Sources */,
-				119509F415C1DC710039876A /* StartPageViewcontroller.m in Sources */,
 				11AAA29015C4D9CB00D6FAEE /* SearchViewController.m in Sources */,
 				118E23FE15CC3F5800C943F5 /* SearchByCategoryViewController.m in Sources */,
 				38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */,
@@ -3213,6 +3195,8 @@
 				38AAE861167263A400BF4922 /* AFURLConnectionOperation.m in Sources */,
 				38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */,
 				38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */,
+				38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */,
+				38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
