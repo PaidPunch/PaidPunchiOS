@@ -12,7 +12,7 @@
 #import "UsingPaidPunchViewController.h"
 #import "FAQViewController.h"
 
-@interface StartPageViewController : UIViewController <UIScrollViewDelegate,UITextFieldDelegate>
+@interface StartPageViewController : UIViewController <UIScrollViewDelegate>
 {
 	UIScrollView* scrollView;
 	UIPageControl* pageControl;
