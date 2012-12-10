@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseView.h"
 
-@interface SignupView : UIView
-
+@interface SignupView : BaseView
+{
+    UIImage *uncheckedImage;
+}
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseView.h"
 
-@interface LoginView : UIView<UITextFieldDelegate>
+@interface LoginView : BaseView
 
 @end
