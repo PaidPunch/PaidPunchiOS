@@ -69,6 +69,8 @@
     [containerView addSubview:loginView];
     [self.scrollView addSubview:containerView];
     
+    onLoginView = TRUE;
+    
     return (currentIndex+1);
 }
 
@@ -247,13 +249,41 @@
 
 - (IBAction)signIn:(id)sender
 {
+    pageControl.currentPage = 3;
+    [self switchPage:self.pageControl.currentPage];
+    
+    if (!onLoginView)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.75];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:YES];
+        [signinView removeFromSuperview];
+        [containerView addSubview:loginView];
+        [UIView commitAnimations];
+    }
+    
+    onLoginView = TRUE;
+    userHasInteracted = YES;
+}
+
+- (IBAction)signUp:(id)sender
+{
     //DualSignInViewController *dualSignInViewController = [[DualSignInViewController alloc] initWithNibName:nil bundle:nil];
     //[self.navigationController pushViewController:dualSignInViewController animated:YES];
     pageControl.currentPage = 3;
     [self switchPage:self.pageControl.currentPage];
-
-    [UIView commitAnimations];
     
+    if (onLoginView)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.75];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:YES];
+        [loginView removeFromSuperview];
+        [containerView addSubview:signinView];
+        [UIView commitAnimations];
+    }
+    
+    onLoginView = FALSE;
     userHasInteracted = YES;
 }
 

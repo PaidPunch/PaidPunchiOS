@@ -148,34 +148,56 @@
 					<object class="IBUIButton" id="101654678">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{6, 400}, {308, 55}}</string>
+						<string key="NSFrame">{{199, 400}, {115, 55}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">Sign In</string>
+						<string key="IBUINormalTitle">Sign Up</string>
 						<reference key="IBUIHighlightedTitleColor" ref="440499535"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4zMDU4ODIzNTI5IDAuMjgyMzUyOTQxMiAwLjI5MDE5NjA3ODQAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="172617252"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="225732978">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">SignInButton.png</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="131681031">
 							<string key="name">Helvetica-Bold</string>
 							<string key="family">Helvetica</string>
 							<int key="traits">2</int>
 							<double key="pointSize">22</double>
 						</object>
-						<object class="NSFont" key="IBUIFont">
+						<object class="NSFont" key="IBUIFont" id="551580039">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">22</double>
 							<int key="NSfFlags">16</int>
 						</object>
+					</object>
+					<object class="IBUIButton" id="368024311">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{6, 400}, {115, 55}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="101654678"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<string key="IBUINormalTitle">Log In</string>
+						<reference key="IBUIHighlightedTitleColor" ref="440499535"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4zMDU4ODIzNTI5IDAuMjgyMzUyOTQxMiAwLjI5MDE5NjA3ODQAA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="172617252"/>
+						<reference key="IBUINormalBackgroundImage" ref="225732978"/>
+						<reference key="IBUIFontDescription" ref="131681031"/>
+						<reference key="IBUIFont" ref="551580039"/>
 					</object>
 					<object class="IBUIPageControl" id="68492890">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -183,7 +205,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{6, 375}, {308, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="101654678"/>
+						<reference key="NSNextKeyView" ref="368024311"/>
 						<string key="NSReuseIdentifierKey">_NS:660</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -299,12 +321,21 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">signIn:</string>
+						<string key="label">signUp:</string>
 						<reference key="source" ref="101654678"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">37</int>
+					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">signIn:</string>
+						<reference key="source" ref="368024311"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">40</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -330,6 +361,7 @@
 							<reference ref="68492890"/>
 							<reference ref="931811518"/>
 							<reference ref="101654678"/>
+							<reference ref="368024311"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -387,6 +419,11 @@
 						<reference key="object" ref="101654678"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">39</int>
+						<reference key="object" ref="368024311"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -406,12 +443,14 @@
 					<string>24.IBPluginDependency</string>
 					<string>34.IBPluginDependency</string>
 					<string>35.IBPluginDependency</string>
+					<string>39.IBPluginDependency</string>
 				</object>
 				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>StartPageViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -436,7 +475,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">38</int>
+			<int key="maxID">41</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

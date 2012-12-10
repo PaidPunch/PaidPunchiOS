@@ -16,6 +16,7 @@
 
 @interface StartPageViewController : UIViewController <UIScrollViewDelegate>
 {
+    BOOL onLoginView;
     LoginView* loginView;
     SigninView* signinView;
     UIView* containerView;
@@ -42,6 +43,7 @@
 - (IBAction)showFAQ:(id)sender;
 - (IBAction)pressPlay:(id)sender;
 - (IBAction)signIn:(id)sender;
+- (IBAction)signUp:(id)sender;
 
 - (void)autoChangePage;
 
