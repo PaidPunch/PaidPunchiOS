@@ -40,4 +40,20 @@
     return textField;
 }
 
+- (void) createFacebookButton:(NSString*)text framewidth:(CGFloat)framewidth yPos:(CGFloat)yPos textFont:(UIFont*)textFont
+{    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"SignInFacebook" ofType:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    UIButton* btnFacebook = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGFloat imageLeftEdge = framewidth/2 - image.size.width/2;
+    btnFacebook.frame = CGRectMake(imageLeftEdge, yPos, image.size.width, image.size.height);
+    [btnFacebook setBackgroundImage:image forState:UIControlStateNormal];
+    [btnFacebook setTitle:text forState:UIControlStateNormal];
+    [btnFacebook setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btnFacebook.titleLabel.font = textFont;
+    
+    [self addSubview:btnFacebook];
+}
+
 @end

@@ -11,5 +11,6 @@
 @interface BaseView : UIView<UITextFieldDelegate>
 
 - (UITextField*) initializeUITextField:(CGRect)frame placeholder:(NSString*)placeholder font:(UIFont*)font;
+- (void) createFacebookButton:(NSString*)text framewidth:(CGFloat)framewidth yPos:(CGFloat)yPos textFont:(UIFont*)textFont;
 
 @end

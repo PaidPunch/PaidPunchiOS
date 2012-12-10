@@ -73,22 +73,12 @@
         hortLine.backgroundColor = [UIColor whiteColor];
         
         // Insert facebook signup/signin image
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"SignInFacebook" ofType:@"png"];
-        NSData *imageData = [NSData dataWithContentsOfFile:filePath];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        UIButton* btnFacebook = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat imageLeftEdge = frame.size.width/2 - image.size.width/2;
-        btnFacebook.frame = CGRectMake(imageLeftEdge, hortLine.frame.origin.y + hortLine.frame.size.height + 20, image.size.width, image.size.height);
-        [btnFacebook setBackgroundImage:image forState:UIControlStateNormal];
-        [btnFacebook setTitle:@"          Sign Up With Facebook" forState:UIControlStateNormal];
-        [btnFacebook setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btnFacebook.titleLabel.font = textFont;
+        [self createFacebookButton:@"          Sign Up With Facebook" framewidth:frame.size.width yPos:hortLine.frame.origin.y + hortLine.frame.size.height + 20 textFont:textFont];
         
         [self addSubview:referralTextField];
         [self addSubview:termsLabel];
         [self addSubview:termsLink];
         [self addSubview:hortLine];
-        [self addSubview:btnFacebook];
         [self addSubview:checkbox];
     }
     return self;
