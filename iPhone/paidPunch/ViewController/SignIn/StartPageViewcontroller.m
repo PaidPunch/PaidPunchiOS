@@ -20,7 +20,7 @@
     if (self)
     {
         loginView = NULL;
-        signinView = NULL;
+        signupView = NULL;
         containerView = NULL;
         totalContentCount = 0;
         userHasInteracted = NO;
@@ -64,7 +64,7 @@
 {
     containerView = [[UIView alloc] initWithFrame:[self getPlacardFrame:currentIndex]];
     loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
-    signinView = [[SigninView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
+    signupView = [[SignupView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
     
     [containerView addSubview:loginView];
     [self.scrollView addSubview:containerView];
@@ -257,7 +257,7 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.75];
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:YES];
-        [signinView removeFromSuperview];
+        [signupView removeFromSuperview];
         [containerView addSubview:loginView];
         [UIView commitAnimations];
     }
@@ -279,7 +279,7 @@
         [UIView setAnimationDuration:0.75];
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:YES];
         [loginView removeFromSuperview];
-        [containerView addSubview:signinView];
+        [containerView addSubview:signupView];
         [UIView commitAnimations];
     }
     

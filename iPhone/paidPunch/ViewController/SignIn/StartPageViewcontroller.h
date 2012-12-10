@@ -11,14 +11,14 @@
 #import "DualSignInViewController.h"
 #import "FAQViewController.h"
 #import "LoginView.h"
-#import "SigninView.h"
+#import "SignupView.h"
 #import "UsingPaidPunchViewController.h"
 
 @interface StartPageViewController : UIViewController <UIScrollViewDelegate>
 {
     BOOL onLoginView;
     LoginView* loginView;
-    SigninView* signinView;
+    SignupView* signupView;
     UIView* containerView;
     
 	UIScrollView* scrollView;

@@ -1,14 +1,14 @@
 //
-//  SigninView.m
+//  SignupView.m
 //  paidPunch
 //
 //  Created by Aaron Khoo on 12/8/12.
 //  Copyright (c) 2012 PaidPunch. All rights reserved.
 //
 
-#import "SigninView.h"
+#import "SignupView.h"
 
-@implementation SigninView
+@implementation SignupView
 
 - (id)initWithFrame:(CGRect)frame
 {

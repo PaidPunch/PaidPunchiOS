@@ -1,5 +1,5 @@
 //
-//  SigninView.h
+//  SignupView.h
 //  paidPunch
 //
 //  Created by Aaron Khoo on 12/8/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SigninView : UIView
+@interface SignupView : UIView
 
 @end
