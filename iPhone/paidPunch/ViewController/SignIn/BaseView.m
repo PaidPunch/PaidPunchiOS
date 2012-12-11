@@ -9,11 +9,14 @@
 #import "BaseView.h"
 
 @implementation BaseView
+@synthesize navigationController = _navigationController;
+@synthesize btnFacebook = _btnFacebook;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
@@ -40,20 +43,21 @@
     return textField;
 }
 
-- (void) createFacebookButton:(NSString*)text framewidth:(CGFloat)framewidth yPos:(CGFloat)yPos textFont:(UIFont*)textFont
+- (void) createFacebookButton:(NSString*)text framewidth:(CGFloat)framewidth yPos:(CGFloat)yPos textFont:(UIFont*)textFont action:(SEL)action
 {    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"SignInFacebook" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-    UIButton* btnFacebook = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnFacebook = [UIButton buttonWithType:UIButtonTypeCustom];
     CGFloat imageLeftEdge = framewidth/2 - image.size.width/2;
-    btnFacebook.frame = CGRectMake(imageLeftEdge, yPos, image.size.width, image.size.height);
-    [btnFacebook setBackgroundImage:image forState:UIControlStateNormal];
-    [btnFacebook setTitle:text forState:UIControlStateNormal];
-    [btnFacebook setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btnFacebook.titleLabel.font = textFont;
+    _btnFacebook.frame = CGRectMake(imageLeftEdge, yPos, image.size.width, image.size.height);
+    [_btnFacebook setBackgroundImage:image forState:UIControlStateNormal];
+    [_btnFacebook setTitle:text forState:UIControlStateNormal];
+    [_btnFacebook setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _btnFacebook.titleLabel.font = textFont;
+    [_btnFacebook addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [self addSubview:btnFacebook];
+    [self addSubview:_btnFacebook];
 }
 
 @end

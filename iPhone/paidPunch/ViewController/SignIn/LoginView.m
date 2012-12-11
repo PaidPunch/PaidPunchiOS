@@ -82,7 +82,7 @@
         hortLine2.backgroundColor = separatorColor;
         
         // Insert facebook signup/signin image        
-        [self createFacebookButton:@"          Sign In With Facebook" framewidth:frame.size.width yPos:orLabel.frame.origin.y + orLabel.frame.size.height + 20 textFont:textFont];
+        [self createFacebookButton:@"          Sign In With Facebook" framewidth:frame.size.width yPos:orLabel.frame.origin.y + orLabel.frame.size.height + 20 textFont:textFont action:@selector(didPressFacebookButton:)];
         
         [self addSubview:emailTextField];
         [self addSubview:passwordTextField];
@@ -93,6 +93,14 @@
         [self addSubview:forgotPasswordButton];
     }
     return self;
+}
+
+- (void) dismissKeyboard
+{
+}
+
+- (void) didPressFacebookButton:(id)sender
+{
 }
 
 @end

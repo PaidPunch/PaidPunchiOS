@@ -11,4 +11,6 @@
 
 @interface LoginView : BaseView
 
+- (void) dismissKeyboard;
+
 @end

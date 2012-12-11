@@ -12,5 +12,13 @@
 @interface SignupView : BaseView
 {
     UIImage *uncheckedImage;
+    UIImage *checkedImage;
+    BOOL checked;
+    
+    UIButton* checkbox;
+    UITextField *referralTextField;
 }
+
+- (void) dismissKeyboard;
+
 @end

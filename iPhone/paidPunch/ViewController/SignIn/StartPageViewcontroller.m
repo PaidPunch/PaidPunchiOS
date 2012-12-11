@@ -64,7 +64,9 @@
 {
     containerView = [[UIView alloc] initWithFrame:[self getPlacardFrame:currentIndex]];
     loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
+    loginView.navigationController = [self navigationController];
     signupView = [[SignupView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
+    signupView.navigationController = [self navigationController];
     
     [containerView addSubview:loginView];
     [self.scrollView addSubview:containerView];
@@ -145,6 +147,10 @@
     
     // Turn off auto-scroll since user has started interacting with the pages
     userHasInteracted = YES;
+    
+    // If the scroll begins moving, go ahead and dismiss any keyboards that might be up
+    [loginView dismissKeyboard];
+    [signupView dismissKeyboard];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -268,9 +274,8 @@
 
 - (IBAction)signUp:(id)sender
 {
-    //DualSignInViewController *dualSignInViewController = [[DualSignInViewController alloc] initWithNibName:nil bundle:nil];
-    //[self.navigationController pushViewController:dualSignInViewController animated:YES];
-    pageControl.currentPage = 3;
+    // Change to signin/up page. Assumed to be the last page.
+    pageControl.currentPage = totalContentCount - 1;
     [self switchPage:self.pageControl.currentPage];
     
     if (onLoginView)
