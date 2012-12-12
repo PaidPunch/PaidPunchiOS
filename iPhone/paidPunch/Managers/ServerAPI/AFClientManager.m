@@ -1,9 +1,8 @@
 //
 //  AFClientManager.m
-//  traderpog
 //
-//  Created by Shu Chiun Cheah on 5/30/12.
-//  Copyright (c) 2012 GeoloPigs. All rights reserved.
+//  Created by Aaron Khoo on 12/11/12.
+//  Copyright (c) 2012 PaidPunch. All rights reserved.
 //
 
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -11,62 +10,62 @@
 #import "AFXMLRequestOperation.h"
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
-static NSString* const kTraderPogBaseURLString = @"safe-chamber-1004.herokuapp.com";
-static NSString* const kTraderPogPort = @"443";
+static NSString* const kPaidPunchBaseURLString = @"paidpunch.com";
+static NSString* const kPaidPunchPort = @"443";
 #else
-static NSString* const kTraderPogBaseURLString = @"strong-rain-5460.herokuapp.com";
-static NSString* const kTraderPogPort = @"80";
+static NSString* const kPaidPunchBaseURLString = @"test.paidpunch.com";
+static NSString* const kPaidPunchPort = @"80";
 #endif
 
 
 @implementation AFClientManager
-@synthesize traderPog = _traderPog;
+@synthesize paidpunch = _paidpunch;
 
 - (id) init
 {
     self = [super init];
     if(self)
     {
-        _traderPog = nil;
+        _paidpunch = nil;
         
-        [self resetTraderPogWithIp:kTraderPogBaseURLString];
+        [self resetPaidPunchWithIp:kPaidPunchBaseURLString];
     }
     return self;
 }
 
 - (void) dealloc
 {
-    [_traderPog unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
+    [_paidpunch unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
 }
 
-- (NSString*) getTraderPogURL
+- (NSString*) getPaidPunchURL
 {
-    return [NSString stringWithFormat:@"%@", kTraderPogBaseURLString];
+    return [NSString stringWithFormat:@"%@", kPaidPunchBaseURLString];
 }
 
-- (void) resetTraderPogWithIp:(NSString *)serverIp
+- (void) resetPaidPunchWithIp:(NSString *)serverIp
 {
-    if(_traderPog)
+    if(_paidpunch)
     {
-        [_traderPog unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
+        [_paidpunch unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
     }
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
     NSString* urlString = [NSString stringWithFormat:@"https://%@:%@/", serverIp, kTraderPogPort];
 #else
-    NSString* urlString = [NSString stringWithFormat:@"http://%@:%@/", serverIp, kTraderPogPort];
+    NSString* urlString = [NSString stringWithFormat:@"http://%@:%@/", serverIp, kPaidPunchPort];
 #endif
     NSLog(@"traderpog client reset with server ip %@", urlString);
     
-    _traderPog = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    [_traderPog registerHTTPOperationClass:[AFXMLRequestOperation class]];
+    _paidpunch = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+    [_paidpunch registerHTTPOperationClass:[AFXMLRequestOperation class]];
     
     //  Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
-    [_traderPog setDefaultHeader:@"Accept" value:@"application/json"];
-    [_traderPog setDefaultHeader:@"expected-traderpog-version" value:@"1.0"];
+    [_paidpunch setDefaultHeader:@"Accept" value:@"application/json"];
+    [_paidpunch setDefaultHeader:@"expected-traderpog-version" value:@"1.0"];
     
-    // Encode parameters in JSON format
-    _traderPog.parameterEncoding = AFJSONParameterEncoding;
+    // Encode parameters in XML format
+    _paidpunch.parameterEncoding =  AFJSONParameterEncoding;
 }
 
 #pragma mark - singleton

@@ -7,20 +7,19 @@
 //
 
 #import "RegistrationViewController.h"
+#import "User.h"
 
 @implementation RegistrationViewController
-@synthesize registerBtn;
-@synthesize agreeBtn;
 @synthesize scrollView;
 @synthesize registrationFieldsTableView;
-
 
 #define kCellHeight		44.0
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -30,8 +29,6 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -39,14 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
+    // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor=[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
     self.title=@"Registration";
-//    self.registrationFieldsTableView.backgroundColor = [UIColor clearColor];
-//	self.registrationFieldsTableView.sectionFooterHeight = 0;
-//	self.registrationFieldsTableView.sectionHeaderHeight = 0;
-//    self.registrationFieldsTableView.separatorColor=[UIColor clearColor];
     self.registrationFieldsTableView.scrollEnabled=YES;
     self.registrationFieldsTableView.backgroundColor = [UIColor clearColor];
     
@@ -55,16 +48,17 @@
     
     networkManager=[[NetworkManager alloc] initWithView:self.view];
     networkManager.delegate=self;
-    regFlag=0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTap:) name:@"scrollViewTouchEvent" object:nil];
     
+    /*
     UIBarButtonItem *tempBtn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStyleDone target:self action:@selector(continueBtnTouchUpInsideHandler:)];
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+    {
         [tempBtn setTintColor:[UIColor colorWithRed:60.0/255.0 green:144.0/255.0 blue:220.0/255.0 alpha:1]];
     }
     self.navigationItem.rightBarButtonItem = tempBtn;
-    
+     */
     
     usernameTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     usernameTF.adjustsFontSizeToFitWidth = YES;
@@ -79,7 +73,6 @@
     usernameTF.keyboardType = UIKeyboardTypeDefault;
     usernameTF.returnKeyType = UIReturnKeyNext;
     usernameTF.tag = 1;
-//    usernameTF.text = username;
     
     emailTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     emailTF.adjustsFontSizeToFitWidth = YES;
@@ -94,7 +87,6 @@
     emailTF.keyboardType = UIKeyboardTypeEmailAddress;
     emailTF.returnKeyType = UIReturnKeyNext;
     emailTF.tag = 2;
-//    emailTF.text = email;
     
     passwordTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     passwordTF.adjustsFontSizeToFitWidth = YES;
@@ -110,7 +102,6 @@
     passwordTF.returnKeyType = UIReturnKeyNext;
     passwordTF.secureTextEntry = YES;
     passwordTF.tag = 3;
-//    passwordTF.text = password;
     
     confirmPasswordTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     confirmPasswordTF.adjustsFontSizeToFitWidth = YES;
@@ -126,7 +117,6 @@
     confirmPasswordTF.returnKeyType = UIReturnKeyNext;
     confirmPasswordTF.secureTextEntry = YES;
     confirmPasswordTF.tag = 4;
-//    confirmPasswordTF.text = confirmPassword;
 
     zipcodeTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     zipcodeTF.adjustsFontSizeToFitWidth = YES;
@@ -141,7 +131,6 @@
     zipcodeTF.keyboardType = UIKeyboardTypeDefault;
     zipcodeTF.returnKeyType = UIReturnKeyNext;
     zipcodeTF.tag = 6;
-//    zipcodeTF.text = zipcode;
 
     mobileNumberTF = [[UITextField alloc] initWithFrame:CGRectMake(15, 13, 280, 30)];
     mobileNumberTF.adjustsFontSizeToFitWidth = YES;
@@ -156,11 +145,15 @@
     mobileNumberTF.keyboardType = UIKeyboardTypeDefault;
     mobileNumberTF.returnKeyType = UIReturnKeyDone;
     mobileNumberTF.tag = 5;
-//    mobileNumberTF.text = mobileNumber;
-
 }
 
-- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden=NO;
+}
+
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+{
     //if you want to dismiss the controller presented, you can do that here or the method btnBackClicked
     return NO;
 }
@@ -169,8 +162,6 @@
 {
     [self setRegistrationFieldsTableView:nil];
     [self setScrollView:nil];
-    [self setAgreeBtn:nil];
-    [self setRegisterBtn:nil];
     [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -183,11 +174,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {
+- (void)dealloc
+{
     NSLog(@"In dealloc of RegistrationViewController");
 }
 
@@ -195,76 +186,102 @@
 #pragma mark -
 #pragma mark UITableViewDataSource methods Implementation
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 5;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0){
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(section == 0)
+    {
+        // Full name
         return 1;
     }
-    else if(section == 1){
+    else if(section == 1)
+    {
+        // Email
         return 1;
     }
-    else if(section == 2){
+    else if(section == 2)
+    {
+        // Passwords
         return 2;
     }
-    else if(section == 3){
+    else if(section == 3)
+    {
+        // Zip code
         return 1;
     }
-    else {
-        return 1;
-    }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0)
-        return @"Personal Information";
-    if(section == 4)
-        return @"Mobile Phone Information";
     else
-        return @"";
+    {
+        // Phone number
+        return 1;
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0)
+    {
+        return @"Personal Information";
+    }
+    if(section == 4)
+    {
+        return @"Mobile Phone Information";
+    }
+    else
+    {
+        return @"";
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"RegCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-        if(indexPath.section == 0){
-            [usernameTF setEnabled:YES];
-            [cell addSubview:usernameTF];
+
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
+    if(indexPath.section == 0)
+    {
+        [usernameTF setEnabled:YES];
+        [cell addSubview:usernameTF];
+    }
+    else if(indexPath.section == 1)
+    {
+        [emailTF setEnabled:YES];
+        [cell addSubview:emailTF];
+    }
+    else if(indexPath.section == 2)
+    {
+        if(indexPath.row == 0)
+        {
+            [passwordTF setEnabled:YES];
+            [cell addSubview:passwordTF];
         }
-        else if(indexPath.section == 1){
-            [emailTF setEnabled:YES];
-            [cell addSubview:emailTF];
+        else
+        {
+            [confirmPasswordTF setEnabled:YES];
+            [cell addSubview:confirmPasswordTF];
         }
-        else if(indexPath.section == 2){
-            if(indexPath.row == 0){
-                [passwordTF setEnabled:YES];
-                [cell addSubview:passwordTF];
-            }
-            else {
-                [confirmPasswordTF setEnabled:YES];
-                [cell addSubview:confirmPasswordTF];
-            }
-        }
-        else if(indexPath.section == 3){
-            [zipcodeTF setEnabled:YES];
-            [cell addSubview:zipcodeTF];
-        }
-        else if(indexPath.section == 4){
-            [mobileNumberTF setEnabled:YES];
-            [cell addSubview:mobileNumberTF];
-        }
+    }
+    else if(indexPath.section == 3)
+    {
+        [zipcodeTF setEnabled:YES];
+        [cell addSubview:zipcodeTF];
+    }
+    else if(indexPath.section == 4)
+    {
+        [mobileNumberTF setEnabled:YES];
+        [cell addSubview:mobileNumberTF];
+    }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self dismissKeyboard];
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -281,10 +298,12 @@
     {
         [self.registrationFieldsTableView setContentOffset:CGPointMake(0, 140) animated:YES];
     }
-    else if(textField.tag==1 || textField.tag==2){
+    else if(textField.tag==1 || textField.tag==2)
+    {
         [self.registrationFieldsTableView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
-    else if(textField.tag==5 || textField.tag==6){
+    else if(textField.tag==5 || textField.tag==6)
+    {
         [self.registrationFieldsTableView setContentOffset:CGPointMake(0, 240) animated:YES];
     }
 }
@@ -292,47 +311,31 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-//    CustomTextFieldCell *cell;
-//    NSIndexPath *indexPath;
     
     if(textField.tag==1)
     {
-//        indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-//        cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:indexPath];
-//        [cell.valueTextField becomeFirstResponder];
         [emailTF becomeFirstResponder];
     }
     if(textField.tag==2)
     {
-//        indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-//        cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:indexPath];
-//        [cell.valueTextField becomeFirstResponder];
         [passwordTF becomeFirstResponder];
     }
     if(textField.tag==3)
     {
-//        indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
-//        cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:indexPath];
-//        [cell.valueTextField becomeFirstResponder];
         [confirmPasswordTF becomeFirstResponder];
     }
 
     if(textField.tag==4)
     {
-//        indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
-//        cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:indexPath];
-//        [cell.valueTextField becomeFirstResponder];
         [zipcodeTF becomeFirstResponder];
     }
 
     if(textField.tag==6)
     {
-//        indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-//        cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:indexPath];
-//        [cell.valueTextField becomeFirstResponder];
         [mobileNumberTF becomeFirstResponder];
     }
-    if(textField.tag == 5){
+    if(textField.tag == 5)
+    {
         [self dismissKeyboard];
     }
 
@@ -366,31 +369,27 @@
 
 #pragma mark -
 
-- (IBAction)termsAndConditionsTouchUpInsideHandler:(id)sender {
-    [self dismissKeyboard];
-    [self goToTermsAndConditionsView];
-}
-
-- (IBAction)agreeBtnTouchUpInsideHandler:(id)sender {
-    if(regFlag==0)
-    {
-        [agreeBtn setBackgroundImage:[UIImage imageNamed:@"Checked.png"] forState:UIControlStateNormal];
-        regFlag=1;
-    }
-    else
-    {
-        [agreeBtn setBackgroundImage:[UIImage imageNamed:@"Unchecked.png"] forState:UIControlStateNormal];
-        regFlag=0;
-    }
-}
-
-- (IBAction)continueBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)continueBtnTouchUpInsideHandler:(id)sender
+{
     [self dismissKeyboard];
     
     if([self validate])
     {
-        [networkManager signUp:[self populate]];
+        // Set the values into the User instance
+        [User getInstance].email = usernameTF.text;
+        [User getInstance].password = passwordTF.text;
+        [User getInstance].phone = mobileNumberTF.text;
+        [User getInstance].zipcode = zipcodeTF.text;
+                                    
+        //[networkManager signUp:[self populate]];
+        [[User getInstance] registerUser:self];
     }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, id responseObject, NSString* message
+{
+    NSLog(@"In didCompleteHttpCallback");
 }
 
 #pragma mark-
@@ -403,49 +402,11 @@
     [emailTF resignFirstResponder];
     [zipcodeTF resignFirstResponder];
     [mobileNumberTF resignFirstResponder];
-//    if(mobileNumberTF.isFirstResponder)
-//        [mobileNumberTF resignFirstResponder];
-    
-    /*NSIndexPath *userNameIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	CustomTextFieldCell *cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:userNameIndexPath];
-    [cell.valueTextField resignFirstResponder];
-    
-    NSIndexPath *emailIdIndexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-    cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:emailIdIndexPath];
-    [cell.valueTextField resignFirstResponder]; 
-    
-    NSIndexPath *confirmPasswordIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-	cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:confirmPasswordIndexPath];
-    [cell.valueTextField resignFirstResponder];
-    
-    NSIndexPath *passwordIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-	cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:passwordIndexPath];
-	[cell.valueTextField resignFirstResponder];
-    
-    NSIndexPath *mobileIndexPath=[NSIndexPath indexPathForRow:4 inSection:0];
-    cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:mobileIndexPath];
-    [cell.valueTextField resignFirstResponder];
-    
-    NSIndexPath *zipcodeIndexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-    cell = (CustomTextFieldCell *)[registrationFieldsTableView cellForRowAtIndexPath:zipcodeIndexPath];
-    [cell.valueTextField resignFirstResponder];*/
     
     [self.registrationFieldsTableView setContentOffset:CGPointMake(0, 0) animated:YES];
     [self.scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES] ;
 	scrollView.scrollEnabled = FALSE;
 
-}
--(Registration *)populate
-{
-    
-    Registration *registrationDetails=[[DatabaseManager sharedInstance] getRegistrationObject];
-    [registrationDetails setValue:usernameTF.text forKey:@"username"];
-    [registrationDetails setValue:passwordTF.text forKey:@"password"];
-    [registrationDetails setValue:confirmPasswordTF.text forKey:@"confirm_password"];
-    [registrationDetails setValue:emailTF.text forKey:@"email"];
-    [registrationDetails setValue:mobileNumberTF.text forKey:@"mobile"];
-    [registrationDetails setValue:zipcodeTF.text forKey:@"zipcode"];
-    return registrationDetails;
 }
 
 -(BOOL) validate
@@ -490,12 +451,6 @@
         [logInAlert show];
         return NO;
     }
-    if(regFlag==0)
-    {
-        UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Please Accept the Terms and Conditions to Register" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [logInAlert show];
-        return NO;
-    }
     return YES;
 }
 
@@ -510,14 +465,6 @@
 -(void)handleTap:(NSNotification *) notification
 {
     [self dismissKeyboard];
-}
-
-#pragma mark-
-
--(void) goToTermsAndConditionsView
-{
-    TermsAndConditionsViewController *termsAndConditionsViewController = [[TermsAndConditionsViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:termsAndConditionsViewController animated:YES];
 }
 
 @end

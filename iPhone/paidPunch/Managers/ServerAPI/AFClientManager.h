@@ -1,9 +1,8 @@
 //
 //  AFClientManager.h
-//  traderpog
 //
-//  Created by Shu Chiun Cheah on 5/30/12.
-//  Copyright (c) 2012 GeoloPigs. All rights reserved.
+//  Created by Aaron Khoo on 12/11/12.
+//  Copyright (c) 2012 PaidPunch. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,12 +12,12 @@
 @class AFHTTPClient;
 @interface AFClientManager : NSObject
 {
-    AFHTTPClient* _traderPog;
+    AFHTTPClient* _paidpunch;
 }
-@property (nonatomic,readonly) AFHTTPClient* traderPog;
+@property (nonatomic,readonly) AFHTTPClient* paidpunch;
 
-- (NSString*) getTraderPogURL;
-- (void) resetTraderPogWithIp:(NSString*)serverIp;
+- (NSString*) getPaidPunchURL;
+- (void) resetPaidPunchWithIp:(NSString*)serverIp;
 
 // singelton
 + (AFClientManager*) sharedInstance;

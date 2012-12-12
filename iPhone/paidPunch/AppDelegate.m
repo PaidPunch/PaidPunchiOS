@@ -11,6 +11,7 @@
 #import "SignInViewController.h"
 #import "StartPageViewController.h"
 #import "iRate.h"
+#import "User.h"
 
 @implementation AppDelegate
 
@@ -78,17 +79,7 @@ static NSString* kAppId = @"159848747459550";
         [self.window makeKeyAndVisible];
     }
     else
-    {
-        //self.viewController=[[DualSignInViewController alloc] initWithNibName:@"DualSignInViewController" bundle:nil];
-        /*DualSignInViewController *dualSignInViewController=[[DualSignInViewController alloc] initWithNibName:@"DualSignInViewController" bundle:nil];
-        UINavigationController *navController=[[UINavigationController alloc] initWithRootViewController:dualSignInViewController];
-        self.navigationController=navController;
-        self.navigationController.navigationBar.tintColor=[UIColor blackColor];
-        self.window.rootViewController=self.navigationController;
-        [self.window makeKeyAndVisible];
-        [dualSignInViewController release];
-        [navController release];*/
-        
+    {        
         StartPageViewController *startPageViewController = [[StartPageViewController alloc] initWithNibName:@"StartPageViewcontroller" bundle:nil];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startPageViewController];
         self.navigationController = navController;
@@ -97,6 +88,11 @@ static NSString* kAppId = @"159848747459550";
         [self.window makeKeyAndVisible];
     }
     [ud synchronize];
+}
+
+- (void) appInit
+{
+    [User getInstance];
 }
 
 -(void)initFB
@@ -223,6 +219,7 @@ static NSString* kAppId = @"159848747459550";
     if([CLLocationManager locationServicesEnabled])
         [self.locationManager startUpdatingLocation];
     
+    [self appInit];
     [self initFB];
     [self initView];
     return YES;

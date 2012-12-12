@@ -159,7 +159,7 @@ static NSString* const kKeyCallArray = @"callarray";
     
     if (nextCall.type == putType || nextCall.type == postType)
     {
-        AFHTTPClient* httpClient = [[AFClientManager sharedInstance] traderPog];
+        AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
         
         // Set the headers
         NSDictionary* headers = [nextCall headers];

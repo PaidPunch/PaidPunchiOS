@@ -9,21 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SignInViewController.h"
 #import "CustomTextFieldCell.h"
-#import "Registration.h"
 #import "DatabaseManager.h"
+#import "HttpCallbackDelegate.h"
 #import "NetworkManager.h"
 #import "TermsAndConditionsViewController.h"
 
-@interface RegistrationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkManagerDelegate,UINavigationBarDelegate>
+@interface RegistrationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkManagerDelegate,UINavigationBarDelegate,HttpCallbackDelegate>
 {
-    /*NSString *username;
-    NSString *password;
-    NSString *confirmPassword;
-    NSString *email;
-    NSString *mobileNumber;
-    NSString *zipcode;*/
     NetworkManager *networkManager;
-    int regFlag;
     
     UITextField *usernameTF;
     UITextField *passwordTF;
@@ -34,19 +27,13 @@
 }
 @property (strong, nonatomic) IBOutlet UIButton *registerBtn;
 
-@property (strong, nonatomic) IBOutlet UIButton *agreeBtn;
 @property (strong, nonatomic) IBOutlet UITableView *registrationFieldsTableView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (IBAction)agreeBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)continueBtnTouchUpInsideHandler:(id)sender;
-- (IBAction)termsAndConditionsTouchUpInsideHandler:(id)sender;
 
 - (BOOL) validate;
 - (BOOL) validateEmail: (NSString *) emailId;
-- (Registration *)populate;
 - (void)dismissKeyboard;
-
--(void) goToTermsAndConditionsView;
 
 @end

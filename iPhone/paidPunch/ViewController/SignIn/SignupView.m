@@ -7,7 +7,9 @@
 //
 
 #import "SignupView.h"
+#import "RegistrationViewController.h"
 #import "TermsAndConditionsViewController.h"
+#import "User.h"
 
 static NSUInteger kMinReferralCodeSize = 5;
 static NSUInteger kMaxReferralCodeSize = 10;
@@ -182,7 +184,8 @@ static NSUInteger kMaxReferralCodeSize = 10;
     
     if ([self validateInputs:referralCode])
     {
-        
+        // Store the current referralCode
+        [User getInstance].referralCode = referralCode;
     }
 }
 
@@ -194,7 +197,11 @@ static NSUInteger kMaxReferralCodeSize = 10;
     
     if ([self validateInputs:referralCode])
     {
+        // Store the current referralCode
+        [User getInstance].referralCode = referralCode;
         
+        RegistrationViewController *signUpViewController = [[RegistrationViewController alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:signUpViewController animated:YES];
     }
 }
 
