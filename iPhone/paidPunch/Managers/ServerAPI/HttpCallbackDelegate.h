@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol HttpCallbackDelegate <NSObject>
-- (void) didCompleteHttpCallback:(BOOL) success, id responseObject, NSString* message;
+- (void) didCompleteHttpCallback:(BOOL) success, NSString* message;
 @end

@@ -57,7 +57,6 @@ NSString * const OFFER=@"offer";
 NSString * const APP_IP_REQ=@"APP-IP-REQ";
 NSString * const LOGIN_REQ=@"LOGIN-REQ";
 NSString * const LOGOUT_REQ=@"LOGOUT-REQ";
-NSString * const REGISTER_REQ=@"REGISTER-REQ";
 NSString * const SENDFEEDBACK_REQ=@"SENDFEEDBACK-REQ";
 NSString * const MARKPUNCHUSED_REQ=@"MARKPUNCHUSED-REQ";
 NSString * const EMAILUPDATE_REQ=@"EMAILUPDATE-REQ";

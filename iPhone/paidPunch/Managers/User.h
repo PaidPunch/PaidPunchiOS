@@ -22,13 +22,16 @@
     NSString* _password;
     NSString* _zipcode;
     NSString* _phone;
+    BOOL _isUserValidated;
 }
+@property(nonatomic,strong) NSString* userId;
 @property(nonatomic,strong) NSString* username;
 @property(nonatomic,strong) NSString* referralCode;
 @property(nonatomic,strong) NSString* email;
 @property(nonatomic,strong) NSString* password;
 @property(nonatomic,strong) NSString* zipcode;
 @property(nonatomic,strong) NSString* phone;
+@property(nonatomic) BOOL isUserValidated;
 
 - (void) registerUser:(NSObject<HttpCallbackDelegate>*) delegate;
 

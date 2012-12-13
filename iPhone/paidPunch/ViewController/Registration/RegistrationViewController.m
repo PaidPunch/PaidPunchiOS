@@ -345,9 +345,11 @@
 #pragma mark -
 #pragma mark NetworkManagerDelegate methods Implementation
 
--(void) didFinishSigningUp:(NSString *)statusCode statusMessage:(NSString *)message
+-(void) didFinishEmailSignup:(BOOL)success statusMessage:(NSString *)message
 {
-    if([statusCode isEqualToString:@"00"])
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if(success)
     {
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
@@ -375,6 +377,9 @@
     
     if([self validate])
     {
+        hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText = @"Registering User";
+        
         // Set the values into the User instance
         [User getInstance].username = usernameTF.text;
         [User getInstance].email = emailTF.text;
@@ -388,9 +393,10 @@
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(BOOL)success, id responseObject, NSString* message
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
 {
     NSLog(@"In didCompleteHttpCallback");
+    [self didFinishEmailSignup:success statusMessage:message];
 }
 
 #pragma mark-

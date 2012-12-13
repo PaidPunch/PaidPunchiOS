@@ -7,6 +7,7 @@
 //
 
 #import "StartPageViewController.h"
+#import "User.h"
 
 @implementation StartPageViewController
 
@@ -112,6 +113,22 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden=YES;
+    
+    // Reset the scrolling when the user id is set (i.e. user has registered)
+    NSString* userId = [[User getInstance] userId];
+    if ([userId length] > 0)
+    {
+        pageControl.currentPage = 0;
+        [self switchPage:self.pageControl.currentPage];
+        userHasInteracted = NO;
+        
+        if (!onLoginView)
+        {
+            [signupView removeFromSuperview];
+            [containerView addSubview:loginView];
+            onLoginView = TRUE;
+        }
+    }
 }
 
 - (void)awakeFromNib

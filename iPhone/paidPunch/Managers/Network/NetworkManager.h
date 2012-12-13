@@ -50,7 +50,6 @@
 -(void) fbLogin:(NSString*)username withEmailId:(NSString *)email withFBId:(NSString *)fbid;
 -(void) login:(NSString*)username loginPassword:(NSString *)password;
 -(void) logout:(NSString *)userid;
--(void) signUp:(Registration *)registrationDetails;
 -(void) sendFeedBack:(NSString*)feedback loggedInUserId:(NSString *)userID;
 -(void) markPunchUsed:(NSString *)punchCardId punchCardDownloadId:(NSString *)downloadId loggedInUserId:(NSString *)userID isMysteryPunch:(BOOL)isMystery isPunchExpired:(BOOL)punchExpired;
 -(void) update:(NSString *)email withMobileNumber:(NSString *)mobileNo loggedInUserId:(NSString *)userID;

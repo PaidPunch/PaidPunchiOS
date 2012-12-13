@@ -433,48 +433,6 @@ response
 }
 
 #pragma mark -
-#pragma mark Request For Registration
-/*
- -----------------Registration-------------
- http://localhost:8080/paid_punch/app_registration
- <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
- <paidpunch-req>
-    <txtype>REGISTER-REQ</txtype>
-    <name>ghost</name>
-    <email>vvv@g.com</email>
-    <pincode>654</pincode>
-    <password>a</password>
-    <mobilenumber>5775</mobilenumber>
- </paidpunch-req>
-*/
--(void) signUp:(Registration *)registrationDetails
-{
-    self.requestType=REGISTER_REQ;
-    NSString *post=@"";	
-    post=[NSString stringWithFormat:@" <?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><email>%@</email><pincode>%@</pincode><password>%@</password><mobilenumber>%@</mobilenumber></paidpunch-req>",REGISTER_REQ,registrationDetails.username,registrationDetails.email,registrationDetails.zipcode,registrationDetails.password,registrationDetails.mobile];  
-	//NSLog(@"request format--->%@",post);
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
-	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl],NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
-    [request setHTTPMethod:@"POST"];  
-	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
-	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
-	[request setHTTPBody:postData];  
-    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if (connection)
-    {
-        NSMutableData *data = [[NSMutableData alloc] init];
-        self.webData = data;
-    }
-    else
-    {
-        NSLog(@"Connection creation failed in signUp!");
-    }
-    [self showPopup];
-}
-
-#pragma mark -
 #pragma mark Request For Sending Feedback
 /*
  ------------------feedback---------------
@@ -1052,10 +1010,6 @@ response
         if([self.requestType isEqualToString:FB_LOGIN_REQ ])
         {
             [delegate didFinishWithFacebookLogin:xmlParser.statusCode statusMessage:xmlParser.statusMessage];
-        }
-        if([self.requestType isEqualToString:REGISTER_REQ])
-        {
-            [delegate didFinishSigningUp:xmlParser.statusCode statusMessage:xmlParser.statusMessage];
         }
         if([self.requestType isEqualToString:LOGIN_REQ])
         {

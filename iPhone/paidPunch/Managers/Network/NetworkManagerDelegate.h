@@ -11,7 +11,6 @@
 @protocol NetworkManagerDelegate <NSObject>
 @optional
 -(void) didFinishLoadingAppURL:(NSString *)url;
--(void) didFinishSigningUp:(NSString *)statusCode statusMessage:(NSString *)message;
 -(void) didFinishLogin:(NSString *)statusCode statusMessage:(NSString *)message;
 -(void) didFinishWithFacebookLogin:(NSString *)statusCode statusMessage:(NSString *)message;
 -(void) didFinishLoggingOut:(NSString *)statusCode statusMessage:(NSString *)message;

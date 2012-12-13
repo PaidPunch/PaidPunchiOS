@@ -11,6 +11,7 @@
 #import "CustomTextFieldCell.h"
 #import "DatabaseManager.h"
 #import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 #import "NetworkManager.h"
 #import "TermsAndConditionsViewController.h"
 
@@ -24,6 +25,8 @@
     UITextField *emailTF;
     UITextField *mobileNumberTF;
     UITextField *zipcodeTF;
+    
+    MBProgressHUD *hud;
 }
 @property (strong, nonatomic) IBOutlet UIButton *registerBtn;
 

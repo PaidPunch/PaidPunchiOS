@@ -56,6 +56,7 @@
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
 		38B84433167581420068D3C3 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84432167581410068D3C3 /* BaseView.m */; };
 		38B844361677C1060068D3C3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B844351677C1060068D3C3 /* User.m */; };
+		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
 		8A03AE9D151B47CD004BEDC3 /* CancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A03AE9B151B47CD004BEDC3 /* CancelBtn@2x.png */; };
@@ -581,6 +582,8 @@
 		38B844341677C1060068D3C3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		38B844351677C1060068D3C3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		38B844371677FB460068D3C3 /* HttpCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpCallbackDelegate.h; path = ServerAPI/HttpCallbackDelegate.h; sourceTree = "<group>"; };
+		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -1395,6 +1398,8 @@
 				8A7871CB14E10E43003992B3 /* Reachability.m */,
 				8A78E1BA14976B1500F79380 /* Base64.h */,
 				8A78E1BB14976B1500F79380 /* Base64.m */,
+				38D686151679B62400DED3A0 /* Utilities.h */,
+				38D686161679B62400DED3A0 /* Utilities.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -3223,6 +3228,7 @@
 				38B8443016744CD30068D3C3 /* SignupView.m in Sources */,
 				38B84433167581420068D3C3 /* BaseView.m in Sources */,
 				38B844361677C1060068D3C3 /* User.m in Sources */,
+				38D686171679B62400DED3A0 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

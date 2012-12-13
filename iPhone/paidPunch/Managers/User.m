@@ -9,6 +9,7 @@
 #import "AFClientManager.h"
 #import "AFHTTPRequestOperation.h"
 #import "User.h"
+#import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
 static NSString* const kKeyUserId = @"userid";
@@ -19,17 +20,20 @@ static NSString* const kKeyZipcode = @"zipcode";
 static NSString* const kKeyPhone = @"mobile_no";
 static NSString* const kTxType = @"txtype";
 static NSString* const kKeyPassword = @"password";
+static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kUserFilename = @"user.sav";
 
 @implementation User
 @synthesize referralCode = _referralCode;
+@synthesize userId = _userId;
 @synthesize username = _username;
 @synthesize email = _email;
 @synthesize password = _password;
 @synthesize zipcode = _zipcode;
 @synthesize phone = _phone;
+@synthesize isUserValidated = _isUserValidated;
 
 - (id) init
 {
@@ -44,6 +48,7 @@ static NSString* const kUserFilename = @"user.sav";
         _password = @"";
         _zipcode = @"";
         _phone = @"";
+        _isUserValidated = FALSE;
     }
     return self;
 }
@@ -148,28 +153,19 @@ static NSString* const kUserFilename = @"user.sav";
                                 _referralCode, kKeyReferral,
                                 nil];
     
-    // make a get request
+    // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
     NSString* path = @"paid_punch/Users";
     [httpClient postPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
-                    [delegate didCompleteHttpCallback:TRUE, responseObject, @""];
+                    _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
-                    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Server Failure"
-                                                                      message:@"Unable to retrieve player data. Please try again later."
-                                                                     delegate:nil
-                                                            cancelButtonTitle:@"OK"
-                                                            otherButtonTitles:nil];
-                    
-                    [message show];
-                    NSLog(@"Localized failure reason: %@", error.localizedFailureReason);
-                    NSLog(@"Localized failure description: %@", error.localizedDescription);
-                    NSLog(@"Recovery options: %@", error.localizedRecoveryOptions);
-                    NSLog(@"Recover suggestion: %@", error.localizedRecoverySuggestion);
-                    [delegate didCompleteHttpCallback:FALSE, NULL, error.localizedDescription];
+                    NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
+                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }

@@ -55,7 +55,6 @@ extern NSString * const OFFER;
 extern NSString * const APP_IP_REQ;
 extern NSString * const LOGIN_REQ;
 extern NSString * const LOGOUT_REQ;
-extern NSString * const REGISTER_REQ;
 extern NSString * const SENDFEEDBACK_REQ;
 extern NSString * const MARKPUNCHUSED_REQ;
 extern NSString * const EMAILUPDATE_REQ;
