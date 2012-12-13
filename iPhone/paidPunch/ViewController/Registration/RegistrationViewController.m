@@ -376,7 +376,8 @@
     if([self validate])
     {
         // Set the values into the User instance
-        [User getInstance].email = usernameTF.text;
+        [User getInstance].username = usernameTF.text;
+        [User getInstance].email = emailTF.text;
         [User getInstance].password = passwordTF.text;
         [User getInstance].phone = mobileNumberTF.text;
         [User getInstance].zipcode = zipcodeTF.text;

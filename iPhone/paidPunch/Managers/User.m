@@ -12,14 +12,20 @@
 
 static NSString* const kKeyVersion = @"version";
 static NSString* const kKeyUserId = @"userid";
-static NSString* const kKeyReferral = @"referral";
+static NSString* const kKeyReferral = @"refer_code";
+static NSString* const kKeyName = @"name";
 static NSString* const kKeyEmail = @"email";
 static NSString* const kKeyZipcode = @"zipcode";
-static NSString* const kKeyPhone = @"phone";
+static NSString* const kKeyPhone = @"mobile_no";
+static NSString* const kTxType = @"txtype";
+static NSString* const kKeyPassword = @"password";
+static NSString* const kEmailRegister = @"EMAIL-REGISTER";
+static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kUserFilename = @"user.sav";
 
 @implementation User
 @synthesize referralCode = _referralCode;
+@synthesize username = _username;
 @synthesize email = _email;
 @synthesize password = _password;
 @synthesize zipcode = _zipcode;
@@ -33,6 +39,7 @@ static NSString* const kUserFilename = @"user.sav";
         _createdVersion = @"1.0";
         _referralCode = @"";
         _userId = @"";
+        _username = @"";
         _email = @"";
         _password = @"";
         _zipcode = @"";
@@ -46,6 +53,7 @@ static NSString* const kUserFilename = @"user.sav";
 {
     [aCoder encodeObject:_createdVersion forKey:kKeyVersion];
     [aCoder encodeObject:_userId forKey:kKeyUserId];
+    [aCoder encodeObject:_username forKey:kKeyName];
     [aCoder encodeObject:_email forKey:kKeyEmail];
     [aCoder encodeObject:_phone forKey:kKeyPhone];
     [aCoder encodeObject:_zipcode forKey:kKeyZipcode];
@@ -56,6 +64,7 @@ static NSString* const kUserFilename = @"user.sav";
 {
     _createdVersion = [aDecoder decodeObjectForKey:kKeyVersion];
      _userId = [aDecoder decodeObjectForKey:kKeyUserId];
+    _username = [aDecoder decodeObjectForKey:kKeyName];
     _email = [aDecoder decodeObjectForKey:kKeyEmail];
     _phone = [aDecoder decodeObjectForKey:kKeyPhone];
     _zipcode = [aDecoder decodeObjectForKey:kKeyZipcode];
@@ -128,13 +137,24 @@ static NSString* const kUserFilename = @"user.sav";
 
 - (void) registerUser:(NSObject<HttpCallbackDelegate>*) delegate
 {
+    // post parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                kEmailRegister, kTxType,
+                                _username, kKeyName,
+                                _password, kKeyPassword,
+                                _email, kKeyEmail,
+                                _phone, kKeyPhone,
+                                _zipcode, kKeyZipcode,
+                                _referralCode, kKeyReferral,
+                                nil];
+    
     // make a get request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"Users";
-    [httpClient getPath:path
-             parameters:nil
+    NSString* path = @"paid_punch/Users";
+    [httpClient postPath:path
+             parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
-                    
+                    NSLog(@"%@", responseObject);
                     [delegate didCompleteHttpCallback:TRUE, responseObject, @""];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
@@ -145,6 +165,10 @@ static NSString* const kUserFilename = @"user.sav";
                                                             otherButtonTitles:nil];
                     
                     [message show];
+                    NSLog(@"Localized failure reason: %@", error.localizedFailureReason);
+                    NSLog(@"Localized failure description: %@", error.localizedDescription);
+                    NSLog(@"Recovery options: %@", error.localizedRecoveryOptions);
+                    NSLog(@"Recover suggestion: %@", error.localizedRecoverySuggestion);
                     [delegate didCompleteHttpCallback:FALSE, NULL, error.localizedDescription];
                 }
      ];

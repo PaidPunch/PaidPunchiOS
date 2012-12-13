@@ -7,7 +7,7 @@
 
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "AFClientManager.h"
-#import "AFXMLRequestOperation.h"
+#import "AFJSONRequestOperation.h"
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
 static NSString* const kPaidPunchBaseURLString = @"paidpunch.com";
@@ -35,7 +35,7 @@ static NSString* const kPaidPunchPort = @"80";
 
 - (void) dealloc
 {
-    [_paidpunch unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
+    [_paidpunch unregisterHTTPOperationClass:[AFJSONRequestOperation class]];
 }
 
 - (NSString*) getPaidPunchURL
@@ -47,7 +47,7 @@ static NSString* const kPaidPunchPort = @"80";
 {
     if(_paidpunch)
     {
-        [_paidpunch unregisterHTTPOperationClass:[AFXMLRequestOperation class]];
+        [_paidpunch unregisterHTTPOperationClass:[AFJSONRequestOperation class]];
     }
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
@@ -58,11 +58,11 @@ static NSString* const kPaidPunchPort = @"80";
     NSLog(@"traderpog client reset with server ip %@", urlString);
     
     _paidpunch = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
-    [_paidpunch registerHTTPOperationClass:[AFXMLRequestOperation class]];
+    [_paidpunch registerHTTPOperationClass:[AFJSONRequestOperation class]];
     
     //  Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
     [_paidpunch setDefaultHeader:@"Accept" value:@"application/json"];
-    [_paidpunch setDefaultHeader:@"expected-traderpog-version" value:@"1.0"];
+    [_paidpunch setDefaultHeader:@"api-version" value:@"1.0"];
     
     // Encode parameters in XML format
     _paidpunch.parameterEncoding =  AFJSONParameterEncoding;
