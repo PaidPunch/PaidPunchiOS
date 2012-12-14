@@ -584,6 +584,7 @@
 		38B844371677FB460068D3C3 /* HttpCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpCallbackDelegate.h; path = ServerAPI/HttpCallbackDelegate.h; sourceTree = "<group>"; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
 		848F468B156F61DC00332D31 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		848F468C156F61DC00332D31 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		848F468D156F61DC00332D31 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -1867,6 +1868,7 @@
 			children = (
 				8A7A7B02152AD4550097A3B4 /* FacebookFacade.h */,
 				8A7A7B03152AD4550097A3B4 /* FacebookFacade.m */,
+				38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */,
 			);
 			path = FacebookFacade;
 			sourceTree = "<group>";

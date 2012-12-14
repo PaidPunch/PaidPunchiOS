@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseView.h"
+#import "FacebookPaidPunchDelegate.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface SignupView : BaseView
+@interface SignupView : BaseView<HttpCallbackDelegate>
 {
     UIImage *uncheckedImage;
     UIImage *checkedImage;
@@ -17,6 +20,8 @@
     
     UIButton* checkbox;
     UITextField *referralTextField;
+    
+    MBProgressHUD *hud;
 }
 
 - (void) dismissKeyboard;

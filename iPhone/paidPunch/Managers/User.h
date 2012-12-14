@@ -9,20 +9,27 @@
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
 
-@interface User : NSObject
+static NSString* const kUser_EmailRegistration = @"User_EmailRegistration";
+static NSString* const kUser_FacebookRegistration = @"User_FacebookRegistration";
+
+@interface User : NSObject<FBRequestDelegate, FacebookPaidPunchDelegate>
 {
     // internal
     NSString* _createdVersion;
     
     // User attributes
     NSString* _userId;
+    NSString* _facebookId;
     NSString* _referralCode;
     NSString* _username;
     NSString* _email;
     NSString* _password;
     NSString* _zipcode;
     NSString* _phone;
+    NSString* _uniqueId;
     BOOL _isUserValidated;
+    
+    __weak NSObject<HttpCallbackDelegate>* facebookDelegate;
 }
 @property(nonatomic,strong) NSString* userId;
 @property(nonatomic,strong) NSString* username;
@@ -33,7 +40,9 @@
 @property(nonatomic,strong) NSString* phone;
 @property(nonatomic) BOOL isUserValidated;
 
-- (void) registerUser:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) getUserProfileInfo;
 
 + (User*) getInstance;
 + (void) destroyInstance;

@@ -17,6 +17,7 @@
 @synthesize punchUsedViewController;
 @synthesize punchCardOfferViewController;
 @synthesize dualSignInViewController;
+@synthesize callbackDelegate = _callbackDelegate;
 
 static FacebookFacade *sharedInstance=nil;
 
@@ -39,13 +40,11 @@ static FacebookFacade *sharedInstance=nil;
 	return self;
 }
 
-
-
-
 -(void)apiLogin
 {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![[delegate facebook] isSessionValid]) {
+    if (![[delegate facebook] isSessionValid])
+    {
         currentAPICall = kAPILogin;
         [[delegate facebook] authorize:[delegate permissions]];
     } 
@@ -55,6 +54,7 @@ static FacebookFacade *sharedInstance=nil;
         [self.dualSignInViewController loggedIn];
         [self.punchUsedViewController loggedIn];
         [self.punchCardOfferViewController loggedIn];
+        [self.callbackDelegate didCompleteFacebookLogin:TRUE];
     }
 }
 /*
@@ -798,8 +798,8 @@ static FacebookFacade *sharedInstance=nil;
     [self.dualSignInViewController loggedIn];
     [self.punchUsedViewController loggedIn];
     [self.punchCardOfferViewController loggedIn];
-     [self userDidGrantPermission];
-    //[self getUserProfileInfo];
+    [self userDidGrantPermission];
+    [self.callbackDelegate didCompleteFacebookLogin:TRUE];
 }
 
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {

@@ -388,7 +388,7 @@
         [User getInstance].zipcode = zipcodeTF.text;
                                     
         //[networkManager signUp:[self populate]];
-        [[User getInstance] registerUser:self];
+        [[User getInstance] registerUserWithEmail:self];
     }
 }
 

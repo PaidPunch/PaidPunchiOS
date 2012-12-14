@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Facebook.h"
 #import "AppDelegate.h"
+#import "Facebook.h"
+#import "FacebookPaidPunchDelegate.h"
 #import "MBProgressHUD.h"
 
 @class FeedsTableViewController;
@@ -50,6 +51,7 @@ typedef enum apiCall {
     NSMutableArray *savedAPIResult;    
     UIView *activityView;
     MBProgressHUD *popupHUD;
+    __weak NSObject<FacebookPaidPunchDelegate>* _callbackDelegate;
 }
 
 @property (nonatomic, strong) NSMutableArray *savedAPIResult;
@@ -58,6 +60,7 @@ typedef enum apiCall {
 @property (nonatomic, weak) PunchUsedViewController *punchUsedViewController;
 @property (nonatomic, weak) PunchCardOfferViewController *punchCardOfferViewController;
 @property (nonatomic, weak) DualSignInViewController *dualSignInViewController;
+@property (nonatomic, weak) NSObject<FacebookPaidPunchDelegate>* callbackDelegate;
 
 + (id)sharedInstance;
 

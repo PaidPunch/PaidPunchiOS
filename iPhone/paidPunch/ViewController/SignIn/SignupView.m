@@ -186,6 +186,11 @@ static NSUInteger kMaxReferralCodeSize = 10;
     {
         // Store the current referralCode
         [User getInstance].referralCode = referralCode;
+        
+        hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText = @"Registering User";
+        
+        [[User getInstance] registerUserWithFacebook:self];
     }
 }
 
@@ -203,6 +208,26 @@ static NSUInteger kMaxReferralCodeSize = 10;
         RegistrationViewController *signUpViewController = [[RegistrationViewController alloc] initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:signUpViewController animated:YES];
     }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+     if(success)
+     {
+         [[DatabaseManager sharedInstance] deleteAllPunchCards];
+         [[DatabaseManager sharedInstance] deleteBusinesses];
+         
+         PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
+         [self.navigationController presentModalViewController:tabBarViewController animated:NO];
+     }
+     else
+     {
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         [alertView show];
+     }
 }
 
 @end

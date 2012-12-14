@@ -8,6 +8,7 @@
 
 #import "AFClientManager.h"
 #import "AFHTTPRequestOperation.h"
+#import "AppDelegate.h"
 #import "User.h"
 #import "Utilities.h"
 
@@ -20,6 +21,8 @@ static NSString* const kKeyZipcode = @"zipcode";
 static NSString* const kKeyPhone = @"mobile_no";
 static NSString* const kTxType = @"txtype";
 static NSString* const kKeyPassword = @"password";
+static NSString* const kKeyFacebook = @"fbid";
+static NSString* const kKeyUniqueId = @"sessionid";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
@@ -48,6 +51,8 @@ static NSString* const kUserFilename = @"user.sav";
         _password = @"";
         _zipcode = @"";
         _phone = @"";
+        _facebookId = @"";
+        [self getUniqueId];
         _isUserValidated = FALSE;
     }
     return self;
@@ -62,6 +67,8 @@ static NSString* const kUserFilename = @"user.sav";
     [aCoder encodeObject:_email forKey:kKeyEmail];
     [aCoder encodeObject:_phone forKey:kKeyPhone];
     [aCoder encodeObject:_zipcode forKey:kKeyZipcode];
+    [aCoder encodeObject:_facebookId forKey:kKeyFacebook];
+    [aCoder encodeObject:_uniqueId forKey:kKeyUniqueId];
     [aCoder encodeObject:_referralCode forKey:kKeyReferral];
 }
 
@@ -73,11 +80,28 @@ static NSString* const kUserFilename = @"user.sav";
     _email = [aDecoder decodeObjectForKey:kKeyEmail];
     _phone = [aDecoder decodeObjectForKey:kKeyPhone];
     _zipcode = [aDecoder decodeObjectForKey:kKeyZipcode];
+    _facebookId = [aDecoder decodeObjectForKey:kKeyFacebook];
+    _uniqueId = [aDecoder decodeObjectForKey:kKeyUniqueId];
     _referralCode = [aDecoder decodeObjectForKey:kKeyReferral];
     return self;
 }
 
 #pragma mark - private functions
+
+-(NSString *)getUniqueId
+{
+    if (!_uniqueId)
+    {
+        // Create universally unique identifier (object)
+        CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
+        
+        // Get the string representation of CFUUID object.
+        _uniqueId = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuidObject));
+        CFRelease(uuidObject);
+    }
+    
+    return _uniqueId;
+}
 
 + (NSString*) documentsDirectory
 {
@@ -140,7 +164,7 @@ static NSString* const kUserFilename = @"user.sav";
 
 #pragma mark - Server calls
 
-- (void) registerUser:(NSObject<HttpCallbackDelegate>*) delegate
+- (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate
 {
     // post parameters
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -168,6 +192,112 @@ static NSString* const kUserFilename = @"user.sav";
                     [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
+}
+
+- (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate
+{
+    facebookDelegate = delegate;
+    
+    [[FacebookFacade sharedInstance] setCallbackDelegate:self];
+    [[FacebookFacade sharedInstance] apiLogin];
+}
+
+- (void) registerUserWithFacebookInternal
+{
+    // post parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                kFacebookRegister, kTxType,
+                                _username, kKeyName,
+                                _email, kKeyEmail,
+                                _facebookId, kKeyFacebook,
+                                _uniqueId, kKeyUniqueId,
+                                _referralCode, kKeyReferral,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users";
+    [httpClient postPath:path
+              parameters:parameters
+                 success:^(AFHTTPRequestOperation *operation, id responseObject){
+                     NSLog(@"%@", responseObject);
+                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                 }
+                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                     NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
+                     [facebookDelegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                 }
+     ];
+}
+
+#pragma mark - Facebook data
+
+- (void) didCompleteFacebookLogin:(BOOL) success
+{
+    [self getUserProfileInfo];
+}
+
+- (void)getUserProfileInfo
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"SELECT uid, name ,email FROM user WHERE uid=me()", @"query",
+                                   nil];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[delegate facebook] requestWithMethodName:@"fql.query"
+                                     andParams:params
+                                 andHttpMethod:@"POST"
+                                   andDelegate:self];
+}
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"received response %@",response);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result
+{    
+    if ([result isKindOfClass:[NSArray class]])
+    {
+        result = [result objectAtIndex:0];
+    }
+    
+    // This callback can be a result of getting the user's basic
+    // information or getting the user's permissions.
+    if ([result objectForKey:@"name"])
+    {
+        // Store the information retrieved from facebook
+        _username = [result objectForKey:@"name"];
+        if([result objectForKey:@"uid"])
+        {
+            _facebookId = [NSString stringWithFormat:@"%@", [result objectForKey:@"uid"]];
+        }
+        if([result objectForKey:@"email"])
+        {
+            _email=[result objectForKey:@"email"];
+        }
+        
+        // Call the facebook registration API
+        [self registerUserWithFacebookInternal];
+    }
+    else
+    {
+        NSLog(@"Unknown facebook callback in didLoad.");
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"Err message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    NSLog(@"Err code: %d", [error code]);
+}
+
+- (void)requestLoading:(FBRequest *)request
+{
+}
+
+- (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data
+{
 }
 
 #pragma mark - Singleton
