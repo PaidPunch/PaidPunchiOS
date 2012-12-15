@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 mobimedia. All rights reserved.
 //
 
+#import "AFClientManager.h"
 #import "UsingPaidPunchViewController.h"
 
 @implementation UsingPaidPunchViewController
@@ -41,7 +42,7 @@
     
     self.usingPaidPunchWebView.delegate=self;
 
-    NSString *url=[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"HowToUseTxtUrl", @"")];
+    NSString *url=[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"HowToUseTxtUrl", @"")];
     NSURL *targetURL=[NSURL URLWithString:url];
     NSURLRequest *request=[NSURLRequest requestWithURL:targetURL];
     [self.usingPaidPunchWebView loadRequest:request];

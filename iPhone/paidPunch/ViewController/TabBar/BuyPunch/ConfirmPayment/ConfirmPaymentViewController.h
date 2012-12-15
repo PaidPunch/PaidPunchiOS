@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CongratulationsViewController.h"
 #import "NetworkManager.h"
-#import "InfoExpert.h"
 #import "SDWebImageManagerDelegate.h"
 
 @class NetworkManager;

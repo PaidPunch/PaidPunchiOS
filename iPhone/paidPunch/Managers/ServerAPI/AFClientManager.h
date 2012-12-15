@@ -13,8 +13,10 @@
 @interface AFClientManager : NSObject
 {
     AFHTTPClient* _paidpunch;
+    NSString* _appUrl;
 }
 @property (nonatomic,readonly) AFHTTPClient* paidpunch;
+@property (nonatomic,strong) NSString* appUrl;
 
 - (NSString*) getPaidPunchURL;
 - (void) resetPaidPunchWithIp:(NSString*)serverIp;

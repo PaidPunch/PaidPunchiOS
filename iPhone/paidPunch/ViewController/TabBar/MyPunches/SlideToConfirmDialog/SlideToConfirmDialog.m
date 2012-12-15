@@ -335,7 +335,7 @@ BOOL UNLOCKED = NO;
         }
         
     }
-    [networkManager markPunchUsed:self.punchCardDetails.punch_card_id punchCardDownloadId:self.punchCardDetails.punch_card_download_id loggedInUserId:[[InfoExpert sharedInstance]userId] isMysteryPunch:isMystery isPunchExpired:[self.punchCardDetails.punch_expire boolValue]];
+    [networkManager markPunchUsed:self.punchCardDetails.punch_card_id punchCardDownloadId:self.punchCardDetails.punch_card_download_id loggedInUserId:[[User getInstance] userId] isMysteryPunch:isMystery isPunchExpired:[self.punchCardDetails.punch_expire boolValue]];
 }
 
 - (IBAction)goBack:(id)sender {

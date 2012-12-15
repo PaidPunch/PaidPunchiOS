@@ -65,7 +65,7 @@
         [locationMgr startUpdatingLocation];
     }
     
-    [[InfoExpert sharedInstance] setSearchCriteria:1];
+    //[[InfoExpert sharedInstance] setSearchCriteria:1];
     
     if (_refreshHeaderView == nil) {
 		
@@ -327,7 +327,7 @@
 
 -(void) loadBusinessList
 {
-    [networkManagerBusinessList searchByName:@"" loggedInUserId:[[InfoExpert sharedInstance] userId]];
+    [networkManagerBusinessList searchByName:@"" loggedInUserId:[[User getInstance] userId]];
 }
 
 - (void)refreshBusinessList {
@@ -359,12 +359,12 @@
             if([networkManagerBusinessOfferDict objectForKey:bizObj.business_name] == nil){
                 NetworkManager *tempNetManager = [[NetworkManager alloc] initWithView:self.view];
                 tempNetManager.delegate = self;
-                [tempNetManager getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
+                [tempNetManager getBusinessOffer:bizObj.business_name loggedInUserId:[[User getInstance] userId]];
                 [networkManagerBusinessOfferDict setObject:tempNetManager forKey:bizObj.business_name];
 //                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
             }
             else {
-                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
+                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[User getInstance] userId]];
             }
 //            [networkManagerBusinessOffer getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance]userId]];
         }

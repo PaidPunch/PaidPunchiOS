@@ -51,7 +51,7 @@
     NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
     if(arr.count==0)
     {
-        [[InfoExpert sharedInstance] setBuyFlag:NO];
+        //[[InfoExpert sharedInstance] setBuyFlag:NO];
         [self getMyPunches];
     }
     
@@ -78,10 +78,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if([[InfoExpert sharedInstance] buyFlag]==YES)
+    //if([[InfoExpert sharedInstance] buyFlag]==YES)
     {
         [[DatabaseManager sharedInstance] deleteMyPunches];
-        [[InfoExpert sharedInstance] setBuyFlag:NO];
+        //[[InfoExpert sharedInstance] setBuyFlag:NO];
         self.lastRefreshTime=[NSDate date];
         [self getMyPunches];
     }
@@ -264,7 +264,7 @@
 
 -(void)getMyPunches
 {
-    [networkManager getUserPunches:[[InfoExpert sharedInstance]userId]];
+    [networkManager getUserPunches:[[User getInstance] userId]];
 }
 
 #pragma mark -

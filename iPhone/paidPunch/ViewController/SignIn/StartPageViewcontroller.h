@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomMoviePlayer.h"
-#import "DualSignInViewController.h"
 #import "FAQViewController.h"
 #import "LoginView.h"
 #import "SignupView.h"

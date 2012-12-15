@@ -87,7 +87,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[InfoExpert sharedInstance] isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
         if(self.punchCardDetails==nil)
         {
@@ -102,7 +102,7 @@
         }
         else
         {
-            [networkManager getProfileRequest:[[InfoExpert sharedInstance] userId] withName:@""];
+            [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
         }
     }
 }
@@ -362,7 +362,7 @@
 {
     if([statusCode isEqualToString:@"00"])
     {
-        [[InfoExpert sharedInstance] setIsProfileCreated:YES];
+        [[User getInstance] setIsPaymentProfileCreated:TRUE];
         
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         [ud setObject:@"YES" forKey:@"isProfileCreated"];
@@ -377,7 +377,7 @@
         }
         else
         {
-            [networkManager getProfileRequest:[[InfoExpert sharedInstance] userId] withName:@""];
+            [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
         }
     }
     else
@@ -661,7 +661,7 @@
     if([self validate])
     {
         NSArray *arr=[expDate componentsSeparatedByString:@"-"];
-        [networkManager createProfile:name withUserID:[[InfoExpert sharedInstance] userId] withEmail:email withExpDate:[NSString stringWithFormat:@"%@-%@",[arr objectAtIndex:1],[arr objectAtIndex:0]] withCVV:cvv withCardNo:cardNumber];
+        [networkManager createProfile:name withUserID:[[User getInstance] userId] withEmail:email withExpDate:[NSString stringWithFormat:@"%@-%@",[arr objectAtIndex:1],[arr objectAtIndex:0]] withCVV:cvv withCardNo:cardNumber];
     }
 }
 
@@ -744,9 +744,11 @@
 
 - (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId
 {
+    /*
     [[InfoExpert sharedInstance] setMaskedId:maskedId];
     ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
     [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
+     */
 }
 
 

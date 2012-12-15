@@ -130,26 +130,9 @@
     {
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         [[DatabaseManager sharedInstance] deleteBusinesses];
-        [[InfoExpert sharedInstance] setPassword:passwordTextField.text];
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        [ud setObject:@"YES" forKey:@"loggedIn"];
-        //[ud setObject:@"NO" forKey:@"isManualShown"];
-
-        [ud setObject:[[InfoExpert sharedInstance]userId] forKey:@"userId"];
-        [ud setObject:[[InfoExpert sharedInstance]email] forKey:@"email"];
-        [ud setObject:[[InfoExpert sharedInstance]username] forKey:@"username"];
-        [ud setObject:[[InfoExpert sharedInstance]zipcode] forKey:@"zipcode"];
-        [ud setObject:[[InfoExpert sharedInstance]mobileNumber] forKey:@"mobileNumber"];
-        [ud setObject:[[InfoExpert sharedInstance]password] forKey:@"password"];
-        if([[InfoExpert sharedInstance] isProfileCreated])
-        {
-            [ud setObject:@"YES" forKey:@"isProfileCreated"];
-        }
-        else
-        {
-            [ud setObject:@"NO" forKey:@"isProfileCreated"];
-        }
-        [ud synchronize];
+        
+        // TODO: Replace with new login approach
+        
         [self goToTabBarView];
     }
     else
@@ -163,7 +146,6 @@
 
 -(void) didFinishLoadingAppURL:(NSString *)url
 {
-    [[InfoExpert sharedInstance] setAppUrl:url];
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     [ud setObject:url forKey:@"appUrl"];
     [ud synchronize];

@@ -7,6 +7,7 @@
 //
 
 #import "CreditCardSettingsViewController.h"
+#import "User.h"
 
 @implementation CreditCardSettingsViewController
 @synthesize deleteCardBtn;
@@ -58,7 +59,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[InfoExpert sharedInstance] isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
         [self setUpUI];
     }
@@ -107,8 +108,8 @@
         UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [logInAlert show];
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        [[InfoExpert sharedInstance] setIsProfileCreated:NO];
-        if([[InfoExpert sharedInstance] isProfileCreated])
+        [[User getInstance] setIsPaymentProfileCreated:FALSE];
+        if([[User getInstance] isPaymentProfileCreated])
         {
             [ud setObject:@"YES" forKey:@"isProfileCreated"];
         }
@@ -131,7 +132,7 @@
 
 -(void)setUpUI
 {
-    if([[InfoExpert sharedInstance] isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
         self.linkAddCardLbl.hidden=NO;
         self.linkAddCardLbl.text=@"We have the following credit card on file:";
@@ -140,6 +141,8 @@
         self.deleteCardBtn.hidden=NO;
         self.cardMaskedCodeLbl.hidden=NO;
         self.creditCardPinImageView.hidden=NO;
+        self.cardMaskedCodeLbl.text=self.maskedId;
+        /*
         if(self.maskedId==nil)
         {
             self.cardMaskedCodeLbl.text=[[InfoExpert sharedInstance] maskedId];
@@ -148,6 +151,7 @@
         {
             self.cardMaskedCodeLbl.text=self.maskedId;
         }
+         */
     }
     else
     {

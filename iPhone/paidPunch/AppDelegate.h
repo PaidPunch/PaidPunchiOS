@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "PaidPunchTabBarController.h"
-#import "InfoExpert.h"
+#import "User.h"
 #import "FBConnect.h"
 #import "FacebookFacade.h"
 #import "Common/MBProgressHUD.h"
@@ -32,7 +32,6 @@
     
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
-   
 }
 
 @property (strong, nonatomic) UIWindow *window;

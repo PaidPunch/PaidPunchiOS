@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkManager.h"
-#import "InfoExpert.h"
 
 @interface FeedBackViewController : UIViewController<NetworkManagerDelegate,UITextViewDelegate>
 {

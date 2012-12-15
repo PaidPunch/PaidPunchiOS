@@ -7,6 +7,7 @@
 //
 
 #import "SearchListViewController.h"
+#import "User.h"
 
 @implementation SearchListViewController
 
@@ -132,7 +133,7 @@
             CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityOrZipCode];
             NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
             CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-            self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+            self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance] totalMiles] withCategory:self.category];
             self.reverseGeoLocation=cloc;
         }
     }
@@ -150,12 +151,13 @@
             CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityOrZipCode];
             NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
             CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-            self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+            self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance] totalMiles] withCategory:self.category];
             self.reverseGeoLocation=cloc;
         }
     }
     if(self.searchType == SEARCH_BY_NAME)
     {
+        /*
         self.searchFilterType=SEARCH_BY_NAME;
         self.categoryLbl.text=@"Search";
         NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesByName:self.businessName];
@@ -167,15 +169,7 @@
         else //by city
             if([[InfoExpert sharedInstance] searchCriteria]==2)
             {
-                /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
-                 for(Business *bObj in arr)
-                 {
-                 if([bObj.city.lowercaseString isEqualToString:self.cityOrZipCode.lowercaseString])
-                 {
-                 [businessesByCity addObject:bObj];
-                 }
-                 }
-                 self.businessList=businessesByCity;*/
+
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityOrZipCode];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
@@ -186,15 +180,6 @@
             else //by zipcode
                 if([[InfoExpert sharedInstance] searchCriteria]==3)
                 {
-                    /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
-                     for(Business *bObj in arr)
-                     {
-                     if([[bObj.pincode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:self.cityOrZipCode])
-                     {
-                     [businessesByZipCode addObject:bObj];
-                     }
-                     }
-                     self.businessList=businessesByZipCode;*/
                     CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityOrZipCode];
                     NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
@@ -207,12 +192,13 @@
                 }
         self.searchBar.placeholder=@"Search by name";
         self.searchBar.text=self.businessName;
+         */
     }
     if(self.searchType == SEARCH_BY_CURRENT_LOCATION)
     {
         self.searchFilterType=SEARCH_BY_CURRENT_LOCATION;
         self.categoryLbl.text=category;
-        self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.userLocation withMiles:[[InfoExpert sharedInstance] totalMilesValue] withCategory:self.category];
+        self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.userLocation withMiles:[[User getInstance] totalMiles] withCategory:self.category];
     }
     
     if(self.category==@"eat")
@@ -243,7 +229,7 @@
     locateViewFlag=0;
     settingsViewFlag=0;
     
-    self.totalMilesTxtField.text=[[[InfoExpert sharedInstance] totalMilesValue] stringValue];
+    self.totalMilesTxtField.text=[[[User getInstance] totalMiles] stringValue];
     //[[InfoExpert sharedInstance] setSearchCriteria:1];
     
     networkManager=[[NetworkManager alloc] initWithView:self.view];
@@ -254,8 +240,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.totalMilesTxtField.text=[[[InfoExpert sharedInstance] totalMilesValue] stringValue];
-    self.cityTxtField.text=[[InfoExpert sharedInstance] cityOrZipCodeValue];
+    self.totalMilesTxtField.text=[[[User getInstance] totalMiles] stringValue];
+    self.cityTxtField.text=[[User getInstance] zipcode];
     
     self.navigationItem.hidesBackButton=YES;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 3.2) {
@@ -408,7 +394,7 @@
     //NSLog(@"Distance in metres: %f", meters);
     double distanceInMiles=meters/kOneMileMeters;
     //NSLog(@"Distance in miles: %f", distanceInMiles);
-    if(distanceInMiles<[[[InfoExpert sharedInstance] totalMilesValue] doubleValue])
+    if(distanceInMiles<[[[User getInstance] totalMiles] doubleValue])
     {
     }
     
@@ -416,6 +402,7 @@
     cell.businessNameLbl.adjustsFontSizeToFitWidth=NO;
     cell.businessNameLbl.lineBreakMode=UILineBreakModeTailTruncation;
     cell.businessNameLbl.font = [UIFont fontWithName:@"Helvetica" size:18];
+    /*
     if((self.searchType==SEARCH_BY_NAME && ([[InfoExpert sharedInstance] searchCriteria]==2 || [[InfoExpert sharedInstance] searchCriteria] == 3)) || self.searchType==SEARCH_BY_CITY || self.searchType==SEARCH_BY_ZIPCODE)
     {
         if(self.searchFilterType==SEARCH_BY_CURRENT_LOCATION)
@@ -431,6 +418,7 @@
         if(self.searchFilterType==SEARCH_BY_NAME && self.searchFilterType==SEARCH_BY_NAME)
             cell.milesLbl.text=[NSString stringWithFormat:@"%.2f miles",distanceInMiles];
     }
+     */
     
     /*if((self.searchType==SEARCH_BY_NAME && ([[InfoExpert sharedInstance] searchCriteria]==2 || [[InfoExpert sharedInstance] searchCriteria] == 3)))
      {
@@ -559,11 +547,12 @@
     self.searchFilterType=SEARCH_BY_NAME;
     
 	[searchBar resignFirstResponder];
+    /*
     NSArray *arr;
     //arr=[[DatabaseManager sharedInstance] getBusinessesByName:self.searchBar.text];
     NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
     //by current location
-    if([[InfoExpert sharedInstance] searchCriteria]==1)
+    if ([[InfoExpert sharedInstance] searchCriteria]==1)
     {
         if(self.currentLocation==nil)
         {
@@ -622,15 +611,6 @@
             //by city
             if([[InfoExpert sharedInstance] searchCriteria]==2)
             {
-                /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
-                 for(Business *bObj in arr)
-                 {
-                 if([bObj.city.lowercaseString isEqualToString:self.cityTxtField.text.lowercaseString])
-                 {
-                 [businessesByCity addObject:bObj];
-                 }
-                 }
-                 self.businessList=businessesByCity;*/
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
@@ -651,15 +631,6 @@
             else //by zipcode
                 if([[InfoExpert sharedInstance] searchCriteria]==3)
                 {
-                    /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
-                     for(Business *bObj in arr)
-                     {
-                     if([[bObj.pincode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:self.cityTxtField.text])
-                     {
-                     [businessesByZipCode addObject:bObj];
-                     }
-                     }
-                     self.businessList=businessesByZipCode;*/
                     CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                     NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
@@ -686,15 +657,6 @@
             //by city
             if([[InfoExpert sharedInstance] searchCriteria]==2)
             {
-                /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
-                 for(Business *bObj in arr)
-                 {
-                 if([bObj.city.lowercaseString isEqualToString:self.cityTxtField.text.lowercaseString])
-                 {
-                 [businessesByCity addObject:bObj];
-                 }
-                 }
-                 self.businessList=businessesByCity;*/
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
@@ -715,19 +677,10 @@
             else //by zipcode
                 if([[InfoExpert sharedInstance] searchCriteria]==3)
                 {
-                    /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
-                     for(Business *bObj in arr)
-                     {
-                     if([[bObj.pincode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:self.cityTxtField.text])
-                     {
-                     [businessesByZipCode addObject:bObj];
-                     }
-                     }
-                     self.businessList=businessesByZipCode;*/
                     CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                     NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-                    arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+                    arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance]totalMiles] withCategory:self.category];
                     self.reverseGeoLocation=cloc;
                     
                     NSMutableArray *businessesByZipCode=[[NSMutableArray alloc] init];
@@ -748,6 +701,7 @@
                 }
         }
     }
+          */
     [self.businessListTableView reloadData];
 }
 
@@ -783,7 +737,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [[InfoExpert sharedInstance] setCityOrZipCodeValue:self.cityTxtField.text];
+    [[User getInstance] setZipcode:self.cityTxtField.text];
     
     if(textField==cityTxtField)
     {
@@ -805,7 +759,7 @@
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-                arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+                arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance]totalMiles] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
                 self.searchFilterType=SEARCH_BY_ZIPCODE;
             }
@@ -821,7 +775,7 @@
             self.businessList=arr;
             
             [self.businessListTableView reloadData];
-            [[InfoExpert sharedInstance] setSearchCriteria:3];
+            //[[InfoExpert sharedInstance] setSearchCriteria:3];
         }
         else
         {
@@ -835,7 +789,7 @@
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-                arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+                arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance] totalMiles] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
                 self.searchFilterType=SEARCH_BY_CITY;
             }
@@ -850,7 +804,7 @@
              self.businessList=businessesByCity;*/
             self.businessList=arr;
             [self.businessListTableView reloadData];
-            [[InfoExpert sharedInstance] setSearchCriteria:2];
+            //[[InfoExpert sharedInstance] setSearchCriteria:2];
         }
     }
     [self.businessListTableView reloadData];
@@ -994,7 +948,7 @@
 #pragma mark -
 
 - (IBAction)numberPadDoneButton:(id)sender {
-    [[InfoExpert sharedInstance] setTotalMilesValue:[NSNumber numberWithDouble:[self.totalMilesTxtField.text doubleValue]]];
+    [[User getInstance] setTotalMiles:[NSNumber numberWithDouble:[self.totalMilesTxtField.text doubleValue]]];
     UITextField *textField = [self findFirstResponderTextField];
     [textField resignFirstResponder];
     self.settingsView.hidden=YES;
@@ -1005,8 +959,8 @@
     [self.cityTxtField resignFirstResponder];
     //self.searchFilterType=SEARCH_BY_CURRENT_LOCATION;
     //[[InfoExpert sharedInstance] setSearchCriteria:1];
-    NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
-    if(self.currentLocation==nil && [[InfoExpert sharedInstance] searchCriteria]==1)
+    //NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
+    if(self.currentLocation==nil) // && [[InfoExpert sharedInstance] searchCriteria]==1)
     {
         [self showPopup];
         self.locationMgr = [[CLLocationManager alloc] init];
@@ -1041,61 +995,24 @@
             /*self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.currentLocation withMiles:sMiles withCategory:self.category];*/
             
             //by city
-            if([[InfoExpert sharedInstance] searchCriteria]==2)
+            /*
+            if ([[InfoExpert sharedInstance] searchCriteria]==2)
             {
-                /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
-                 for(Business *bObj in arr)
-                 {
-                 if([bObj.city.lowercaseString isEqualToString:self.cityTxtField.text.lowercaseString])
-                 {
-                 [businessesByCity addObject:bObj];
-                 }
-                 }
-                 self.businessList=businessesByCity;*/
                 CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                 NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                 CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
-                NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
+                NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[User getInstance] totalMiles] withCategory:self.category];
                 self.reverseGeoLocation=cloc;
-                
-                /*NSMutableArray *businessesByCity=[[[NSMutableArray alloc] init] autorelease];
-                 for(Business *bObj in arr)
-                 {
-                 if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
-                 {
-                 [businessesByCity addObject:bObj];
-                 }
-                 }
-                 self.businessList=businessesByCity;*/
                 self.businessList=arr;
             }
             else //by zipcode
                 if([[InfoExpert sharedInstance] searchCriteria]==3)
                 {
-                    /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
-                     for(Business *bObj in arr)
-                     {
-                     if([[bObj.pincode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:self.cityTxtField.text])
-                     {
-                     [businessesByZipCode addObject:bObj];
-                     }
-                     }
-                     self.businessList=businessesByZipCode;*/
                     CLLocationCoordinate2D coords=[self geoCodeUsingAddress:self.cityTxtField.text];
                     NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
                     CLLocation *cloc = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
                     NSArray *arr=[[DatabaseManager sharedInstance] getBusinessesNearMe:cloc withMiles:[[InfoExpert sharedInstance]totalMilesValue] withCategory:self.category];
                     self.reverseGeoLocation=cloc;
-                    
-                    /*NSMutableArray *businessesByZipCode=[[[NSMutableArray alloc] init] autorelease];
-                     for(Business *bObj in arr)
-                     {
-                     if([bObj.business_name.lowercaseString hasPrefix:self.searchBar.text])
-                     {
-                     [businessesByZipCode addObject:bObj];
-                     }
-                     }
-                     self.businessList=businessesByZipCode;*/
                     
                     self.businessList=arr;
                 }
@@ -1104,6 +1021,7 @@
                     //self.businessList=[[DatabaseManager sharedInstance] getBusinessesByName:self.businessName];
                     self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.currentLocation withMiles:sMiles withCategory:self.category];
                 }
+             */
             
             [self.businessListTableView reloadData];
         }
@@ -1154,7 +1072,8 @@
     self.cityTxtField.text=@"";
     [self.cityTxtField resignFirstResponder];
     self.searchFilterType=SEARCH_BY_CURRENT_LOCATION;
-    [[InfoExpert sharedInstance] setSearchCriteria:1];
+    //[[InfoExpert sharedInstance] setSearchCriteria:1];
+    /*
     NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
     if(self.currentLocation==nil && [[InfoExpert sharedInstance] searchCriteria]==1)
     {
@@ -1192,6 +1111,7 @@
             [self.businessListTableView reloadData];
         }
     }
+     */
     [self.businessListTableView reloadData];
 }
 
@@ -1216,7 +1136,7 @@
         if(biz.punchCard == nil){
             //At least one biz does not have it's punch card, load it from the internet, then this'll be called again
             allBizsHaveCards = NO;
-            [networkManager getBusinessOffer:biz.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
+            [networkManager getBusinessOffer:biz.business_name loggedInUserId:[[User getInstance] userId]];
         }
         else {
             [cardArray addObject:biz.punchCard];
@@ -1249,7 +1169,7 @@
 -(void) getBusinessOffer
 {
     Business *business=[self.businessList objectAtIndex:selectedIndex];
-    [networkManager getBusinessOffer:business.business_name loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager getBusinessOffer:business.business_name loggedInUserId:[[User getInstance] userId]];
 }
 
 -(void) showPopup

@@ -7,6 +7,7 @@
 //
 
 #import "FeedBackViewController.h"
+#import "User.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation FeedBackViewController
@@ -122,7 +123,7 @@
     }
     else
     {
-        [networkManager sendFeedBack:feedbackTextView.text loggedInUserId:[[InfoExpert sharedInstance]userId]];
+        [networkManager sendFeedBack:feedbackTextView.text loggedInUserId:[[User getInstance] userId]];
     }
 }
 

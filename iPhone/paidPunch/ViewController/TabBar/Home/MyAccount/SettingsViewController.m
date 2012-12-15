@@ -50,10 +50,10 @@
     networkManager=[[NetworkManager alloc] initWithView:self.view];
     networkManager.delegate=self;
     
-    self.usernameLbl.text=[[InfoExpert sharedInstance] username];
+    self.usernameLbl.text=[[User getInstance] username];
     emailTextField.enabled=NO;
-    emailTextField.text=[[InfoExpert sharedInstance] email];
-    mobileNoTextField.text=[[InfoExpert sharedInstance]mobileNumber];
+    emailTextField.text=[[User getInstance] email];
+    mobileNoTextField.text=[[User getInstance] phone];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *s=[defaults objectForKey:@"LoggedInFromFacebook"];
@@ -161,11 +161,6 @@
 
 -(void) didFinishLoadingAppURL:(NSString *)url
 {
-    [[InfoExpert sharedInstance] setAppUrl:url];
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    [ud setObject:url forKey:@"appUrl"];
-    [ud synchronize];
-    
 }
 
 -(void) didConnectionFailed :(NSString *)responseStatus
@@ -199,18 +194,18 @@
 
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender {
     [mobileNoTextField resignFirstResponder];
-    [networkManager update:emailTextField.text withMobileNumber:mobileNoTextField.text loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager update:emailTextField.text withMobileNumber:mobileNoTextField.text loggedInUserId:[[User getInstance] userId]];
 }
 
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender {
-    [networkManager logout:[[InfoExpert sharedInstance]userId]];
+    [networkManager logout:[[User getInstance] userId]];
     //[self goToDualSignInView];
 }
 
 - (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender {
-    if([[InfoExpert sharedInstance] isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
-        [networkManager getProfileRequest:[[InfoExpert sharedInstance] userId] withName:@""];
+        [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
     }
     else
     {

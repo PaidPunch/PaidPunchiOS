@@ -10,7 +10,6 @@
 #import "NetworkManager.h"
 #import "SignInViewController.h"
 #import "ChangePasswordViewController.h"
-#import "InfoExpert.h"
 #import "AppDelegate.h"
 #import "SDImageCache.h"
 #import "Reachability.h"

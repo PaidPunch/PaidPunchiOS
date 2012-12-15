@@ -20,6 +20,7 @@ static NSString* const kPaidPunchPort = @"80";
 
 @implementation AFClientManager
 @synthesize paidpunch = _paidpunch;
+@synthesize appUrl = _appUrl;
 
 - (id) init
 {
@@ -29,6 +30,9 @@ static NSString* const kPaidPunchPort = @"80";
         _paidpunch = nil;
         
         [self resetPaidPunchWithIp:kPaidPunchBaseURLString];
+
+        // TODO: Merge this into the BaseURLString above
+        _appUrl = @"https://www.paidpunch.com/paid_punch";
     }
     return self;
 }

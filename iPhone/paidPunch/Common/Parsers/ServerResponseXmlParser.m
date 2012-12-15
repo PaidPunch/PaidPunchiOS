@@ -92,33 +92,6 @@
     {
         self.statusMessage=newCurrentValue;
     }
-    if ([elementName isEqualToString:USER_ID])
-    {
-        [[InfoExpert sharedInstance] setUserId:newCurrentValue];
-    }
-    if([elementName isEqualToString:EMAIL])
-    {
-        [[InfoExpert sharedInstance] setEmail:newCurrentValue];
-    }
-    if([elementName isEqualToString:USERNAME])
-    {
-        [[InfoExpert sharedInstance] setUsername:newCurrentValue];
-    }
-    if([elementName isEqualToString:ZIP_CODE])
-    {
-        [[InfoExpert sharedInstance] setZipcode:newCurrentValue];
-    }
-    if([elementName isEqualToString:IS_PROFILE_CREATED])
-    {
-        if([newCurrentValue    isEqualToString:@"true"])
-            [[InfoExpert sharedInstance] setIsProfileCreated:YES];
-        else
-            [[InfoExpert sharedInstance] setIsProfileCreated:NO];
-    }
-    if([elementName isEqualToString:MOBILE_NUMBER])
-    {
-        [[InfoExpert sharedInstance] setMobileNumber:newCurrentValue];
-    }
     if([elementName isEqualToString:BUSINESS_ID])
     {
         [punchCardDetails setValue:newCurrentValue forKey:@"business_id"];

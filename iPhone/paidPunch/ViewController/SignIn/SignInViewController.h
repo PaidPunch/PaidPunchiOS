@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PaidPunchTabBarController.h"
 #import "NetworkManager.h"
-#import "InfoExpert.h"
 
 @class NetworkManager;
 @protocol NetworkManagerDelegate;

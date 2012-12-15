@@ -6,6 +6,7 @@
 //  Copyright 2011 mobimedia. All rights reserved.
 //
 
+#import "AFClientManager.h"
 #import "NetworkManager.h"
 
 @implementation NetworkManager
@@ -90,12 +91,12 @@
 {
     self.requestType=DELETE_PROFILE_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",DELETE_PROFILE_REQ,[[InfoExpert sharedInstance] userId],[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",DELETE_PROFILE_REQ,[[User getInstance] userId], [self getUniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"DeleteProfileUrl", @"")]]];  
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"DeleteProfileUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -145,7 +146,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"MysteryPunchUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"MysteryPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -199,7 +200,7 @@ response
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"ProfileCreationUrl", @"")]]];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]]; 
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -244,7 +245,7 @@ response
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"ProfileCreationUrl", @"")]]];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]]; 
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"ProfileCreationUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -286,7 +287,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FBLoginUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"FBLoginUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -330,7 +331,7 @@ response
     }
     //NSLog(@"Request: %@", jsonRequest);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FeedsUrl", @"")]]]; 
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"FeedsUrl", @"")]]];
     NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
     
     [request setHTTPMethod:@"POST"];
@@ -374,7 +375,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -414,7 +415,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -454,7 +455,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"FeedBackUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"FeedBackUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -509,7 +510,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];  
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -551,7 +552,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -594,7 +595,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"UpdateUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -637,7 +638,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"AppRegistrationUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -690,7 +691,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"BuyPunchUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"BuyPunchUrl", @"")]]];
     //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:NSLocalizedString(@"BuyPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
@@ -731,7 +732,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl],NSLocalizedString(@"PaidPunchUrl", @"")]]];    
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl],NSLocalizedString(@"PaidPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -770,7 +771,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"PaidPunchUrl", @"")]]];
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 
@@ -808,7 +809,7 @@ response
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];  
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[InfoExpert sharedInstance] appUrl], NSLocalizedString(@"ForgotPasswordUrl", @"")]]];   
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[AFClientManager sharedInstance] appUrl], NSLocalizedString(@"ForgotPasswordUrl", @"")]]];   
     [request setHTTPMethod:@"POST"];  
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
 	[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"]; 

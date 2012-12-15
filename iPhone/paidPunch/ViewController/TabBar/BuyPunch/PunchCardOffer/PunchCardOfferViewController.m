@@ -377,9 +377,9 @@
 }
 
 - (IBAction)payBtnTouchUpInsideHandler:(id)sender {
-    if([[InfoExpert sharedInstance]isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
-        [networkManager getProfileRequest:[[InfoExpert sharedInstance] userId] withName:@""];
+        [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
     }
     else
     {
@@ -451,7 +451,7 @@
 
 -(void) buy:(NSString *)orangeQrCode isFreePunch:(BOOL)unlockedFreePunch
 {
-    [networkManager buy:self.qrCode loggedInUserId:[[InfoExpert sharedInstance]userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:orangeQrCode isFreePunch:unlockedFreePunch withTransactionId:@"" withAmount:self.punchCardDetails.selling_price withPaymentId:@""];
+    [networkManager buy:self.qrCode loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:orangeQrCode isFreePunch:unlockedFreePunch withTransactionId:@"" withAmount:self.punchCardDetails.selling_price withPaymentId:@""];
 }
 
 #pragma mark -

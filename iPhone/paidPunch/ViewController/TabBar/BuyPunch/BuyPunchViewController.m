@@ -7,6 +7,7 @@
 //
 
 #import "BuyPunchViewController.h"
+#import "User.h"
 
 
 @implementation BuyPunchViewController
@@ -133,7 +134,7 @@
 
 -(void) getBusinessOffer
 {
-    [networkManager getBusinessOffer:self.qrCode loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager getBusinessOffer:self.qrCode loggedInUserId:[[User getInstance] userId]];
 }
 
 @end

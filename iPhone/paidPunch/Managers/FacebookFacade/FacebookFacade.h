@@ -15,7 +15,6 @@
 @class FeedsTableViewController;
 @class PunchCardOfferViewController;
 @class PunchUsedViewController;
-@class DualSignInViewController;
 
 typedef enum apiCall {
     kAPILogin,
@@ -59,7 +58,6 @@ typedef enum apiCall {
 @property (nonatomic, weak) FeedsTableViewController *feedsViewController;
 @property (nonatomic, weak) PunchUsedViewController *punchUsedViewController;
 @property (nonatomic, weak) PunchCardOfferViewController *punchCardOfferViewController;
-@property (nonatomic, weak) DualSignInViewController *dualSignInViewController;
 @property (nonatomic, weak) NSObject<FacebookPaidPunchDelegate>* callbackDelegate;
 
 + (id)sharedInstance;

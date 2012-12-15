@@ -7,6 +7,7 @@
 //
 
 #import "ConfirmPaymentViewController.h"
+#import "User.h"
 
 @implementation ConfirmPaymentViewController
 @synthesize businessLogoImageView;
@@ -65,7 +66,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[InfoExpert sharedInstance] isProfileCreated])
+    if([[User getInstance] isPaymentProfileCreated])
     {
     }
     else
@@ -191,7 +192,7 @@
 
 -(void)buy
 {
-    [networkManager buy:@"" loggedInUserId:[[InfoExpert sharedInstance]userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:@"" isFreePunch:false withTransactionId:@"123456" withAmount:self.punchCardDetails.selling_price withPaymentId:self.paymentId];
+    [networkManager buy:@"" loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:@"" isFreePunch:false withTransactionId:@"123456" withAmount:self.punchCardDetails.selling_price withPaymentId:self.paymentId];
 }
 
 @end

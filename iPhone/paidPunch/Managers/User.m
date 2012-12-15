@@ -24,6 +24,9 @@ static NSString* const kKeyPassword = @"password";
 static NSString* const kKeyFacebook = @"fbid";
 static NSString* const kKeyUniqueId = @"sessionid";
 static NSString* const kKeyStatusMessage = @"statusMessage";
+static NSString* const kKeyUserValidate = @"userValidated";
+static NSString* const kKeyPaymentProfileCreated = @"paymentProfile";
+static NSString* const kKeyTotalMiles = @"totalMiles";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kUserFilename = @"user.sav";
@@ -36,7 +39,10 @@ static NSString* const kUserFilename = @"user.sav";
 @synthesize password = _password;
 @synthesize zipcode = _zipcode;
 @synthesize phone = _phone;
+@synthesize uniqueId = _uniqueId;
 @synthesize isUserValidated = _isUserValidated;
+@synthesize isPaymentProfileCreated = _isPaymentProfileCreated;
+@synthesize totalMiles = _totalMiles;
 
 - (id) init
 {
@@ -54,6 +60,7 @@ static NSString* const kUserFilename = @"user.sav";
         _facebookId = @"";
         [self getUniqueId];
         _isUserValidated = FALSE;
+        _totalMiles = [NSNumber numberWithInt:10];
     }
     return self;
 }
@@ -70,6 +77,9 @@ static NSString* const kUserFilename = @"user.sav";
     [aCoder encodeObject:_facebookId forKey:kKeyFacebook];
     [aCoder encodeObject:_uniqueId forKey:kKeyUniqueId];
     [aCoder encodeObject:_referralCode forKey:kKeyReferral];
+    [aCoder encodeBool:_isPaymentProfileCreated forKey:kKeyPaymentProfileCreated];
+    [aCoder encodeBool:_isUserValidated forKey:kKeyUserValidate];
+    [aCoder encodeObject:_totalMiles forKey:kKeyTotalMiles];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -83,6 +93,9 @@ static NSString* const kUserFilename = @"user.sav";
     _facebookId = [aDecoder decodeObjectForKey:kKeyFacebook];
     _uniqueId = [aDecoder decodeObjectForKey:kKeyUniqueId];
     _referralCode = [aDecoder decodeObjectForKey:kKeyReferral];
+    _isPaymentProfileCreated = [aDecoder decodeBoolForKey:kKeyPaymentProfileCreated];
+    _isUserValidated = [aDecoder decodeBoolForKey:kKeyUserValidate];
+    _totalMiles = [aDecoder decodeObjectForKey:kKeyTotalMiles];
     return self;
 }
 
@@ -185,6 +198,7 @@ static NSString* const kUserFilename = @"user.sav";
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                    [self saveUserData];
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
@@ -222,6 +236,8 @@ static NSString* const kUserFilename = @"user.sav";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _isUserValidated = TRUE;
+                     [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){

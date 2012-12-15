@@ -192,7 +192,6 @@
         [[FacebookFacade sharedInstance] setFeedsViewController:nil];
         [[FacebookFacade sharedInstance] setPunchUsedViewController:nil];
         [[FacebookFacade sharedInstance] setPunchCardOfferViewController:nil];
-        [[FacebookFacade sharedInstance] setDualSignInViewController:nil];
         
         /*//clear the cache for images
          SDImageCache *imageCache=[SDImageCache sharedImageCache];
@@ -211,11 +210,7 @@
 
 -(void) didFinishLoadingAppURL:(NSString *)url
 {
-    [[InfoExpert sharedInstance] setAppUrl:url];
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    [ud setObject:url forKey:@"appUrl"];
-    [ud synchronize];
-    
+    // Do nothing. This function is pointless.
 }
 
 -(void) didConnectionFailed :(NSString *)responseStatus
@@ -277,7 +272,7 @@
 
 -(void) signout
 {
-    [networkManager logout:[[InfoExpert sharedInstance]userId]];
+    [networkManager logout:[[User getInstance] userId]];
 }
 
 -(void) requestAppIp

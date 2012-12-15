@@ -7,6 +7,7 @@
 //
 
 #import "SearchByBusinessViewController.h"
+#import "User.h"
 
 @implementation SearchByBusinessViewController
 @synthesize businessListTableView;
@@ -268,12 +269,12 @@
 
 -(void) getBusinessOffer
 {
-    [networkManager getBusinessOffer:qrCode loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager getBusinessOffer:qrCode loggedInUserId:[[User getInstance] userId]];
 }
 
 -(void) loadBusinessList
 {
-    [networkManager searchByName:@"" loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager searchByName:@"" loggedInUserId:[[User getInstance] userId]];
 }
 
 - (void) searchTableView {

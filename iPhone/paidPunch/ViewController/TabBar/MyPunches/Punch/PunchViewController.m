@@ -319,7 +319,7 @@
     [passwordTextField resignFirstResponder];*/
     if(self.punchCardDetails.offer==nil)
     {
-        [networkManager getMysteryOffer:[[InfoExpert sharedInstance] userId] withPunchCardId:self.punchCardDetails.punch_card_id withPunchCardDownloadId:self.punchCardDetails.punch_card_download_id];
+        [networkManager getMysteryOffer:[[User getInstance] userId] withPunchCardId:self.punchCardDetails.punch_card_id withPunchCardDownloadId:self.punchCardDetails.punch_card_download_id];
     }
     else
     {
@@ -335,7 +335,7 @@
 {
     [passwordAlert dismissWithClickedButtonIndex:0 animated:NO];
     
-    if([passwordTextField.text isEqualToString:[[InfoExpert sharedInstance]password]])
+    if([passwordTextField.text isEqualToString:[[User getInstance] password]])
     {
         /*[networkManager markPunchUsed:punchCardDetails.punch_card_id punchCardDownloadId:punchCardDetails.punch_card_download_id loggedInUserId:[[InfoExpert sharedInstance]userId]];*/
     }
@@ -414,7 +414,7 @@
             [alert release];*/
             if(self.punchCardDetails.offer==nil)
             {
-                [networkManager getMysteryOffer:[[InfoExpert sharedInstance] userId] withPunchCardId:self.punchCardDetails.punch_card_id withPunchCardDownloadId:self.punchCardDetails.punch_card_download_id];
+                [networkManager getMysteryOffer:[[User getInstance] userId] withPunchCardId:self.punchCardDetails.punch_card_id withPunchCardDownloadId:self.punchCardDetails.punch_card_download_id];
             }
             else
             {

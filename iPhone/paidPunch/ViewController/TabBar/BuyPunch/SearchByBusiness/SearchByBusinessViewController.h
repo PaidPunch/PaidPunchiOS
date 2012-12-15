@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkManager.h"
-#import "InfoExpert.h"
 #import "Business.h"
 #import "PunchCardOfferViewController.h"
 #import "OverlayViewController.h"

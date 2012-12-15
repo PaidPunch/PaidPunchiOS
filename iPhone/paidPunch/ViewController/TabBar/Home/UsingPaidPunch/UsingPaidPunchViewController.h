@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "InfoExpert.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 

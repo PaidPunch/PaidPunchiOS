@@ -11,7 +11,6 @@
 #import "DatabaseManager.h"
 #import "SearchListViewController.h"
 #import "DatabaseManager.h"
-#import "InfoExpert.h"
 #import "JSON.h"
 #import "PunchUsedViewController.h"
 #import "MarqueeLabel.h"

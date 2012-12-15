@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ServerXmlResponseConstants.h"
-#import "InfoExpert.h"
 #import "PunchCard.h"
 #import "DatabaseManager.h"
 #import "Base64.h"

@@ -10,7 +10,7 @@
 #import "ConfirmPaymentViewController.h"
 #import "NetworkManager.h"
 #import "AddCardViewCell.h"
-#import "InfoExpert.h"
+#import "User.h"
 #import "PunchCard.h"
 #import "HomeViewController.h"
 

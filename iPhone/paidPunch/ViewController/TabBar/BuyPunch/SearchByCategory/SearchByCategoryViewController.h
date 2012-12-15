@@ -10,7 +10,6 @@
 #import "NetworkManager.h"
 #import "SearchListViewController.h"
 #import "DatabaseManager.h"
-#import "InfoExpert.h"
 #import "JSON.h"
 #import "EGORefreshTableHeaderView.h"
 #import "SearchViewController.h"

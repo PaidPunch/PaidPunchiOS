@@ -25,10 +25,6 @@
         [self.view addSubview:tabBarController.view];
         networkManager=[[NetworkManager alloc] initWithView:tabBarController.view];
         networkManager.delegate=self;
-        
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        NSString *appUrl=[ud objectForKey:@"appUrl"];
-        [[InfoExpert sharedInstance] setAppUrl:appUrl];
     }
     return self;
 }
@@ -86,7 +82,6 @@
 
 -(void) didFinishLoadingAppURL:(NSString *)url
 {   
-    [[InfoExpert sharedInstance] setAppUrl:url];
 }
 
 #pragma mark Facebook delegates

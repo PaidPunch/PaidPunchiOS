@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkManager.h"
-#import "InfoExpert.h"
 #import "CustomScrollView.h"
 
 @interface ChangePasswordViewController : UIViewController<NetworkManagerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
@@ -17,11 +16,8 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *oldPasswordTextField;
-
 @property (strong, nonatomic) IBOutlet UITextField *nwPasswordTextField;
-
 @property (strong, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
-
 @property(strong,nonatomic) IBOutlet CustomScrollView *scrollView;
 
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;

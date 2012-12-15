@@ -51,7 +51,6 @@
 		38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
-		38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441A167435890068D3C3 /* DualSignInViewController.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
 		38B84433167581420068D3C3 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84432167581410068D3C3 /* BaseView.m */; };
@@ -94,7 +93,6 @@
 		8A78E1CC14976B1500F79380 /* ServerResponseXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1B814976B1500F79380 /* ServerResponseXmlParser.m */; };
 		8A78E1CD14976B1500F79380 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1BB14976B1500F79380 /* Base64.m */; };
 		8A78E1D514976B2D00F79380 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1D114976B2D00F79380 /* DatabaseManager.m */; };
-		8A78E1F714976C6F00F79380 /* InfoExpert.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1EF14976C6F00F79380 /* InfoExpert.m */; };
 		8A78E1F914976C6F00F79380 /* Registration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1F514976C6F00F79380 /* Registration.m */; };
 		8A78E1FB149770A000F79380 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E1FA1497709E00F79380 /* AppDelegate.m */; };
 		8A78E23F149770BC00F79380 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E203149770BC00F79380 /* RegistrationViewController.m */; };
@@ -571,8 +569,6 @@
 		38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
-		38B84419167435890068D3C3 /* DualSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualSignInViewController.h; sourceTree = "<group>"; };
-		38B8441A167435890068D3C3 /* DualSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualSignInViewController.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		38B8441D1674391A0068D3C3 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		38B8442E16744CD30068D3C3 /* SignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupView.h; sourceTree = "<group>"; };
@@ -639,8 +635,6 @@
 		8A78E1D114976B2D00F79380 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		8A78E1D314976B2D00F79380 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		8A78E1D414976B2D00F79380 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
-		8A78E1EE14976C6F00F79380 /* InfoExpert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoExpert.h; sourceTree = "<group>"; };
-		8A78E1EF14976C6F00F79380 /* InfoExpert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoExpert.m; sourceTree = "<group>"; };
 		8A78E1F414976C6F00F79380 /* Registration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Registration.h; sourceTree = "<group>"; };
 		8A78E1F514976C6F00F79380 /* Registration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Registration.m; sourceTree = "<group>"; };
 		8A78E1FA1497709E00F79380 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1441,8 +1435,6 @@
 		8A78E1EA14976C6E00F79380 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8A78E1EE14976C6F00F79380 /* InfoExpert.h */,
-				8A78E1EF14976C6F00F79380 /* InfoExpert.m */,
 				8A7EEEB81553B8D20076E289 /* Zipcodes_Cache */,
 				8A7A7B08152B18D70097A3B4 /* Feed */,
 				8A78E1EB14976C6F00F79380 /* Business */,
@@ -1505,8 +1497,6 @@
 		8A78E205149770BC00F79380 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				38B84419167435890068D3C3 /* DualSignInViewController.h */,
-				38B8441A167435890068D3C3 /* DualSignInViewController.m */,
 				38B84416167434390068D3C3 /* StartPageViewcontroller.h */,
 				38B84417167434390068D3C3 /* StartPageViewcontroller.m */,
 				8A78E206149770BC00F79380 /* SignInViewController.h */,
@@ -3151,7 +3141,6 @@
 				8A78E1CC14976B1500F79380 /* ServerResponseXmlParser.m in Sources */,
 				8A78E1CD14976B1500F79380 /* Base64.m in Sources */,
 				8A78E1D514976B2D00F79380 /* DatabaseManager.m in Sources */,
-				8A78E1F714976C6F00F79380 /* InfoExpert.m in Sources */,
 				8A78E1F914976C6F00F79380 /* Registration.m in Sources */,
 				8A78E1FB149770A000F79380 /* AppDelegate.m in Sources */,
 				8A78E23F149770BC00F79380 /* RegistrationViewController.m in Sources */,
@@ -3225,7 +3214,6 @@
 				38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */,
 				38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */,
 				38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */,
-				38B8441B167435890068D3C3 /* DualSignInViewController.m in Sources */,
 				38B8441E1674391A0068D3C3 /* LoginView.m in Sources */,
 				38B8443016744CD30068D3C3 /* SignupView.m in Sources */,
 				38B84433167581420068D3C3 /* BaseView.m in Sources */,

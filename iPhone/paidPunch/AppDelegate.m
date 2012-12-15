@@ -24,7 +24,6 @@
 @synthesize locationManager;
 @synthesize currentLocation;
 
-
 static NSString* kAppId = @"159848747459550";
 
 #pragma mark -
@@ -49,31 +48,8 @@ static NSString* kAppId = @"159848747459550";
 
 - (void)initView 
 {    
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *stat=[ud objectForKey:@"loggedIn"];
-    if(ud==nil)
+    if (([[User getInstance] userId] != NULL) && ([[[User getInstance] userId] length] > 0))
     {
-        [ud setObject:@"NO" forKey:@"loggedIn"];
-    }
-    if ([stat isEqualToString:@"YES"]) {
-        
-        [[InfoExpert sharedInstance] setUserId:[ud objectForKey:@"userId"]];
-        [[InfoExpert sharedInstance] setEmail:[ud objectForKey:@"email"]];
-        [[InfoExpert sharedInstance] setUsername:[ud objectForKey:@"username"]];
-        [[InfoExpert sharedInstance] setZipcode:[ud objectForKey:@"zipcode"]];
-        [[InfoExpert sharedInstance] setMobileNumber:[ud objectForKey:@"mobileNumber"]];
-        [[InfoExpert sharedInstance] setPassword:[ud objectForKey:@"password"]];
-        
-        NSString *s=[ud objectForKey:@"isProfileCreated"];
-        if([s isEqualToString:@"YES"])
-        {
-            [[InfoExpert sharedInstance] setIsProfileCreated:YES];
-        }
-        else
-        {
-            [[InfoExpert sharedInstance] setIsProfileCreated:NO];
-        }
-
         PaidPunchTabBarController *tabBarController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
         self.window.rootViewController=tabBarController;
         [self.window makeKeyAndVisible];
@@ -87,7 +63,6 @@ static NSString* kAppId = @"159848747459550";
         self.window.rootViewController=self.navigationController;
         [self.window makeKeyAndVisible];
     }
-    [ud synchronize];
 }
 
 - (void) appInit
@@ -201,16 +176,6 @@ static NSString* kAppId = @"159848747459550";
    
     permissions=[[NSMutableArray alloc] initWithObjects:@"read_friendlists", @"user_about_me", @"publish_stream",@"email", nil];
     
-
-    /*NSString *url=@"https://122.179.131.164:8186/paid_punch";
-    //NSString *url=@"https://192.168.1.28:8443/paid_punch";
-    [[InfoExpert sharedInstance] setAppUrl:url];
-    [defaults setObject:url forKey:@"appUrl"];
-    [defaults synchronize];*/
-    
-    if([[InfoExpert sharedInstance] totalMilesValue]==nil || [[InfoExpert sharedInstance] totalMilesValue]==0)
-        [[InfoExpert sharedInstance] setTotalMilesValue:[NSNumber numberWithInt:10]];
-    
     CLLocation *loc=[[CLLocation alloc] init];
     self.currentLocation=loc;
     CLLocationManager *locMgr=[[CLLocationManager alloc] init];
@@ -245,15 +210,6 @@ static NSString* kAppId = @"159848747459550";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *appUrl=[ud objectForKey:@"appUrl"];
-    [[InfoExpert sharedInstance] setAppUrl:appUrl];
-    if([[InfoExpert sharedInstance] totalMilesValue]==nil || [[InfoExpert sharedInstance] totalMilesValue]==0)
-        [[InfoExpert sharedInstance] setTotalMilesValue:[NSNumber numberWithInt:10]];
-    
     if([CLLocationManager locationServicesEnabled])
         [self.locationManager startUpdatingLocation];
 }

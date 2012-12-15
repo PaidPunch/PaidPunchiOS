@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 mobimedia. All rights reserved.
 //
 
-#import "DualSignInViewController.h"
 #import "FacebookFacade.h"
 #import "FeedsTableViewController.h"
 #import "PunchCardOfferViewController.h"
@@ -16,7 +15,6 @@
 @synthesize feedsViewController;
 @synthesize punchUsedViewController;
 @synthesize punchCardOfferViewController;
-@synthesize dualSignInViewController;
 @synthesize callbackDelegate = _callbackDelegate;
 
 static FacebookFacade *sharedInstance=nil;
@@ -51,7 +49,6 @@ static FacebookFacade *sharedInstance=nil;
     else
     {
         [self.feedsViewController loggedIn];
-        [self.dualSignInViewController loggedIn];
         [self.punchUsedViewController loggedIn];
         [self.punchCardOfferViewController loggedIn];
         [self.callbackDelegate didCompleteFacebookLogin:TRUE];
@@ -795,7 +792,6 @@ static FacebookFacade *sharedInstance=nil;
     [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
     
     [self.feedsViewController loggedIn];
-    [self.dualSignInViewController loggedIn];
     [self.punchUsedViewController loggedIn];
     [self.punchCardOfferViewController loggedIn];
     [self userDidGrantPermission];

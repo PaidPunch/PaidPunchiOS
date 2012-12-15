@@ -7,7 +7,7 @@
 //
 
 #import "ChangePasswordViewController.h"
-
+#import "User.h"
 
 @implementation ChangePasswordViewController
 @synthesize oldPasswordTextField;
@@ -106,7 +106,7 @@
 
         if([self validate])
         {
-            [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[InfoExpert sharedInstance]userId]];
+            [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[User getInstance] userId]];
         }
     }
 	return TRUE;
@@ -129,10 +129,7 @@
     }
     else
     {
-        [[InfoExpert sharedInstance] setPassword:nwPasswordTextField.text];
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        [ud setObject:[[InfoExpert sharedInstance]password] forKey:@"password"];
-        [ud synchronize];
+        [[User getInstance] setPassword:nwPasswordTextField.text];
         
         oldPasswordTextField.text=@"";
         nwPasswordTextField.text=@"";
@@ -164,7 +161,7 @@
 	scrollView.scrollEnabled = FALSE;
     if([self validate])
     {
-        [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[InfoExpert sharedInstance]userId]];
+        [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[User getInstance] userId]];
     }
 }
 
@@ -192,7 +189,7 @@
         [alert show];
         return NO;
     }
-    if(![oldPasswordTextField.text isEqualToString:[[InfoExpert sharedInstance]password]])
+    if(![oldPasswordTextField.text isEqualToString:[[User getInstance] password]])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter correct Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

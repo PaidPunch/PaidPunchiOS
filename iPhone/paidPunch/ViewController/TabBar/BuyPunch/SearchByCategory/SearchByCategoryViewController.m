@@ -77,12 +77,12 @@
     networkManager=[[NetworkManager alloc] initWithView:self.view];
     networkManager.delegate=self;
     
-    totalMilesTxtField.text=[[[InfoExpert sharedInstance] totalMilesValue] stringValue];
-    [[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CURRENT_LOCATION];
+    totalMilesTxtField.text=[[[User getInstance] totalMiles] stringValue];
+    //[[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CURRENT_LOCATION];
     
     locateViewFlag=0;
     settingsViewFlag=0;
-    [[InfoExpert sharedInstance] setSearchCriteria:1];
+    //[[InfoExpert sharedInstance] setSearchCriteria:1];
     
     if (_refreshHeaderView == nil) {
 		
@@ -113,8 +113,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.totalMilesTxtField.text=[[[InfoExpert sharedInstance] totalMilesValue] stringValue];
-    self.cityTxtField.text=[[InfoExpert sharedInstance] cityOrZipCodeValue];
+    self.totalMilesTxtField.text=[[[User getInstance] totalMiles] stringValue];
+    self.cityTxtField.text=[[User getInstance] zipcode];
     self.currentLocation=nil;
     // Add listener for keyboard display events
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 3.2) {
@@ -251,6 +251,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     selectedIndex=indexPath.row;
     currentBtnClicked=NO;
     NSNumber *sMiles=[NSNumber numberWithDouble:[totalMilesTxtField.text doubleValue]];
@@ -303,6 +304,7 @@
             [self goToSearchListView:[[InfoExpert sharedInstance] searchType] withCategory:@"essentials" withTotalMiles:sMiles];
         }
     }
+    */
 }
 
 #pragma mark -
@@ -312,6 +314,7 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
+    /*
     [self removePopup];
     [self.locationMgr stopUpdatingLocation];
     CLLocation *prevLocation=self.currentLocation;
@@ -343,6 +346,7 @@
             }
             
         }
+     */
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -386,7 +390,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [[InfoExpert sharedInstance] setCityOrZipCodeValue:self.cityTxtField.text];
+    [[User getInstance] setZipcode:self.cityTxtField.text];
     if(textField==cityTxtField)
     {
         NSString *str = cityTxtField.text;
@@ -394,13 +398,13 @@
         BOOL valid = [[str stringByTrimmingCharactersInSet: decimalSet] isEqualToString:@""];
         if(valid)
         {
-            [[InfoExpert sharedInstance] setSearchType:SEARCH_BY_ZIPCODE];
-            [[InfoExpert sharedInstance] setSearchCriteria:3];
+            //[[InfoExpert sharedInstance] setSearchType:SEARCH_BY_ZIPCODE];
+            //[[InfoExpert sharedInstance] setSearchCriteria:3];
         }
         else
         {
-            [[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CITY];
-            [[InfoExpert sharedInstance] setSearchCriteria:2];
+            //[[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CITY];
+            //[[InfoExpert sharedInstance] setSearchCriteria:2];
         }
     }
     [textField resignFirstResponder];
@@ -513,7 +517,7 @@
 #pragma mark -
 
 - (IBAction)numberPadDoneButton:(id)sender {
-    [[InfoExpert sharedInstance] setTotalMilesValue:[NSNumber numberWithDouble:[self.totalMilesTxtField.text doubleValue]]];
+    [[User getInstance] setTotalMiles:[NSNumber numberWithDouble:[self.totalMilesTxtField.text doubleValue]]];
     UITextField *textField = [self findFirstResponderTextField];
     [textField resignFirstResponder];
     self.settingsView.hidden=YES;
@@ -559,9 +563,9 @@
     settingsView.hidden=YES;
     locateView.hidden=YES;
     self.cityTxtField.text=@"";
-    [[InfoExpert sharedInstance] setCityOrZipCodeValue:@""];
-    [[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CURRENT_LOCATION];
-    [[InfoExpert sharedInstance] setSearchCriteria:1];
+    //[[InfoExpert sharedInstance] setCityOrZipCodeValue:@""];
+    //[[InfoExpert sharedInstance] setSearchType:SEARCH_BY_CURRENT_LOCATION];
+    //[[InfoExpert sharedInstance] setSearchCriteria:1];
     [self.cityTxtField resignFirstResponder];
     [self showPopup];
     self.locationMgr = [[CLLocationManager alloc] init];
@@ -594,7 +598,7 @@
 
 -(void) loadBusinessList
 {
-    [networkManager searchByName:@"" loggedInUserId:[[InfoExpert sharedInstance]userId]];
+    [networkManager searchByName:@"" loggedInUserId:[[User getInstance] userId]];
 }
 
 #pragma mark -
