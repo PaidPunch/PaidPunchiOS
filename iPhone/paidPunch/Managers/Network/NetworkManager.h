@@ -62,8 +62,6 @@
 -(void) loadFeeds:(NSString *)fbid withFriendsList:(NSDictionary *)dict;
 -(void) deleteProfile;
 
--(NSString *)getUniqueId;
-
 -(void) showPopup;
 -(void) removePopup;
 

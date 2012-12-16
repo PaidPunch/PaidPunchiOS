@@ -91,7 +91,7 @@
 {
     self.requestType=DELETE_PROFILE_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",DELETE_PROFILE_REQ,[[User getInstance] userId], [self getUniqueId]];
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",DELETE_PROFILE_REQ,[[User getInstance] userId], [[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -141,7 +141,7 @@ response
 {
     self.requestType=MYSTERY_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><punchcardid>%@</punchcardid><punch_card_downloadid>%@</punch_card_downloadid><sessionid>%@</sessionid></paidpunch-req>",MYSTERY_REQ,userId,punchId,punchCardDownloadId,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><punchcardid>%@</punchcardid><punch_card_downloadid>%@</punch_card_downloadid><sessionid>%@</sessionid></paidpunch-req>",MYSTERY_REQ,userId,punchId,punchCardDownloadId,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -194,7 +194,7 @@ response
 {
     self.requestType=GET_PROFILE_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",GET_PROFILE_REQ,name,userId,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",GET_PROFILE_REQ,name,userId,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -239,7 +239,7 @@ response
 {
     self.requestType=PROFILE_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><email>%@</email ><userid>%@</userid><cardno>%@</cardno><exp_date>%@</exp_date><cvv>%@</cvv><sessionid>%@</sessionid></paidpunch-req>",PROFILE_REQ,name,email,userId,cardNo,expDate,cvv,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><email>%@</email ><userid>%@</userid><cardno>%@</cardno><exp_date>%@</exp_date><cvv>%@</cvv><sessionid>%@</sessionid></paidpunch-req>",PROFILE_REQ,name,email,userId,cardNo,expDate,cvv,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -282,7 +282,7 @@ response
 {    
     self.requestType=FB_LOGIN_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><email>%@</email ><FBid>%@</FBid><sessionid>%@</sessionid></paidpunch-req>",FB_LOGIN_REQ,username,email,fbid,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><email>%@</email ><FBid>%@</FBid><sessionid>%@</sessionid></paidpunch-req>",FB_LOGIN_REQ,username,email,fbid,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -370,7 +370,7 @@ response
 
     self.requestType=LOGIN_REQ;
 	NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><password>%@</password><sessionid>%@</sessionid></paidpunch-req>",LOGIN_REQ,username,password,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><name>%@</name><password>%@</password><sessionid>%@</sessionid></paidpunch-req>",LOGIN_REQ,username,password,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -410,7 +410,7 @@ response
 {
     self.requestType=LOGOUT_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",LOGOUT_REQ,userid,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",LOGOUT_REQ,userid,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -450,7 +450,7 @@ response
 {
     self.requestType=SENDFEEDBACK_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><feedbackText>%@</feedbackText><sessionid>%@</sessionid></paidpunch-req>",SENDFEEDBACK_REQ,userID,feedback,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><feedbackText>%@</feedbackText><sessionid>%@</sessionid></paidpunch-req>",SENDFEEDBACK_REQ,userID,feedback,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -505,7 +505,7 @@ response
     else
         s1=@"false";
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><punchcardid>%@</punchcardid><punch_card_downloadid>%@</punch_card_downloadid><sessionid>%@</sessionid><is_mystery_punch>%@</is_mystery_punch><expirestatus>%@</expirestatus></paidpunch-req>",MARKPUNCHUSED_REQ,userID,punchCardId,downloadId,[self getUniqueId],s,s1];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><punchcardid>%@</punchcardid><punch_card_downloadid>%@</punch_card_downloadid><sessionid>%@</sessionid><is_mystery_punch>%@</is_mystery_punch><expirestatus>%@</expirestatus></paidpunch-req>",MARKPUNCHUSED_REQ,userID,punchCardId,downloadId,[[User getInstance] uniqueId],s,s1];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -547,7 +547,7 @@ response
 {
     self.requestType=EMAILUPDATE_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><email>%@</email><mobilenumber>%@</mobilenumber><sessionid>%@</sessionid></paidpunch-req>",EMAILUPDATE_REQ,userID,email,mobileNo,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><email>%@</email><mobilenumber>%@</mobilenumber><sessionid>%@</sessionid></paidpunch-req>",EMAILUPDATE_REQ,userID,email,mobileNo,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -590,7 +590,7 @@ response
 {
     self.requestType=VERIFICATION_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><oldpassword>%@</oldpassword><password>%@</password><sessionid>%@</sessionid></paidpunch-req>",VERIFICATION_REQ,userID,oldPassword,password,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><oldpassword>%@</oldpassword><password>%@</password><sessionid>%@</sessionid></paidpunch-req>",VERIFICATION_REQ,userID,oldPassword,password,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -633,7 +633,7 @@ response
     NSString *post=@"";	
     
     scannedQrCode=[scannedQrCode stringByEncodingHTMLEntities:YES];
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><scannedcode>%@</scannedcode><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",BUSINESSOFFER_REQ,scannedQrCode,userID,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><scannedcode>%@</scannedcode><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",BUSINESSOFFER_REQ,scannedQrCode,userID,[[User getInstance] uniqueId]];
 	NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -686,7 +686,7 @@ response
     {
         isFree=@"false";
     }
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><offerQRscannedcode>%@</offerQRscannedcode><userid>%@</userid><punchcardid>%@</punchcardid><orangeqrscannedvalue>%@</orangeqrscannedvalue><sessionid>%@</sessionid><isfreepunch>%@</isfreepunch><transactionid>%@</transactionid><amount>%@</amount><paymentid>%@</paymentid></paidpunch-req>",BUYBUSSINESSOFFER_REQ,scannedQrCode,userID,pid,orangeCode,[self getUniqueId],isFree,tid,[amount stringValue],paymentId];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><offerQRscannedcode>%@</offerQRscannedcode><userid>%@</userid><punchcardid>%@</punchcardid><orangeqrscannedvalue>%@</orangeqrscannedvalue><sessionid>%@</sessionid><isfreepunch>%@</isfreepunch><transactionid>%@</transactionid><amount>%@</amount><paymentid>%@</paymentid></paidpunch-req>",BUYBUSSINESSOFFER_REQ,scannedQrCode,userID,pid,orangeCode,[[User getInstance] uniqueId],isFree,tid,[amount stringValue],paymentId];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -727,7 +727,7 @@ response
 {
     self.requestType=SEARCHBYBUSINESSNAME_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><business_name>%@</business_name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",SEARCHBYBUSINESSNAME_REQ,business_name,userID,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><business_name>%@</business_name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",SEARCHBYBUSINESSNAME_REQ,business_name,userID,[[User getInstance] uniqueId]];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -766,7 +766,7 @@ response
 {
     self.requestType=GETUSERPUCNHCARD_REQ;
     NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",GETUSERPUCNHCARD_REQ,userId,[self getUniqueId]];  
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",GETUSERPUCNHCARD_REQ,userId,[[User getInstance] uniqueId]];  
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -1122,21 +1122,6 @@ response
     activityIndicator.hidden = YES;
     [activityIndicator removeFromSuperview];*/
     [popupHUD hide:YES];
-}
-
--(NSString *)getUniqueId
-{
-    if (!uniqueID)
-    {
-        // Create universally unique identifier (object)
-        CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
-        
-        // Get the string representation of CFUUID object.
-        uniqueID = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuidObject));
-        CFRelease(uuidObject);
-    }
-    
-    return uniqueID;
 }
 
 #pragma mark -
