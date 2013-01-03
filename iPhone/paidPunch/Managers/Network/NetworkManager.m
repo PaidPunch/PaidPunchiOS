@@ -737,8 +737,9 @@ response
 -(void) searchByName:(NSString *)business_name loggedInUserId:(NSString *)userID 
 {
     self.requestType=SEARCHBYBUSINESSNAME_REQ;
-    NSString *post=@"";	
-    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><business_name>%@</business_name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",SEARCHBYBUSINESSNAME_REQ,business_name,userID,[[User getInstance] uniqueId]];
+    NSString *post=@"";
+    NSString* sessionId = [[User getInstance] uniqueId];
+    post=[NSString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><paidpunch-req><txtype>%@</txtype><business_name>%@</business_name><userid>%@</userid><sessionid>%@</sessionid></paidpunch-req>",SEARCHBYBUSINESSNAME_REQ,business_name,userID,sessionId];
 	//NSLog(@"request format--->%@",post);
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];  
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
@@ -1087,6 +1088,7 @@ response
         else
         [self goToDualSignInView];
          */
+        [self goToSignInView];
     }
 }
 
@@ -1138,17 +1140,16 @@ response
 
 #pragma mark -
 
--(void) goToDualSignInView
+-(void) goToSignInView
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:xmlParser.statusMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
     
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    [ud setObject:@"NO" forKey:@"loggedIn"];
-    [ud synchronize];
-    
     AppDelegate *appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    //[appDelegate goToDualSignInView];
+    
+    // Clear user info, which will force a login
+    [[User getInstance] clearUser];
+    
     [appDelegate initView];
 }
 

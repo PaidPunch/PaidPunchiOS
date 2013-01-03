@@ -66,8 +66,6 @@
 -(void) showPopup;
 -(void) removePopup;
 
--(void) goToDualSignInView;
-
 @end
 
 

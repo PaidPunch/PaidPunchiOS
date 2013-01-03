@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "User.h"
 
 @interface SearchViewController ()
 
@@ -123,7 +124,8 @@
     }
 }
 
-- (void)didFinishSearchByName:(NSString *)statusCode {
+- (void)didFinishSearchByName:(NSString *)statusCode
+{
     if ([statusCode rangeOfString:@"00"].location == NSNotFound)
     {
         
@@ -364,12 +366,11 @@
                 tempNetManager.delegate = self;
                 [tempNetManager getBusinessOffer:bizObj.business_name loggedInUserId:[[User getInstance] userId]];
                 [networkManagerBusinessOfferDict setObject:tempNetManager forKey:bizObj.business_name];
-//                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance] userId]];
+                [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[User getInstance] userId]];
             }
             else {
                 [[networkManagerBusinessOfferDict objectForKey:bizObj.business_name] getBusinessOffer:bizObj.business_name loggedInUserId:[[User getInstance] userId]];
             }
-//            [networkManagerBusinessOffer getBusinessOffer:bizObj.business_name loggedInUserId:[[InfoExpert sharedInstance]userId]];
         }
         else {
             [businessOfferDetails setValue:bizObj.punchCard forKey:bizObj.punchCard.business_name];
@@ -394,7 +395,6 @@
             [diffTwentyMiles addObject:bizObj];
         }
         else {
-            
         }
     }
     

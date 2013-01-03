@@ -58,6 +58,7 @@ typedef enum
 @property(nonatomic) BOOL isPaymentProfileCreated;
 @property(nonatomic) NSNumber* totalMiles;
 
+- (void) clearUser;
 - (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;

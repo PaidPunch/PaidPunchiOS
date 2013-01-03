@@ -51,22 +51,27 @@ static NSString* const kUserFilename = @"user.sav";
     self = [super init];
     if(self)
     {
-        _createdVersion = @"1.0";
-        _referralCode = @"";
-        _userId = @"";
-        _username = @"";
-        _email = @"";
-        _password = @"";
-        _zipcode = @"";
-        _phone = @"";
-        _facebookId = @"";
-        [self getUniqueId];
-        _isUserValidated = FALSE;
-        _totalMiles = [NSNumber numberWithInt:10];
-        
-        _callType = no_call;
+        [self clearUser];
     }
     return self;
+}
+
+- (void) clearUser
+{
+    _createdVersion = @"1.0";
+    _referralCode = @"";
+    _userId = @"";
+    _username = @"";
+    _email = @"";
+    _password = @"";
+    _zipcode = @"";
+    _phone = @"";
+    _facebookId = @"";
+    [self getUniqueId];
+    _isUserValidated = FALSE;
+    _totalMiles = [NSNumber numberWithInt:10];
+    
+    _callType = no_call;
 }
 
 #pragma mark - NSCoding
@@ -263,6 +268,7 @@ static NSString* const kUserFilename = @"user.sav";
                                 kEmailLogin, kTxType,
                                 _email, kKeyEmail,
                                 _password, kKeyPassword,
+                                _uniqueId, kKeyUniqueId,
                                 nil];
     
     // make a post request
@@ -297,6 +303,7 @@ static NSString* const kUserFilename = @"user.sav";
                                 kFacebookLogin, kTxType,
                                 _email, kKeyEmail,
                                 _facebookId, kKeyFacebook,
+                                _uniqueId, kKeyUniqueId,
                                 nil];
     
     // make a post request

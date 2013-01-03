@@ -35,6 +35,7 @@
         // Create textfield for password
         CGRect passwordFrame = CGRectMake(leftSpacing, emailFrame.size.height + emailFrame.origin.y + 5, textFieldWidth, textHeight);
         _passwordTextField = [self initializeUITextField:passwordFrame placeholder:@"Password" font:textFont];
+        _passwordTextField.secureTextEntry = TRUE;
         
         // Create login button
         UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
