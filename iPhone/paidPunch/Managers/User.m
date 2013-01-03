@@ -261,7 +261,7 @@ static NSString* const kUserFilename = @"user.sav";
     // post parameters
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 kEmailLogin, kTxType,
-                                _username, kKeyName,
+                                _email, kKeyEmail,
                                 _password, kKeyPassword,
                                 nil];
     
