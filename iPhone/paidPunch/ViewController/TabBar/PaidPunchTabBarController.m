@@ -17,7 +17,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
         [self.navigationController.view setNeedsLayout];
         [self setWantsFullScreenLayout:YES];
@@ -32,6 +33,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
 }
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -65,7 +67,8 @@
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc {	
+- (void)dealloc
+{
     NSLog(@"In dealloc of PaidPunchTabBarController");
 }
 

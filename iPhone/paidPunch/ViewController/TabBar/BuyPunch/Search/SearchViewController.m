@@ -124,11 +124,14 @@
 }
 
 - (void)didFinishSearchByName:(NSString *)statusCode {
-    if ([statusCode rangeOfString:@"00"].location == NSNotFound) {
+    if ([statusCode rangeOfString:@"00"].location == NSNotFound)
+    {
         
     }
-    else {
-        [self refreshBusinessList];
+    else
+    {
+        NSLog(@"SearchByName received a failure from the server: %@", statusCode);
+        //[self refreshBusinessList];
     }
 }
 

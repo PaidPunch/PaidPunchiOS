@@ -1080,10 +1080,13 @@ response
     }
     else
     {
+        // TODO: Verify that this is not required and remove if necessary.
+        /*
         if(self.requestType==APP_IP_REQ)
         {}
         else
         [self goToDualSignInView];
+         */
     }
 }
 
