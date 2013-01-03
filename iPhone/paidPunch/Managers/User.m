@@ -29,6 +29,8 @@ static NSString* const kKeyPaymentProfileCreated = @"paymentProfile";
 static NSString* const kKeyTotalMiles = @"totalMiles";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
+static NSString* const kEmailLogin= @"EMAIL-LOGIN";
+static NSString* const kFacebookLogin = @"FACEBOOK-LOGIN";
 static NSString* const kUserFilename = @"user.sav";
 
 @implementation User
@@ -61,6 +63,8 @@ static NSString* const kUserFilename = @"user.sav";
         [self getUniqueId];
         _isUserValidated = FALSE;
         _totalMiles = [NSNumber numberWithInt:10];
+        
+        _callType = no_call;
     }
     return self;
 }
@@ -100,6 +104,12 @@ static NSString* const kUserFilename = @"user.sav";
 }
 
 #pragma mark - private functions
+
+-(void) facebookLogin
+{    
+    [[FacebookFacade sharedInstance] setCallbackDelegate:self];
+    [[FacebookFacade sharedInstance] apiLogin];
+}
 
 -(NSString *)getUniqueId
 {
@@ -211,9 +221,8 @@ static NSString* const kUserFilename = @"user.sav";
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate
 {
     facebookDelegate = delegate;
-    
-    [[FacebookFacade sharedInstance] setCallbackDelegate:self];
-    [[FacebookFacade sharedInstance] apiLogin];
+    [self facebookLogin];
+    _callType = register_call;
 }
 
 - (void) registerUserWithFacebookInternal
@@ -242,6 +251,68 @@ static NSString* const kUserFilename = @"user.sav";
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
+                     [facebookDelegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                 }
+     ];
+}
+
+- (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate
+{
+    // post parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                kEmailLogin, kTxType,
+                                _username, kKeyName,
+                                _password, kKeyPassword,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users";
+    [httpClient putPath:path
+              parameters:parameters
+                 success:^(AFHTTPRequestOperation *operation, id responseObject){
+                     NSLog(@"%@", responseObject);
+                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     [self saveUserData];
+                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                 }
+                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                     NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
+                     [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                 }
+     ];
+}
+
+- (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate
+{
+    facebookDelegate = delegate;
+    [self facebookLogin];
+    _callType = login_call;
+}
+
+- (void) loginUserWithFacebookInternal
+{
+    // post parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                kFacebookLogin, kTxType,
+                                _email, kKeyEmail,
+                                _facebookId, kKeyFacebook,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users";
+    [httpClient putPath:path
+              parameters:parameters
+                 success:^(AFHTTPRequestOperation *operation, id responseObject){
+                     NSLog(@"%@", responseObject);
+                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _isUserValidated = TRUE;
+                     [self saveUserData];
+                     [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                 }
+                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                     NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
                      [facebookDelegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
@@ -293,8 +364,20 @@ static NSString* const kUserFilename = @"user.sav";
             _email=[result objectForKey:@"email"];
         }
         
-        // Call the facebook registration API
-        [self registerUserWithFacebookInternal];
+        if (_callType == register_call)
+        {
+            // Call the facebook registration API
+            [self registerUserWithFacebookInternal];
+        }
+        else if (_callType == login_call)
+        {
+            // Call the facebook login API
+            [self loginUserWithFacebookInternal];
+        }
+        else
+        {
+            NSLog(@"Unknown callType in didLoad.");
+        }
     }
     else
     {

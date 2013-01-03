@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseView.h"
+#import "FacebookPaidPunchDelegate.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
+#import "NetworkManager.h"
 
-@interface LoginView : BaseView
+@interface LoginView : BaseView<HttpCallbackDelegate,NetworkManagerDelegate>
+{
+    UITextField* _emailTextField;
+    UITextField* _passwordTextField;
+    
+    MBProgressHUD* _hud;
+    
+    NetworkManager* _networkManager;
+}
 
 - (void) dismissKeyboard;
 

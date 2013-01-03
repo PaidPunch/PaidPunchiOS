@@ -6,7 +6,10 @@
 //  Copyright (c) 2012 PaidPunch. All rights reserved.
 //
 
+#import "DatabaseManager.h"
 #import "LoginView.h"
+#import "User.h"
+#import "Utilities.h"
 
 @implementation LoginView
 
@@ -27,15 +30,15 @@
         
         // Create textfield for email
         CGRect emailFrame = CGRectMake(leftSpacing, distanceFromTop, textFieldWidth, textHeight);
-        UITextField *emailTextField = [self initializeUITextField:emailFrame placeholder:@"Email: example@example.com" font:textFont];
+        _emailTextField = [self initializeUITextField:emailFrame placeholder:@"Email: example@example.com" font:textFont];
         
         // Create textfield for password
         CGRect passwordFrame = CGRectMake(leftSpacing, emailFrame.size.height + emailFrame.origin.y + 5, textFieldWidth, textHeight);
-        UITextField *passwordTextField = [self initializeUITextField:passwordFrame placeholder:@"Password" font:textFont];
+        _passwordTextField = [self initializeUITextField:passwordFrame placeholder:@"Password" font:textFont];
         
         // Create login button
         UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        //[loginButton addTarget:self action:@selector(didPressLoginButton:) forControlEvents:UIControlEventTouchUpInside];
+        [loginButton addTarget:self action:@selector(didPressLoginButton:) forControlEvents:UIControlEventTouchUpInside];
         NSString* loginText = @"Sign In";
         CGSize sizeLoginText = [loginText sizeWithFont:buttonFont
                                      constrainedToSize:CGSizeMake(constrainedSize, CGFLOAT_MAX)
@@ -48,7 +51,7 @@
         
         // Create forgot password button
         UIButton* forgotPasswordButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        //[forgotPasswordButton addTarget:self action:@selector(didPressLoginButton:) forControlEvents:UIControlEventTouchUpInside];
+        [forgotPasswordButton addTarget:self action:@selector(didPressForgetPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
         NSString* forgotPasswordText = @"Forgot Password";
         CGSize sizeforgotPasswordText = [forgotPasswordText sizeWithFont:buttonFont
                                                        constrainedToSize:CGSizeMake(constrainedSize, CGFLOAT_MAX)
@@ -84,23 +87,113 @@
         // Insert facebook signup/signin image        
         [self createFacebookButton:@"          Sign In With Facebook" framewidth:frame.size.width yPos:orLabel.frame.origin.y + orLabel.frame.size.height + 20 textFont:textFont action:@selector(didPressFacebookButton:)];
         
-        [self addSubview:emailTextField];
-        [self addSubview:passwordTextField];
+        [self addSubview:_emailTextField];
+        [self addSubview:_passwordTextField];
         [self addSubview:orLabel];
         [self addSubview:hortLine1];
         [self addSubview:hortLine2];
         [self addSubview:loginButton];
         [self addSubview:forgotPasswordButton];
+        
+        // Use old school NetworkManager for ForgetPassword call
+        _networkManager=[[NetworkManager alloc] init];
+        _networkManager.delegate = self;
     }
     return self;
 }
 
 - (void) dismissKeyboard
 {
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
 }
 
 - (void) didPressFacebookButton:(id)sender
 {
+    [self dismissKeyboard];
+    
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Logging in";
+    
+    [[User getInstance] loginUserWithFacebook:self];
+}
+
+- (void) didPressLoginButton:(id)sender
+{
+    [self dismissKeyboard];
+    
+    [User getInstance].email = _emailTextField.text;
+    [User getInstance].password = _passwordTextField.text;
+    
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Logging in";
+    
+    [[User getInstance] loginUserWithEmail:self];
+}
+
+- (void) didPressForgetPasswordButton:(id)sender
+{
+    [self dismissKeyboard];
+    
+    if (_emailTextField.text.length==0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        if(![Utilities validateEmail:_emailTextField.text])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"Checking for password";
+            
+            [_networkManager forgotPassword:_emailTextField.text];
+        }
+        
+    }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if(success)
+    {
+        [[DatabaseManager sharedInstance] deleteAllPunchCards];
+        [[DatabaseManager sharedInstance] deleteBusinesses];
+        
+        PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController presentModalViewController:tabBarViewController animated:NO];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+#pragma mark - Callback delegate for forgot password request
+
+-(void) didFinishSendingForgotPasswordRequest:(NSString *)statusCode statusMessage:(NSString *)message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if([statusCode isEqualToString:@"00"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+    }
 }
 
 @end

@@ -32,7 +32,7 @@ static NSString* const kPaidPunchPort = @"80";
         [self resetPaidPunchWithIp:kPaidPunchBaseURLString];
 
         // TODO: Merge this into the BaseURLString above
-        _appUrl = @"https://www.paidpunch.com/paid_punch";
+        _appUrl = @"http://test.paidpunch.com/paid_punch";
     }
     return self;
 }

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperation.h"
 
 @interface Utilities : NSObject
 
 + (NSString*) getStatusMessageFromResponse:(AFHTTPRequestOperation*)operation;
++ (BOOL) validateEmail: (NSString *) emailId;
 
 @end

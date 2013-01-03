@@ -14,6 +14,13 @@
 static NSString* const kUser_EmailRegistration = @"User_EmailRegistration";
 static NSString* const kUser_FacebookRegistration = @"User_FacebookRegistration";
 
+typedef enum
+{
+    no_call,
+    register_call,
+    login_call
+} CallType;
+
 @interface User : NSObject<FBRequestDelegate, FacebookPaidPunchDelegate>
 {
     // internal
@@ -34,6 +41,10 @@ static NSString* const kUser_FacebookRegistration = @"User_FacebookRegistration"
     NSNumber* _totalMiles;
     
     __weak NSObject<HttpCallbackDelegate>* facebookDelegate;
+    
+    CallType _callType;
+    
+    
 }
 @property(nonatomic,strong) NSString* userId;
 @property(nonatomic,strong) NSString* username;
@@ -49,6 +60,8 @@ static NSString* const kUser_FacebookRegistration = @"User_FacebookRegistration"
 
 - (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) getUserProfileInfo;
 
 + (User*) getInstance;

@@ -18,6 +18,17 @@
 @synthesize requestType;
 @synthesize xmlParser;
 
+-(id) init
+{
+	if ((self=[super init]))
+	{
+		xmlParser=[[ServerResponseXmlParser alloc] init];
+        popupHUD = NULL;
+        uniqueID = nil;
+	}
+	return self;
+}
+
 -(id) initWithView:(UIView *)parentView{
 	
 	if ((self=[super init]))
@@ -824,8 +835,6 @@ response
     {
         NSLog(@"Connection creation failed in forgotPassword!");
     }
-    [self showPopup];
-
 }
 
 #pragma mark -

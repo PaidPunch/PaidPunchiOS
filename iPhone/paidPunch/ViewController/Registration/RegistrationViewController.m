@@ -8,6 +8,7 @@
 
 #import "RegistrationViewController.h"
 #import "User.h"
+#import "Utilities.h"
 
 @implementation RegistrationViewController
 @synthesize scrollView;
@@ -432,7 +433,7 @@
     }
     if(emailTF.text.length!=0)
     {
-        if(![self validateEmail:emailTF.text])
+        if(![Utilities validateEmail:emailTF.text])
         {
             UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [logInAlert show];
@@ -459,14 +460,6 @@
         return NO;
     }
     return YES;
-}
-
-- (BOOL) validateEmail: (NSString *) emailId
-{
-	NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-	BOOL isValid = [emailTest evaluateWithObject:emailId];
-	return isValid;
 }
 
 -(void)handleTap:(NSNotification *) notification

@@ -41,6 +41,7 @@
 
 @property(nonatomic,strong) ServerResponseXmlParser *xmlParser;
 
+-(id) init;
 -(id) initWithView:(UIView *)parentView;
 
 -(void) appIpRequest;

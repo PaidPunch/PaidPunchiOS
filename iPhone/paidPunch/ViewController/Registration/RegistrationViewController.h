@@ -36,7 +36,6 @@
 - (IBAction)continueBtnTouchUpInsideHandler:(id)sender;
 
 - (BOOL) validate;
-- (BOOL) validateEmail: (NSString *) emailId;
 - (void)dismissKeyboard;
 
 @end
