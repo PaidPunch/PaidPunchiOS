@@ -36,7 +36,7 @@
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender;
 
-- (void)goToDualSignInView;
+- (void)goToSignInView;
 - (void)goToChangePasswordView;
 - (void) goToCreditCardSettingsView:(NSString *)maskedId;
 - (void)requestAppIp;

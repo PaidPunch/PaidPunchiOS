@@ -64,6 +64,7 @@ typedef enum
 - (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) getUserProfileInfo;
+- (BOOL) isFacebookProfile;
 
 + (User*) getInstance;
 + (void) destroyInstance;

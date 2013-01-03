@@ -279,6 +279,8 @@ static NSString* const kUserFilename = @"user.sav";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
+                     _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -404,6 +406,13 @@ static NSString* const kUserFilename = @"user.sav";
 
 - (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data
 {
+}
+
+#pragma mark - Public function
+
+- (BOOL) isFacebookProfile
+{
+    return !([_facebookId length] == 0);
 }
 
 #pragma mark - Singleton

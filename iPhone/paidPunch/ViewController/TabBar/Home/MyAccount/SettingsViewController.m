@@ -55,10 +55,7 @@
     emailTextField.text=[[User getInstance] email];
     mobileNoTextField.text=[[User getInstance] phone];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *s=[defaults objectForKey:@"LoggedInFromFacebook"];
-    
-    if([s isEqualToString:@"YES"])
+    if([[User getInstance] isFacebookProfile])
     {
         self.emailLbl.hidden=YES;
         self.emailTextField.hidden=YES;
@@ -124,18 +121,16 @@
 {
     if([statusCode isEqualToString:@"00"])
     {
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        [ud setObject:@"NO" forKey:@"loggedIn"];
-        [ud synchronize];
+        // Clear current user on logout
+        [[User getInstance] clearUser];
         
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         /*//clear the cache for images
         SDImageCache *imageCache=[SDImageCache sharedImageCache];
         [imageCache clearMemory];
-        [imageCache clearDisk];
         [imageCache cleanDisk];*/
         
-        [self goToDualSignInView];
+        [self goToSignInView];
     }
     else
     {
@@ -215,7 +210,7 @@
 
 #pragma mark -
 
--(void) goToDualSignInView
+-(void) goToSignInView
 {
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate initView];
