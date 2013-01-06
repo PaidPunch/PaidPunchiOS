@@ -35,6 +35,8 @@
 		11D4D9BF15CB983F00FEF636 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D4D9BD15CB968A00FEF636 /* MarqueeLabel.m */; };
 		11D4D9C615CBA3D800FEF636 /* FAQ.html in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C415CBA3D800FEF636 /* FAQ.html */; };
 		11D4D9C715CBA3D800FEF636 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C515CBA3D800FEF636 /* style.css */; };
+		38099F901697648D00BFD3CC /* Products.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F8F1697648D00BFD3CC /* Products.m */; };
+		38099F9316978F0100BFD3CC /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F9216978F0100BFD3CC /* Product.m */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
 		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
@@ -536,6 +538,10 @@
 		11D4D9C515CBA3D800FEF636 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Html/style.css; sourceTree = SOURCE_ROOT; };
 		11FF086615CC715600A7177A /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		11FF086715CC715600A7177A /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		38099F8E1697648D00BFD3CC /* Products.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Products.h; sourceTree = "<group>"; };
+		38099F8F1697648D00BFD3CC /* Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Products.m; sourceTree = "<group>"; };
+		38099F9116978F0100BFD3CC /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		38099F9216978F0100BFD3CC /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
@@ -1408,6 +1414,10 @@
 				8A78E1D214976B2D00F79380 /* Network */,
 				38B844341677C1060068D3C3 /* User.h */,
 				38B844351677C1060068D3C3 /* User.m */,
+				38099F9116978F0100BFD3CC /* Product.h */,
+				38099F9216978F0100BFD3CC /* Product.m */,
+				38099F8E1697648D00BFD3CC /* Products.h */,
+				38099F8F1697648D00BFD3CC /* Products.m */,
 			);
 			name = Managers;
 			path = paidPunch/Managers;
@@ -3219,6 +3229,8 @@
 				38B84433167581420068D3C3 /* BaseView.m in Sources */,
 				38B844361677C1060068D3C3 /* User.m in Sources */,
 				38D686171679B62400DED3A0 /* Utilities.m in Sources */,
+				38099F901697648D00BFD3CC /* Products.m in Sources */,
+				38099F9316978F0100BFD3CC /* Product.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

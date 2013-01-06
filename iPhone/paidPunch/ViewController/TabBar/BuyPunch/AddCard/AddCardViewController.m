@@ -85,6 +85,7 @@
                            nil];
     [numberToolBar sizeToFit];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     if([[User getInstance] isPaymentProfileCreated])
@@ -363,10 +364,6 @@
     if([statusCode isEqualToString:@"00"])
     {
         [[User getInstance] setIsPaymentProfileCreated:TRUE];
-        
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        [ud setObject:@"YES" forKey:@"isProfileCreated"];
-        [ud synchronize];
         
         if(self.punchCardDetails==nil)
         {

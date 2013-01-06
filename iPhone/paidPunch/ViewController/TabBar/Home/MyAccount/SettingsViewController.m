@@ -194,7 +194,7 @@
 
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender {
     [networkManager logout:[[User getInstance] userId]];
-    //[self goToDualSignInView];
+    [self goToSignInView];
 }
 
 - (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender {

@@ -18,7 +18,7 @@ static NSString* const kKeyReferral = @"refer_code";
 static NSString* const kKeyName = @"name";
 static NSString* const kKeyEmail = @"email";
 static NSString* const kKeyZipcode = @"zipcode";
-static NSString* const kKeyPhone = @"mobile_no";
+static NSString* const kKeyPhone = @"mobilenumber";
 static NSString* const kTxType = @"txtype";
 static NSString* const kKeyPassword = @"password";
 static NSString* const kKeyFacebook = @"fbid";
@@ -27,6 +27,8 @@ static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kKeyUserValidate = @"userValidated";
 static NSString* const kKeyPaymentProfileCreated = @"paymentProfile";
 static NSString* const kKeyTotalMiles = @"totalMiles";
+static NSString* const kKeyCredits = @"credit";
+static NSString* const kKeyUserCode = @"user_code";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kEmailLogin= @"EMAIL-LOGIN";
@@ -45,6 +47,7 @@ static NSString* const kUserFilename = @"user.sav";
 @synthesize isUserValidated = _isUserValidated;
 @synthesize isPaymentProfileCreated = _isPaymentProfileCreated;
 @synthesize totalMiles = _totalMiles;
+@synthesize userCode = _userCode;
 
 - (id) init
 {
@@ -70,8 +73,17 @@ static NSString* const kUserFilename = @"user.sav";
     [self getUniqueId];
     _isUserValidated = FALSE;
     _totalMiles = [NSNumber numberWithInt:10];
+    _credits = 0;
     
     _callType = no_call;
+}
+
+- (NSString*) getCreditAsString
+{
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString* creditString = [formatter stringFromNumber:_credits];
+    return creditString;
 }
 
 #pragma mark - NSCoding
@@ -213,6 +225,8 @@ static NSString* const kUserFilename = @"user.sav";
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                    _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                    _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                     [self saveUserData];
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
@@ -250,6 +264,8 @@ static NSString* const kUserFilename = @"user.sav";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                      _isUserValidated = TRUE;
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
@@ -281,6 +297,8 @@ static NSString* const kUserFilename = @"user.sav";
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                      _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
                      _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
+                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -316,6 +334,8 @@ static NSString* const kUserFilename = @"user.sav";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                      _isUserValidated = TRUE;
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
