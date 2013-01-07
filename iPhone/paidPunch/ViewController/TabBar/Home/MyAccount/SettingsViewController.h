@@ -14,22 +14,27 @@
 #import "SDImageCache.h"
 #import "Reachability.h"
 #import "CreditCardSettingsViewController.h"
+#import "MBProgressHUD.h"
+#import "HttpCallbackDelegate.h"
 
-@interface SettingsViewController : UIViewController<NetworkManagerDelegate,UITextFieldDelegate>
+@interface SettingsViewController : UIViewController<HttpCallbackDelegate,NetworkManagerDelegate,UITextFieldDelegate>
 {
     NetworkManager *networkManager;
+    
+    MBProgressHUD *hud;
 }
 @property (strong, nonatomic) IBOutlet UILabel *usernameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *creditLbl;
 
-@property (strong, nonatomic) IBOutlet UITextField *mobileNoTextField;
-@property (strong, nonatomic) IBOutlet UITextField *emailTextField;
-@property (strong, nonatomic) IBOutlet UILabel *emailLbl;
-@property (strong, nonatomic) IBOutlet UILabel *mobileNoLbl;
 @property (strong, nonatomic) IBOutlet UIButton *updateBtn;
 @property (strong, nonatomic) IBOutlet UIButton *changePwdBtn;
 @property (strong, nonatomic) IBOutlet UIButton *creditCardBtn;
 @property (strong, nonatomic) IBOutlet UIButton *signOutBtn;
-@property (strong, nonatomic) IBOutlet UIImageView *myAccountsBg;
+
+@property (strong, nonatomic) IBOutlet UIButton *product1Btn;
+@property (strong, nonatomic) IBOutlet UIButton *product2Btn;
+@property (strong, nonatomic) IBOutlet UIButton *product3Btn;
+@property (strong, nonatomic) IBOutlet UIButton *product4Btn;
 
 - (IBAction)changePwdBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;
@@ -39,5 +44,4 @@
 - (void)goToSignInView;
 - (void)goToChangePasswordView;
 - (void) goToCreditCardSettingsView:(NSString *)maskedId;
-- (void)requestAppIp;
 @end

@@ -6,24 +6,27 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#import "Product.h"
+#import "Products.h"
 #import "SettingsViewController.h"
 
 @implementation SettingsViewController
 @synthesize usernameLbl;
-@synthesize mobileNoTextField;
-@synthesize emailTextField;
-@synthesize emailLbl;
-@synthesize mobileNoLbl;
+@synthesize creditLbl;
 @synthesize updateBtn;
 @synthesize changePwdBtn;
 @synthesize creditCardBtn;
 @synthesize signOutBtn;
-@synthesize myAccountsBg;
+@synthesize product1Btn;
+@synthesize product2Btn;
+@synthesize product3Btn;
+@synthesize product4Btn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -49,46 +52,30 @@
     
     networkManager=[[NetworkManager alloc] initWithView:self.view];
     networkManager.delegate=self;
-    
-    self.usernameLbl.text=[[User getInstance] username];
-    emailTextField.enabled=NO;
-    emailTextField.text=[[User getInstance] email];
-    mobileNoTextField.text=[[User getInstance] phone];
-    
-    if([[User getInstance] isFacebookProfile])
-    {
-        self.emailLbl.hidden=YES;
-        self.emailTextField.hidden=YES;
-        self.usernameLbl.hidden=YES;
-        self.mobileNoLbl.hidden=YES;
-        self.mobileNoTextField.hidden=YES;
-        self.updateBtn.hidden=YES;
-        self.changePwdBtn.hidden=YES;
-        self.myAccountsBg.hidden=NO;
-        self.creditCardBtn.frame=CGRectMake(8, 150, 305, 44);
-        self.signOutBtn.frame = CGRectMake(8, 202, 305, 44);
-    }
-    else
-    {
-        self.myAccountsBg.hidden=YES;
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
+    
+    [creditLbl setText:[[User getInstance] getCreditAsString]];
+    [usernameLbl setText:[[User getInstance] username]];
+    
+    if ([[Products getInstance] needsRefresh])
+    {
+        hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText = @"Retrieving Products";
+        
+        [[Products getInstance] retrieveProductsFromServer:self];
+    }
+    else
+    {
+        [self enableValidProductButtons];
+    }
 }
+
 - (void)viewDidUnload
 {
-    [self setEmailTextField:nil];
-    [self setMobileNoTextField:nil];
-    [self setUsernameLbl:nil];
-    [self setEmailLbl:nil];
-    [self setMobileNoLbl:nil];
-    [self setUpdateBtn:nil];
-    [self setChangePwdBtn:nil];
-    [self setCreditCardBtn:nil];
-    [self setMyAccountsBg:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -107,14 +94,6 @@
     NSLog(@"In dealloc of SettingsViewController");
 }
 
-#pragma mark -
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.mobileNoTextField resignFirstResponder];
-}
-
-#pragma mark -
 #pragma mark NetworkManagerDelegate methods Implementation
 
 -(void) didFinishLoggingOut:(NSString *)statusCode statusMessage:(NSString *)message
@@ -163,7 +142,7 @@
     Reachability *hostReach = [Reachability reachabilityForInternetConnection];
 	if ([hostReach currentReachabilityStatus] != NotReachable) 
 	{		
-        [self requestAppIp];
+        //[self requestAppIp];
     }
 }
 
@@ -187,9 +166,12 @@
     [self goToChangePasswordView];
 }
 
-- (IBAction)saveBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)saveBtnTouchUpInsideHandler:(id)sender
+{
+    /*
     [mobileNoTextField resignFirstResponder];
     [networkManager update:emailTextField.text withMobileNumber:mobileNoTextField.text loggedInUserId:[[User getInstance] userId]];
+     */
 }
 
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender {
@@ -228,11 +210,63 @@
     [self.navigationController pushViewController:creditCardSettingsView animated:YES];
 }
 
-#pragma mark -
-
--(void) requestAppIp
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
 {
-    [networkManager appIpRequest];
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    [self enableValidProductButtons];
+}
+
+#pragma mark - private
+- (void) enableValidProductButtons
+{
+    NSMutableArray* productsArray = [[Products getInstance] productsArray];
+    NSUInteger productsCount = [productsArray count];
+    const NSUInteger maxProductsCount = 4;
+    NSUInteger index = 0;
+    
+    // Maximum of 4 products
+    while (index < maxProductsCount)
+    {
+        // Number of products might be less than the max allowed
+        if (index < productsCount)
+        {
+            Product* current = [productsArray objectAtIndex:index];
+            
+            if (index == 0)
+            {
+                [product1Btn setTitle:[current desc] forState:UIControlStateNormal];
+                product1Btn.hidden = FALSE;
+                product1Btn.enabled = TRUE;
+            }
+            else if (index == 1)
+            {
+                [product2Btn setTitle:[current desc] forState:UIControlStateNormal];
+                product2Btn.hidden = FALSE;
+                product2Btn.enabled = TRUE;
+            }
+            else if (index == 2)
+            {
+                [product3Btn setTitle:[current desc] forState:UIControlStateNormal];
+                product3Btn.hidden = FALSE;
+                product3Btn.enabled = TRUE;
+            }
+            else if (index == 3)
+            {
+                [product4Btn setTitle:[current desc] forState:UIControlStateNormal];
+                product4Btn.hidden = FALSE;
+                product4Btn.enabled = TRUE;
+            }
+            
+            index++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    
 }
 
 @end

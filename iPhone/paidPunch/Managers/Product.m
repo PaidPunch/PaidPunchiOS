@@ -33,8 +33,10 @@ static NSString* const kKeyCost = @"cost";
         _productId = [dict valueForKeyPath:@"product_id"];
         _name = [dict valueForKeyPath:@"name"];
         _desc = [dict valueForKeyPath:@"desc"];
-        _credits = [NSDecimalNumber decimalNumberWithString:[dict valueForKeyPath:@"credits"]];
-        _cost = [NSDecimalNumber decimalNumberWithString:[dict valueForKeyPath:@"cost"]];
+        NSString* creditsString = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"credits"]];
+        _credits = [NSDecimalNumber decimalNumberWithString:creditsString];
+        NSString* costString = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"cost"]];
+        _cost = [NSDecimalNumber decimalNumberWithString:costString];
     }
     return self;
 }

@@ -17,6 +17,9 @@ static NSString* const kKeyProducts = @"products";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kProductsFilename = @"products.sav";
 
+// 1 hour refresh schedule
+static double const refreshTime = -(60 * 60);
+
 @implementation Products
 @synthesize productsArray = _productsArray;
 @synthesize lastUpdate = _lastUpdate;
@@ -111,9 +114,9 @@ static NSString* const kProductsFilename = @"products.sav";
 }
 
 #pragma mark - public functions
-- (BOOL) needsRefresh:(NSDate*) lastModifiedDate
+- (BOOL) needsRefresh
 {
-    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceDate:lastModifiedDate] < 0);
+    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
 - (void) createProductsArray:(id)responseObject

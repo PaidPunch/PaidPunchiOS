@@ -101,6 +101,8 @@ static NSString* const kUserFilename = @"user.sav";
     [aCoder encodeBool:_isPaymentProfileCreated forKey:kKeyPaymentProfileCreated];
     [aCoder encodeBool:_isUserValidated forKey:kKeyUserValidate];
     [aCoder encodeObject:_totalMiles forKey:kKeyTotalMiles];
+    [aCoder encodeObject:_credits forKey:kKeyCredits];
+    [aCoder encodeObject:_userCode forKey:kKeyUserCode];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -117,6 +119,8 @@ static NSString* const kUserFilename = @"user.sav";
     _isPaymentProfileCreated = [aDecoder decodeBoolForKey:kKeyPaymentProfileCreated];
     _isUserValidated = [aDecoder decodeBoolForKey:kKeyUserValidate];
     _totalMiles = [aDecoder decodeObjectForKey:kKeyTotalMiles];
+    _credits = [aDecoder decodeObjectForKey:kKeyCredits];
+    _userCode = [aDecoder decodeObjectForKey:kKeyUserCode];
     return self;
 }
 

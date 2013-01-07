@@ -21,6 +21,7 @@
 @property (nonatomic,readonly) NSDate* lastUpdate;
 
 - (void) retrieveProductsFromServer:(NSObject<HttpCallbackDelegate>*) delegate;
+- (BOOL) needsRefresh;
 
 + (Products*) getInstance;
 + (void) destroyInstance;
