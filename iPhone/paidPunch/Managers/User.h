@@ -60,6 +60,7 @@ typedef enum
 @property(nonatomic) NSNumber* totalMiles;
 
 - (void) clearUser;
+- (void)updateFacebookFeed:(NSString*)message;
 - (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;

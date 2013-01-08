@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface FreeCreditViewController : UIViewController
+@interface FreeCreditViewController : UIViewController<UIAlertViewDelegate>
 {
     UIButton* _btnFacebook;
     UIButton* _btnEmail;
     UIButton* _btnBusiness;
     UILabel* _lblFreeCredit;
+    
+    MBProgressHUD* _hud;
 }
 @property (nonatomic,strong) UIButton* btnFacebook;
 

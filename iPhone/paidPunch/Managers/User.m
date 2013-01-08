@@ -384,6 +384,19 @@ static NSString* const kUserFilename = @"user.sav";
 
 #pragma mark - Facebook data
 
+- (void)updateFacebookFeed:(NSString*)message
+{
+    NSMutableDictionary* params1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    message, @"message",
+                                    @"https://itunes.apple.com/us/app/paidpunch/id501977872?mt=8", @"link",
+                                    @"https://s3-us-west-2.amazonaws.com/paidpunch.company/APPicon.png", @"picture",
+                                    @"PaidPunch", @"name",
+                                    @"Save Money. Get Free Stuff. What are you waiting for?", @"description",
+                                    nil];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[delegate facebook] requestWithGraphPath:@"me/feed" andParams:params1 andHttpMethod:@"POST" andDelegate:self];
+}
+
 - (void) didCompleteFacebookLogin:(BOOL) success
 {
     [self getUserProfileInfo];
@@ -407,45 +420,53 @@ static NSString* const kUserFilename = @"user.sav";
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result
-{    
-    if ([result isKindOfClass:[NSArray class]])
+{
+    if ([[request url] rangeOfString:@"me/feed"].location != NSNotFound)
     {
-        result = [result objectAtIndex:0];
-    }
-    
-    // This callback can be a result of getting the user's basic
-    // information or getting the user's permissions.
-    if ([result objectForKey:@"name"])
-    {
-        // Store the information retrieved from facebook
-        _username = [result objectForKey:@"name"];
-        if([result objectForKey:@"uid"])
-        {
-            _facebookId = [NSString stringWithFormat:@"%@", [result objectForKey:@"uid"]];
-        }
-        if([result objectForKey:@"email"])
-        {
-            _email=[result objectForKey:@"email"];
-        }
-        
-        if (_callType == register_call)
-        {
-            // Call the facebook registration API
-            [self registerUserWithFacebookInternal];
-        }
-        else if (_callType == login_call)
-        {
-            // Call the facebook login API
-            [self loginUserWithFacebookInternal];
-        }
-        else
-        {
-            NSLog(@"Unknown callType in didLoad.");
-        }
+        // Updating facebook newsfeed completed
+        NSLog(@"Facebook /me/feed call completed");
     }
     else
     {
-        NSLog(@"Unknown facebook callback in didLoad.");
+        if ([result isKindOfClass:[NSArray class]])
+        {
+            result = [result objectAtIndex:0];
+        }
+        
+        // This callback can be a result of getting the user's basic
+        // information or getting the user's permissions.
+        if ([result objectForKey:@"name"])
+        {
+            // Store the information retrieved from facebook
+            _username = [result objectForKey:@"name"];
+            if([result objectForKey:@"uid"])
+            {
+                _facebookId = [NSString stringWithFormat:@"%@", [result objectForKey:@"uid"]];
+            }
+            if([result objectForKey:@"email"])
+            {
+                _email=[result objectForKey:@"email"];
+            }
+            
+            if (_callType == register_call)
+            {
+                // Call the facebook registration API
+                [self registerUserWithFacebookInternal];
+            }
+            else if (_callType == login_call)
+            {
+                // Call the facebook login API
+                [self loginUserWithFacebookInternal];
+            }
+            else
+            {
+                NSLog(@"Unknown callType in didLoad.");
+            }
+        }
+        else
+        {
+            NSLog(@"Unknown facebook callback in didLoad.");
+        }
     }
 }
 

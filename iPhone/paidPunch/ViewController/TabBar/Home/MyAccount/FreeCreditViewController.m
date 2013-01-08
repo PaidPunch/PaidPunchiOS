@@ -8,9 +8,18 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FreeCreditViewController.h"
+#import "User.h"
+
+typedef enum
+{
+    no_response,
+    facebook_response
+} AlertType;
 
 @interface FreeCreditViewController ()
-
+{
+    AlertType _alertType;
+}
 @end
 
 @implementation FreeCreditViewController
@@ -21,6 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _alertType = no_response;
     }
     return self;
 }
@@ -32,7 +42,10 @@
     CGFloat currentYPos = 80.0;
     CGFloat spacing = 20.0;
     currentYPos = [self createFreeCreditLabel:currentYPos];
-    currentYPos = [self createFacebookButton:currentYPos + spacing];
+    if ([[User getInstance] isFacebookProfile])
+    {
+        currentYPos = [self createFacebookButton:currentYPos + spacing];    
+    }
     currentYPos = [self createEmailButton:currentYPos + spacing];
     currentYPos = [self createBusinessButton:currentYPos + spacing];
 }
@@ -100,7 +113,7 @@
     [_btnEmail setTitle:@"Invite Via Email" forState:UIControlStateNormal];
     [_btnEmail setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnEmail.titleLabel.font = textFont;
-    [_btnEmail addTarget:self action:@selector(didPressFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnEmail addTarget:self action:@selector(didPressEmailButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_btnEmail];
     
@@ -122,7 +135,7 @@
     [_btnBusiness setTitle:@"Suggest A Business" forState:UIControlStateNormal];
     [_btnBusiness setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnBusiness.titleLabel.font = textFont;
-    [_btnBusiness addTarget:self action:@selector(didPressFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnBusiness addTarget:self action:@selector(didPressBusinessButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_btnBusiness];
     
@@ -130,6 +143,43 @@
 }
 
 #pragma mark - Event actions
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (_alertType == facebook_response)
+    {
+        NSString* upsellString = [NSString stringWithFormat:@"I've been using this awesome app called PaidPunch to save money at my favorite stores. I've got some invite codes for folks who'd like to try it out. Download the app below and use %@ as the code to start saving!", [[User getInstance] userCode]];
+        if(buttonIndex == 0)
+        {
+            [[User getInstance] updateFacebookFeed:upsellString];
+            _alertType = no_response;
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
+                                                              message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            
+            [message show];
+        }
+    }
+    
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+}
+
+-(IBAction)didPressFacebookButton:(id)sender
+{
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"";
+    
+    _alertType = facebook_response;
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                      message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will post a invitation to your Facebook wall."
+                                                     delegate:self
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:@"Cancel",nil];
+    
+    [message show];
+}
 
 - (IBAction)goBack:(id)sender
 {
