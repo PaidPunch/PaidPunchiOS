@@ -269,7 +269,6 @@
 						<string key="NSFrame">{{173, 356}, {140, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -521,15 +520,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">creditCardBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="623588694"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">31</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">signOutBtnTouchUpInsideHandler:</string>
 						<reference key="source" ref="623588694"/>
 						<reference key="destination" ref="372490531"/>
@@ -539,57 +529,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changePwdBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="400332560"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">saveBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="388821402"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">46</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">creditCardBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="758037410"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">signOutBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="230167249"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">creditCardBtnTouchUpInsideHandler:</string>
-						<reference key="source" ref="230167249"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">creditCardBtnTouchUpInsideHandler:</string>
+						<string key="label">freeCreditBtnTouchUpInsideHandler:</string>
 						<reference key="source" ref="120968160"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">50</int>
+					<int key="connectionID">60</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -775,7 +720,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">59</int>
+			<int key="maxID">60</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -789,11 +734,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePwdBtnTouchUpInsideHandler:</string>
 							<string>creditCardBtnTouchUpInsideHandler:</string>
+							<string>freeCreditBtnTouchUpInsideHandler:</string>
 							<string>saveBtnTouchUpInsideHandler:</string>
 							<string>signOutBtnTouchUpInsideHandler:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -806,6 +753,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePwdBtnTouchUpInsideHandler:</string>
 							<string>creditCardBtnTouchUpInsideHandler:</string>
+							<string>freeCreditBtnTouchUpInsideHandler:</string>
 							<string>saveBtnTouchUpInsideHandler:</string>
 							<string>signOutBtnTouchUpInsideHandler:</string>
 						</object>
@@ -817,6 +765,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">creditCardBtnTouchUpInsideHandler:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">freeCreditBtnTouchUpInsideHandler:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

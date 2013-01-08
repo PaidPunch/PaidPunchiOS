@@ -40,6 +40,7 @@
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender;
+- (IBAction)freeCreditBtnTouchUpInsideHandler:(id)sender;
 
 - (void)goToSignInView;
 - (void)goToChangePasswordView;

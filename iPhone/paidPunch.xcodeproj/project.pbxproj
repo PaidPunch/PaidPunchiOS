@@ -57,6 +57,8 @@
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
 		38B84433167581420068D3C3 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84432167581410068D3C3 /* BaseView.m */; };
 		38B844361677C1060068D3C3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B844351677C1060068D3C3 /* User.m */; };
+		38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */; };
+		38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -585,6 +587,9 @@
 		38B844351677C1060068D3C3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		38B844371677FB460068D3C3 /* HttpCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpCallbackDelegate.h; path = ServerAPI/HttpCallbackDelegate.h; sourceTree = "<group>"; };
 		38BFA89A169BEDEF00102715 /* SubviewInteractionEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubviewInteractionEventDelegate.h; sourceTree = "<group>"; };
+		38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeCreditViewController.xib; sourceTree = "<group>"; };
+		38BFA89F169C0B6600102715 /* FreeCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCreditViewController.h; sourceTree = "<group>"; };
+		38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCreditViewController.m; sourceTree = "<group>"; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -763,7 +768,7 @@
 		8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		8A7C8FE715107B1000F99863 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		8A7C8FE815107B1000F99863 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		8A7C8FED15107BC000F99863 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		8A7C8FED15107BC000F99863 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePasswordViewController.xib; path = /Users/aaronkhoo/Projects/PaidPunchiOS/iPhone/paidPunch/View/TabBar/Home/MyAccount/ChangePassword/ChangePasswordViewController.xib; sourceTree = "<absolute>"; };
 		8A7C8FEE15107BC000F99863 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		8A7C8FF915107D7500F99863 /* UsingPaidPunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsingPaidPunchViewController.h; sourceTree = "<group>"; };
 		8A7C8FFA15107D7500F99863 /* UsingPaidPunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsingPaidPunchViewController.m; sourceTree = "<group>"; };
@@ -2086,6 +2091,8 @@
 				8A7C8FE415107B1000F99863 /* ChangePassword */,
 				8A7C8FE715107B1000F99863 /* SettingsViewController.h */,
 				8A7C8FE815107B1000F99863 /* SettingsViewController.m */,
+				38BFA89F169C0B6600102715 /* FreeCreditViewController.h */,
+				38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -2104,6 +2111,7 @@
 			children = (
 				8A7C8FEC15107BC000F99863 /* ChangePassword */,
 				8A7C8FEE15107BC000F99863 /* SettingsViewController.xib */,
+				38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -3134,6 +3142,7 @@
 				8BD3D34615D230F10024B079 /* DoneButton@2x.png in Resources */,
 				8BAE652815D48B7D0075E5D8 /* AppIcon@2x.png in Resources */,
 				3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */,
+				38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3233,6 +3242,7 @@
 				38D686171679B62400DED3A0 /* Utilities.m in Sources */,
 				38099F901697648D00BFD3CC /* Products.m in Sources */,
 				38099F9316978F0100BFD3CC /* Product.m in Sources */,
+				38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#import "FreeCreditViewController.h"
 #import "Product.h"
 #import "Products.h"
 #import "SettingsViewController.h"
@@ -191,6 +192,12 @@
     {
         [self goToCreditCardSettingsView:nil];
     }
+}
+
+- (IBAction)freeCreditBtnTouchUpInsideHandler:(id)sender
+{
+    FreeCreditViewController *freeCreditView = [[FreeCreditViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:freeCreditView animated:YES];
 }
 
 #pragma mark -
