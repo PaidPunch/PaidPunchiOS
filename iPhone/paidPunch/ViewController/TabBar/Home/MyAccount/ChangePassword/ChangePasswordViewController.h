@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NetworkManager.h"
 #import "CustomScrollView.h"
+#import "HttpCallbackDelegate.h"
 
-@interface ChangePasswordViewController : UIViewController<NetworkManagerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
+@interface ChangePasswordViewController : UIViewController<HttpCallbackDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
-    NetworkManager *networkManager;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *oldPasswordTextField;

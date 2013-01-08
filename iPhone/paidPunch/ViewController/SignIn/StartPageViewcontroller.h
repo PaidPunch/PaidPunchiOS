@@ -11,9 +11,10 @@
 #import "FAQViewController.h"
 #import "LoginView.h"
 #import "SignupView.h"
+#import "SubviewInteractionEventDelegate.h"
 #import "UsingPaidPunchViewController.h"
 
-@interface StartPageViewController : UIViewController <UIScrollViewDelegate>
+@interface StartPageViewController : UIViewController <SubviewInteractionEventDelegate, UIScrollViewDelegate>
 {
     BOOL onLoginView;
     LoginView* loginView;

@@ -124,12 +124,11 @@
     [self dismissKeyboard];
     
     [User getInstance].email = _emailTextField.text;
-    [User getInstance].password = _passwordTextField.text;
     
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Logging in";
     
-    [[User getInstance] loginUserWithEmail:self];
+    [[User getInstance] loginUserWithEmail:self password:_passwordTextField.text];
 }
 
 - (void) didPressForgetPasswordButton:(id)sender

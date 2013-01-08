@@ -384,12 +384,11 @@
         // Set the values into the User instance
         [User getInstance].username = usernameTF.text;
         [User getInstance].email = emailTF.text;
-        [User getInstance].password = passwordTF.text;
         [User getInstance].phone = mobileNumberTF.text;
         [User getInstance].zipcode = zipcodeTF.text;
                                     
         //[networkManager signUp:[self populate]];
-        [[User getInstance] registerUserWithEmail:self];
+        [[User getInstance] registerUserWithEmail:self password:passwordTF.text];
     }
 }
 

@@ -11,6 +11,7 @@
 @implementation BaseView
 @synthesize navigationController = _navigationController;
 @synthesize btnFacebook = _btnFacebook;
+@synthesize delegate = _delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,6 +27,11 @@
 {
     [textField resignFirstResponder];
     return NO;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [[self delegate] didInteractWithSubview];
 }
 
 - (UITextField*) initializeUITextField:(CGRect)frame placeholder:(NSString*)placeholder font:(UIFont*)font

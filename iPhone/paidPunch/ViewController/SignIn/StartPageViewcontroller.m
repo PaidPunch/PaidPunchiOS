@@ -66,8 +66,10 @@
     containerView = [[UIView alloc] initWithFrame:[self getPlacardFrame:currentIndex]];
     loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
     loginView.navigationController = [self navigationController];
+    loginView.delegate = self;
     signupView = [[SignupView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
     signupView.navigationController = [self navigationController];
+    signupView.delegate = self;
     
     [containerView addSubview:loginView];
     [self.scrollView addSubview:containerView];
@@ -322,8 +324,19 @@
             pageControl.currentPage = 0;
         }
         
+        // If the scroll begins moving, go ahead and dismiss any keyboards that might be up
+        [loginView dismissKeyboard];
+        [signupView dismissKeyboard];
+        
         [self switchPage:self.pageControl.currentPage];
     }
+}
+
+#pragma mark - 
+
+- (void) didInteractWithSubview
+{
+    userHasInteracted = YES;
 }
 
 @end

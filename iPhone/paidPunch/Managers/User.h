@@ -32,7 +32,6 @@ typedef enum
     NSString* _referralCode;
     NSString* _username;
     NSString* _email;
-    NSString* _password;
     NSString* _zipcode;
     NSString* _phone;
     NSString* _uniqueId;
@@ -52,7 +51,6 @@ typedef enum
 @property(nonatomic,strong) NSString* username;
 @property(nonatomic,strong) NSString* referralCode;
 @property(nonatomic,strong) NSString* email;
-@property(nonatomic,strong) NSString* password;
 @property(nonatomic,strong) NSString* zipcode;
 @property(nonatomic,strong) NSString* phone;
 @property(nonatomic,strong) NSString* uniqueId;
@@ -62,10 +60,11 @@ typedef enum
 @property(nonatomic) NSNumber* totalMiles;
 
 - (void) clearUser;
-- (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
-- (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) changePassword:(NSObject<HttpCallbackDelegate>*)delegate oldPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword;
 - (void) getUserProfileInfo;
 - (BOOL) isFacebookProfile;
 - (NSString*) getCreditAsString;

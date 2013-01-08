@@ -335,11 +335,11 @@
 {
     [passwordAlert dismissWithClickedButtonIndex:0 animated:NO];
     
-    if([passwordTextField.text isEqualToString:[[User getInstance] password]])
+    //if([passwordTextField.text isEqualToString:[[User getInstance] password]])
     {
         /*[networkManager markPunchUsed:punchCardDetails.punch_card_id punchCardDownloadId:punchCardDetails.punch_card_download_id loggedInUserId:[[InfoExpert sharedInstance]userId]];*/
     }
-    else
+    //else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Incorrect password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

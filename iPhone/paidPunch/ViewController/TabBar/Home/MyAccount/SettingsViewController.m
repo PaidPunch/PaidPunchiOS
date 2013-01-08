@@ -162,7 +162,8 @@
 
 #pragma mark -
 
-- (IBAction)changePwdBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)changePwdBtnTouchUpInsideHandler:(id)sender
+{
     [self goToChangePasswordView];
 }
 
@@ -174,12 +175,14 @@
      */
 }
 
-- (IBAction)signOutBtnTouchUpInsideHandler:(id)sender {
-    [networkManager logout:[[User getInstance] userId]];
+- (IBAction)signOutBtnTouchUpInsideHandler:(id)sender
+{
+    [[User getInstance] clearUser];	
     [self goToSignInView];
 }
 
-- (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender
+{
     if([[User getInstance] isPaymentProfileCreated])
     {
         [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];

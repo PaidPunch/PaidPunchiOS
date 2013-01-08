@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ChangePasswordViewController.h"
 #import "User.h"
 
@@ -18,7 +19,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -47,9 +49,6 @@
     
     [self.scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES] ;
 	scrollView.scrollEnabled = FALSE;
-    
-    networkManager =[[NetworkManager alloc] initWithView:self.view];
-    networkManager.delegate=self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTap:) name:@"scrollViewTouchEvent" object:nil];
     
@@ -95,8 +94,11 @@
 {
     [textField resignFirstResponder];
     if(textField==oldPasswordTextField)
+    {
         [nwPasswordTextField becomeFirstResponder];
-    if (textField==nwPasswordTextField) {
+    }
+    if (textField==nwPasswordTextField)
+    {
         [confirmPasswordTextField becomeFirstResponder];
     }
     if(textField==confirmPasswordTextField)
@@ -106,7 +108,7 @@
 
         if([self validate])
         {
-            [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[User getInstance] userId]];
+            [[User getInstance] changePassword:self oldPassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text];
         }
     }
 	return TRUE;
@@ -120,26 +122,24 @@
 #pragma mark -
 #pragma mark NetworkManagerDelegate methods Implementation
 
--(void) didFinishChangingPassword:(NSString *)statusCode statusMessage:(NSString *)message
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
 {
-    if([statusCode rangeOfString:@"00"].location == NSNotFound)
+    if (success)
+    {
+        // Clear password fields
+        oldPasswordTextField.text=@"";
+        nwPasswordTextField.text=@"";
+        confirmPasswordTextField.text=@"";
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    else
-    {
-        [[User getInstance] setPassword:nwPasswordTextField.text];
-        
-        oldPasswordTextField.text=@"";
-        nwPasswordTextField.text=@"";
-        confirmPasswordTextField.text=@"";
-       
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-
-    }
-
 }
 
 #pragma mark -
@@ -161,7 +161,7 @@
 	scrollView.scrollEnabled = FALSE;
     if([self validate])
     {
-        [networkManager changePassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text loggedInUserId:[[User getInstance] userId]];
+        [[User getInstance] changePassword:self oldPassword:oldPasswordTextField.text newPassword:nwPasswordTextField.text];
     }
 }
 
@@ -186,12 +186,6 @@
     if(oldPasswordTextField.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        return NO;
-    }
-    if(![oldPasswordTextField.text isEqualToString:[[User getInstance] password]])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter correct Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return NO;
     }
