@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import <MessageUI/MFMailComposeViewController.h>
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
-@interface FreeCreditViewController : UIViewController<UIAlertViewDelegate>
+@interface FreeCreditViewController : UIViewController<UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 {
     UIButton* _btnFacebook;
     UIButton* _btnEmail;

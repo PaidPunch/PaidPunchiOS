@@ -59,6 +59,7 @@
 		38B844361677C1060068D3C3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B844351677C1060068D3C3 /* User.m */; };
 		38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */; };
 		38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */; };
+		38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BFA8A2169CE69800102715 /* MessageUI.framework */; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -590,6 +591,7 @@
 		38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeCreditViewController.xib; sourceTree = "<group>"; };
 		38BFA89F169C0B6600102715 /* FreeCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCreditViewController.h; sourceTree = "<group>"; };
 		38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCreditViewController.m; sourceTree = "<group>"; };
+		38BFA8A2169CE69800102715 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -1093,6 +1095,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */,
 				3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */,
 				8A7C54641549265B002854FF /* MapKit.framework in Frameworks */,
 				8A3B1D15154006F800BD0AAE /* libSocialNetworkLibrary.a in Frameworks */,
@@ -1254,6 +1257,7 @@
 				3842B24A16407E28009203D0 /* libxml2.dylib */,
 				8A77CF3714C015A600F9560E /* libSDWebImage.a */,
 				8AFE25F9147F7A560039247A /* libiconv.dylib */,
+				38BFA8A2169CE69800102715 /* MessageUI.framework */,
 				8A7C54631549265B002854FF /* MapKit.framework */,
 				8A7921AD152C515800CC70E1 /* CoreText.framework */,
 				8A7CB64715244395005E4689 /* CoreLocation.framework */,

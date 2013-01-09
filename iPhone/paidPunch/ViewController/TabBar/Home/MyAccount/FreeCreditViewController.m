@@ -13,7 +13,8 @@
 typedef enum
 {
     no_response,
-    facebook_response
+    facebook_response,
+    email_response
 } AlertType;
 
 @interface FreeCreditViewController ()
@@ -144,11 +145,28 @@ typedef enum
 
 #pragma mark - Event actions
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Email Sent"
+                                                          message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSString* upsellString = [NSString stringWithFormat:@"I've been using this awesome app called PaidPunch to save money at my favorite stores. I've got some invite codes for folks who'd like to try it out. Download the app below and use %@ as the code to start saving!", [[User getInstance] userCode]];
     if (_alertType == facebook_response)
     {
-        NSString* upsellString = [NSString stringWithFormat:@"I've been using this awesome app called PaidPunch to save money at my favorite stores. I've got some invite codes for folks who'd like to try it out. Download the app below and use %@ as the code to start saving!", [[User getInstance] userCode]];
         if(buttonIndex == 0)
         {
             [[User getInstance] updateFacebookFeed:upsellString];
@@ -162,7 +180,19 @@ typedef enum
             [message show];
         }
     }
-    
+    else if (_alertType == email_response)
+    {
+        // Show the composer
+        _alertType = no_response;
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:@"My Subject"];
+        [controller setMessageBody:@"Hello there." isHTML:NO];
+        if (controller)
+        {
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
 }
 
@@ -179,6 +209,35 @@ typedef enum
                                                      otherButtonTitles:@"Cancel",nil];
     
     [message show];
+}
+
+-(IBAction)didPressEmailButton:(id)sender
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"";
+        
+        _alertType = email_response;
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                          message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will open your email client. Fill in your friends' emails and invite them!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:@"Cancel",nil];
+        
+        [message show];
+    }
+    else
+    {
+        // Current device is not configured for email
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Email Available"
+                                                          message:@"Your current device does not have an email client configured."
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
 }
 
 - (IBAction)goBack:(id)sender
