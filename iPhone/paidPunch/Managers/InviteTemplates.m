@@ -1,28 +1,27 @@
 //
-//  Products.m
+//  InviteTemplates.m
 //  paidPunch
 //
-//  Created by Aaron Khoo on 1/4/13.
+//  Created by Aaron Khoo on 1/9/13.
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
 #import "AFClientManager.h"
-#import "Product.h"
-#import "Products.h"
+#import "InviteTemplates.h"
 #import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
-static NSString* const kKeyLastUpdate = @"lastUpdate";
-static NSString* const kKeyProducts = @"products";
+static NSString* const kKeyEmailTemplate = @"emailTemplate";
+static NSString* const kKeyFacebookTemplate = @"facebookTemplate";
+static NSString* const kTemplatesFilename = @"template.sav";
 static NSString* const kKeyStatusMessage = @"statusMessage";
-static NSString* const kProductsFilename = @"products.sav";
 
 // 1 hour refresh schedule
-static double const refreshTime = -(60 * 60);
+static double const refreshTime = -(60 * 30);
 
-@implementation Products
-@synthesize productsArray = _productsArray;
-@synthesize lastUpdate = _lastUpdate;
+@implementation InviteTemplates
+@synthesize emailTemplate = _emailTemplate;
+@synthesize facebookTemplate = _facebookTemplate;
 
 - (id) init
 {
@@ -31,29 +30,34 @@ static double const refreshTime = -(60 * 60);
     {
         _createdVersion = @"1.0";
         _lastUpdate = NULL;
-        _productsArray = [[NSMutableArray alloc] init];
+        _facebookTemplate = @"";
+        _emailTemplate = @"";
     }
     return self;
+}
+
+- (BOOL) needsRefresh
+{
+    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
 #pragma mark - NSCoding
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_createdVersion forKey:kKeyVersion];
-    [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
-    [aCoder encodeObject:_productsArray forKey:kKeyProducts];
+    [aCoder encodeObject:_emailTemplate forKey:kKeyEmailTemplate];
+    [aCoder encodeObject:_facebookTemplate forKey:kKeyFacebookTemplate];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
     _createdVersion = [aDecoder decodeObjectForKey:kKeyVersion];
-    _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
-    _productsArray = [aDecoder decodeObjectForKey:kKeyProducts];
+    _emailTemplate = [aDecoder decodeObjectForKey:kKeyEmailTemplate];
+    _facebookTemplate = [aDecoder decodeObjectForKey:kKeyFacebookTemplate];
     return self;
 }
 
-#pragma mark - private functions
-
+#pragma mark - saved game data loading and unloading
 + (NSString*) documentsDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -61,51 +65,50 @@ static double const refreshTime = -(60 * 60);
     return documentsDirectory;
 }
 
-+ (NSString*) productsFilepath
++ (NSString*) templatesFilepath
 {
-    NSString* docsDir = [Products documentsDirectory];
-    NSString* filepath = [docsDir stringByAppendingPathComponent:kProductsFilename];
+    NSString* docsDir = [InviteTemplates documentsDirectory];
+    NSString* filepath = [docsDir stringByAppendingPathComponent:kTemplatesFilename];
     return filepath;
 }
 
-#pragma mark - saved game data loading and unloading
-+ (Products*) loadProductsData
++ (InviteTemplates*) loadTemplatesData
 {
-    Products* current_products = nil;
+    InviteTemplates* current_templates = nil;
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* filepath = [Products productsFilepath];
+    NSString* filepath = [InviteTemplates templatesFilepath];
     if ([fileManager fileExistsAtPath:filepath])
     {
         NSData* readData = [NSData dataWithContentsOfFile:filepath];
         if(readData)
         {
-            current_products = [NSKeyedUnarchiver unarchiveObjectWithData:readData];
+            current_templates = [NSKeyedUnarchiver unarchiveObjectWithData:readData];
         }
     }
-    return current_products;
+    return current_templates;
 }
 
-- (void) saveProductsData
+- (void) saveTemplatesData
 {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSError* error = nil;
-    BOOL writeSuccess = [data writeToFile:[Products productsFilepath]
+    BOOL writeSuccess = [data writeToFile:[InviteTemplates templatesFilepath]
                                   options:NSDataWritingAtomic
                                     error:&error];
     if(writeSuccess)
     {
-        NSLog(@"products file saved successfully");
+        NSLog(@"templates file saved successfully");
     }
     else
     {
-        NSLog(@"products file save failed: %@", error);
+        NSLog(@"templates file save failed: %@", error);
     }
 }
 
-- (void) removeProductsData
+- (void) removeTemplatesData
 {
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* filepath = [Products productsFilepath];
+    NSString* filepath = [InviteTemplates templatesFilepath];
     NSError *error = nil;
     if ([fileManager fileExistsAtPath:filepath])
     {
@@ -113,35 +116,21 @@ static double const refreshTime = -(60 * 60);
     }
 }
 
-#pragma mark - public functions
-- (BOOL) needsRefresh
-{
-    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
-}
-
-- (void) createProductsArray:(id)responseObject
-{
-    for (NSDictionary* product in responseObject)
-    {
-        Product* current = [[Product alloc] initWithDictionary:product];
-        [_productsArray addObject:current];
-    }
-}
-
 #pragma mark - Server calls
 
-- (void) retrieveProductsFromServer:(NSObject<HttpCallbackDelegate>*) delegate
+- (void) retrieveTemplatesFromServer:(NSObject<HttpCallbackDelegate>*) delegate
 {
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient getPath:@"paid_punch/Products"
+    [httpClient getPath:@"paid_punch/Templates"
              parameters:nil
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
-                    [_productsArray removeAllObjects];
-                    [self createProductsArray:responseObject];
+                    NSDictionary* dict = responseObject;
+                    _emailTemplate = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"email"]];
+                    _facebookTemplate = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"facebook"]];
                     _lastUpdate = [NSDate date];
-                    [self saveProductsData];
+                    [self saveTemplatesData];
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
@@ -152,19 +141,19 @@ static double const refreshTime = -(60 * 60);
 }
 
 #pragma mark - Singleton
-static Products* singleton = nil;
-+ (Products*) getInstance
+static InviteTemplates* singleton = nil;
++ (InviteTemplates*) getInstance
 {
 	@synchronized(self)
 	{
 		if (!singleton)
 		{
             // First, try to load the user data from disk
-            singleton = [Products loadProductsData];
+            singleton = [InviteTemplates loadTemplatesData];
             if (!singleton)
             {
                 // OK, no saved data available. Go ahead and create a new User.
-                singleton = [[Products alloc] init];
+                singleton = [[InviteTemplates alloc] init];
             }
 		}
 	}

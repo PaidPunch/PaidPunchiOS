@@ -8,9 +8,10 @@
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
 
-@interface FreeCreditViewController : UIViewController<UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
+@interface FreeCreditViewController : UIViewController<HttpCallbackDelegate, UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 {
     UIButton* _btnFacebook;
     UIButton* _btnEmail;

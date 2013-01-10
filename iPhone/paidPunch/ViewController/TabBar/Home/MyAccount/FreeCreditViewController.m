@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FreeCreditViewController.h"
+#import "InviteTemplates.h"
 #import "User.h"
 
 typedef enum
@@ -143,6 +144,38 @@ typedef enum
     return (_btnEmail.frame.origin.y + _btnEmail.frame.size.height);
 }
 
+- (void)sendInvite
+{
+    if (_alertType == facebook_response)
+    {
+        [[User getInstance] updateFacebookFeed:[[InviteTemplates getInstance] facebookTemplate]];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
+                                                          message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+    else if (_alertType == email_response)
+    {
+        // Show the composer
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:@"My Subject"];
+        [controller setMessageBody:[[InviteTemplates getInstance] emailTemplate] isHTML:YES];
+        if (controller)
+        {
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
+    else
+    {
+        NSLog(@"FreeCreditView: Unknown alert type");
+    }
+    _alertType = no_response;
+}
+
 #pragma mark - Event actions
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller
@@ -164,43 +197,23 @@ typedef enum
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString* upsellString = [NSString stringWithFormat:@"I've been using this awesome app called PaidPunch to save money at my favorite stores. I've got some invite codes for folks who'd like to try it out. Download the app below and use %@ as the code to start saving!", [[User getInstance] userCode]];
-    if (_alertType == facebook_response)
+    if(buttonIndex == 0)
     {
-        if(buttonIndex == 0)
+        if ([[InviteTemplates getInstance] needsRefresh])
         {
-            [[User getInstance] updateFacebookFeed:upsellString];
-            _alertType = no_response;
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
-                                                              message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles:nil];
-            
-            [message show];
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"";
+            [[InviteTemplates getInstance] retrieveTemplatesFromServer:self];
+        }
+        else
+        {
+            [self sendInvite];
         }
     }
-    else if (_alertType == email_response)
-    {
-        // Show the composer
-        _alertType = no_response;
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setSubject:@"My Subject"];
-        [controller setMessageBody:@"Hello there." isHTML:NO];
-        if (controller)
-        {
-            [self presentModalViewController:controller animated:YES];
-        }
-    }
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
 }
 
 -(IBAction)didPressFacebookButton:(id)sender
-{
-    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    _hud.labelText = @"";
-    
+{    
     _alertType = facebook_response;
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
                                                       message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will post a invitation to your Facebook wall."
@@ -215,9 +228,6 @@ typedef enum
 {
     if ([MFMailComposeViewController canSendMail])
     {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"";
-        
         _alertType = email_response;
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
                                                           message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will open your email client. Fill in your friends' emails and invite them!"
@@ -250,6 +260,21 @@ typedef enum
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+{    
+    if(success)
+    {
+        [self sendInvite];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
 }
 
 @end
