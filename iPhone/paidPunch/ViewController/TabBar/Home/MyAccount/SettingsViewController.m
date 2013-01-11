@@ -7,6 +7,7 @@
 //
 
 #import "FreeCreditViewController.h"
+#import "InfoChangeViewController.h"
 #import "Product.h"
 #import "Products.h"
 #import "SettingsViewController.h"
@@ -168,12 +169,9 @@
     [self goToChangePasswordView];
 }
 
-- (IBAction)saveBtnTouchUpInsideHandler:(id)sender
+- (IBAction)changeInfoBtnTouchUpInsideHandler:(id)sender
 {
-    /*
-    [mobileNoTextField resignFirstResponder];
-    [networkManager update:emailTextField.text withMobileNumber:mobileNoTextField.text loggedInUserId:[[User getInstance] userId]];
-     */
+    [self goToInfoChangeView];
 }
 
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender
@@ -212,6 +210,12 @@
 {
     ChangePasswordViewController *changePasswordView = [[ChangePasswordViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:changePasswordView animated:YES];
+}
+
+-(void) goToInfoChangeView
+{
+    InfoChangeViewController *infoChangeView = [[InfoChangeViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:infoChangeView animated:YES];
 }
 
 -(void) goToCreditCardSettingsView:(NSString *)maskedId

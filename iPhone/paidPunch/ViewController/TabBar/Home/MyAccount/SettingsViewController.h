@@ -36,8 +36,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *product3Btn;
 @property (strong, nonatomic) IBOutlet UIButton *product4Btn;
 
+- (IBAction)changeInfoBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)changePwdBtnTouchUpInsideHandler:(id)sender;
-- (IBAction)saveBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)signOutBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)creditCardBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)freeCreditBtnTouchUpInsideHandler:(id)sender;

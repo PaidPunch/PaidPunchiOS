@@ -502,12 +502,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">saveBtnTouchUpInsideHandler:</string>
+						<string key="label">changeInfoBtnTouchUpInsideHandler:</string>
 						<reference key="source" ref="271541384"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">9</int>
+					<int key="connectionID">61</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -720,7 +720,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">61</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -732,10 +732,10 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>changeInfoBtnTouchUpInsideHandler:</string>
 							<string>changePwdBtnTouchUpInsideHandler:</string>
 							<string>creditCardBtnTouchUpInsideHandler:</string>
 							<string>freeCreditBtnTouchUpInsideHandler:</string>
-							<string>saveBtnTouchUpInsideHandler:</string>
 							<string>signOutBtnTouchUpInsideHandler:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -751,14 +751,18 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>changeInfoBtnTouchUpInsideHandler:</string>
 							<string>changePwdBtnTouchUpInsideHandler:</string>
 							<string>creditCardBtnTouchUpInsideHandler:</string>
 							<string>freeCreditBtnTouchUpInsideHandler:</string>
-							<string>saveBtnTouchUpInsideHandler:</string>
 							<string>signOutBtnTouchUpInsideHandler:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">changeInfoBtnTouchUpInsideHandler:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">changePwdBtnTouchUpInsideHandler:</string>
 								<string key="candidateClassName">id</string>
@@ -769,10 +773,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">freeCreditBtnTouchUpInsideHandler:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">saveBtnTouchUpInsideHandler:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

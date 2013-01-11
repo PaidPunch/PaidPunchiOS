@@ -37,6 +37,8 @@
 		11D4D9C715CBA3D800FEF636 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C515CBA3D800FEF636 /* style.css */; };
 		38099F901697648D00BFD3CC /* Products.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F8F1697648D00BFD3CC /* Products.m */; };
 		38099F9316978F0100BFD3CC /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F9216978F0100BFD3CC /* Product.m */; };
+		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
+		3828035616A0067D005A8A32 /* InfoChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3828035516A0067D005A8A32 /* InfoChangeViewController.xib */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
 		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
@@ -546,6 +548,9 @@
 		38099F8F1697648D00BFD3CC /* Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Products.m; sourceTree = "<group>"; };
 		38099F9116978F0100BFD3CC /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		38099F9216978F0100BFD3CC /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		38280352169FF56C005A8A32 /* InfoChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoChangeViewController.h; sourceTree = "<group>"; };
+		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoChangeViewController.m; sourceTree = "<group>"; };
+		3828035516A0067D005A8A32 /* InfoChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoChangeViewController.xib; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
@@ -2102,6 +2107,8 @@
 				8A7C8FE815107B1000F99863 /* SettingsViewController.m */,
 				38BFA89F169C0B6600102715 /* FreeCreditViewController.h */,
 				38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */,
+				38280352169FF56C005A8A32 /* InfoChangeViewController.h */,
+				38280353169FF56C005A8A32 /* InfoChangeViewController.m */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -2121,6 +2128,7 @@
 				8A7C8FEC15107BC000F99863 /* ChangePassword */,
 				8A7C8FEE15107BC000F99863 /* SettingsViewController.xib */,
 				38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */,
+				3828035516A0067D005A8A32 /* InfoChangeViewController.xib */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -3152,6 +3160,7 @@
 				8BAE652815D48B7D0075E5D8 /* AppIcon@2x.png in Resources */,
 				3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */,
 				38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */,
+				3828035616A0067D005A8A32 /* InfoChangeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3253,6 +3262,7 @@
 				38099F9316978F0100BFD3CC /* Product.m in Sources */,
 				38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */,
 				38B1D809169E8D620087ECD2 /* InviteTemplates.m in Sources */,
+				38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
