@@ -8,11 +8,13 @@
 
 #import "AFClientManager.h"
 #import "InviteTemplates.h"
+#import "User.h"
 #import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
 static NSString* const kKeyEmailTemplate = @"emailTemplate";
 static NSString* const kKeyFacebookTemplate = @"facebookTemplate";
+static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kTemplatesFilename = @"template.sav";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 
@@ -41,12 +43,22 @@ static double const refreshTime = -(60 * 30);
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
+- (NSString*) replacePlaceholders:(NSString*)original
+{
+    NSString* newStr = [original stringByReplacingOccurrencesOfString:@"[USERCODE]"
+                                                           withString:[[User getInstance] userCode]];
+    newStr = [newStr stringByReplacingOccurrencesOfString:@"[USERNAME]"
+                                               withString:[[User getInstance] username]];
+    return newStr;
+}
+
 #pragma mark - NSCoding
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_createdVersion forKey:kKeyVersion];
     [aCoder encodeObject:_emailTemplate forKey:kKeyEmailTemplate];
     [aCoder encodeObject:_facebookTemplate forKey:kKeyFacebookTemplate];
+    [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -54,6 +66,7 @@ static double const refreshTime = -(60 * 30);
     _createdVersion = [aDecoder decodeObjectForKey:kKeyVersion];
     _emailTemplate = [aDecoder decodeObjectForKey:kKeyEmailTemplate];
     _facebookTemplate = [aDecoder decodeObjectForKey:kKeyFacebookTemplate];
+    _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
     return self;
 }
 
@@ -127,8 +140,8 @@ static double const refreshTime = -(60 * 30);
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
                     NSDictionary* dict = responseObject;
-                    _emailTemplate = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"email"]];
-                    _facebookTemplate = [NSString stringWithFormat:@"%@", [dict valueForKeyPath:@"facebook"]];
+                    _emailTemplate = [self replacePlaceholders:[dict valueForKeyPath:@"email"]];
+                    _facebookTemplate = [self replacePlaceholders:[dict valueForKeyPath:@"facebook"]];
                     _lastUpdate = [NSDate date];
                     [self saveTemplatesData];
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
