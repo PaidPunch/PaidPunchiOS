@@ -66,6 +66,7 @@ typedef enum
 - (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) changePassword:(NSObject<HttpCallbackDelegate>*)delegate oldPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword;
+- (void) changeInfo:(NSObject<HttpCallbackDelegate>*)delegate parameters:(NSMutableDictionary*)parameters;
 - (void) getUserProfileInfo;
 - (BOOL) isFacebookProfile;
 - (NSString*) getCreditAsString;

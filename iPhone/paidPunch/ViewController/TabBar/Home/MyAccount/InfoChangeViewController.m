@@ -123,10 +123,58 @@
     return textField;
 }
 
+- (BOOL)validateInput:(NSString*)newVersion oldVersion:(NSString*)oldVersion
+{
+    // The input is valid if:
+    // 1. The new version is longer than 0
+    // 2. The new version is not the same as the old version
+    return (([newVersion length] > 0) && ([newVersion compare:oldVersion] != NSOrderedSame));
+}
+
 #pragma mark - Event actions
 
 -(IBAction)didPressUpdateButton:(id)sender
 {
+    // Dismiss any keyboards
+    [_usernameTF resignFirstResponder];
+    [_mobilenoTF resignFirstResponder];
+    [_zipcodeTF resignFirstResponder];
+    
+    BOOL hasValidInput = false;
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    NSString* newUsername = [_usernameTF text];
+    if ([self validateInput:newUsername oldVersion:[[User getInstance] username]])
+    {
+        [dict setObject:newUsername forKey:@"username"];
+        hasValidInput = true;
+    }
+    
+    NSString* newMobileno = [_mobilenoTF text];
+    if ([self validateInput:newMobileno oldVersion:[[User getInstance] phone]])
+    {
+        [dict setObject:newMobileno forKey:@"mobile_no"];
+        hasValidInput = true;
+    }
+    
+    NSString* newZipcode = [_zipcodeTF text];
+    if ([self validateInput:newZipcode oldVersion:[[User getInstance] zipcode]])
+    {
+        [dict setObject:newZipcode forKey:@"zipcode"];
+        hasValidInput = true;
+    }
+    
+    if (hasValidInput)
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Updating info";
+        
+        [[User getInstance] changeInfo:self parameters:dict];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"No changes found." delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (IBAction)goBack:(id)sender
@@ -148,13 +196,16 @@
     
     if(success)
     {
-
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
     else
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
+    
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

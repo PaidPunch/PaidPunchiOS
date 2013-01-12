@@ -18,7 +18,7 @@ static NSString* const kKeyReferral = @"refer_code";
 static NSString* const kKeyName = @"username";
 static NSString* const kKeyEmail = @"email";
 static NSString* const kKeyZipcode = @"zipcode";
-static NSString* const kKeyPhone = @"mobilenumber";
+static NSString* const kKeyPhone = @"mobile_no";
 static NSString* const kTxType = @"txtype";
 static NSString* const kKeyPassword = @"password";
 static NSString* const kKeyNewPassword = @"new_password";
@@ -35,7 +35,7 @@ static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kEmailLogin= @"EMAIL-LOGIN";
 static NSString* const kFacebookLogin = @"FACEBOOK-LOGIN";
 static NSString* const kPasswordChange = @"PASSWORD-CHANGE";
-static NSString* const kMobileChange = @"MOBILE-CHANGE";
+static NSString* const kInfoChange = @"INFO-CHANGE";
 static NSString* const kUserFilename = @"user.sav";
 
 @implementation User
@@ -259,6 +259,7 @@ static NSString* const kUserFilename = @"user.sav";
                                 kFacebookRegister, kTxType,
                                 _username, kKeyName,
                                 _email, kKeyEmail,
+                                _zipcode, kKeyZipcode,
                                 _facebookId, kKeyFacebook,
                                 _uniqueId, kKeyUniqueId,
                                 _referralCode, kKeyReferral,
@@ -306,6 +307,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
                      _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
@@ -342,7 +344,10 @@ static NSString* const kUserFilename = @"user.sav";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                     _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
+                     _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      _isUserValidated = TRUE;
                      [self saveUserData];
@@ -377,6 +382,50 @@ static NSString* const kUserFilename = @"user.sav";
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User password change failed with status code: %d", [operation.response statusCode]);
+                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                }
+     ];
+}
+
+- (void) changeInfo:(NSObject<HttpCallbackDelegate>*)delegate parameters:(NSMutableDictionary*)parameters
+{
+    [parameters setObject:kInfoChange forKey:kTxType];
+    [parameters setObject:_userId forKey:kKeyUserId];
+    [parameters setObject:_uniqueId forKey:kKeyUniqueId];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users";
+    [httpClient putPath:path
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject){
+                    NSLog(@"%@", responseObject);
+                    
+                    // Update local copies after successfully updating server
+                    NSString* value = [parameters valueForKey:kKeyName];
+                    if (value != NULL)
+                    {
+                        _username = value;
+                    }
+                    
+                    value = [parameters valueForKey:kKeyPhone];
+                    if (value != NULL)
+                    {
+                        _phone = value;
+                    }
+                    
+                    value = [parameters valueForKey:kKeyZipcode];
+                    if (value != NULL)
+                    {
+                        _zipcode = value;
+                    }
+                    
+                    [self saveUserData];
+                    
+                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                }
+                failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                    NSLog(@"User info change failed with status code: %d", [operation.response statusCode]);
                     [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
