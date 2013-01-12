@@ -54,6 +54,17 @@
     
     networkManager=[[NetworkManager alloc] initWithView:self.view];
     networkManager.delegate=self;
+    
+    if ([[User getInstance] isFacebookProfile])
+    {
+        // Hide changePwd button
+        [changePwdBtn setHidden:true];
+        [changePwdBtn setEnabled:false];
+        
+        // Centerize signoutbutton so it doesn't look offset
+        CGRect newRectFrame = CGRectMake(self.view.frame.size.width/2 - signOutBtn.frame.size.width/2, signOutBtn.frame.origin.y, signOutBtn.frame.size.width, signOutBtn.frame.size.height);
+        [signOutBtn setFrame:newRectFrame];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
