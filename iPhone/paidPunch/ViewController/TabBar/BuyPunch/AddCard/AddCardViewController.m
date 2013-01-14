@@ -361,6 +361,8 @@
 
 -(void) didFinishCreatingProfile:(NSString *)statusCode statusMessage:(NSString *)message
 {
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
     if([statusCode isEqualToString:@"00"])
     {
         [[User getInstance] setIsPaymentProfileCreated:TRUE];
@@ -386,6 +388,8 @@
 
 -(void) didFinishGettingProfile:(NSString *)statusCode statusMessage:(NSString *)message withMaskedId:(NSString *)maskedId withPaymentId:(NSString *)paymentId
 {
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
     if([statusCode isEqualToString:@"00"])
     {
         if(self.navigationController.visibleViewController==self)
@@ -395,8 +399,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-    }
-    
+    }    
 }
 
 #pragma mark -
@@ -514,103 +517,6 @@
 	BOOL isValid = [emailTest evaluateWithObject:emailId];
 	return isValid;
 }
-/*
-- (BOOL) validateCard:(NSString *)ccNumberString
-{
-    BOOL validCard = NO;
-    NSString *isAMEX=@"";
-    NSString *ccNumber=ccNumberString;
-    NSString * ccNumberReversed = @"";
-    NSString * doubleNumbers = @"";
-    NSString * everyOtherNumber = @"";
-    NSString * lastChar = @"";
-    NSString * intDoubled;
-    NSString * stringToSum;
-    NSUInteger count = [ccNumberString length];
-    NSUInteger len = 1;
-    NSRange r;
-    
-    //since American Express is American Express....., we have to do something special for them.... assholes....
-    r = NSMakeRange( 0, 1);
-    lastChar = [ccNumberString substringWithRange:r];
-    if ([lastChar compare:@"3"] ==0) {
-        
-        isAMEX = @"YES";
-        
-    }
-    else {
-        isAMEX = @"NO";
-    }
-    //reverse the string
-    
-    for ( int i=0; i<count; i++){
-        r = NSMakeRange( count-i-1, len);
-        lastChar = [ccNumberString substringWithRange:r];
-        ccNumberReversed = [ccNumberReversed stringByAppendingString:lastChar];
-    }
-    
-    //double every other number
-    
-    int loc = 1;
-    int ttr = ccNumberReversed.length/2;
-    for ( int i=0; i<ttr; i++){
-        
-        r = NSMakeRange( loc, len);
-        loc = loc+2;
-        lastChar = [ccNumberReversed substringWithRange:r];
-        int dv = [lastChar intValue];
-        dv = (dv * 2);
-        intDoubled = [NSString stringWithFormat:@"%d",dv];
-        doubleNumbers = [doubleNumbers stringByAppendingString:intDoubled];
-    }
-    
-    // get every other number starting at index 0
-    loc = 0;
-    if ([isAMEX compare:@"YES"] ==0) {
-        ttr = ccNumber.length/2+1;
-    }
-    else {
-        ttr = ccNumber.length/2;
-    }
-    
-    
-    for ( int i=0; i<ttr; i++){
-        
-        r = NSMakeRange( loc, len);
-        loc = loc+2;
-        lastChar = [ccNumberReversed substringWithRange:r];
-        everyOtherNumber = [everyOtherNumber stringByAppendingString:lastChar];
-    }
-    
-    //combine both strings so we can sum them up
-    stringToSum = [doubleNumbers stringByAppendingString:everyOtherNumber];
-    
-    // add all the numbers up one by one and divide by 10... if no remainder - its a valid card
-    
-    loc = 0;
-    ttr = stringToSum.length;
-    int stringSum = 0;
-    for ( int i=0; i<ttr; i++){
-        
-        r = NSMakeRange( loc, len);
-        lastChar = [stringToSum substringWithRange:r];
-        int cc = [lastChar intValue];
-        stringSum = stringSum+cc;
-        
-        loc ++;
-    }
-    
-    if (stringSum%10 == 0) {
-        
-        validCard = YES;
-    }
-    else {
-        
-        validCard = NO;
-    }
-    
-    return validCard;
-}*/
 
 -(BOOL) validateCard:(NSString *)ccNumberString
 {
@@ -658,6 +564,10 @@
     if([self validate])
     {
         NSArray *arr=[expDate componentsSeparatedByString:@"-"];
+        
+        hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText = @"Adding Credit Card";
+        
         [networkManager createProfile:name withUserID:[[User getInstance] userId] withEmail:email withExpDate:[NSString stringWithFormat:@"%@-%@",[arr objectAtIndex:1],[arr objectAtIndex:0]] withCVV:cvv withCardNo:cardNumber];
     }
 }
@@ -741,11 +651,9 @@
 
 - (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId
 {
-    /*
-    [[InfoExpert sharedInstance] setMaskedId:maskedId];
+    [[User getInstance] setMaskedId:maskedId];
     ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
     [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
-     */
 }
 
 

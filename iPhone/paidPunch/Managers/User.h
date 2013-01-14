@@ -39,7 +39,7 @@ typedef enum
     BOOL _isPaymentProfileCreated;
     NSNumber* _totalMiles;
     NSDecimalNumber* _credits;
-    NSString* _userCode;
+    NSString* _maskedId;
     
     __weak NSObject<HttpCallbackDelegate>* facebookDelegate;
     
@@ -55,11 +55,13 @@ typedef enum
 @property(nonatomic,strong) NSString* phone;
 @property(nonatomic,strong) NSString* uniqueId;
 @property(nonatomic,strong) NSString* userCode;
+@property(nonatomic,strong) NSString* maskedId;
 @property(nonatomic) BOOL isUserValidated;
 @property(nonatomic) BOOL isPaymentProfileCreated;
 @property(nonatomic) NSNumber* totalMiles;
 
 - (void) clearUser;
+- (void) saveUserData;
 - (void)updateFacebookFeed:(NSString*)message;
 - (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ConfirmPaymentViewController.h"
-#import "NetworkManager.h"
 #import "AddCardViewCell.h"
-#import "User.h"
-#import "PunchCard.h"
+#import "ConfirmPaymentViewController.h"
 #import "HomeViewController.h"
+#import "MBProgressHUD.h"
+#import "NetworkManager.h"
+#import "PunchCard.h"
+#import "User.h"
 
 @class NetworkManager;
 @protocol NetworkManagerDelegate;
@@ -34,6 +35,8 @@
     int selectedMonth;
     
     UIToolbar *numberToolBar;
+    
+    MBProgressHUD *hud;
 }
 @property (strong, nonatomic) IBOutlet UITableView *addCardDetailsTableView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

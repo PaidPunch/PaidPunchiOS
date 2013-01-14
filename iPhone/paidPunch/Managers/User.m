@@ -26,7 +26,7 @@ static NSString* const kKeyFacebook = @"fbid";
 static NSString* const kKeyUniqueId = @"sessionid";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kKeyUserValidate = @"userValidated";
-static NSString* const kKeyPaymentProfileCreated = @"paymentProfile";
+static NSString* const kKeyPaymentProfileCreated = @"isprofile_created";
 static NSString* const kKeyTotalMiles = @"totalMiles";
 static NSString* const kKeyCredits = @"credit";
 static NSString* const kKeyUserCode = @"user_code";
@@ -50,6 +50,7 @@ static NSString* const kUserFilename = @"user.sav";
 @synthesize isPaymentProfileCreated = _isPaymentProfileCreated;
 @synthesize totalMiles = _totalMiles;
 @synthesize userCode = _userCode;
+@synthesize maskedId = _maskedId;
 
 - (id) init
 {
@@ -309,6 +310,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                      _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
+                     _isPaymentProfileCreated = [responseObject boolForKey:kKeyPaymentProfileCreated];
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -349,6 +351,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                      _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
+                     _isPaymentProfileCreated = [responseObject boolForKey:kKeyPaymentProfileCreated];
                      _isUserValidated = TRUE;
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];

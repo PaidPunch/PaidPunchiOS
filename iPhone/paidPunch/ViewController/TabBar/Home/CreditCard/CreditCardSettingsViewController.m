@@ -141,17 +141,14 @@
         self.deleteCardBtn.hidden=NO;
         self.cardMaskedCodeLbl.hidden=NO;
         self.creditCardPinImageView.hidden=NO;
-        self.cardMaskedCodeLbl.text=self.maskedId;
-        /*
         if(self.maskedId==nil)
         {
-            self.cardMaskedCodeLbl.text=[[InfoExpert sharedInstance] maskedId];
+            self.cardMaskedCodeLbl.text=[[User getInstance] maskedId];
         }
         else
         {
             self.cardMaskedCodeLbl.text=self.maskedId;
         }
-         */
     }
     else
     {
