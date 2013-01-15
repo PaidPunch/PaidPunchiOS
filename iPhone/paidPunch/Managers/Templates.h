@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
 
-@interface InviteTemplates : NSObject
+@interface Templates : NSObject
 {
     NSDate* _lastUpdate;
     
@@ -17,8 +17,7 @@
     NSString* _createdVersion;
     
     // Templates
-    NSString* _emailTemplate;
-    NSString* _facebookTemplate;
+    NSMutableArray* _templatesArray;
     
     __weak NSObject<HttpCallbackDelegate>* facebookDelegate;
 }
@@ -27,8 +26,9 @@
 
 - (BOOL) needsRefresh;
 - (void) retrieveTemplatesFromServer:(NSObject<HttpCallbackDelegate>*) delegate;
+- (NSString*) getTemplateByName:(NSString*)name;
 
-+ (InviteTemplates*) getInstance;
++ (Templates*) getInstance;
 + (void) destroyInstance;
 
 @end

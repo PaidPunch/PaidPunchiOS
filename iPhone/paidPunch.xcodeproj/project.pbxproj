@@ -35,6 +35,7 @@
 		11D4D9BF15CB983F00FEF636 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D4D9BD15CB968A00FEF636 /* MarqueeLabel.m */; };
 		11D4D9C615CBA3D800FEF636 /* FAQ.html in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C415CBA3D800FEF636 /* FAQ.html */; };
 		11D4D9C715CBA3D800FEF636 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 11D4D9C515CBA3D800FEF636 /* style.css */; };
+		38011C9916A4D99D008395E6 /* Template.m in Sources */ = {isa = PBXBuildFile; fileRef = 38011C9816A4D99C008395E6 /* Template.m */; };
 		38099F901697648D00BFD3CC /* Products.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F8F1697648D00BFD3CC /* Products.m */; };
 		38099F9316978F0100BFD3CC /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F9216978F0100BFD3CC /* Product.m */; };
 		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
@@ -54,7 +55,7 @@
 		38AAE861167263A400BF4922 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE855167263A400BF4922 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		38B1D809169E8D620087ECD2 /* InviteTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B1D808169E8D620087ECD2 /* InviteTemplates.m */; };
+		38B1D809169E8D620087ECD2 /* Templates.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B1D808169E8D620087ECD2 /* Templates.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -544,6 +545,8 @@
 		11D4D9C515CBA3D800FEF636 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Html/style.css; sourceTree = SOURCE_ROOT; };
 		11FF086615CC715600A7177A /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		11FF086715CC715600A7177A /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		38011C9716A4D99C008395E6 /* Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
+		38011C9816A4D99C008395E6 /* Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Template.m; sourceTree = "<group>"; };
 		38099F8E1697648D00BFD3CC /* Products.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Products.h; sourceTree = "<group>"; };
 		38099F8F1697648D00BFD3CC /* Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Products.m; sourceTree = "<group>"; };
 		38099F9116978F0100BFD3CC /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
@@ -582,8 +585,8 @@
 		38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		38AAE858167263A400BF4922 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		38B1D807169E8D620087ECD2 /* InviteTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteTemplates.h; sourceTree = "<group>"; };
-		38B1D808169E8D620087ECD2 /* InviteTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteTemplates.m; sourceTree = "<group>"; };
+		38B1D807169E8D620087ECD2 /* Templates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Templates.h; sourceTree = "<group>"; };
+		38B1D808169E8D620087ECD2 /* Templates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Templates.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1436,8 +1439,10 @@
 				38099F9216978F0100BFD3CC /* Product.m */,
 				38099F8E1697648D00BFD3CC /* Products.h */,
 				38099F8F1697648D00BFD3CC /* Products.m */,
-				38B1D807169E8D620087ECD2 /* InviteTemplates.h */,
-				38B1D808169E8D620087ECD2 /* InviteTemplates.m */,
+				38B1D807169E8D620087ECD2 /* Templates.h */,
+				38B1D808169E8D620087ECD2 /* Templates.m */,
+				38011C9716A4D99C008395E6 /* Template.h */,
+				38011C9816A4D99C008395E6 /* Template.m */,
 			);
 			name = Managers;
 			path = paidPunch/Managers;
@@ -3261,8 +3266,9 @@
 				38099F901697648D00BFD3CC /* Products.m in Sources */,
 				38099F9316978F0100BFD3CC /* Product.m in Sources */,
 				38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */,
-				38B1D809169E8D620087ECD2 /* InviteTemplates.m in Sources */,
+				38B1D809169E8D620087ECD2 /* Templates.m in Sources */,
 				38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */,
+				38011C9916A4D99D008395E6 /* Template.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

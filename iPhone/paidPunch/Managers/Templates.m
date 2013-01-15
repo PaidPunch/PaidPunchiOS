@@ -1,5 +1,5 @@
 //
-//  InviteTemplates.m
+//  Templates
 //  paidPunch
 //
 //  Created by Aaron Khoo on 1/9/13.
@@ -7,13 +7,13 @@
 //
 
 #import "AFClientManager.h"
-#import "InviteTemplates.h"
+#import "Template.h"
+#import "Templates.h"
 #import "User.h"
 #import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
-static NSString* const kKeyEmailTemplate = @"emailTemplate";
-static NSString* const kKeyFacebookTemplate = @"facebookTemplate";
+static NSString* const kKeyTemplates = @"templates";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kTemplatesFilename = @"template.sav";
 static NSString* const kKeyStatusMessage = @"statusMessage";
@@ -21,9 +21,7 @@ static NSString* const kKeyStatusMessage = @"statusMessage";
 // 1 hour refresh schedule
 static double const refreshTime = -(60 * 30);
 
-@implementation InviteTemplates
-@synthesize emailTemplate = _emailTemplate;
-@synthesize facebookTemplate = _facebookTemplate;
+@implementation Templates
 
 - (id) init
 {
@@ -32,8 +30,7 @@ static double const refreshTime = -(60 * 30);
     {
         _createdVersion = @"1.0";
         _lastUpdate = NULL;
-        _facebookTemplate = @"";
-        _emailTemplate = @"";
+        _templatesArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -43,30 +40,33 @@ static double const refreshTime = -(60 * 30);
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
-- (NSString*) replacePlaceholders:(NSString*)original
+- (NSString*) getTemplateByName:(NSString*)name
 {
-    NSString* newStr = [original stringByReplacingOccurrencesOfString:@"[USERCODE]"
-                                                           withString:[[User getInstance] userCode]];
-    newStr = [newStr stringByReplacingOccurrencesOfString:@"[USERNAME]"
-                                               withString:[[User getInstance] username]];
-    return newStr;
+    Template* result = nil;
+    for (Template* current in _templatesArray)
+    {
+        if ([[current name] compare:name] == NSOrderedSame)
+        {
+            result = current;
+            break;
+        }
+    }
+    return [result templateValue];
 }
 
 #pragma mark - NSCoding
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_createdVersion forKey:kKeyVersion];
-    [aCoder encodeObject:_emailTemplate forKey:kKeyEmailTemplate];
-    [aCoder encodeObject:_facebookTemplate forKey:kKeyFacebookTemplate];
     [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
+    [aCoder encodeObject:_templatesArray forKey:kKeyTemplates];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
     _createdVersion = [aDecoder decodeObjectForKey:kKeyVersion];
-    _emailTemplate = [aDecoder decodeObjectForKey:kKeyEmailTemplate];
-    _facebookTemplate = [aDecoder decodeObjectForKey:kKeyFacebookTemplate];
     _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
+    _templatesArray = [aDecoder decodeObjectForKey:kKeyTemplates];
     return self;
 }
 
@@ -80,16 +80,16 @@ static double const refreshTime = -(60 * 30);
 
 + (NSString*) templatesFilepath
 {
-    NSString* docsDir = [InviteTemplates documentsDirectory];
+    NSString* docsDir = [Templates documentsDirectory];
     NSString* filepath = [docsDir stringByAppendingPathComponent:kTemplatesFilename];
     return filepath;
 }
 
-+ (InviteTemplates*) loadTemplatesData
++ (Templates*) loadTemplatesData
 {
-    InviteTemplates* current_templates = nil;
+    Templates* current_templates = nil;
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* filepath = [InviteTemplates templatesFilepath];
+    NSString* filepath = [Templates templatesFilepath];
     if ([fileManager fileExistsAtPath:filepath])
     {
         NSData* readData = [NSData dataWithContentsOfFile:filepath];
@@ -105,7 +105,7 @@ static double const refreshTime = -(60 * 30);
 {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSError* error = nil;
-    BOOL writeSuccess = [data writeToFile:[InviteTemplates templatesFilepath]
+    BOOL writeSuccess = [data writeToFile:[Templates templatesFilepath]
                                   options:NSDataWritingAtomic
                                     error:&error];
     if(writeSuccess)
@@ -121,11 +121,20 @@ static double const refreshTime = -(60 * 30);
 - (void) removeTemplatesData
 {
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* filepath = [InviteTemplates templatesFilepath];
+    NSString* filepath = [Templates templatesFilepath];
     NSError *error = nil;
     if ([fileManager fileExistsAtPath:filepath])
     {
         [fileManager removeItemAtPath:filepath error:&error];
+    }
+}
+
+- (void) createTemplatesArray:(id)responseObject
+{
+    for (NSDictionary* templateValue in responseObject)
+    {
+        Template* current = [[Template alloc] initWithDictionary:templateValue];
+        [_templatesArray addObject:current];
     }
 }
 
@@ -140,8 +149,7 @@ static double const refreshTime = -(60 * 30);
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
                     NSDictionary* dict = responseObject;
-                    _emailTemplate = [self replacePlaceholders:[dict valueForKeyPath:@"email"]];
-                    _facebookTemplate = [self replacePlaceholders:[dict valueForKeyPath:@"facebook"]];
+                    [self createTemplatesArray:dict];
                     _lastUpdate = [NSDate date];
                     [self saveTemplatesData];
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
@@ -154,19 +162,19 @@ static double const refreshTime = -(60 * 30);
 }
 
 #pragma mark - Singleton
-static InviteTemplates* singleton = nil;
-+ (InviteTemplates*) getInstance
+static Templates* singleton = nil;
++ (Templates*) getInstance
 {
 	@synchronized(self)
 	{
 		if (!singleton)
 		{
             // First, try to load the user data from disk
-            singleton = [InviteTemplates loadTemplatesData];
+            singleton = [Templates loadTemplatesData];
             if (!singleton)
             {
                 // OK, no saved data available. Go ahead and create a new User.
-                singleton = [[InviteTemplates alloc] init];
+                singleton = [[Templates alloc] init];
             }
 		}
 	}

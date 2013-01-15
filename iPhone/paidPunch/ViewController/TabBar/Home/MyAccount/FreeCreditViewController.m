@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FreeCreditViewController.h"
-#import "InviteTemplates.h"
+#import "Templates.h"
 #import "User.h"
 
 typedef enum
@@ -148,7 +148,7 @@ typedef enum
 {
     if (_alertType == facebook_response)
     {
-        [[User getInstance] updateFacebookFeed:[[InviteTemplates getInstance] facebookTemplate]];
+        [[User getInstance] updateFacebookFeed:[[Templates getInstance] getTemplateByName:@"facebook"]];
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
                                                           message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
                                                          delegate:nil
@@ -163,7 +163,7 @@ typedef enum
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
         [controller setSubject:@"My Subject"];
-        [controller setMessageBody:[[InviteTemplates getInstance] emailTemplate] isHTML:YES];
+        [controller setMessageBody:[[Templates getInstance] getTemplateByName:@"email"] isHTML:YES];
         if (controller)
         {
             [self presentModalViewController:controller animated:YES];
@@ -199,11 +199,11 @@ typedef enum
 {
     if(buttonIndex == 0)
     {
-        if ([[InviteTemplates getInstance] needsRefresh])
+        if ([[Templates getInstance] needsRefresh])
         {
             _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             _hud.labelText = @"";
-            [[InviteTemplates getInstance] retrieveTemplatesFromServer:self];
+            [[Templates getInstance] retrieveTemplatesFromServer:self];
         }
         else
         {
