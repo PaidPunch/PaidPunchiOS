@@ -111,7 +111,6 @@
 		8A78E247149770BC00F79380 /* PayToCashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E214149770BC00F79380 /* PayToCashierViewController.m */; };
 		8A78E249149770BC00F79380 /* PunchCardOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E218149770BC00F79380 /* PunchCardOfferViewController.m */; };
 		8A78E24B149770BC00F79380 /* SearchByBusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E21C149770BC00F79380 /* SearchByBusinessViewController.m */; };
-		8A78E24D149770BC00F79380 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E221149770BC00F79380 /* FeedBackViewController.m */; };
 		8A78E24F149770BC00F79380 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E224149770BC00F79380 /* HomeViewController.m */; };
 		8A78E251149770BC00F79380 /* MyPunchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E228149770BC00F79380 /* MyPunchesViewController.m */; };
 		8A78E253149770BC00F79380 /* PunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E22C149770BC00F79380 /* PunchViewController.m */; };
@@ -129,7 +128,6 @@
 		8A78E2A61497757B00F79380 /* CongratulationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2891497757B00F79380 /* CongratulationsViewController.xib */; };
 		8A78E2A71497757B00F79380 /* PayToCashierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E28B1497757B00F79380 /* PayToCashierViewController.xib */; };
 		8A78E2A91497757B00F79380 /* SearchByBusinessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E28F1497757B00F79380 /* SearchByBusinessViewController.xib */; };
-		8A78E2AA1497757B00F79380 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2921497757B00F79380 /* FeedBackViewController.xib */; };
 		8A78E2AB1497757B00F79380 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2931497757B00F79380 /* HomeViewController.xib */; };
 		8A78E2AC1497757B00F79380 /* MyPunchesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2951497757B00F79380 /* MyPunchesViewController.xib */; };
 		8A78E2AD1497757B00F79380 /* PunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2971497757B00F79380 /* PunchViewController.xib */; };
@@ -677,8 +675,6 @@
 		8A78E218149770BC00F79380 /* PunchCardOfferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchCardOfferViewController.m; sourceTree = "<group>"; };
 		8A78E21B149770BC00F79380 /* SearchByBusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByBusinessViewController.h; sourceTree = "<group>"; };
 		8A78E21C149770BC00F79380 /* SearchByBusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByBusinessViewController.m; sourceTree = "<group>"; };
-		8A78E220149770BC00F79380 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
-		8A78E221149770BC00F79380 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		8A78E223149770BC00F79380 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		8A78E224149770BC00F79380 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		8A78E227149770BC00F79380 /* MyPunchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPunchesViewController.h; sourceTree = "<group>"; };
@@ -704,7 +700,6 @@
 		8A78E2891497757B00F79380 /* CongratulationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationsViewController.xib; sourceTree = "<group>"; };
 		8A78E28B1497757B00F79380 /* PayToCashierViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayToCashierViewController.xib; sourceTree = "<group>"; };
 		8A78E28F1497757B00F79380 /* SearchByBusinessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchByBusinessViewController.xib; sourceTree = "<group>"; };
-		8A78E2921497757B00F79380 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
 		8A78E2931497757B00F79380 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		8A78E2951497757B00F79380 /* MyPunchesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPunchesViewController.xib; sourceTree = "<group>"; };
 		8A78E2971497757B00F79380 /* PunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchViewController.xib; sourceTree = "<group>"; };
@@ -777,8 +772,8 @@
 		8A7C771F1525EA300068DDC1 /* Greenbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Greenbutton@2x.png"; sourceTree = "<group>"; };
 		8A7C8FDE1510715F00F99863 /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
 		8A7C8FDF1510715F00F99863 /* TermsAndConditionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsAndConditionsViewController.m; sourceTree = "<group>"; };
-		8A7C8FE515107B1000F99863 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
-		8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		8A7C8FE515107B1000F99863 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePasswordViewController.h; path = ChangePassword/ChangePasswordViewController.h; sourceTree = "<group>"; };
+		8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePasswordViewController.m; path = ChangePassword/ChangePasswordViewController.m; sourceTree = "<group>"; };
 		8A7C8FE715107B1000F99863 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		8A7C8FE815107B1000F99863 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		8A7C8FED15107BC000F99863 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePasswordViewController.xib; path = /Users/aaronkhoo/Projects/PaidPunchiOS/iPhone/paidPunch/View/TabBar/Home/MyAccount/ChangePassword/ChangePasswordViewController.xib; sourceTree = "<absolute>"; };
@@ -1623,20 +1618,10 @@
 				8A7C8FF715107D5800F99863 /* FAQ */,
 				8A7C8FF815107D5800F99863 /* UsingPaidPunch */,
 				8A7C8FE315107B1000F99863 /* MyAccount */,
-				8A78E21F149770BC00F79380 /* FeedBack */,
 				8A78E223149770BC00F79380 /* HomeViewController.h */,
 				8A78E224149770BC00F79380 /* HomeViewController.m */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		8A78E21F149770BC00F79380 /* FeedBack */ = {
-			isa = PBXGroup;
-			children = (
-				8A78E220149770BC00F79380 /* FeedBackViewController.h */,
-				8A78E221149770BC00F79380 /* FeedBackViewController.m */,
-			);
-			path = FeedBack;
 			sourceTree = "<group>";
 		};
 		8A78E226149770BC00F79380 /* MyPunches */ = {
@@ -1847,18 +1832,9 @@
 				8A7C44D2153ECAD8003282D1 /* FAQ */,
 				8A7C44D4153ECAD8003282D1 /* UsingPaidPunch */,
 				8A7C8FEB15107BC000F99863 /* MyAccount */,
-				8A78E2911497757B00F79380 /* FeedBack */,
 				8A78E2931497757B00F79380 /* HomeViewController.xib */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		8A78E2911497757B00F79380 /* FeedBack */ = {
-			isa = PBXGroup;
-			children = (
-				8A78E2921497757B00F79380 /* FeedBackViewController.xib */,
-			);
-			path = FeedBack;
 			sourceTree = "<group>";
 		};
 		8A78E2941497757B00F79380 /* MyPunches */ = {
@@ -2107,7 +2083,8 @@
 		8A7C8FE315107B1000F99863 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
-				8A7C8FE415107B1000F99863 /* ChangePassword */,
+				8A7C8FE515107B1000F99863 /* ChangePasswordViewController.h */,
+				8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */,
 				8A7C8FE715107B1000F99863 /* SettingsViewController.h */,
 				8A7C8FE815107B1000F99863 /* SettingsViewController.m */,
 				38BFA89F169C0B6600102715 /* FreeCreditViewController.h */,
@@ -2118,32 +2095,15 @@
 			path = MyAccount;
 			sourceTree = "<group>";
 		};
-		8A7C8FE415107B1000F99863 /* ChangePassword */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C8FE515107B1000F99863 /* ChangePasswordViewController.h */,
-				8A7C8FE615107B1000F99863 /* ChangePasswordViewController.m */,
-			);
-			path = ChangePassword;
-			sourceTree = "<group>";
-		};
 		8A7C8FEB15107BC000F99863 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
-				8A7C8FEC15107BC000F99863 /* ChangePassword */,
+				8A7C8FED15107BC000F99863 /* ChangePasswordViewController.xib */,
 				8A7C8FEE15107BC000F99863 /* SettingsViewController.xib */,
 				38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */,
 				3828035516A0067D005A8A32 /* InfoChangeViewController.xib */,
 			);
 			path = MyAccount;
-			sourceTree = "<group>";
-		};
-		8A7C8FEC15107BC000F99863 /* ChangePassword */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C8FED15107BC000F99863 /* ChangePasswordViewController.xib */,
-			);
-			path = ChangePassword;
 			sourceTree = "<group>";
 		};
 		8A7C8FF115107BEF00F99863 /* Feeds */ = {
@@ -2812,7 +2772,6 @@
 				8A78E2A61497757B00F79380 /* CongratulationsViewController.xib in Resources */,
 				8A78E2A71497757B00F79380 /* PayToCashierViewController.xib in Resources */,
 				8A78E2A91497757B00F79380 /* SearchByBusinessViewController.xib in Resources */,
-				8A78E2AA1497757B00F79380 /* FeedBackViewController.xib in Resources */,
 				8A78E2AB1497757B00F79380 /* HomeViewController.xib in Resources */,
 				8A78E2AC1497757B00F79380 /* MyPunchesViewController.xib in Resources */,
 				8A78E2AD1497757B00F79380 /* PunchViewController.xib in Resources */,
@@ -3194,7 +3153,6 @@
 				8A78E247149770BC00F79380 /* PayToCashierViewController.m in Sources */,
 				8A78E249149770BC00F79380 /* PunchCardOfferViewController.m in Sources */,
 				8A78E24B149770BC00F79380 /* SearchByBusinessViewController.m in Sources */,
-				8A78E24D149770BC00F79380 /* FeedBackViewController.m in Sources */,
 				8A78E24F149770BC00F79380 /* HomeViewController.m in Sources */,
 				8A78E251149770BC00F79380 /* MyPunchesViewController.m in Sources */,
 				8A78E253149770BC00F79380 /* PunchViewController.m in Sources */,
