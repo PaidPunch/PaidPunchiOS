@@ -310,7 +310,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                      _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
-                     _isPaymentProfileCreated = [responseObject boolForKey:kKeyPaymentProfileCreated];
+                     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -351,7 +351,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                      _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
-                     _isPaymentProfileCreated = [responseObject boolForKey:kKeyPaymentProfileCreated];
+                     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
                      _isUserValidated = TRUE;
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
