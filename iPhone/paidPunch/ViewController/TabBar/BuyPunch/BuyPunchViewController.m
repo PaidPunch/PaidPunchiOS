@@ -88,8 +88,7 @@
     self.activityIndicator.hidden=YES;
 }
 
-#pragma mark -
-#pragma mark NetworkManagerDelegate methods Implementation
+#pragma mark - Event actions
 
 -(void) didFinishBuying:(NSString *)statusCode statusMessage:(NSString *)message
 {
@@ -165,8 +164,6 @@
     }
     
 }
-
-#pragma mark -
 
 -(void)buy
 {

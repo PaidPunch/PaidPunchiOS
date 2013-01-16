@@ -51,6 +51,7 @@ static NSString* const kUserFilename = @"user.sav";
 @synthesize totalMiles = _totalMiles;
 @synthesize userCode = _userCode;
 @synthesize maskedId = _maskedId;
+@synthesize credits = _credits;
 
 - (id) init
 {

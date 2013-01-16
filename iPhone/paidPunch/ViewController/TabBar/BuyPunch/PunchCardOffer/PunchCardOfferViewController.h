@@ -18,7 +18,7 @@
 @class NetworkManager;
 @protocol NetworkManagerDelegate;
 
-@interface PunchCardOfferViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,FBRequestDelegate,FBDialogDelegate,NetworkManagerDelegate,SDWebImageManagerDelegate>
+@interface PunchCardOfferViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,FBRequestDelegate,FBDialogDelegate,NetworkManagerDelegate,SDWebImageManagerDelegate,UIAlertViewDelegate>
 {
     NSString *qrCode;
     PunchCard *punchCardDetails;

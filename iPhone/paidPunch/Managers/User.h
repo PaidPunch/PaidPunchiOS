@@ -59,6 +59,7 @@ typedef enum
 @property(nonatomic) BOOL isUserValidated;
 @property(nonatomic) BOOL isPaymentProfileCreated;
 @property(nonatomic) NSNumber* totalMiles;
+@property(nonatomic) NSDecimalNumber* credits;
 
 - (void) clearUser;
 - (void) saveUserData;

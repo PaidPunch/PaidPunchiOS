@@ -8,6 +8,7 @@
 
 #import "BuyPunchViewController.h"
 #import "PunchCardOfferViewController.h"
+#import "SettingsViewController.h"
 
 @implementation PunchCardOfferViewController
 
@@ -287,7 +288,19 @@
     
 }
 
-#pragma mark -
+#pragma mark - Alert actions
+
+// Reacting to not-enough-credits alert
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        // Navigate to settings view
+        SettingsViewController *settingsViewController= [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:settingsViewController animated:YES];
+    }
+}
+
 #pragma mark FBDialogDelegate methods Implementation
 
 - (void)dialogCompleteWithUrl:(NSURL *)url
@@ -342,7 +355,22 @@
 
 - (IBAction)buyBtnTouchUpInsideHandler:(id)sender
 {
-    [self goToBuyPunchView];
+    double credits = [[[User getInstance] credits] doubleValue];
+    if (credits < [self.punchCardDetails.selling_price doubleValue])
+    {
+        // Not enough credits to purchase
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Insufficient Credits"
+                                                          message:@"You don't have enough credits to purchase the current punchcard. Would you like to add more credits to your account?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:@"Cancel",nil];
+        
+        [message show];
+    }
+    else
+    {
+        [self goToBuyPunchView];    
+    }
 }
 
 - (IBAction)getFreePunchBtnTouchUpInsideHandler:(id)sender 
