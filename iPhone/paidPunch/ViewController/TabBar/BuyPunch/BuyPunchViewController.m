@@ -7,6 +7,7 @@
 //
 
 #import "BuyPunchViewController.h"
+#import "Punches.h"
 
 @implementation BuyPunchViewController
 @synthesize businessLogoImageView;
@@ -54,9 +55,6 @@
     self.title=@"Confirm Payment";
     self.navigationItem.hidesBackButton=YES;
     
-    networkManager=[[NetworkManager alloc] initWithView:self.view];
-    networkManager.delegate = self;
-    
     [self setUpUI];
 }
 
@@ -88,47 +86,15 @@
     self.activityIndicator.hidden=YES;
 }
 
-#pragma mark - Event actions
-
--(void) didFinishBuying:(NSString *)statusCode statusMessage:(NSString *)message
-{
-    if([statusCode isEqualToString:@"00"])
-    {
-        [self goToCongratulationsView];
-    }
-    else
-        if([statusCode isEqualToString:@"401"])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            [[DatabaseManager sharedInstance] deleteEntity:self.punchCardDetails.business];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-    
-}
-
 #pragma mark -
 
-- (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender
+{
     [self buy];
-    //[self goToCongratulationsView];
 }
 
-- (IBAction)cancelBtnTouchUpInsideHandler:(id)sender {
-    /*CATransition *transition = [CATransition animation];
-     transition.duration = 0.5;
-     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-     transition.type = kCATransitionPush;
-     transition.subtype = kCATransitionFromLeft;
-     [self.navigationController.view.layer addAnimation:transition forKey:nil];
-     
-     [self.navigationController popViewControllerAnimated:NO];*/
-    
+- (IBAction)cancelBtnTouchUpInsideHandler:(id)sender
+{    
     NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(noOfViewControllers - 3)] animated:YES];
 }
@@ -168,6 +134,28 @@
 -(void)buy
 {
     //[networkManager buy:@"" loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:@"" isFreePunch:false withTransactionId:@"123456" withAmount:self.punchCardDetails.selling_price withPaymentId:self.paymentId];
+    
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Purchasing Punch";
+    
+    [[Punches getInstance] purchasePunchWithCredit:self punchid:self.punchCardDetails.punch_card_id];
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if(success)
+    {
+        [self goToCongratulationsView];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 @end

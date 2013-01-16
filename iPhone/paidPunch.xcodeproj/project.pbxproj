@@ -66,6 +66,7 @@
 		38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BFA8A2169CE69800102715 /* MessageUI.framework */; };
 		38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C258FC16A5FDF400982568 /* BuyPunchViewController.m */; };
 		38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38C2590016A6087500982568 /* BuyPunchViewController.xib */; };
+		38C2590416A648B200982568 /* Punches.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2590316A648B200982568 /* Punches.m */; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -600,6 +601,8 @@
 		38C258FB16A5FDF400982568 /* BuyPunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyPunchViewController.h; sourceTree = "<group>"; };
 		38C258FC16A5FDF400982568 /* BuyPunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyPunchViewController.m; sourceTree = "<group>"; };
 		38C2590016A6087500982568 /* BuyPunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyPunchViewController.xib; sourceTree = "<group>"; };
+		38C2590216A648B200982568 /* Punches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Punches.h; sourceTree = "<group>"; };
+		38C2590316A648B200982568 /* Punches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Punches.m; sourceTree = "<group>"; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -1428,6 +1431,8 @@
 				38B1D808169E8D620087ECD2 /* Templates.m */,
 				38011C9716A4D99C008395E6 /* Template.h */,
 				38011C9816A4D99C008395E6 /* Template.m */,
+				38C2590216A648B200982568 /* Punches.h */,
+				38C2590316A648B200982568 /* Punches.m */,
 			);
 			name = Managers;
 			path = paidPunch/Managers;
@@ -3175,6 +3180,7 @@
 				38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */,
 				38011C9916A4D99D008395E6 /* Template.m in Sources */,
 				38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */,
+				38C2590416A648B200982568 /* Punches.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CongratulationsViewController.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 #import "NetworkManager.h"
 #import "SDWebImageManagerDelegate.h"
 
-@interface BuyPunchViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate>
+@interface BuyPunchViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate,HttpCallbackDelegate>
 {
-    NetworkManager *networkManager;
+
+    MBProgressHUD* _hud;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLbl;
