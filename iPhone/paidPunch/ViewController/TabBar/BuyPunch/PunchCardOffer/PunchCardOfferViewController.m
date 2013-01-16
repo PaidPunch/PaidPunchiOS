@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#import "BuyPunchViewController.h"
 #import "PunchCardOfferViewController.h"
 
 @implementation PunchCardOfferViewController
@@ -286,39 +287,11 @@
     
 }
 
--(void) didFinishGettingProfile:(NSString *)statusCode statusMessage:(NSString *)message withMaskedId:(NSString *)maskedId withPaymentId:(NSString *)paymentId
-{
-    if([statusCode isEqualToString:@"00"])
-    {
-        [self goToConfirmPaymentView:paymentId withMaskedId:maskedId];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-}
-
 #pragma mark -
 #pragma mark FBDialogDelegate methods Implementation
 
-- (void)dialogCompleteWithUrl:(NSURL *)url {
-    /*if (![url query]) {
-     NSLog(@"User canceled dialog or there was an error");
-     return;
-     }
-     NSDictionary *params = [self parseURLParams:[url query]];
-     // Successful posts return a post_id
-     if ([params valueForKey:@"post_id"]) {
-     //[self showMessage:@"Published feed successfully."];
-     NSLog(@"Feed post ID: %@", [params valueForKey:@"post_id"]);
-     //Successfully posted...Unlock the free punch
-     isFreePunch=YES;
-     [self buy:@"" isFreePunch:true];
-     
-     }*/
-    
+- (void)dialogCompleteWithUrl:(NSURL *)url
+{    
     if([url.absoluteString rangeOfString:@"post_id="].location!=NSNotFound)
     {
         isFreePunch=YES;
@@ -362,30 +335,20 @@
 
 #pragma mark -
 
-- (IBAction)mapBtnTouchUpInsideHandler:(id)sender {
+- (IBAction)mapBtnTouchUpInsideHandler:(id)sender
+{
     [self goToMapView];
 }
 
-- (IBAction)buyBtnTouchUpInsideHandler:(id)sender {
-    [self payBtnTouchUpInsideHandler:sender];
+- (IBAction)buyBtnTouchUpInsideHandler:(id)sender
+{
+    [self goToBuyPunchView];
 }
 
 - (IBAction)getFreePunchBtnTouchUpInsideHandler:(id)sender 
 {
     [[FacebookFacade sharedInstance] setPunchCardOfferViewController:self];
     [[FacebookFacade sharedInstance] apiLogin];
-}
-
-- (IBAction)payBtnTouchUpInsideHandler:(id)sender {
-    if([[User getInstance] isPaymentProfileCreated])
-    {
-        [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
-    }
-    else
-    {
-        [self goToAddCardView];
-    }
-    
 }
 
 - (IBAction)goBack:(id)sender {
@@ -397,6 +360,11 @@
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+-(void) buy:(NSString *)orangeQrCode isFreePunch:(BOOL)unlockedFreePunch
+{
+    [networkManager buy:self.qrCode loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:orangeQrCode isFreePunch:unlockedFreePunch withTransactionId:@"" withAmount:self.punchCardDetails.selling_price withPaymentId:@""];
 }
 
 -(void)backBtnTouchUpInsideHandler:(id)sender
@@ -447,11 +415,6 @@
 {
     [[FacebookFacade sharedInstance] setPunchUsedViewController:nil];
     [self shareOnFacebook];
-}
-
--(void) buy:(NSString *)orangeQrCode isFreePunch:(BOOL)unlockedFreePunch
-{
-    [networkManager buy:self.qrCode loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:orangeQrCode isFreePunch:unlockedFreePunch withTransactionId:@"" withAmount:self.punchCardDetails.selling_price withPaymentId:@""];
 }
 
 #pragma mark -
@@ -526,9 +489,7 @@
     [finePrintDivider setFrame:CGRectMake(3.0, 355.0, 330.0f, 34.0)];
     [[getFreePunchBtn superview] addSubview:finePrintDivider];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *s=[defaults objectForKey:@"LoggedInFromFacebook"];
-    if([s isEqualToString:@"YES"] && [self.punchCardDetails.is_free_punch intValue]==1)
+    if([[User getInstance] isFacebookProfile] && [self.punchCardDetails.is_free_punch intValue]==1)
     {
         self.getFreePunchBtn.enabled=YES;
     }
@@ -543,52 +504,7 @@
     [self.punchesListTableView reloadData];
 }
 
-
--(void)setUpConfirmPurchaseUI:(ConfirmPurchaseView *)cview
-{
-    int totalPunches=[punchCardDetails.total_punches intValue];
-    if([self.punchCardDetails.is_mystery_punch intValue]==1)
-    {
-        totalPunches-=1;
-    }
-    cview.totalCostOfPunchesValueLbl.text=[NSString stringWithFormat:@"%d x $%.2f",totalPunches,[self.punchCardDetails.discount_value_of_each_punch doubleValue]];
-    cview.totalCostOfPunchesLbl.text=[NSString stringWithFormat:@"$%.2f",[self.punchCardDetails.selling_price doubleValue]];
-    cview.totalRedeemablePunchesValueLbl.text=[NSString stringWithFormat:@"%d x $%.2f",totalPunches,[self.punchCardDetails.each_punch_value doubleValue]];
-    cview.totalCostOfRedeemablePunches.text=[NSString stringWithFormat:@"$%.2f",[self.punchCardDetails.actual_price doubleValue]];
-    double num=[self.punchCardDetails.actual_price doubleValue]-[self.punchCardDetails.selling_price doubleValue];
-    cview.totalSavingsValueLbl.text=[NSString stringWithFormat:@"$%.2f",num];
-    
-    cview.totalSavingsLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39.0/255.0 alpha:1];
-    cview.totalSavingsValueLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39.0/255.0 alpha:1];
-    cview.expiryDateLbl.text=[NSString stringWithFormat:@"Promotional value expires %d days after purchase",[self.punchCardDetails.expire_days intValue]];
-    cview.minimumPurchaseLbl.text=[NSString stringWithFormat:@"- Min. purchase of $%.2f required",[self.punchCardDetails.minimum_value doubleValue]];
-    cview.timeDiffLbl.text=[NSString stringWithFormat:@"- 1 Punch may be used every %@ mins",self.punchCardDetails.redeem_time_diff];
-}
-
 #pragma mark -
-
--(void)goToConfirmPurchaseView
-{
-    ConfirmPurchaseView *confirmView;
-    NSArray *xibUIObjects =[[NSBundle mainBundle] loadNibNamed:@"ConfirmPurchaseView" owner:self options:nil];
-    confirmView= [xibUIObjects objectAtIndex:0];
-    [confirmView.payBtn addTarget:self action:@selector(payBtnTouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
-    [self setUpConfirmPurchaseUI:confirmView];
-    AppDelegate *appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.window addSubview:confirmView];
-}
-
-- (void)goToAddCardView
-{
-    AddCardViewController *addCardViewController = [[AddCardViewController alloc] init:self.punchCardDetails];
-    [self.navigationController pushViewController:addCardViewController animated:YES];
-}
-
-- (void)goToPayToCashierView
-{
-    PayToCashierViewController *payToCashierView = [[PayToCashierViewController alloc] init:self.qrCode punchCardDetailsObj:self.punchCardDetails punchCardId:self.punchCardDetails.punch_card_id businessName:self.punchCardDetails.business_name];
-    [self.navigationController pushViewController:payToCashierView animated:YES];
-}
 
 -(void) gotoRootView
 {
@@ -610,10 +526,10 @@
     isFreePunch=NO;
 }
 
-- (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId
+- (void)goToBuyPunchView
 {
-    ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
-    [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
+    BuyPunchViewController *buyPunchViewController = [[BuyPunchViewController alloc] init:self.punchCardDetails];
+    [self.navigationController pushViewController:buyPunchViewController animated:YES];
 }
 
 -(void)goToMapView

@@ -64,6 +64,8 @@
 		38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */; };
 		38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */; };
 		38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BFA8A2169CE69800102715 /* MessageUI.framework */; };
+		38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C258FC16A5FDF400982568 /* BuyPunchViewController.m */; };
+		38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38C2590016A6087500982568 /* BuyPunchViewController.xib */; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -107,7 +109,6 @@
 		8A78E23F149770BC00F79380 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E203149770BC00F79380 /* RegistrationViewController.m */; };
 		8A78E241149770BC00F79380 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E207149770BC00F79380 /* SignInViewController.m */; };
 		8A78E245149770BC00F79380 /* CongratulationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E210149770BC00F79380 /* CongratulationsViewController.m */; };
-		8A78E247149770BC00F79380 /* PayToCashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E214149770BC00F79380 /* PayToCashierViewController.m */; };
 		8A78E249149770BC00F79380 /* PunchCardOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E218149770BC00F79380 /* PunchCardOfferViewController.m */; };
 		8A78E24B149770BC00F79380 /* SearchByBusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E21C149770BC00F79380 /* SearchByBusinessViewController.m */; };
 		8A78E24F149770BC00F79380 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A78E224149770BC00F79380 /* HomeViewController.m */; };
@@ -124,7 +125,6 @@
 		8A78E2A31497757B00F79380 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2821497757B00F79380 /* RegistrationViewController.xib */; };
 		8A78E2A41497757B00F79380 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2841497757B00F79380 /* SignInViewController.xib */; };
 		8A78E2A61497757B00F79380 /* CongratulationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2891497757B00F79380 /* CongratulationsViewController.xib */; };
-		8A78E2A71497757B00F79380 /* PayToCashierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E28B1497757B00F79380 /* PayToCashierViewController.xib */; };
 		8A78E2A91497757B00F79380 /* SearchByBusinessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E28F1497757B00F79380 /* SearchByBusinessViewController.xib */; };
 		8A78E2AB1497757B00F79380 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2931497757B00F79380 /* HomeViewController.xib */; };
 		8A78E2AC1497757B00F79380 /* MyPunchesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A78E2951497757B00F79380 /* MyPunchesViewController.xib */; };
@@ -166,7 +166,6 @@
 		8A7C44E1153ECC2A003282D1 /* SlideToConfirmDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44DF153ECC2A003282D1 /* SlideToConfirmDialog.xib */; };
 		8A7C44EC153ECD3D003282D1 /* AddCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E3153ECD3D003282D1 /* AddCardViewController.xib */; };
 		8A7C44ED153ECD3D003282D1 /* ConfirmPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */; };
-		8A7C44EE153ECD3D003282D1 /* ConfirmPurchaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E7153ECD3D003282D1 /* ConfirmPurchaseView.xib */; };
 		8A7C44EF153ECD3D003282D1 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E9153ECD3D003282D1 /* SearchViewController.xib */; };
 		8A7C44F0153ECD3D003282D1 /* SearchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44EB153ECD3D003282D1 /* SearchListViewController.xib */; };
 		8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */; };
@@ -417,7 +416,6 @@
 		8A7D0A141519DF2500B98387 /* ConfirmPaymentBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D0A0C1519DF2500B98387 /* ConfirmPaymentBg@2x.png */; };
 		8A7D0A151519DF2500B98387 /* PurchaseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D0A0D1519DF2500B98387 /* PurchaseBtn.png */; };
 		8A7D0A161519DF2500B98387 /* PurchaseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D0A0E1519DF2500B98387 /* PurchaseBtn@2x.png */; };
-		8A7D0A1A1519E78D00B98387 /* ConfirmPurchaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D0A191519E78D00B98387 /* ConfirmPurchaseView.m */; };
 		8A7D0A1F1519E8AD00B98387 /* PayViaCreditCardBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D0A1D1519E8AD00B98387 /* PayViaCreditCardBtn@2x.png */; };
 		8A7D0A201519E8AD00B98387 /* PayViaCreditCardBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D0A1E1519E8AD00B98387 /* PayViaCreditCardBtn.png */; };
 		8A7D3EA51521958200B01637 /* SearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D3EA31521958200B01637 /* SearchListViewController.m */; };
@@ -599,6 +597,9 @@
 		38BFA89F169C0B6600102715 /* FreeCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCreditViewController.h; sourceTree = "<group>"; };
 		38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCreditViewController.m; sourceTree = "<group>"; };
 		38BFA8A2169CE69800102715 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		38C258FB16A5FDF400982568 /* BuyPunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyPunchViewController.h; sourceTree = "<group>"; };
+		38C258FC16A5FDF400982568 /* BuyPunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyPunchViewController.m; sourceTree = "<group>"; };
+		38C2590016A6087500982568 /* BuyPunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyPunchViewController.xib; sourceTree = "<group>"; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -665,8 +666,6 @@
 		8A78E207149770BC00F79380 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		8A78E20F149770BC00F79380 /* CongratulationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulationsViewController.h; sourceTree = "<group>"; };
 		8A78E210149770BC00F79380 /* CongratulationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongratulationsViewController.m; sourceTree = "<group>"; };
-		8A78E213149770BC00F79380 /* PayToCashierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayToCashierViewController.h; sourceTree = "<group>"; };
-		8A78E214149770BC00F79380 /* PayToCashierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayToCashierViewController.m; sourceTree = "<group>"; };
 		8A78E217149770BC00F79380 /* PunchCardOfferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchCardOfferViewController.h; sourceTree = "<group>"; };
 		8A78E218149770BC00F79380 /* PunchCardOfferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchCardOfferViewController.m; sourceTree = "<group>"; };
 		8A78E21B149770BC00F79380 /* SearchByBusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByBusinessViewController.h; sourceTree = "<group>"; };
@@ -693,7 +692,6 @@
 		8A78E2821497757B00F79380 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewController.xib; sourceTree = "<group>"; };
 		8A78E2841497757B00F79380 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		8A78E2891497757B00F79380 /* CongratulationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationsViewController.xib; sourceTree = "<group>"; };
-		8A78E28B1497757B00F79380 /* PayToCashierViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayToCashierViewController.xib; sourceTree = "<group>"; };
 		8A78E28F1497757B00F79380 /* SearchByBusinessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchByBusinessViewController.xib; sourceTree = "<group>"; };
 		8A78E2931497757B00F79380 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		8A78E2951497757B00F79380 /* MyPunchesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPunchesViewController.xib; sourceTree = "<group>"; };
@@ -746,7 +744,6 @@
 		8A7C44DF153ECC2A003282D1 /* SlideToConfirmDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideToConfirmDialog.xib; sourceTree = "<group>"; };
 		8A7C44E3153ECD3D003282D1 /* AddCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewController.xib; sourceTree = "<group>"; };
 		8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPaymentViewController.xib; sourceTree = "<group>"; };
-		8A7C44E7153ECD3D003282D1 /* ConfirmPurchaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPurchaseView.xib; sourceTree = "<group>"; };
 		8A7C44E9153ECD3D003282D1 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		8A7C44EB153ECD3D003282D1 /* SearchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchListViewController.xib; sourceTree = "<group>"; };
 		8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewCell.xib; sourceTree = "<group>"; };
@@ -1010,8 +1007,6 @@
 		8A7D0A0C1519DF2500B98387 /* ConfirmPaymentBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmPaymentBg@2x.png"; sourceTree = "<group>"; };
 		8A7D0A0D1519DF2500B98387 /* PurchaseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurchaseBtn.png; sourceTree = "<group>"; };
 		8A7D0A0E1519DF2500B98387 /* PurchaseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PurchaseBtn@2x.png"; sourceTree = "<group>"; };
-		8A7D0A181519E78D00B98387 /* ConfirmPurchaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPurchaseView.h; sourceTree = "<group>"; };
-		8A7D0A191519E78D00B98387 /* ConfirmPurchaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPurchaseView.m; sourceTree = "<group>"; };
 		8A7D0A1D1519E8AD00B98387 /* PayViaCreditCardBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PayViaCreditCardBtn@2x.png"; sourceTree = "<group>"; };
 		8A7D0A1E1519E8AD00B98387 /* PayViaCreditCardBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PayViaCreditCardBtn.png; sourceTree = "<group>"; };
 		8A7D3EA21521958200B01637 /* SearchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchListViewController.h; sourceTree = "<group>"; };
@@ -1557,13 +1552,13 @@
 				8A7D3EA11521956800B01637 /* SearchList */,
 				118E23FB15CC3F5800C943F5 /* SearchByCategory */,
 				8A7D3E9B1521912600B01637 /* Search */,
-				8A7D0A171519E3E800B98387 /* ConfirmPurchase */,
 				8A7D09E91519DC1F00B98387 /* ConfirmPayment */,
 				8A7D09CC1519C97C00B98387 /* AddCard */,
 				8A78E20E149770BC00F79380 /* Congratulations */,
-				8A78E212149770BC00F79380 /* PayToCashier */,
 				8A78E216149770BC00F79380 /* PunchCardOffer */,
 				8A78E21A149770BC00F79380 /* SearchByBusiness */,
+				38C258FB16A5FDF400982568 /* BuyPunchViewController.h */,
+				38C258FC16A5FDF400982568 /* BuyPunchViewController.m */,
 			);
 			path = BuyPunch;
 			sourceTree = "<group>";
@@ -1575,15 +1570,6 @@
 				8A78E210149770BC00F79380 /* CongratulationsViewController.m */,
 			);
 			path = Congratulations;
-			sourceTree = "<group>";
-		};
-		8A78E212149770BC00F79380 /* PayToCashier */ = {
-			isa = PBXGroup;
-			children = (
-				8A78E213149770BC00F79380 /* PayToCashierViewController.h */,
-				8A78E214149770BC00F79380 /* PayToCashierViewController.m */,
-			);
-			path = PayToCashier;
 			sourceTree = "<group>";
 		};
 		8A78E216149770BC00F79380 /* PunchCardOffer */ = {
@@ -1770,15 +1756,14 @@
 		8A78E2861497757B00F79380 /* BuyPunch */ = {
 			isa = PBXGroup;
 			children = (
+				38C2590016A6087500982568 /* BuyPunchViewController.xib */,
 				8A80F0C6154A990300378622 /* BusinessLocator */,
 				118E23FF15CC3F7000C943F5 /* SearchByCategory */,
 				8A7C44E8153ECD3D003282D1 /* Search */,
 				8A7C44EA153ECD3D003282D1 /* SearchList */,
 				8A7C44E4153ECD3D003282D1 /* ConfirmPayment */,
 				8A7C44E2153ECD3D003282D1 /* AddCard */,
-				8A7C44E6153ECD3D003282D1 /* ConfirmPurchase */,
 				8A78E2881497757B00F79380 /* Congratulations */,
-				8A78E28A1497757B00F79380 /* PayToCashier */,
 				8A78E28C1497757B00F79380 /* PunchCardOffer */,
 				8A78E28E1497757B00F79380 /* SearchByBusiness */,
 			);
@@ -1791,14 +1776,6 @@
 				8A78E2891497757B00F79380 /* CongratulationsViewController.xib */,
 			);
 			path = Congratulations;
-			sourceTree = "<group>";
-		};
-		8A78E28A1497757B00F79380 /* PayToCashier */ = {
-			isa = PBXGroup;
-			children = (
-				8A78E28B1497757B00F79380 /* PayToCashierViewController.xib */,
-			);
-			path = PayToCashier;
 			sourceTree = "<group>";
 		};
 		8A78E28C1497757B00F79380 /* PunchCardOffer */ = {
@@ -1967,14 +1944,6 @@
 				8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */,
 			);
 			path = ConfirmPayment;
-			sourceTree = "<group>";
-		};
-		8A7C44E6153ECD3D003282D1 /* ConfirmPurchase */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C44E7153ECD3D003282D1 /* ConfirmPurchaseView.xib */,
-			);
-			path = ConfirmPurchase;
 			sourceTree = "<group>";
 		};
 		8A7C44E8153ECD3D003282D1 /* Search */ = {
@@ -2570,15 +2539,6 @@
 			path = ConfirmPayment;
 			sourceTree = "<group>";
 		};
-		8A7D0A171519E3E800B98387 /* ConfirmPurchase */ = {
-			isa = PBXGroup;
-			children = (
-				8A7D0A181519E78D00B98387 /* ConfirmPurchaseView.h */,
-				8A7D0A191519E78D00B98387 /* ConfirmPurchaseView.m */,
-			);
-			path = ConfirmPurchase;
-			sourceTree = "<group>";
-		};
 		8A7D3E9B1521912600B01637 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -2761,7 +2721,6 @@
 				8A78E2A31497757B00F79380 /* RegistrationViewController.xib in Resources */,
 				8A78E2A41497757B00F79380 /* SignInViewController.xib in Resources */,
 				8A78E2A61497757B00F79380 /* CongratulationsViewController.xib in Resources */,
-				8A78E2A71497757B00F79380 /* PayToCashierViewController.xib in Resources */,
 				8A78E2A91497757B00F79380 /* SearchByBusinessViewController.xib in Resources */,
 				8A78E2AB1497757B00F79380 /* HomeViewController.xib in Resources */,
 				8A78E2AC1497757B00F79380 /* MyPunchesViewController.xib in Resources */,
@@ -3042,7 +3001,6 @@
 				8A7C44E1153ECC2A003282D1 /* SlideToConfirmDialog.xib in Resources */,
 				8A7C44EC153ECD3D003282D1 /* AddCardViewController.xib in Resources */,
 				8A7C44ED153ECD3D003282D1 /* ConfirmPaymentViewController.xib in Resources */,
-				8A7C44EE153ECD3D003282D1 /* ConfirmPurchaseView.xib in Resources */,
 				8A7C44EF153ECD3D003282D1 /* SearchViewController.xib in Resources */,
 				8A7C44F0153ECD3D003282D1 /* SearchListViewController.xib in Resources */,
 				8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */,
@@ -3116,6 +3074,7 @@
 				3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */,
 				38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */,
 				3828035616A0067D005A8A32 /* InfoChangeViewController.xib in Resources */,
+				38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3140,7 +3099,6 @@
 				8A78E23F149770BC00F79380 /* RegistrationViewController.m in Sources */,
 				8A78E241149770BC00F79380 /* SignInViewController.m in Sources */,
 				8A78E245149770BC00F79380 /* CongratulationsViewController.m in Sources */,
-				8A78E247149770BC00F79380 /* PayToCashierViewController.m in Sources */,
 				8A78E249149770BC00F79380 /* PunchCardOfferViewController.m in Sources */,
 				8A78E24B149770BC00F79380 /* SearchByBusinessViewController.m in Sources */,
 				8A78E24F149770BC00F79380 /* HomeViewController.m in Sources */,
@@ -3166,7 +3124,6 @@
 				8A7B655E1513304100F6FB71 /* SecurityImageView.m in Sources */,
 				8A7D09D01519C9A300B98387 /* AddCardViewController.m in Sources */,
 				8A7D09ED1519DC3D00B98387 /* ConfirmPaymentViewController.m in Sources */,
-				8A7D0A1A1519E78D00B98387 /* ConfirmPurchaseView.m in Sources */,
 				8A7E6A81151B2561000F9F32 /* AddCardViewCell.m in Sources */,
 				8A7BC57515205E660052A0E6 /* InstructionsView.m in Sources */,
 				8A7D3EA51521958200B01637 /* SearchListViewController.m in Sources */,
@@ -3217,6 +3174,7 @@
 				38B1D809169E8D620087ECD2 /* Templates.m in Sources */,
 				38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */,
 				38011C9916A4D99D008395E6 /* Template.m in Sources */,
+				38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

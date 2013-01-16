@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NetworkManager.h"
 #import "PunchCard.h"
-#import "PayToCashierViewController.h"
 #import "PunchesViewCell.h"
-#import "AddCardViewController.h"
-#import "ConfirmPurchaseView.h"
-#import "ConfirmPaymentViewController.h"
+#import "BuyPunchViewController.h"
 #import "Reachability.h"
 #import "BusinessLocatorViewController.h"
 #import "SDWebImageManagerDelegate.h"
@@ -61,15 +58,9 @@
 - (IBAction)goBack:(id)sender;
 
 - (id)init:(NSString *)offerCode punchCardDetails:(PunchCard *)punchCard;
-- (void)goToPayToCashierView;
 - (void)setUpUI;
 - (void)shareOnFacebook;
-- (void)buy:(NSString *)orangeQrCode isFreePunch:(BOOL)unlockedFreePunch;
 - (void)goToCongratulationsView;
-- (void)goToAddCardView;
-- (void)goToConfirmPurchaseView;
-- (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId;
-- (void)setUpConfirmPurchaseUI:(ConfirmPurchaseView *)cview;
 - (void)loggedIn;
 - (void)goToMapView;
 
