@@ -83,14 +83,32 @@
     self.activityIndicator.hidden=YES;
     self.businessLogoImageView.image=image;
     [self.activityIndicator stopAnimating];
+  
     self.activityIndicator.hidden=YES;
+}
+
+#pragma mark - Alert actions
+
+// Reacting to not-enough-credits alert
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        [self buy];
+    }
 }
 
 #pragma mark -
 
 - (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender
 {
-    [self buy];
+    NSString* confirmMsg = [NSString stringWithFormat:@"This transaction will deduct $%.2f from your credit balance. Continue?",[self.punchCardDetails.selling_price doubleValue]];
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Confirm Purchase"
+                                                      message:confirmMsg
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:@"Cancel",nil];
+    [message show];
 }
 
 - (IBAction)cancelBtnTouchUpInsideHandler:(id)sender
@@ -133,8 +151,6 @@
 
 -(void)buy
 {
-    //[networkManager buy:@"" loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:@"" isFreePunch:false withTransactionId:@"123456" withAmount:self.punchCardDetails.selling_price withPaymentId:self.paymentId];
-    
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Purchasing Punch";
     
