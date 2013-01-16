@@ -7,8 +7,9 @@
 //
 
 #import "MyPunchesViewController.h"
-#import "UIImageView+WebCache.h"
+#import "Punches.h"
 #import "SDWebImageManager.h"
+#import "UIImageView+WebCache.h"
 
 @implementation MyPunchesViewController
 
@@ -51,7 +52,7 @@
     NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
     if(arr.count==0)
     {
-        //[[InfoExpert sharedInstance] setBuyFlag:NO];
+        [[Punches getInstance] setJustPurchased:FALSE];
         [self getMyPunches];
     }
     
@@ -78,10 +79,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //if([[InfoExpert sharedInstance] buyFlag]==YES)
+    if ([[Punches getInstance] justPurchased])
     {
         [[DatabaseManager sharedInstance] deleteMyPunches];
-        //[[InfoExpert sharedInstance] setBuyFlag:NO];
+        [[Punches getInstance] setJustPurchased:FALSE];
         self.lastRefreshTime=[NSDate date];
         [self getMyPunches];
     }

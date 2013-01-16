@@ -49,7 +49,6 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor=[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
     self.navigationItem.hidesBackButton=YES;
-    //[[InfoExpert sharedInstance] setBuyFlag:YES];
     
     UIBarButtonItem *doneButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneBtnTouchUpInsideHandler:)];
     self.navigationItem.rightBarButtonItem=doneButton;

@@ -19,6 +19,17 @@ static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kKeyUniqueId = @"sessionid";
 
 @implementation Punches
+@synthesize justPurchased = _justPurchased;
+
+- (id) init
+{
+    self = [super init];
+    if(self)
+    {
+        _justPurchased = TRUE;
+    }
+    return self;
+}
 
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid
 {
@@ -36,6 +47,7 @@ static NSString* const kKeyUniqueId = @"sessionid";
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
+                     _justPurchased = TRUE;
                      [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){

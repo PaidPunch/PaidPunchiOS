@@ -10,6 +10,14 @@
 #import "HttpCallbackDelegate.h"
 
 @interface Punches : NSObject
+{
+    // HACK: This is a hack to mirror a legacy situation
+    //       involving UI refresh of punches. Unfortunately,
+    //       we are stuck with it until we have a chance to
+    //       to redesign the UI.
+    BOOL _justPurchased;
+}
+@property(nonatomic) BOOL justPurchased;
 
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
 
