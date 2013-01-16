@@ -67,6 +67,12 @@
 		38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C258FC16A5FDF400982568 /* BuyPunchViewController.m */; };
 		38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38C2590016A6087500982568 /* BuyPunchViewController.xib */; };
 		38C2590416A648B200982568 /* Punches.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2590316A648B200982568 /* Punches.m */; };
+		38C2590D16A67B9F00982568 /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2590716A67B9F00982568 /* LocalyticsDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		38C2590E16A67B9F00982568 /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2590916A67B9F00982568 /* LocalyticsSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		38C2590F16A67B9F00982568 /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2590B16A67B9F00982568 /* LocalyticsUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		38C2591116A67F3D00982568 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C2591016A67F3C00982568 /* libz.dylib */; };
+		38C2591316A67F4E00982568 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C2591216A67F4D00982568 /* libsqlite3.dylib */; };
+		38C2591516A67F6D00982568 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C2591416A67F6C00982568 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -603,6 +609,16 @@
 		38C2590016A6087500982568 /* BuyPunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyPunchViewController.xib; sourceTree = "<group>"; };
 		38C2590216A648B200982568 /* Punches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Punches.h; sourceTree = "<group>"; };
 		38C2590316A648B200982568 /* Punches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Punches.m; sourceTree = "<group>"; };
+		38C2590616A67B9F00982568 /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsDatabase.h; path = External/Localytics/LocalyticsDatabase.h; sourceTree = "<group>"; };
+		38C2590716A67B9F00982568 /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalyticsDatabase.m; path = External/Localytics/LocalyticsDatabase.m; sourceTree = "<group>"; };
+		38C2590816A67B9F00982568 /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsSession.h; path = External/Localytics/LocalyticsSession.h; sourceTree = "<group>"; };
+		38C2590916A67B9F00982568 /* LocalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalyticsSession.m; path = External/Localytics/LocalyticsSession.m; sourceTree = "<group>"; };
+		38C2590A16A67B9F00982568 /* LocalyticsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsUploader.h; path = External/Localytics/LocalyticsUploader.h; sourceTree = "<group>"; };
+		38C2590B16A67B9F00982568 /* LocalyticsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalyticsUploader.m; path = External/Localytics/LocalyticsUploader.m; sourceTree = "<group>"; };
+		38C2590C16A67B9F00982568 /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebserviceConstants.h; path = External/Localytics/WebserviceConstants.h; sourceTree = "<group>"; };
+		38C2591016A67F3C00982568 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		38C2591216A67F4D00982568 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		38C2591416A67F6C00982568 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -1094,6 +1110,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C2591516A67F6D00982568 /* AdSupport.framework in Frameworks */,
+				38C2591316A67F4E00982568 /* libsqlite3.dylib in Frameworks */,
+				38C2591116A67F3D00982568 /* libz.dylib in Frameworks */,
 				38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */,
 				3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */,
 				8A7C54641549265B002854FF /* MapKit.framework in Frameworks */,
@@ -1174,6 +1193,7 @@
 		38AAE8431672636100BF4922 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				38C2590516A67B8300982568 /* Localytics */,
 				38AAE844167263A400BF4922 /* AFNetworking */,
 			);
 			name = External;
@@ -1206,6 +1226,20 @@
 			);
 			name = AFNetworking;
 			path = External/AFNetworking;
+			sourceTree = "<group>";
+		};
+		38C2590516A67B8300982568 /* Localytics */ = {
+			isa = PBXGroup;
+			children = (
+				38C2590616A67B9F00982568 /* LocalyticsDatabase.h */,
+				38C2590716A67B9F00982568 /* LocalyticsDatabase.m */,
+				38C2590816A67B9F00982568 /* LocalyticsSession.h */,
+				38C2590916A67B9F00982568 /* LocalyticsSession.m */,
+				38C2590A16A67B9F00982568 /* LocalyticsUploader.h */,
+				38C2590B16A67B9F00982568 /* LocalyticsUploader.m */,
+				38C2590C16A67B9F00982568 /* WebserviceConstants.h */,
+			);
+			name = Localytics;
 			sourceTree = "<group>";
 		};
 		848F468A156F61DC00332D31 /* iRate */ = {
@@ -1253,9 +1287,12 @@
 		8A77DE39147E677100E05277 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38C2591216A67F4D00982568 /* libsqlite3.dylib */,
+				38C2591016A67F3C00982568 /* libz.dylib */,
 				3842B24A16407E28009203D0 /* libxml2.dylib */,
 				8A77CF3714C015A600F9560E /* libSDWebImage.a */,
 				8AFE25F9147F7A560039247A /* libiconv.dylib */,
+				38C2591416A67F6C00982568 /* AdSupport.framework */,
 				38BFA8A2169CE69800102715 /* MessageUI.framework */,
 				8A7C54631549265B002854FF /* MapKit.framework */,
 				8A7921AD152C515800CC70E1 /* CoreText.framework */,
@@ -3181,6 +3218,9 @@
 				38011C9916A4D99D008395E6 /* Template.m in Sources */,
 				38C258FD16A5FDF500982568 /* BuyPunchViewController.m in Sources */,
 				38C2590416A648B200982568 /* Punches.m in Sources */,
+				38C2590D16A67B9F00982568 /* LocalyticsDatabase.m in Sources */,
+				38C2590E16A67B9F00982568 /* LocalyticsSession.m in Sources */,
+				38C2590F16A67B9F00982568 /* LocalyticsUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

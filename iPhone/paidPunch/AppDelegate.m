@@ -8,10 +8,11 @@
 
 #import "AppDelegate.h"
 
+#import "iRate.h"
+#import "LocalyticsSession.h"
+#import "User.h"
 #import "SignInViewController.h"
 #import "StartPageViewController.h"
-#import "iRate.h"
-#import "User.h"
 
 @implementation AppDelegate
 
@@ -162,6 +163,9 @@ static NSString* kAppId = @"159848747459550";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Override point for customization after application launch.
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"add06e1e22ef9ab10bc2e72-5406e6da-5fa0-11e2-3c3f-004b50a28849"];
+    
     //Splash screen waiting time
 	[NSThread sleepForTimeInterval:1];
     
@@ -210,12 +214,20 @@ static NSString* kAppId = @"159848747459550";
     //[[DatabaseManager sharedInstance] deleteOtherPunchCards];
     [self saveContext];
     [[User getInstance] saveUserData];
+    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
+    
     if([CLLocationManager locationServicesEnabled])
+    {
         [self.locationManager startUpdatingLocation];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -235,6 +247,10 @@ static NSString* kAppId = @"159848747459550";
      */
     [self saveContext];
     [[User getInstance] saveUserData];
+    
+    // Close Localytics Session
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 
