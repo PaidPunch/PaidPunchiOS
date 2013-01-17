@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
 
+static NSString* const kKeyProductsRetrieve = @"products_retrieve";
+static NSString* const kKeyProductsPurchase = @"products_purchase";
+
 @interface Products : NSObject
 {
     // internal

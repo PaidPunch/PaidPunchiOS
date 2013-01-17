@@ -14,16 +14,8 @@
 #import "SettingsViewController.h"
 #import "User.h"
 
-typedef enum
-{
-    no_http_call,
-    product_get_call,
-    purchase_product_call
-} httpType;
-
 @interface SettingsViewController ()
 {
-    httpType _httpType;
     BOOL _addCreditCardAlert;
 }
 @end
@@ -45,7 +37,6 @@ typedef enum
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        _httpType = no_http_call;
         _addCreditCardAlert = FALSE;
     }
     return self;
@@ -96,7 +87,6 @@ typedef enum
         hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hud.labelText = @"Retrieving Products";
         
-        _httpType = product_get_call;
         [[Products getInstance] retrieveProductsFromServer:self];
     }
     else
@@ -291,15 +281,15 @@ typedef enum
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
 {
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     
-    if (_httpType == product_get_call)
+    if ([type compare:kKeyProductsRetrieve] == NSOrderedSame)
     {
         [self enableValidProductButtons];
     }
-    else if (_httpType == purchase_product_call)
+    else if ([type compare:kKeyProductsPurchase] == NSOrderedSame)
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Credit Updated"
                                                           message:@"Additional credit has been purchased and added to your account"
@@ -312,7 +302,6 @@ typedef enum
     {
         NSLog(@"Unknown http call in SettingsViewController");
     }
-    _httpType = no_http_call;
 }
 
 #pragma mark - private

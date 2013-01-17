@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
 
+static NSString* const kKeyPunchesPurchase = @"punches_purchase";
+
 @interface Punches : NSObject
 {
     // HACK: This is a hack to mirror a legacy situation

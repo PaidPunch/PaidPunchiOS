@@ -393,7 +393,7 @@
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
 {
     NSLog(@"In didCompleteHttpCallback");
     [self didFinishEmailSignup:success statusMessage:message];

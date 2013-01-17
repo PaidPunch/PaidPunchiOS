@@ -238,11 +238,11 @@ static NSString* const kUserFilename = @"user.sav";
                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                     [self saveUserData];
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -279,11 +279,11 @@ static NSString* const kUserFilename = @"user.sav";
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      _isUserValidated = TRUE;
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -313,11 +313,11 @@ static NSString* const kUserFilename = @"user.sav";
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
                      [self saveUserData];
-                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                     [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -355,11 +355,11 @@ static NSString* const kUserFilename = @"user.sav";
                      _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
                      _isUserValidated = TRUE;
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -382,11 +382,11 @@ static NSString* const kUserFilename = @"user.sav";
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User password change failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -426,11 +426,11 @@ static NSString* const kUserFilename = @"user.sav";
                     
                     [self saveUserData];
                     
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User info change failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }

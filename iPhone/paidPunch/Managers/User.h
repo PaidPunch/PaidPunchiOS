@@ -11,8 +11,12 @@
 #import "FBRequest.h"
 #import "HttpCallbackDelegate.h"
 
-static NSString* const kUser_EmailRegistration = @"User_EmailRegistration";
-static NSString* const kUser_FacebookRegistration = @"User_FacebookRegistration";
+static NSString* const kKeyUsersEmailRegister = @"users_email_register";
+static NSString* const kKeyUsersFacebookRegister = @"users_facebook_register";
+static NSString* const kKeyUsersEmailLogin = @"users_email_login";
+static NSString* const kKeyUsersFacebookLogin = @"users_facebook_login";
+static NSString* const kKeyUsersChangePassword = @"users_change_password";
+static NSString* const kKeyUsersChangeInfo = @"users_change_info";
 
 typedef enum
 {

@@ -146,11 +146,11 @@ static double const refreshTime = -(60 * 60);
                     [self createProductsArray:responseObject];
                     _lastUpdate = [NSDate date];
                     [self saveProductsData];
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProductsRetrieve, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Downloading new Products from server has failed.");
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyProductsRetrieve, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -172,11 +172,11 @@ static double const refreshTime = -(60 * 60);
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProductsPurchase, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Downloading new Products from server has failed.");
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyProductsPurchase, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }

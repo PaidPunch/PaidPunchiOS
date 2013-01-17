@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
 
+static NSString* const kKeyTemplatesRetrieve = @"templates_retrieve";
+
 @interface Templates : NSObject
 {
     NSDate* _lastUpdate;

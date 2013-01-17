@@ -211,7 +211,7 @@ static NSUInteger kMaxReferralCodeSize = 10;
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
 {
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     

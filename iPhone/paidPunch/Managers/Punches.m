@@ -48,11 +48,11 @@ static NSString* const kKeyUniqueId = @"sessionid";
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _justPurchased = TRUE;
-                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"Punch purchase failed with code: %d", [operation.response statusCode]);
-                     [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }

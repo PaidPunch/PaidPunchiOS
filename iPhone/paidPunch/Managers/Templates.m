@@ -152,11 +152,11 @@ static double const refreshTime = -(60 * 30);
                     [self createTemplatesArray:dict];
                     _lastUpdate = [NSDate date];
                     [self saveTemplatesData];
-                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyTemplatesRetrieve, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Downloading new Products from server has failed.");
-                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyTemplatesRetrieve, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
