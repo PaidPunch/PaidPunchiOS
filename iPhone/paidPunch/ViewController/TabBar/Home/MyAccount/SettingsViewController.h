@@ -17,10 +17,9 @@
 #import "MBProgressHUD.h"
 #import "HttpCallbackDelegate.h"
 
-@interface SettingsViewController : UIViewController<HttpCallbackDelegate,NetworkManagerDelegate,UITextFieldDelegate>
+@interface SettingsViewController : UIViewController<HttpCallbackDelegate,NetworkManagerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
     NetworkManager *networkManager;
-    
     MBProgressHUD *hud;
 }
 @property (strong, nonatomic) IBOutlet UILabel *usernameLbl;

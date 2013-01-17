@@ -393,7 +393,9 @@
     if([statusCode isEqualToString:@"00"])
     {
         if(self.navigationController.visibleViewController==self)
+        {
             [self goToConfirmPaymentView:paymentId withMaskedId:maskedId];
+        }
     }
     else
     {
@@ -651,9 +653,11 @@
 
 - (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId
 {
+    /*
     [[User getInstance] setMaskedId:maskedId];
     ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
     [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
+     */
 }
 
 

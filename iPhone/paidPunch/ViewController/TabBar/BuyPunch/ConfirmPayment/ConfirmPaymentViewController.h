@@ -8,33 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import "CongratulationsViewController.h"
-#import "NetworkManager.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 #import "SDWebImageManagerDelegate.h"
 
 @class NetworkManager;
 @protocol NetworkManagerDelegate;
 
-@interface ConfirmPaymentViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate>
+@interface ConfirmPaymentViewController : UIViewController<HttpCallbackDelegate,SDWebImageManagerDelegate>
 {
-    NetworkManager *networkManager;
+    MBProgressHUD* _hud;
+    NSUInteger _index;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLbl;
 @property (strong, nonatomic) IBOutlet UILabel *valueLbl;
 @property (strong, nonatomic) IBOutlet UILabel *pinLbl;
 @property (strong, nonatomic) IBOutlet UILabel *creditCardLbl;
-@property (nonatomic,strong) PunchCard *punchCardDetails;
-@property (nonatomic,strong) NSString *maskedId;
-@property (nonatomic,strong) NSString *paymentId;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-- (id)init:(PunchCard *)punchCard withMaskedId:(NSString *)mid withPaymentId:(NSString *)pid;
+- (id)init:(NSUInteger)index;
 
 - (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender;
 - (IBAction)cancelBtnTouchUpInsideHandler:(id)sender;
 
 - (void)setUpUI;
 - (void)buy;
-- (void)goToCongratulationsView;
 
 @end

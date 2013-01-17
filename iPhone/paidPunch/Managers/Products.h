@@ -21,6 +21,7 @@
 @property (nonatomic,readonly) NSDate* lastUpdate;
 
 - (void) retrieveProductsFromServer:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) purchaseProduct:(NSObject<HttpCallbackDelegate>*) delegate index:(NSUInteger)index;
 - (BOOL) needsRefresh;
 
 + (Products*) getInstance;

@@ -13,9 +13,8 @@
 #import "NetworkManager.h"
 #import "SDWebImageManagerDelegate.h"
 
-@interface BuyPunchViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate,HttpCallbackDelegate>
+@interface BuyPunchViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate,HttpCallbackDelegate,UIAlertViewDelegate>
 {
-
     MBProgressHUD* _hud;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;

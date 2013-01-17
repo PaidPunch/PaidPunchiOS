@@ -9,12 +9,16 @@
 #import "AFClientManager.h"
 #import "Product.h"
 #import "Products.h"
+#import "User.h"
 #import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kKeyProducts = @"products";
 static NSString* const kKeyStatusMessage = @"statusMessage";
+static NSString* const kKeyUserId = @"user_id";
+static NSString* const kKeyProductId = @"product_id";
+static NSString* const kKeyUniqueId = @"sessionid";
 static NSString* const kProductsFilename = @"products.sav";
 
 // 1 hour refresh schedule
@@ -142,6 +146,32 @@ static double const refreshTime = -(60 * 60);
                     [self createProductsArray:responseObject];
                     _lastUpdate = [NSDate date];
                     [self saveProductsData];
+                    [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                }
+                failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                    NSLog(@"Downloading new Products from server has failed.");
+                    [delegate didCompleteHttpCallback:FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                }
+     ];
+}
+
+- (void) purchaseProduct:(NSObject<HttpCallbackDelegate>*) delegate index:(NSUInteger)index
+{
+    // put parameters
+    NSArray* productsArray = [[Products getInstance] productsArray];
+    Product* current = [productsArray objectAtIndex:index];
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [current productId], kKeyProductId,
+                                [[User getInstance] userId], kKeyUserId,
+                                [[User getInstance] uniqueId], kKeyUniqueId,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    [httpClient putPath:@"paid_punch/Products"
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject){
+                    NSLog(@"Retrieved: %@", responseObject);
                     [delegate didCompleteHttpCallback:TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){

@@ -7,6 +7,8 @@
 //
 
 #import "ConfirmPaymentViewController.h"
+#import "Product.h"
+#import "Products.h"
 #import "User.h"
 
 @implementation ConfirmPaymentViewController
@@ -15,26 +17,23 @@
 @synthesize valueLbl;
 @synthesize pinLbl;
 @synthesize creditCardLbl;
-@synthesize punchCardDetails;
-@synthesize maskedId;
-@synthesize paymentId;
-@synthesize activityIndicator;
 
-- (id)init:(PunchCard *)punchCard withMaskedId:(NSString *)mid withPaymentId:(NSString *)pid
+- (id)init:(NSUInteger)index
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
-        self.punchCardDetails=punchCard;
-        self.paymentId=pid;
-        self.maskedId=mid;
+        _index = index;
     }
     return self;
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -58,30 +57,15 @@
     self.title=@"Confirm Payment";
     self.navigationItem.hidesBackButton=YES;
     
-    networkManager=[[NetworkManager alloc] initWithView:self.view];
-    networkManager.delegate=self;
-    
     [self setUpUI];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[User getInstance] isPaymentProfileCreated])
-    {
-    }
-    else
-    {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    }
 }
+
 - (void)viewDidUnload
 {
-    [self setBusinessLogoImageView:nil];
-    [self setDescriptionLbl:nil];
-    [self setValueLbl:nil];
-    [self setPinLbl:nil];
-    [self setCreditCardLbl:nil];
-    [self setActivityIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -94,71 +78,23 @@
 }
 
 #pragma mark -
-#pragma mark Cleanup
-
-
-#pragma mark -
 #pragma mark SDWebImageManagerDelegate methods Implementation
 
 -(void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
 {
-    [self.activityIndicator stopAnimating];
-    self.activityIndicator.hidden=YES;
     self.businessLogoImageView.image=image;
 }
 
 #pragma mark -
-#pragma mark NetworkManagerDelegate methods Implementation
 
--(void) didFinishBuying:(NSString *)statusCode statusMessage:(NSString *)message
+- (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender
 {
-    if([statusCode isEqualToString:@"00"])
-    {
-        [self goToCongratulationsView];
-    }
-    else
-    if([statusCode isEqualToString:@"401"])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [[DatabaseManager sharedInstance] deleteEntity:self.punchCardDetails.business];
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-}
-
-#pragma mark -
-
-- (IBAction)purchaseBtnTouchUpInsideHandler:(id)sender {
     [self buy];
-    //[self goToCongratulationsView];
 }
 
-- (IBAction)cancelBtnTouchUpInsideHandler:(id)sender {
-   /*CATransition *transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromLeft;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    
-    [self.navigationController popViewControllerAnimated:NO];*/
-    
-    NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(noOfViewControllers - 3)] animated:YES];
-}
-
-#pragma mark -
-
-- (void)goToCongratulationsView
-{
-    CongratulationsViewController *congratulationsView = [[CongratulationsViewController alloc] init:self.punchCardDetails.business_name isFreePunchUnlocked:NO];
-    [self.navigationController pushViewController:congratulationsView animated:YES];
+- (IBAction)cancelBtnTouchUpInsideHandler:(id)sender
+{    
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark -
@@ -166,33 +102,47 @@
 -(void)setUpUI
 {
     self.valueLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39.0/255.0 alpha:1];
-    self.businessLogoImageView.image=[UIImage imageWithData:self.punchCardDetails.business_logo_img];
-    self.descriptionLbl.text=self.punchCardDetails.punch_card_desc;
+    //self.businessLogoImageView.image=[UIImage imageWithData:self.punchCardDetails.business_logo_img];
+    //self.descriptionLbl.text=self.punchCardDetails.punch_card_desc;
     
-    self.valueLbl.text=[NSString stringWithFormat:@"PAY $%.2f",[self.punchCardDetails.selling_price doubleValue]];
+    Product* current = [[[Products getInstance] productsArray] objectAtIndex:_index];
+    
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString* costString = [formatter stringFromNumber:[current cost]];
+    NSString* creditString = [formatter stringFromNumber:[current credits]];
+    
+    self.valueLbl.text=[NSString stringWithFormat:@"PAY $%@",costString];
     self.creditCardLbl.textColor=[UIColor colorWithRed:0/255.0 green:114/255.0 blue:180/255.0 alpha:1];
-    self.pinLbl.text=[NSString stringWithFormat:@"%@",self.maskedId];
-    SDWebImageManager *manager=[SDWebImageManager sharedManager];
-    UIImage *cachedImage=[manager imageWithURL:[NSURL URLWithString:self.punchCardDetails.business_logo_url]];
-    if(cachedImage)
+    self.pinLbl.text=[NSString stringWithFormat:@"for %@ credits",creditString];
+    
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(BOOL)success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if(success)
     {
-        self.businessLogoImageView.image=cachedImage;
-        self.activityIndicator.hidden=YES;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Credit Purchased" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
     else
     {
-        [self.activityIndicator startAnimating];
-        self.activityIndicator.hidden=NO;
-        [manager downloadWithURL:[NSURL URLWithString:self.punchCardDetails.business_logo_url] delegate:self];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
-    
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark -
 
 -(void)buy
 {
-    [networkManager buy:@"" loggedInUserId:[[User getInstance] userId] punchCardId:self.punchCardDetails.punch_card_id orangeQrCodeScanned:@"" isFreePunch:false withTransactionId:@"123456" withAmount:self.punchCardDetails.selling_price withPaymentId:self.paymentId];
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Purchasing Credit";
+    [[Products getInstance] purchaseProduct:self index:_index];
 }
 
 @end

@@ -6,11 +6,27 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#import "ConfirmPaymentViewController.h"
 #import "FreeCreditViewController.h"
 #import "InfoChangeViewController.h"
 #import "Product.h"
 #import "Products.h"
 #import "SettingsViewController.h"
+#import "User.h"
+
+typedef enum
+{
+    no_http_call,
+    product_get_call,
+    purchase_product_call
+} httpType;
+
+@interface SettingsViewController ()
+{
+    httpType _httpType;
+    BOOL _addCreditCardAlert;
+}
+@end
 
 @implementation SettingsViewController
 @synthesize usernameLbl;
@@ -29,7 +45,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // Custom initialization
+        _httpType = no_http_call;
+        _addCreditCardAlert = FALSE;
     }
     return self;
 }
@@ -79,6 +96,7 @@
         hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hud.labelText = @"Retrieving Products";
         
+        _httpType = product_get_call;
         [[Products getInstance] retrieveProductsFromServer:self];
     }
     else
@@ -146,19 +164,6 @@
     
 }
 
--(void) didFinishLoadingAppURL:(NSString *)url
-{
-}
-
--(void) didConnectionFailed :(NSString *)responseStatus
-{
-    Reachability *hostReach = [Reachability reachabilityForInternetConnection];
-	if ([hostReach currentReachabilityStatus] != NotReachable) 
-	{		
-        //[self requestAppIp];
-    }
-}
-
 -(void) didFinishGettingProfile:(NSString *)statusCode statusMessage:(NSString *)message withMaskedId:(NSString *)maskedId withPaymentId:(NSString *)paymentId
 {
     if([statusCode isEqualToString:@"00"])
@@ -170,7 +175,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    
 }
 
 #pragma mark -
@@ -209,7 +213,58 @@
     [self.navigationController pushViewController:freeCreditView animated:YES];
 }
 
+- (IBAction)creditBtn1TouchUpInsideHandler:(id)sender
+{
+    [self handleCreditPurchase:0];
+}
+
+- (IBAction)creditBtn2TouchUpInsideHandler:(id)sender
+{
+    [self handleCreditPurchase:1];
+}
+
+- (IBAction)creditBtn3TouchUpInsideHandler:(id)sender
+{
+    [self handleCreditPurchase:2];
+}
+
+- (IBAction)creditBtn4TouchUpInsideHandler:(id)sender
+{
+    [self handleCreditPurchase:3];
+}
+
+#pragma mark - Alert actions
+
+// Reacting to alerts
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0 && _addCreditCardAlert)
+    {
+        [self goToCreditCardSettingsView:nil];
+    }
+    _addCreditCardAlert = FALSE;
+}
+
 #pragma mark -
+
+- (void)handleCreditPurchase:(NSUInteger)index
+{
+    if ([[User getInstance] isPaymentProfileCreated])
+    {
+        ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:index];
+        [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
+    }
+    else
+    {
+        _addCreditCardAlert = TRUE;
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Credit Card"
+                                                          message:@"You do not have a credit card registered with us, and cannot purchase additional credit until you do so. Please press OK to register a credit card."
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:@"Cancel",nil];
+        [message show];
+    }
+}
 
 -(void) goToSignInView
 {
@@ -240,7 +295,24 @@
 {
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     
-    [self enableValidProductButtons];
+    if (_httpType == product_get_call)
+    {
+        [self enableValidProductButtons];
+    }
+    else if (_httpType == purchase_product_call)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Credit Updated"
+                                                          message:@"Additional credit has been purchased and added to your account"
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
+    else
+    {
+        NSLog(@"Unknown http call in SettingsViewController");
+    }
+    _httpType = no_http_call;
 }
 
 #pragma mark - private
@@ -264,24 +336,28 @@
                 [product1Btn setTitle:[current desc] forState:UIControlStateNormal];
                 product1Btn.hidden = FALSE;
                 product1Btn.enabled = TRUE;
+                [product1Btn addTarget:self action:@selector(creditBtn1TouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
             }
             else if (index == 1)
             {
                 [product2Btn setTitle:[current desc] forState:UIControlStateNormal];
                 product2Btn.hidden = FALSE;
                 product2Btn.enabled = TRUE;
+                [product2Btn addTarget:self action:@selector(creditBtn2TouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
             }
             else if (index == 2)
             {
                 [product3Btn setTitle:[current desc] forState:UIControlStateNormal];
                 product3Btn.hidden = FALSE;
                 product3Btn.enabled = TRUE;
+                [product3Btn addTarget:self action:@selector(creditBtn3TouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
             }
             else if (index == 3)
             {
                 [product4Btn setTitle:[current desc] forState:UIControlStateNormal];
                 product4Btn.hidden = FALSE;
                 product4Btn.enabled = TRUE;
+                [product4Btn addTarget:self action:@selector(creditBtn4TouchUpInsideHandler:) forControlEvents:UIControlEventTouchUpInside];
             }
             
             index++;
