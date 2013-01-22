@@ -30,6 +30,7 @@ static NSString* const kKeyPaymentProfileCreated = @"isprofile_created";
 static NSString* const kKeyTotalMiles = @"totalMiles";
 static NSString* const kKeyCredits = @"credit";
 static NSString* const kKeyUserCode = @"user_code";
+static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
 static NSString* const kEmailLogin= @"EMAIL-LOGIN";
@@ -37,6 +38,9 @@ static NSString* const kFacebookLogin = @"FACEBOOK-LOGIN";
 static NSString* const kPasswordChange = @"PASSWORD-CHANGE";
 static NSString* const kInfoChange = @"INFO-CHANGE";
 static NSString* const kUserFilename = @"user.sav";
+
+// 1 hour refresh schedule
+static double const refreshTime = -(30 * 60);
 
 @implementation User
 @synthesize referralCode = _referralCode;
@@ -52,6 +56,7 @@ static NSString* const kUserFilename = @"user.sav";
 @synthesize userCode = _userCode;
 @synthesize maskedId = _maskedId;
 @synthesize credits = _credits;
+@synthesize lastUpdate = _lastUpdate;
 
 - (id) init
 {
@@ -92,6 +97,11 @@ static NSString* const kUserFilename = @"user.sav";
     return creditString;
 }
 
+- (BOOL) needsRefresh
+{
+    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
+}
+
 #pragma mark - NSCoding
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
@@ -109,6 +119,7 @@ static NSString* const kUserFilename = @"user.sav";
     [aCoder encodeObject:_totalMiles forKey:kKeyTotalMiles];
     [aCoder encodeObject:_credits forKey:kKeyCredits];
     [aCoder encodeObject:_userCode forKey:kKeyUserCode];
+    [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -127,6 +138,7 @@ static NSString* const kUserFilename = @"user.sav";
     _totalMiles = [aDecoder decodeObjectForKey:kKeyTotalMiles];
     _credits = [aDecoder decodeObjectForKey:kKeyCredits];
     _userCode = [aDecoder decodeObjectForKey:kKeyUserCode];
+    _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
     return self;
 }
 
@@ -237,6 +249,7 @@ static NSString* const kUserFilename = @"user.sav";
                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+                    _lastUpdate = [NSDate date];
                     [self saveUserData];
                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
@@ -278,6 +291,7 @@ static NSString* const kUserFilename = @"user.sav";
                      _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      _isUserValidated = TRUE;
+                     _lastUpdate = [NSDate date];
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -295,23 +309,17 @@ static NSString* const kUserFilename = @"user.sav";
                                 kEmailLogin, kTxType,
                                 _email, kKeyEmail,
                                 password, kKeyPassword,
-                                _uniqueId, kKeyUniqueId,
                                 nil];
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = @"paid_punch/Users/login";
     [httpClient putPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
-                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-                     _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
-                     _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
-                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
-                     _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
-                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
-                     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
+                     [self storeUserInfo:responseObject];
+                     _isUserValidated = TRUE;
                      [self saveUserData];
                      [delegate didCompleteHttpCallback:kKeyUsersEmailLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
@@ -336,23 +344,16 @@ static NSString* const kUserFilename = @"user.sav";
                                 kFacebookLogin, kTxType,
                                 _email, kKeyEmail,
                                 _facebookId, kKeyFacebook,
-                                _uniqueId, kKeyUniqueId,
                                 nil];
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = @"paid_punch/Users/login";
     [httpClient putPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
-                     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-                     _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
-                     _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
-                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
-                     _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
-                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
-                     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
+                     [self storeUserInfo:responseObject];
                      _isUserValidated = TRUE;
                      [self saveUserData];
                      [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
@@ -370,14 +371,13 @@ static NSString* const kUserFilename = @"user.sav";
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 kPasswordChange, kTxType,
                                 _userId, kKeyUserId,
-                                _uniqueId, kKeyUniqueId,
                                 oldPassword, kKeyPassword,
                                 newPassword, kKeyNewPassword,
                                 nil];
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@/password", _userId];
     [httpClient putPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -399,7 +399,7 @@ static NSString* const kUserFilename = @"user.sav";
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@", _userId];
     [httpClient putPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -431,6 +431,45 @@ static NSString* const kUserFilename = @"user.sav";
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User info change failed with status code: %d", [operation.response statusCode]);
                     [delegate didCompleteHttpCallback:kKeyUsersChangeInfo, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                }
+     ];
+}
+
+- (void) storeUserInfo:(id)responseObject
+{
+    _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
+    _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
+    _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
+    _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+    _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
+    _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
+    _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
+    _lastUpdate = [NSDate date];
+}
+
+- (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate
+{
+    // get parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                _userId, kKeyUserId,
+                                _uniqueId, kKeyUniqueId,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users";
+    [httpClient getPath:path
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject){
+                    NSLog(@"%@", responseObject);
+                    [self storeUserInfo:responseObject];
+                    _isUserValidated = TRUE;
+                    [self saveUserData];
+                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                }
+                failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                    NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
+                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }

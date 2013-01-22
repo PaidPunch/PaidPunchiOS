@@ -17,6 +17,7 @@ static NSString* const kKeyUsersEmailLogin = @"users_email_login";
 static NSString* const kKeyUsersFacebookLogin = @"users_facebook_login";
 static NSString* const kKeyUsersChangePassword = @"users_change_password";
 static NSString* const kKeyUsersChangeInfo = @"users_change_info";
+static NSString* const kKeyUsersGetInfo = @"users_get_info";
 
 typedef enum
 {
@@ -49,7 +50,7 @@ typedef enum
     
     CallType _callType;
     
-    
+    NSDate* _lastUpdate;
 }
 @property(nonatomic,strong) NSString* userId;
 @property(nonatomic,strong) NSString* username;
@@ -64,6 +65,7 @@ typedef enum
 @property(nonatomic) BOOL isPaymentProfileCreated;
 @property(nonatomic) NSNumber* totalMiles;
 @property(nonatomic) NSDecimalNumber* credits;
+@property(nonatomic,readonly) NSDate* lastUpdate;
 
 - (void) clearUser;
 - (void) saveUserData;
@@ -77,6 +79,8 @@ typedef enum
 - (void) getUserProfileInfo;
 - (BOOL) isFacebookProfile;
 - (NSString*) getCreditAsString;
+- (BOOL) needsRefresh;
+- (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 
 + (User*) getInstance;
 + (void) destroyInstance;

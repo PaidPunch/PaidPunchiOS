@@ -8,6 +8,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "AFClientManager.h"
 #import "AFJSONRequestOperation.h"
+#import "User.h"
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
 static NSString* const kPaidPunchBaseURLString = @"paidpunch.com";
@@ -67,6 +68,7 @@ static NSString* const kPaidPunchPort = @"80";
     //  Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
     [_paidpunch setDefaultHeader:@"Accept" value:@"application/json"];
     [_paidpunch setDefaultHeader:@"api-version" value:@"1.0"];
+    [_paidpunch setDefaultHeader:@"sessionid" value:[[User getInstance] uniqueId]];
     
     // Encode parameters in XML format
     _paidpunch.parameterEncoding =  AFJSONParameterEncoding;

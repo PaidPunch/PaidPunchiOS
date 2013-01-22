@@ -16,6 +16,7 @@
 @interface BuyPunchViewController : UIViewController<NetworkManagerDelegate,SDWebImageManagerDelegate,HttpCallbackDelegate,UIAlertViewDelegate>
 {
     MBProgressHUD* _hud;
+    BOOL _gotoCongratsView;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLbl;

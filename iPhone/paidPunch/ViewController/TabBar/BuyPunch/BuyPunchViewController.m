@@ -24,6 +24,7 @@
     if (self) {
         // Custom initialization
         self.punchCardDetails=punchCard;
+        _gotoCongratsView = FALSE;
     }
     return self;
 }
@@ -60,12 +61,12 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[User getInstance] isPaymentProfileCreated])
+    // User info hasn't been updated in a while; update it
+    if ([[User getInstance] needsRefresh])
     {
-    }
-    else
-    {
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"";
+        [[User getInstance] getUserInfoFromServer:self];
     }
 }
 - (void)viewDidUnload
@@ -159,18 +160,27 @@
 
 #pragma mark - HttpCallbackDelegate
 - (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
-{
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
-    
-    if(success)
+{    
+    // Don't do anything if it is just the user info refreshing
+    if ([type compare:kKeyPunchesPurchase] == NSOrderedSame)
     {
-        [self goToCongratulationsView];
+        if(success)
+        {
+            _gotoCongratsView = TRUE;
+            [[User getInstance] getUserInfoFromServer:self];
+        }
+        else
+        {
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            [self.navigationController popViewControllerAnimated:NO];
+        }
     }
-    else
+    else if (_gotoCongratsView && [type compare:kKeyUsersGetInfo] == NSOrderedSame)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-        [self.navigationController popViewControllerAnimated:NO];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+        [self goToCongratulationsView];
     }
 }
 
