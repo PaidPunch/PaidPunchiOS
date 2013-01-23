@@ -102,9 +102,12 @@ typedef enum
     _signinButton = [self createButton:@"Sign In" xpos:xpos ypos:ypos justification:rightJustify action:@selector(didPressSigninButton:)];
     [_mainView addSubview:_signinButton];
     
+    // Create gesture recognizers to handle tap-to-dismiss when inviteView is up
+    _dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    
     // Create invisible label layer
     _greyoutLabel = [[UILabel alloc] initWithFrame:mainRect];
-    [self toggleGreyoutLabel:FALSE];
+    [self displayInviteView:FALSE];
     [_mainView addSubview:_greyoutLabel];
     
     self.view = _mainView;
@@ -251,7 +254,7 @@ typedef enum
                     } completion:NULL];
 }
 
-- (void)toggleGreyoutLabel:(BOOL)enable
+- (void)displayInviteView:(BOOL)enable
 {
     if (enable)
     {
@@ -259,6 +262,8 @@ typedef enum
         _greyoutLabel.enabled = TRUE;
         _signinButton.enabled = FALSE;
         _signupButton.enabled = FALSE;
+        [_greyoutLabel addGestureRecognizer:_dismissTap];
+        [_greyoutLabel setUserInteractionEnabled:TRUE];
         [_mainView addSubview:_inviteView];
     }
     else
@@ -267,6 +272,8 @@ typedef enum
         _greyoutLabel.enabled = FALSE;
         _signinButton.enabled = TRUE;
         _signupButton.enabled = TRUE;
+        [_greyoutLabel removeGestureRecognizer:_dismissTap];
+        [_greyoutLabel setUserInteractionEnabled:FALSE];
         [_inviteView removeFromSuperview];
     }
 }
@@ -303,9 +310,14 @@ typedef enum
 
 #pragma mark - event actions
 
+-(void)handleSingleTap:(UITapGestureRecognizer *)sender
+{
+    [self displayInviteView:FALSE];
+}
+
 - (void)didPressSignupButton:(id)sender
 {
-    [self toggleGreyoutLabel:TRUE];
+    [self displayInviteView:TRUE];
 }
 
 - (void)didPressSigninButton:(id)sender

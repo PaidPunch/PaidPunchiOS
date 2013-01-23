@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WelcomePageViewController : UIViewController<UITextFieldDelegate>
+@interface WelcomePageViewController : UIViewController<UITextFieldDelegate,UIGestureRecognizerDelegate>
 {
     UIView* _mainView;
     NSTimer* _fadeTimer;
@@ -25,6 +25,7 @@
     UITextField* _inviteCodeTextField;
     UIButton* _continueButton;
     UIButton* _requestInviteButton;
+    UITapGestureRecognizer* _dismissTap;
 }
 
 @end
