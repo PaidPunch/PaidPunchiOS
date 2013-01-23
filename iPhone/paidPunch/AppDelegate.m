@@ -12,7 +12,8 @@
 #import "LocalyticsSession.h"
 #import "User.h"
 #import "SignInViewController.h"
-#import "StartPageViewController.h"
+//#import "StartPageViewController.h"
+#import "WelcomePageViewController.h"
 
 @implementation AppDelegate
 
@@ -57,8 +58,8 @@ static NSString* kAppId = @"159848747459550";
     }
     else
     {        
-        StartPageViewController *startPageViewController = [[StartPageViewController alloc] initWithNibName:@"StartPageViewcontroller" bundle:nil];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startPageViewController];
+        WelcomePageViewController *welcomePageViewController = [[WelcomePageViewController alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:welcomePageViewController];
         self.navigationController = navController;
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];
         self.window.rootViewController=self.navigationController;

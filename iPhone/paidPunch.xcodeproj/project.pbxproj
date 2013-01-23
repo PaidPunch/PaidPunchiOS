@@ -56,6 +56,7 @@
 		38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38B1D809169E8D620087ECD2 /* Templates.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B1D808169E8D620087ECD2 /* Templates.m */; };
+		38B4F6ED16AF709300D73A3A /* WelcomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -588,6 +589,8 @@
 		38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		38B1D807169E8D620087ECD2 /* Templates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Templates.h; sourceTree = "<group>"; };
 		38B1D808169E8D620087ECD2 /* Templates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Templates.m; sourceTree = "<group>"; };
+		38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomePageViewController.h; sourceTree = "<group>"; };
+		38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomePageViewController.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1542,6 +1545,8 @@
 				8A78E201149770BC00F79380 /* Registration */,
 				8A78E205149770BC00F79380 /* SignIn */,
 				8A78E209149770BC00F79380 /* TabBar */,
+				38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */,
+				38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3221,6 +3226,7 @@
 				38C2590D16A67B9F00982568 /* LocalyticsDatabase.m in Sources */,
 				38C2590E16A67B9F00982568 /* LocalyticsSession.m in Sources */,
 				38C2590F16A67B9F00982568 /* LocalyticsUploader.m in Sources */,
+				38B4F6ED16AF709300D73A3A /* WelcomePageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
