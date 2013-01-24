@@ -18,13 +18,24 @@ typedef enum
     rightJustify
 } JustificationType;
 
-@interface BaseWithNavBarViewController : UIViewController
+@interface BaseWithNavBarViewController : UIViewController<UITextFieldDelegate>
 {
     UIView* _mainView;
-    CGFloat _navBarHeight;
-    CGFloat _notifyBarHeight;
+    CGFloat _lowestYPos;
+    
+    // Used in the sign in/up view
+    UIScrollView* _scrollview;
+    UIButton* _btnFacebook;
+    UIButton* _btnEmail;
+    UILabel* _orLabel;
+    UITextField* _emailTextField;
+    UITextField* _passwordTextField;
 }
+@property(nonatomic,strong) UITextField* emailTextField;
+@property(nonatomic,strong) UITextField* passwordTextField;
+@property(nonatomic) CGFloat lowestYPos;
 
-- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage;
+- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction;
+- (void)createSignInOrUpButtons:(NSString*)currentText fbAction:(SEL)fbAction emailAction:(SEL)emailAction;
 
 @end
