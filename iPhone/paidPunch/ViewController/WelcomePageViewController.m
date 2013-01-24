@@ -7,19 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "SignUpViewController.h"
+#import "Utilities.h"
 #import "WelcomePageViewController.h"
 
-static CGFloat const stdiPhoneWidth = 320.0;
-static CGFloat const stdiPhoneHeight = 480.0;
 static NSUInteger kMinInviteCodeSize = 5;
 static NSUInteger kMaxInviteCodeSize = 10;
-
-typedef enum
-{
-    leftJustify,
-    centerJustify,
-    rightJustify
-} JustificationType;
 
 @implementation WelcomePageViewController
 
@@ -51,15 +44,16 @@ typedef enum
     _mainView.backgroundColor = [UIColor whiteColor];
     
     // Create logo image at top of view
-    UIImageView* logoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CompanyLogo.png"]];
-    logoImage.frame = CGRectMake((stdiPhoneWidth - logoImage.frame.size.width)/2, 10.0, logoImage.frame.size.width, logoImage.frame.size.height);
+    UIImageView* logoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"landing-top-logo.png"]];
+    logoImage.frame = CGRectMake(0, 0, logoImage.frame.size.width, logoImage.frame.size.height);
+    logoImage.frame = [Utilities resizeProportionally:logoImage.frame maxWidth:stdiPhoneWidth maxHeight:100];
     [_mainView addSubview:logoImage];
     
     // Create cross fading images in the middle
     _imageFiles = [NSArray arrayWithObjects:@"InformationPlacardThree.png", @"InformationPlacardTwo.png", @"InformationPlacardOne.png", nil];
     _currentIndex = 0;
     UIImage* currentImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [_imageFiles objectAtIndex:_currentIndex]]];
-    CGRect imageRect = CGRectMake(0, logoImage.frame.origin.y + logoImage.frame.size.height + 20, stdiPhoneWidth, currentImage.size.height);
+    CGRect imageRect = CGRectMake(0, logoImage.frame.origin.y + logoImage.frame.size.height, stdiPhoneWidth, currentImage.size.height);
     _mainImageView = [[UIImageView alloc] initWithFrame:imageRect];
     [_mainImageView setImage:currentImage];
     [_mainView addSubview:_mainImageView];
@@ -71,7 +65,7 @@ typedef enum
     CGSize sizeUpsellString = [upsellString sizeWithFont:upsellFont
                                        constrainedToSize:CGSizeMake(constrainedSize, CGFLOAT_MAX)
                                            lineBreakMode:UILineBreakModeWordWrap];
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _mainImageView.frame.origin.y + 40, stdiPhoneWidth, sizeUpsellString.height + 20)];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _mainImageView.frame.origin.y + 30, stdiPhoneWidth, sizeUpsellString.height + 20)];
     textLabel.text = upsellString;
     textLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.85];
     textLabel.textColor = [UIColor blackColor];
@@ -83,7 +77,7 @@ typedef enum
     // Create clear label with business types in orange text
     _businessTypeTexts = [NSArray arrayWithObjects:@"spas", @"pizzerias", @"salons", nil];
     UIFont* businessTypeFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
-    _businessTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sizeUpsellString.width, _mainImageView.frame.origin.y + 40, stdiPhoneWidth - sizeUpsellString.width, sizeUpsellString.height + 20)];
+    _businessTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sizeUpsellString.width, _mainImageView.frame.origin.y + 30, stdiPhoneWidth - sizeUpsellString.width, sizeUpsellString.height + 20)];
     _businessTypeLabel.text = [_businessTypeTexts objectAtIndex:_currentIndex];
     _businessTypeLabel.backgroundColor = [UIColor clearColor];
     _businessTypeLabel.textColor = [UIColor orangeColor];
@@ -94,7 +88,7 @@ typedef enum
     
     // Create signup button
     CGFloat ypos = _mainImageView.frame.origin.y + _mainImageView.frame.size.height + 20;
-    CGFloat xpos = 20;
+    CGFloat xpos = 15;
     _signupButton = [self createButton:@"Sign Up" xpos:xpos ypos:ypos justification:leftJustify action:@selector(didPressSignupButton:)];
     [_mainView addSubview:_signupButton];
     
@@ -322,7 +316,8 @@ typedef enum
 
 - (void)didPressSigninButton:(id)sender
 {
-    
+    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+    [self.navigationController pushViewController:signUpViewController animated:YES];
 }
 
 - (void)didPressContinueButton:(id)sender

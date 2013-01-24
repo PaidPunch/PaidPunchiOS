@@ -57,6 +57,14 @@
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38B1D809169E8D620087ECD2 /* Templates.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B1D808169E8D620087ECD2 /* Templates.m */; };
 		38B4F6ED16AF709300D73A3A /* WelcomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */; };
+		38B4F6F116B08FB900D73A3A /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6EE16B08FB900D73A3A /* facebook-button.png */; };
+		38B4F6F216B08FB900D73A3A /* landing-top-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6EF16B08FB900D73A3A /* landing-top-logo.png */; };
+		38B4F6F316B08FB900D73A3A /* orange-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6F016B08FB900D73A3A /* orange-button.png */; };
+		38B4F6F716B0926200D73A3A /* blank-no-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6F416B0926200D73A3A /* blank-no-glow.png */; };
+		38B4F6F816B0926200D73A3A /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6F516B0926200D73A3A /* blank.png */; };
+		38B4F6F916B0926200D73A3A /* nav-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6F616B0926200D73A3A /* nav-bg.png */; };
+		38B4F6FC16B092A400D73A3A /* BaseWithNavBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F6FB16B092A300D73A3A /* BaseWithNavBarViewController.m */; };
+		38B4F6FF16B09D4D00D73A3A /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F6FE16B09D4C00D73A3A /* SignUpViewController.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -591,6 +599,16 @@
 		38B1D808169E8D620087ECD2 /* Templates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Templates.m; sourceTree = "<group>"; };
 		38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomePageViewController.h; sourceTree = "<group>"; };
 		38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomePageViewController.m; sourceTree = "<group>"; };
+		38B4F6EE16B08FB900D73A3A /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
+		38B4F6EF16B08FB900D73A3A /* landing-top-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "landing-top-logo.png"; sourceTree = "<group>"; };
+		38B4F6F016B08FB900D73A3A /* orange-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orange-button.png"; sourceTree = "<group>"; };
+		38B4F6F416B0926200D73A3A /* blank-no-glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-no-glow.png"; sourceTree = "<group>"; };
+		38B4F6F516B0926200D73A3A /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		38B4F6F616B0926200D73A3A /* nav-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bg.png"; sourceTree = "<group>"; };
+		38B4F6FA16B092A300D73A3A /* BaseWithNavBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWithNavBarViewController.h; sourceTree = "<group>"; };
+		38B4F6FB16B092A300D73A3A /* BaseWithNavBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWithNavBarViewController.m; sourceTree = "<group>"; };
+		38B4F6FD16B09D4B00D73A3A /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		38B4F6FE16B09D4C00D73A3A /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1547,6 +1565,10 @@
 				8A78E209149770BC00F79380 /* TabBar */,
 				38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */,
 				38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */,
+				38B4F6FA16B092A300D73A3A /* BaseWithNavBarViewController.h */,
+				38B4F6FB16B092A300D73A3A /* BaseWithNavBarViewController.m */,
+				38B4F6FD16B09D4B00D73A3A /* SignUpViewController.h */,
+				38B4F6FE16B09D4C00D73A3A /* SignUpViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2167,6 +2189,12 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38B4F6F416B0926200D73A3A /* blank-no-glow.png */,
+				38B4F6F516B0926200D73A3A /* blank.png */,
+				38B4F6F616B0926200D73A3A /* nav-bg.png */,
+				38B4F6EE16B08FB900D73A3A /* facebook-button.png */,
+				38B4F6EF16B08FB900D73A3A /* landing-top-logo.png */,
+				38B4F6F016B08FB900D73A3A /* orange-button.png */,
 				8A7D081D1519BF9900B98387 /* BuyPunch */,
 				8A7D085D1519BF9900B98387 /* Common */,
 				8A7D08911519BF9900B98387 /* Feeds */,
@@ -3122,6 +3150,12 @@
 				38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */,
 				3828035616A0067D005A8A32 /* InfoChangeViewController.xib in Resources */,
 				38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */,
+				38B4F6F116B08FB900D73A3A /* facebook-button.png in Resources */,
+				38B4F6F216B08FB900D73A3A /* landing-top-logo.png in Resources */,
+				38B4F6F316B08FB900D73A3A /* orange-button.png in Resources */,
+				38B4F6F716B0926200D73A3A /* blank-no-glow.png in Resources */,
+				38B4F6F816B0926200D73A3A /* blank.png in Resources */,
+				38B4F6F916B0926200D73A3A /* nav-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3227,6 +3261,8 @@
 				38C2590E16A67B9F00982568 /* LocalyticsSession.m in Sources */,
 				38C2590F16A67B9F00982568 /* LocalyticsUploader.m in Sources */,
 				38B4F6ED16AF709300D73A3A /* WelcomePageViewController.m in Sources */,
+				38B4F6FC16B092A400D73A3A /* BaseWithNavBarViewController.m in Sources */,
+				38B4F6FF16B09D4D00D73A3A /* SignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

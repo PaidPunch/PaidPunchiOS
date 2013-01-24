@@ -28,4 +28,25 @@
 	return isValid;
 }
 
++ (CGRect) resizeProportionally:(CGRect)originalFrame maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
+{
+    CGRect newFrame = originalFrame;
+    CGFloat originalWidth = originalFrame.size.width;
+    CGFloat originalHeight = originalFrame.size.height;
+    
+    if (originalWidth > maxWidth)
+    {
+        newFrame.size.width = maxWidth;
+        newFrame.size.height = maxWidth * (originalHeight/originalWidth);
+    }
+    
+    if (newFrame.size.height > maxHeight)
+    {
+        newFrame.size.height = maxHeight;
+        newFrame.size.width = maxHeight * (newFrame.size.width/originalHeight);
+    }
+    
+    return newFrame;
+}
+
 @end
