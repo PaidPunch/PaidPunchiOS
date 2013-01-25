@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "Utilities.h"
 #import "WelcomePageViewController.h"
@@ -208,37 +209,6 @@ static NSUInteger kMaxInviteCodeSize = 10;
     return textField;
 }
 
-- (UIButton*)createButton:(NSString*)buttonText xpos:(CGFloat)xpos ypos:(CGFloat)ypos justification:(JustificationType)justification action:(SEL)action
-{
-    CGFloat constrainedSize = 265.0f;
-    UIFont* buttonFont = [UIFont fontWithName:@"Helvetica" size:20.0f];
-    UIButton* newButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [newButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    CGSize sizeButtonText = [buttonText sizeWithFont:buttonFont
-                                   constrainedToSize:CGSizeMake(constrainedSize, CGFLOAT_MAX)
-                                       lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat buttonWidth = sizeButtonText.width + 30;
-    CGFloat buttonHeight = sizeButtonText.height + 10;
-    CGFloat realXPos;
-    if (justification == rightJustify)
-    {
-        realXPos = stdiPhoneWidth - xpos - buttonWidth;
-    }
-    else if (justification == leftJustify)
-    {
-        realXPos = xpos;
-    }
-    else
-    {
-        // In center justified scenarios, the xpos is actually the main frame width
-        realXPos = (xpos - buttonWidth)/2;
-    }
-    [newButton setFrame:CGRectMake(realXPos, ypos, buttonWidth, buttonHeight)];
-    [newButton setTitle:buttonText forState:UIControlStateNormal];
-    newButton.titleLabel.font = buttonFont;
-    return newButton;
-}
-
 - (UIButton*)createCustomButton:(NSString*)buttonText btnImage:(NSString*)btnImage btnWidth:(CGFloat)btnWidth xpos:(CGFloat)xpos ypos:(CGFloat)ypos justification:(JustificationType)justification action:(SEL)action
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:btnImage ofType:@"png"];
@@ -357,8 +327,8 @@ static NSUInteger kMaxInviteCodeSize = 10;
 
 - (void)didPressSigninButton:(id)sender
 {
-    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
-    [self.navigationController pushViewController:signUpViewController animated:YES];
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
 - (void)didPressContinueButton:(id)sender
@@ -366,7 +336,8 @@ static NSUInteger kMaxInviteCodeSize = 10;
      NSString* inviteCode = [_inviteCodeTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ([self validateInputs:inviteCode])
     {
-        
+        SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+        [self.navigationController pushViewController:signUpViewController animated:YES];
     }
 }
 

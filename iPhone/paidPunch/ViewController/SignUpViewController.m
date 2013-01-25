@@ -6,13 +6,17 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import "DatabaseManager.h"
 #import "SignUpViewController.h"
+#import "User.h"
+#import "Utilities.h"
 
 @interface SignUpViewController ()
 
 @end
 
 @implementation SignUpViewController
+@synthesize inviteCode = _inviteCode;
 
 - (void)viewDidLoad
 {
@@ -70,18 +74,90 @@
     [_scrollview addSubview:termsLink];
 }
 
+-(BOOL) validate
+{
+    if(_emailTextField.text.length==0)
+    {
+        UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Email Id" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [logInAlert show];
+        return NO;
+    }
+    if(_emailTextField.text.length!=0)
+    {
+        if(![Utilities validateEmail:_emailTextField.text])
+        {
+            UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter valid Email ID" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [logInAlert show];
+            return NO;
+        }
+    }
+    
+    if(_passwordTextField.text.length==0)
+    {
+        UIAlertView *logInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Error" message:@"Enter Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [logInAlert show];
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - event actions
 
 - (void)didPressFacebookButton:(id)sender
 {
+    [self dismissKeyboard];
+    
+    // Store the current referralCode
+    [User getInstance].referralCode = _inviteCode;
+    
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Registering User";
+    
+    [[User getInstance] registerUserWithFacebook:self];
 }
 
 - (void)didPressEmailButton:(id)sender
 {
+    [self dismissKeyboard];
+    
+    // Store the current referralCode
+    [User getInstance].referralCode = _inviteCode;
+    
+    if([self validate])
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Registering User";
+        
+        // Set the values into the User instance
+        [User getInstance].email = _emailTextField.text;
+        
+        // Register user
+        [[User getInstance] registerUserWithEmail:self password:_passwordTextField.text];
+    }
 }
 
 - (void)didPressTermsButton:(id)sender
 {
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if(success)
+    {
+        [[DatabaseManager sharedInstance] deleteAllPunchCards];
+        [[DatabaseManager sharedInstance] deleteBusinesses];
+        
+        //PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
+        //[self.navigationController presentModalViewController:tabBarViewController animated:NO];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end

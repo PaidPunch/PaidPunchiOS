@@ -1,8 +1,8 @@
 //
-//  SignUpViewController.h
+//  LoginViewController.h
 //  paidPunch
 //
-//  Created by Aaron Khoo on 1/23/13.
+//  Created by Aaron Khoo on 1/24/13.
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
@@ -11,12 +11,12 @@
 #import "FacebookPaidPunchDelegate.h"
 #import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
+#import "NetworkManager.h"
 
-@interface SignUpViewController : BaseWithNavBarViewController<HttpCallbackDelegate>
+@interface LoginViewController : BaseWithNavBarViewController<HttpCallbackDelegate,NetworkManagerDelegate>
 {
-    NSString* _inviteCode;
     MBProgressHUD* _hud;
+    NetworkManager* _networkManager;
 }
-@property(nonatomic,strong) NSString* inviteCode;
 
 @end

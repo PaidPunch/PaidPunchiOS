@@ -142,6 +142,12 @@ static CGFloat kButtonHeightSpacing = 10;
 
 #pragma mark - private functions
 
+- (void) dismissKeyboard
+{
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+}
+
 - (UIButton*)createButton:(NSString*)buttonText xpos:(CGFloat)xpos ypos:(CGFloat)ypos justification:(JustificationType)justification maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight action:(SEL)action
 {    
     // Get imagedata
