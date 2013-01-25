@@ -86,14 +86,16 @@ static NSUInteger kMaxInviteCodeSize = 10;
     _businessTypeLabel.textAlignment = UITextAlignmentLeft;
     [_mainView addSubview:_businessTypeLabel];
     
-    // Create signup button
-    CGFloat ypos = _mainImageView.frame.origin.y + _mainImageView.frame.size.height + 20;
-    CGFloat xpos = 15;
-    _signupButton = [self createButton:@"Sign Up" xpos:xpos ypos:ypos justification:leftJustify action:@selector(didPressSignupButton:)];
+    // Create signup button    
+    CGFloat ypos = _mainImageView.frame.origin.y + _mainImageView.frame.size.height + 10;
+    CGFloat xpos = 5;
+    CGFloat buttonSize = (stdiPhoneWidth/2 - xpos*2);
+    _signupButton = [self createCustomButton:@"Sign Up" btnImage:@"orange-button" btnWidth:buttonSize xpos:xpos ypos:ypos justification:leftJustify action:@selector(didPressSignupButton:)];
     [_mainView addSubview:_signupButton];
     
     // Create signin button
-    _signinButton = [self createButton:@"Sign In" xpos:xpos ypos:ypos justification:rightJustify action:@selector(didPressSigninButton:)];
+    _signinButton = [self createCustomButton:@"Sign In" btnImage:@"grey-button" btnWidth:buttonSize xpos:xpos ypos:ypos justification:rightJustify action:@selector(didPressSigninButton:)];
+    [_signinButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_mainView addSubview:_signinButton];
     
     // Create gesture recognizers to handle tap-to-dismiss when inviteView is up
@@ -109,6 +111,7 @@ static NSUInteger kMaxInviteCodeSize = 10;
 
 - (void)createInvitePopupView
 {
+    // Create invite view popup frame
     CGFloat inviteViewWidth = stdiPhoneWidth - 40;
     CGFloat inviteViewHeight = stdiPhoneHeight - 160;
     CGRect inviteRect = CGRectMake((stdiPhoneWidth - inviteViewWidth)/2, (stdiPhoneHeight - inviteViewHeight)/2, inviteViewWidth, inviteViewHeight);
@@ -134,7 +137,6 @@ static NSUInteger kMaxInviteCodeSize = 10;
     [inviteOnlyLabel setNumberOfLines:1];
     [inviteOnlyLabel setFont:inviteOnlyFont];
     inviteOnlyLabel.textAlignment = UITextAlignmentCenter;
-    [_inviteView addSubview:inviteOnlyLabel];
     
     // Explanation lable
     UIFont* explanationFont = [UIFont fontWithName:@"ArialMT" size:17.0f];
@@ -150,7 +152,6 @@ static NSUInteger kMaxInviteCodeSize = 10;
     [explanationLabel setFont:explanationFont];
     [explanationLabel setLineBreakMode:NSLineBreakByWordWrapping];
     explanationLabel.textAlignment = UITextAlignmentCenter;
-    [_inviteView addSubview:explanationLabel];
     
     // Invite code textfield
     NSString* inviteCodeText = @"Invite code: A1B2C";
@@ -169,18 +170,26 @@ static NSUInteger kMaxInviteCodeSize = 10;
     UILabel *greybarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, greybarLabelYPos, inviteViewWidth, greybarLabelHeight)];
     greybarLabel.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
     
+    // lay down background image
+    UIImageView* redcarpetImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"popup-redcarpet-img.png"]];
+    redcarpetImage.frame = CGRectMake(0, greybarLabelYPos, inviteViewWidth, inviteViewHeight - greybarLabelYPos);
+    
+    // Create continue button
+    CGFloat ContinueYPos = greybarLabel.frame.origin.y + greybarLabel.frame.size.height + 15;
+    _continueButton = [self createCustomButton:@"Continue" btnImage:@"orange-button" btnWidth:(stdiPhoneWidth - 160) xpos:inviteViewWidth ypos:ContinueYPos justification:centerJustify action:@selector(didPressContinueButton:)];
+    
+    // Create request invite button
+    CGFloat requestYPos = _continueButton.frame.origin.y + _continueButton.frame.size.height + 15;
+    _requestInviteButton = [self createCustomButton:@"Request Invite" btnImage:@"grey-button" btnWidth:(stdiPhoneWidth - 160) xpos:inviteViewWidth ypos:requestYPos justification:centerJustify action:@selector(didPressRequestInviteButton:)];
+    [_requestInviteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [_inviteView addSubview:redcarpetImage];
+    [_inviteView addSubview:inviteOnlyLabel];
+    [_inviteView addSubview:explanationLabel];
     // Put grey label into view first, so it appears behind textfield
     [_inviteView addSubview:greybarLabel];
     [_inviteView addSubview:_inviteCodeTextField];
-    
-    // Create continue button
-    CGFloat ContinueYPos = greybarLabel.frame.origin.y + greybarLabel.frame.size.height + 20;
-    _continueButton = [self createButton:@"Continue" xpos:inviteViewWidth ypos:ContinueYPos justification:centerJustify action:@selector(didPressContinueButton:)];
     [_inviteView addSubview:_continueButton];
-    
-    // Create request invite button
-    CGFloat requestYPos = _continueButton.frame.origin.y + _continueButton.frame.size.height + 20;
-    _requestInviteButton = [self createButton:@"Request Invite" xpos:inviteViewWidth ypos:requestYPos justification:centerJustify action:@selector(didPressRequestInviteButton:)];
     [_inviteView addSubview:_requestInviteButton];
 }
 
@@ -225,6 +234,38 @@ static NSUInteger kMaxInviteCodeSize = 10;
         realXPos = (xpos - buttonWidth)/2;
     }
     [newButton setFrame:CGRectMake(realXPos, ypos, buttonWidth, buttonHeight)];
+    [newButton setTitle:buttonText forState:UIControlStateNormal];
+    newButton.titleLabel.font = buttonFont;
+    return newButton;
+}
+
+- (UIButton*)createCustomButton:(NSString*)buttonText btnImage:(NSString*)btnImage btnWidth:(CGFloat)btnWidth xpos:(CGFloat)xpos ypos:(CGFloat)ypos justification:(JustificationType)justification action:(SEL)action
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:btnImage ofType:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    UIFont* buttonFont = [UIFont fontWithName:@"Helvetica" size:18.0f];
+    UIButton* newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [newButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    CGRect originalRect = CGRectMake(0, ypos, image.size.width, image.size.height);
+    CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:btnWidth maxHeight:stdiPhoneHeight];
+    if (justification == rightJustify)
+    {
+        finalRect.origin.x = stdiPhoneWidth - xpos - finalRect.size.width;
+    }
+    else if (justification == leftJustify)
+    {
+        finalRect.origin.x = xpos;
+    }
+    else
+    {
+        // In center justified scenarios, the xpos is actually the main frame width
+        finalRect.origin.x = (xpos - finalRect.size.width)/2;
+    }
+    [newButton setFrame:finalRect];
+    [newButton setBackgroundImage:image forState:UIControlStateNormal];
     [newButton setTitle:buttonText forState:UIControlStateNormal];
     newButton.titleLabel.font = buttonFont;
     return newButton;
