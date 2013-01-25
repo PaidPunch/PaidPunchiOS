@@ -11,9 +11,7 @@
 #import "User.h"
 #import "Utilities.h"
 
-@interface SignUpViewController ()
-
-@end
+static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
 
 @implementation SignUpViewController
 @synthesize inviteCode = _inviteCode;
@@ -138,6 +136,7 @@
 
 - (void)didPressTermsButton:(id)sender
 {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsURL]];
 }
 
 #pragma mark - HttpCallbackDelegate
