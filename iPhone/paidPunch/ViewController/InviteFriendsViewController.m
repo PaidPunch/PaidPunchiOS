@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import "VoteBusinessesViewController.h"
 #import "InviteFriendsViewController.h"
 #import "Templates.h"
 #import "User.h"
@@ -47,7 +48,7 @@ typedef enum
     [super viewDidLoad];
 	
     // Create nav bar on top
-    [self createNavBar:nil rightString:@"Next" middle:@"Give $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:nil];
+    [self createNavBar:nil rightString:@"Next" middle:@"Give $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressNextButton:)];
     
     // Create green notification bar
     [self createGreenNotificationBar:@"Sign Up Successful!"];
@@ -392,6 +393,12 @@ typedef enum
         
         [message show];
     }
+}
+
+-(IBAction)didPressNextButton:(id)sender
+{
+    VoteBusinessesViewController *voteBizViewController = [[VoteBusinessesViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:voteBizViewController animated:NO];
 }
 
 -(void)handleSingleTap:(UITapGestureRecognizer *)sender

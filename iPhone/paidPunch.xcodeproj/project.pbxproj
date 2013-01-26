@@ -72,6 +72,7 @@
 		38B4F71F16B3725900D73A3A /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F71C16B3725900D73A3A /* email.png */; };
 		38B4F72016B3725900D73A3A /* facebook-post.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F71D16B3725900D73A3A /* facebook-post.png */; };
 		38B4F72116B3725900D73A3A /* text-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F71E16B3725900D73A3A /* text-message.png */; };
+		38B4F72416B3B57F00D73A3A /* VoteBusinessesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F72316B3B57D00D73A3A /* VoteBusinessesViewController.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -625,6 +626,8 @@
 		38B4F71C16B3725900D73A3A /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		38B4F71D16B3725900D73A3A /* facebook-post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-post.png"; sourceTree = "<group>"; };
 		38B4F71E16B3725900D73A3A /* text-message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text-message.png"; sourceTree = "<group>"; };
+		38B4F72216B3B57C00D73A3A /* VoteBusinessesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteBusinessesViewController.h; sourceTree = "<group>"; };
+		38B4F72316B3B57D00D73A3A /* VoteBusinessesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteBusinessesViewController.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1589,6 +1592,8 @@
 				38B4F71716B2568E00D73A3A /* LoginViewController.m */,
 				38B4F71916B30B8000D73A3A /* InviteFriendsViewController.h */,
 				38B4F71A16B30B8200D73A3A /* InviteFriendsViewController.m */,
+				38B4F72216B3B57C00D73A3A /* VoteBusinessesViewController.h */,
+				38B4F72316B3B57D00D73A3A /* VoteBusinessesViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3295,6 +3300,7 @@
 				38B4F6FF16B09D4D00D73A3A /* SignUpViewController.m in Sources */,
 				38B4F71816B2568E00D73A3A /* LoginViewController.m in Sources */,
 				38B4F71B16B30B8300D73A3A /* InviteFriendsViewController.m in Sources */,
+				38B4F72416B3B57F00D73A3A /* VoteBusinessesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

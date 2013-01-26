@@ -115,7 +115,7 @@ static CGFloat kButtonHeightSpacing = 10;
 
 - (void)createGreenNotificationBar:(NSString*)barText
 {
-    UIFont* textFont = [UIFont fontWithName:@"ArialMT" size:16.0f];
+    UIFont* textFont = [UIFont fontWithName:@"ArialMT" size:15.0f];
     
     // Green bar for notifications
     CGFloat greenbarLabelHeight = 50;
