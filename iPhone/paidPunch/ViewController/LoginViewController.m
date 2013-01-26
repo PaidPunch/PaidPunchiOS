@@ -88,7 +88,7 @@
 - (void)didPressEmailButton:(id)sender
 {
     InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController presentModalViewController:inviteFriendsViewController animated:NO];
+    [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
     /*
     [self dismissKeyboard];
     

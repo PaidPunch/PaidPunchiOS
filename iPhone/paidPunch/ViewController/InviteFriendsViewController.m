@@ -7,10 +7,40 @@
 //
 
 #import "InviteFriendsViewController.h"
+#import "Templates.h"
 #import "User.h"
 #import "Utilities.h"
 
+static const CGFloat kButtonSize = 50;
+static const int kButtonsPerRow = 3;
+static const CGFloat kHorizontalSpacing = 40;
+static const CGFloat kVerticalSpacing = 30;
+
+typedef enum
+{
+    no_response,
+    facebook_response,
+    email_response,
+    sms_response
+} AlertType;
+
+@interface InviteFriendsViewController ()
+{
+    AlertType _alertType;
+}
+@end
+
 @implementation InviteFriendsViewController
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _alertType = no_response;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -51,17 +81,28 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"orange-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-    UIButton* btnInvite = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnInvite = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect originalInviteButtonRect = CGRectMake(0, _lowestYPos + 100, image.size.width, image.size.height);
     CGRect finalInviteButtonRect = [Utilities resizeProportionally:originalInviteButtonRect maxWidth:(stdiPhoneWidth - 80) maxHeight:160];
     finalInviteButtonRect.origin.x = (stdiPhoneWidth - finalInviteButtonRect.size.width)/2;
-    btnInvite.frame = finalInviteButtonRect;
-    [btnInvite setBackgroundImage:image forState:UIControlStateNormal];
-    [btnInvite setTitle:@"Invite Friends" forState:UIControlStateNormal];
-    [btnInvite setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btnInvite.titleLabel.font = orangeButtonFont;
-    [btnInvite addTarget:self action:@selector(didPressInviteFriendsButton:) forControlEvents:UIControlEventTouchUpInside];
-    [_mainView addSubview:btnInvite];
+    _btnInvite.frame = finalInviteButtonRect;
+    [_btnInvite setBackgroundImage:image forState:UIControlStateNormal];
+    [_btnInvite setTitle:@"Invite Friends" forState:UIControlStateNormal];
+    [_btnInvite setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _btnInvite.titleLabel.font = orangeButtonFont;
+    [_btnInvite addTarget:self action:@selector(didPressInviteFriendsButton:) forControlEvents:UIControlEventTouchUpInside];
+    [_mainView addSubview:_btnInvite];
+    
+    // Create the view that contains the invite friend buttons
+    [self createInviteFriendsView];
+    
+    // Create gesture recognizers to handle tap-to-dismiss when inviteView is up
+    _dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    
+    // Create an invisible label to capture the tap-to-dismiss events
+    _invisibleLayer = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, stdiPhoneWidth, stdiPhoneWidth)];
+    [_invisibleLayer setBackgroundColor:[UIColor clearColor]];
+    [_mainView addSubview:_invisibleLayer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +112,49 @@
 }
 
 #pragma mark - private functions
+
+- (void)sendInvite
+{
+    if (_alertType == facebook_response)
+    {
+        [[User getInstance] updateFacebookFeed:[[Templates getInstance] getTemplateByName:@"facebook"]];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
+                                                          message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+    else if (_alertType == email_response)
+    {
+        // Show the composer
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:@"My Subject"];
+        [controller setMessageBody:[[Templates getInstance] getTemplateByName:@"email"] isHTML:YES];
+        if (controller)
+        {
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
+    else if (_alertType == sms_response)
+    {
+        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+        controller.body = @"Use my code and get $5 free! http://goo.gl/NOuKr";
+		//controller.recipients = [NSArray arrayWithObjects:@"12345678", @"87654321", nil];
+		controller.messageComposeDelegate = self;
+        if (controller)
+        {
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
+    else
+    {
+        NSLog(@"FreeCreditView: Unknown alert type");
+    }
+    _alertType = no_response;
+}
 
 - (void)createInviteFriendsText
 {
@@ -108,11 +192,230 @@
     _lowestYPos = _lowestYPos + inviteLabel.frame.size.height + upsellLabel.frame.size.height;
 }
 
+- (CGFloat)computeXPosByIndex:(int)index
+{
+    int position = index % kButtonsPerRow;
+    return ((position * kButtonSize) + ((position + 1) * kHorizontalSpacing));
+}
+
+- (CGFloat)computeYPosByIndex:(int)index
+{
+    int position = index / kButtonsPerRow;
+    return ((position + 1) * kVerticalSpacing);
+}
+
+- (void)createInviteFriendsView
+{
+    _offscreenRect = CGRectMake(0, stdiPhoneHeight + 100, stdiPhoneWidth, stdiPhoneHeight);
+    _onscreenRect = CGRectMake(0, (stdiPhoneHeight*2)/3, stdiPhoneWidth, stdiPhoneHeight);
+    _inviteButtonsView = [[UIView alloc] initWithFrame:_offscreenRect];
+    [_inviteButtonsView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.8]];
+    
+    // Create facebook button
+    int index = 0;
+    UIButton* facebookButton = [self createInviteButton:@"facebook-post" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressFacebookButton:)];
+    [_inviteButtonsView addSubview:facebookButton];
+    index++;
+    
+    // Create email button
+    UIButton* emailButton = [self createInviteButton:@"email" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressEmailButton:)];
+    [_inviteButtonsView addSubview:emailButton];
+    index++;
+    
+    // Create SMS button
+    UIButton* smsButton = [self createInviteButton:@"text-message" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressSMSButton:)];
+    [_inviteButtonsView addSubview:smsButton];
+    
+    [self.view addSubview:_inviteButtonsView];
+}
+
+- (void)toggleInviteFriendsView:(BOOL)display
+{
+    if (display)
+    {
+        [_invisibleLayer addGestureRecognizer:_dismissTap];
+        [_invisibleLayer setUserInteractionEnabled:TRUE];
+        _btnInvite.enabled = FALSE;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             _inviteButtonsView.frame = _onscreenRect;
+                         }];
+    }
+    else
+    {
+        [_invisibleLayer removeGestureRecognizer:_dismissTap];
+        [_invisibleLayer setUserInteractionEnabled:FALSE];
+        _btnInvite.enabled = TRUE;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             _inviteButtonsView.frame = _offscreenRect;
+                         }];
+    }
+}
+
+- (UIButton*)createInviteButton:(NSString*)imageFile xpos:(CGFloat)xpos ypos:(CGFloat)ypos action:(SEL)action
+{
+    // Get imagedata
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:imageFile ofType:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    UIButton* newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [newButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [newButton setBackgroundImage:image forState:UIControlStateNormal];
+    
+    [newButton setFrame:CGRectMake(xpos, ypos, kButtonSize, kButtonSize)];
+    
+    return newButton;
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Email Sent"
+                                                          message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    if (result == MessageComposeResultSent)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Text Sent"
+                                                          message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - event actions
 
 - (void)didPressInviteFriendsButton:(id)sender
 {
+    [self toggleInviteFriendsView:TRUE];
+}
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        if ([[Templates getInstance] needsRefresh])
+        {
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"";
+            [[Templates getInstance] retrieveTemplatesFromServer:self];
+        }
+        else
+        {
+            [self sendInvite];
+        }
+    }
+    else
+    {
+        // The cancel button was pressed. Clear the alert type
+        _alertType = no_response;
+    }
+}
+
+-(IBAction)didPressFacebookButton:(id)sender
+{
+    _alertType = facebook_response;
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                      message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will post a invitation to your Facebook wall."
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"OK",nil];
+    
+    [message show];
+}
+
+-(IBAction)didPressEmailButton:(id)sender
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        _alertType = email_response;
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                          message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will open your email client. Fill in your friends' emails and invite them!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"OK",nil];
+        
+        [message show];
+    }
+    else
+    {
+        // Current device is not configured for email
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Email Available"
+                                                          message:@"Your current device does not have an email client configured."
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+}
+
+-(IBAction)didPressSMSButton:(id)sender
+{
+    if ([MFMessageComposeViewController canSendText])
+    {
+        _alertType = sms_response;
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                          message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will open your SMS client. Fill in your friends' numbers and invite them!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"OK",nil];
+        
+        [message show];
+    }
+    else
+    {
+        // Current device is not configured for email
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No SMS Available"
+                                                          message:@"Your current device does not have an SMS client configured."
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+    }
+}
+
+-(void)handleSingleTap:(UITapGestureRecognizer *)sender
+{
+    if (sender == _dismissTap)
+    {
+        [self toggleInviteFriendsView:FALSE];
+    }
+    
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+{
+    if(success)
+    {
+        [self sendInvite];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
 }
 
 @end
