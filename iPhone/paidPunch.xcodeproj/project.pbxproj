@@ -68,6 +68,7 @@
 		38B4F70216B1FB0900D73A3A /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F70016B1FB0800D73A3A /* grey-button.png */; };
 		38B4F70316B1FB0900D73A3A /* popup-redcarpet-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F70116B1FB0900D73A3A /* popup-redcarpet-img.png */; };
 		38B4F71816B2568E00D73A3A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F71716B2568E00D73A3A /* LoginViewController.m */; };
+		38B4F71B16B30B8300D73A3A /* InviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F71A16B30B8200D73A3A /* InviteFriendsViewController.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -616,6 +617,8 @@
 		38B4F70116B1FB0900D73A3A /* popup-redcarpet-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popup-redcarpet-img.png"; sourceTree = "<group>"; };
 		38B4F71616B2568E00D73A3A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		38B4F71716B2568E00D73A3A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		38B4F71916B30B8000D73A3A /* InviteFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsViewController.h; sourceTree = "<group>"; };
+		38B4F71A16B30B8200D73A3A /* InviteFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsViewController.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1578,6 +1581,8 @@
 				38B4F6FE16B09D4C00D73A3A /* SignUpViewController.m */,
 				38B4F71616B2568E00D73A3A /* LoginViewController.h */,
 				38B4F71716B2568E00D73A3A /* LoginViewController.m */,
+				38B4F71916B30B8000D73A3A /* InviteFriendsViewController.h */,
+				38B4F71A16B30B8200D73A3A /* InviteFriendsViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3277,6 +3282,7 @@
 				38B4F6FC16B092A400D73A3A /* BaseWithNavBarViewController.m in Sources */,
 				38B4F6FF16B09D4D00D73A3A /* SignUpViewController.m in Sources */,
 				38B4F71816B2568E00D73A3A /* LoginViewController.m in Sources */,
+				38B4F71B16B30B8300D73A3A /* InviteFriendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

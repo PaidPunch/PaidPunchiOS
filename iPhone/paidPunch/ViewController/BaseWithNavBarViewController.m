@@ -113,6 +113,25 @@ static CGFloat kButtonHeightSpacing = 10;
     _lowestYPos = backgrdImg.frame.size.height;
 }
 
+- (void)createGreenNotificationBar:(NSString*)barText
+{
+    UIFont* textFont = [UIFont fontWithName:@"ArialMT" size:16.0f];
+    
+    // Green bar for notifications
+    CGFloat greenbarLabelHeight = 50;
+    UILabel* greenbarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, greenbarLabelHeight)];
+    greenbarLabel.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
+    greenbarLabel.text = barText;
+    greenbarLabel.textColor = [UIColor blackColor];
+    [greenbarLabel setNumberOfLines:2];
+    [greenbarLabel setFont:textFont];
+    greenbarLabel.textAlignment = UITextAlignmentCenter;
+    
+    [_mainView addSubview:greenbarLabel];
+    
+    _lowestYPos = greenbarLabelHeight + greenbarLabel.frame.origin.y;
+}
+
 - (void)createSignInOrUpButtons:(NSString*)currentText fbAction:(SEL)fbAction emailAction:(SEL)emailAction
 {
     NSString* fbSpacing = @"          ";

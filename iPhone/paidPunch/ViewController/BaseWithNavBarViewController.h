@@ -38,5 +38,6 @@ typedef enum
 - (void) dismissKeyboard;
 - (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction;
 - (void)createSignInOrUpButtons:(NSString*)currentText fbAction:(SEL)fbAction emailAction:(SEL)emailAction;
+- (void)createGreenNotificationBar:(NSString*)barText;
 
 @end
