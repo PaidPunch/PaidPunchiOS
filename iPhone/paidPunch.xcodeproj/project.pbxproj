@@ -76,6 +76,8 @@
 		38B4F72716B4A14400D73A3A /* ProposedBusinesses.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F72616B4A14300D73A3A /* ProposedBusinesses.m */; };
 		38B4F72A16B4A17100D73A3A /* ProposedBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F72916B4A17100D73A3A /* ProposedBusiness.m */; };
 		38B4F72C16B4E11A00D73A3A /* green-suggest-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */; };
+		38B4F73216B4EAD300D73A3A /* ProposedBusinessesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */; };
+		38B4F73416B58AE700D73A3A /* pp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73316B58AE600D73A3A /* pp_icon.png */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -636,6 +638,9 @@
 		38B4F72816B4A17100D73A3A /* ProposedBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProposedBusiness.h; sourceTree = "<group>"; };
 		38B4F72916B4A17100D73A3A /* ProposedBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProposedBusiness.m; sourceTree = "<group>"; };
 		38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-suggest-button.png"; sourceTree = "<group>"; };
+		38B4F73016B4EACE00D73A3A /* ProposedBusinessesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProposedBusinessesView.h; sourceTree = "<group>"; };
+		38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProposedBusinessesView.m; sourceTree = "<group>"; };
+		38B4F73316B58AE600D73A3A /* pp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pp_icon.png; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1606,6 +1611,8 @@
 				38B4F71A16B30B8200D73A3A /* InviteFriendsViewController.m */,
 				38B4F72216B3B57C00D73A3A /* VoteBusinessesViewController.h */,
 				38B4F72316B3B57D00D73A3A /* VoteBusinessesViewController.m */,
+				38B4F73016B4EACE00D73A3A /* ProposedBusinessesView.h */,
+				38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2226,6 +2233,7 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38B4F73316B58AE600D73A3A /* pp_icon.png */,
 				38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */,
 				38B4F71C16B3725900D73A3A /* email.png */,
 				38B4F71D16B3725900D73A3A /* facebook-post.png */,
@@ -3205,6 +3213,7 @@
 				38B4F72016B3725900D73A3A /* facebook-post.png in Resources */,
 				38B4F72116B3725900D73A3A /* text-message.png in Resources */,
 				38B4F72C16B4E11A00D73A3A /* green-suggest-button.png in Resources */,
+				38B4F73416B58AE700D73A3A /* pp_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3317,6 +3326,7 @@
 				38B4F72416B3B57F00D73A3A /* VoteBusinessesViewController.m in Sources */,
 				38B4F72716B4A14400D73A3A /* ProposedBusinesses.m in Sources */,
 				38B4F72A16B4A17100D73A3A /* ProposedBusiness.m in Sources */,
+				38B4F73216B4EAD300D73A3A /* ProposedBusinessesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

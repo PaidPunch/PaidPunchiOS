@@ -10,10 +10,12 @@
 #import "BaseWithNavBarViewController.h"
 #import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
+#import "ProposedBusinessesView.h"
 
 @interface VoteBusinessesViewController : BaseWithNavBarViewController<HttpCallbackDelegate>
 {
     MBProgressHUD* _hud;
+    ProposedBusinessesView* _tableView;
 }
 
 @end

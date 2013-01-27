@@ -21,7 +21,7 @@
     [super viewDidLoad];
 
     // Create nav bar on top
-    [self createNavBar:@"Back" rightString:@"Done" middle:@"Give Free Credit" isMiddleImage:FALSE leftAction:@selector(didPressBackButton:) rightAction:@selector(didPressDoneButton:)];
+    [self createNavBar:@"Back" rightString:@"Done" middle:@"Give Free Credit" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressDoneButton:)];
     
     // Create green notification bar
     [self createGreenNotificationBar:@"Vote for the businesses you want to be on PaidPunch. When they join, you get $2 each!"];
@@ -72,18 +72,19 @@
     [suggestButton addTarget:self action:@selector(didPressSuggestBusinessButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [_mainView addSubview:suggestButton];
+    
+    _lowestYPos = finalRect.origin.y + finalRect.size.height;
 }
 
 - (void)displayProposeBusinessesList
 {
+    CGRect tableViewRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
+    _tableView = [[ProposedBusinessesView alloc] initWithFrame:tableViewRect];
     
+    [_mainView addSubview:_tableView];
 }
 
 #pragma mark - event actions
-
-- (void)didPressBackButton:(id)sender
-{
-}
 
 - (void)didPressDoneButton:(id)sender
 {
