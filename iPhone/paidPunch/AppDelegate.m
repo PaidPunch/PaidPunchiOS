@@ -7,12 +7,11 @@
 //
 
 #import "AppDelegate.h"
-
+#import "AsyncHttpCallMgr.h"
 #import "iRate.h"
 #import "LocalyticsSession.h"
 #import "User.h"
 #import "SignInViewController.h"
-//#import "StartPageViewController.h"
 #import "WelcomePageViewController.h"
 
 @implementation AppDelegate
@@ -69,7 +68,16 @@ static NSString* kAppId = @"159848747459550";
 
 - (void) appInit
 {
+    [AsyncHttpCallMgr getInstance];
     [User getInstance];
+    
+    [[AsyncHttpCallMgr getInstance] addDelegateInstance:[AsyncHttpCallMgr getInstance]];
+}
+
+- (void) appShutdown
+{
+    [User destroyInstance];
+    [AsyncHttpCallMgr destroyInstance];
 }
 
 -(void)initFB
@@ -208,10 +216,8 @@ static NSString* kAppId = @"159848747459550";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
+    [[AsyncHttpCallMgr getInstance] applicationDidEnterBackground];
+    
     //[[DatabaseManager sharedInstance] deleteOtherPunchCards];
     [self saveContext];
     [[User getInstance] saveUserData];
@@ -241,13 +247,12 @@ static NSString* kAppId = @"159848747459550";
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [[AsyncHttpCallMgr getInstance] applicationWillTerminate];
+    
     [self saveContext];
     [[User getInstance] saveUserData];
+    
+    [self appShutdown];
     
     // Close Localytics Session
     [[LocalyticsSession sharedLocalyticsSession] close];

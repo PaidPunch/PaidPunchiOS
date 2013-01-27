@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseWithNavBarViewController.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface VoteBusinessesViewController : BaseWithNavBarViewController
+@interface VoteBusinessesViewController : BaseWithNavBarViewController<HttpCallbackDelegate>
+{
+    MBProgressHUD* _hud;
+}
 
 @end
