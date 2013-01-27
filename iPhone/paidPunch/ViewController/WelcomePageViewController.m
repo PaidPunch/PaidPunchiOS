@@ -51,17 +51,18 @@ static NSUInteger kMaxInviteCodeSize = 10;
     [_mainView addSubview:logoImage];
     
     // Create cross fading images in the middle
-    _imageFiles = [NSArray arrayWithObjects:@"InformationPlacardThree.png", @"InformationPlacardTwo.png", @"InformationPlacardOne.png", nil];
+    _imageFiles = [NSArray arrayWithObjects:@"spas.png", @"cafes.png", @"restaurants.png", @"salons.png", @"dry-cleaning.png", @"bars.png", nil];
     _currentIndex = 0;
     UIImage* currentImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [_imageFiles objectAtIndex:_currentIndex]]];
-    CGRect imageRect = CGRectMake(0, logoImage.frame.origin.y + logoImage.frame.size.height, stdiPhoneWidth, currentImage.size.height);
+    CGRect imageRect = CGRectMake(0, logoImage.frame.origin.y + logoImage.frame.size.height, stdiPhoneWidth, 310);
+    //imageRect = [Utilities resizeProportionally:imageRect maxWidth:stdiPhoneWidth maxHeight:320];
     _mainImageView = [[UIImageView alloc] initWithFrame:imageRect];
     [_mainImageView setImage:currentImage];
     [_mainView addSubview:_mainImageView];
     
     // Create white label across the images with upsell text
     CGFloat constrainedSize = 265.0f;
-    UIFont* upsellFont = [UIFont fontWithName:@"Helvetica" size:18.0f];
+    UIFont* upsellFont = [UIFont fontWithName:@"Helvetica" size:16.0f];
     NSString* upsellString = @"  Save money every visit at ";
     CGSize sizeUpsellString = [upsellString sizeWithFont:upsellFont
                                        constrainedToSize:CGSizeMake(constrainedSize, CGFLOAT_MAX)
@@ -76,8 +77,8 @@ static NSUInteger kMaxInviteCodeSize = 10;
     [_mainView addSubview:textLabel];
     
     // Create clear label with business types in orange text
-    _businessTypeTexts = [NSArray arrayWithObjects:@"spas", @"pizzerias", @"salons", nil];
-    UIFont* businessTypeFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
+    _businessTypeTexts = [NSArray arrayWithObjects:@"spas", @"cafes", @"restaurants", @"salons", @"laundromats", @"bars", nil];
+    UIFont* businessTypeFont = [UIFont fontWithName:@"Helvetica-Bold" size:16.0f];
     _businessTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sizeUpsellString.width, _mainImageView.frame.origin.y + 30, stdiPhoneWidth - sizeUpsellString.width, sizeUpsellString.height + 20)];
     _businessTypeLabel.text = [_businessTypeTexts objectAtIndex:_currentIndex];
     _businessTypeLabel.backgroundColor = [UIColor clearColor];
@@ -105,6 +106,7 @@ static NSUInteger kMaxInviteCodeSize = 10;
     // Create invisible label layer
     _greyoutLabel = [[UILabel alloc] initWithFrame:mainRect];
     [self displayInviteView:FALSE];
+    
     [_mainView addSubview:_greyoutLabel];
     
     self.view = _mainView;

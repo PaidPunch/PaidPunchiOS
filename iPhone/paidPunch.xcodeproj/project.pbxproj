@@ -78,6 +78,12 @@
 		38B4F72C16B4E11A00D73A3A /* green-suggest-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */; };
 		38B4F73216B4EAD300D73A3A /* ProposedBusinessesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */; };
 		38B4F73416B58AE700D73A3A /* pp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73316B58AE600D73A3A /* pp_icon.png */; };
+		38B4F73C16B5A77400D73A3A /* bars.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73616B5A77400D73A3A /* bars.png */; };
+		38B4F73D16B5A77400D73A3A /* cafes.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73716B5A77400D73A3A /* cafes.png */; };
+		38B4F73E16B5A77400D73A3A /* dry-cleaning.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73816B5A77400D73A3A /* dry-cleaning.png */; };
+		38B4F73F16B5A77400D73A3A /* restaurants.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73916B5A77400D73A3A /* restaurants.png */; };
+		38B4F74016B5A77400D73A3A /* salons.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73A16B5A77400D73A3A /* salons.png */; };
+		38B4F74116B5A77400D73A3A /* spas.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73B16B5A77400D73A3A /* spas.png */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -641,6 +647,12 @@
 		38B4F73016B4EACE00D73A3A /* ProposedBusinessesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProposedBusinessesView.h; sourceTree = "<group>"; };
 		38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProposedBusinessesView.m; sourceTree = "<group>"; };
 		38B4F73316B58AE600D73A3A /* pp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pp_icon.png; sourceTree = "<group>"; };
+		38B4F73616B5A77400D73A3A /* bars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bars.png; sourceTree = "<group>"; };
+		38B4F73716B5A77400D73A3A /* cafes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cafes.png; sourceTree = "<group>"; };
+		38B4F73816B5A77400D73A3A /* dry-cleaning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dry-cleaning.png"; sourceTree = "<group>"; };
+		38B4F73916B5A77400D73A3A /* restaurants.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurants.png; sourceTree = "<group>"; };
+		38B4F73A16B5A77400D73A3A /* salons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = salons.png; sourceTree = "<group>"; };
+		38B4F73B16B5A77400D73A3A /* spas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spas.png; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1279,6 +1291,19 @@
 			);
 			name = AFNetworking;
 			path = External/AFNetworking;
+			sourceTree = "<group>";
+		};
+		38B4F73516B5A77300D73A3A /* WelcomeImages */ = {
+			isa = PBXGroup;
+			children = (
+				38B4F73616B5A77400D73A3A /* bars.png */,
+				38B4F73716B5A77400D73A3A /* cafes.png */,
+				38B4F73816B5A77400D73A3A /* dry-cleaning.png */,
+				38B4F73916B5A77400D73A3A /* restaurants.png */,
+				38B4F73A16B5A77400D73A3A /* salons.png */,
+				38B4F73B16B5A77400D73A3A /* spas.png */,
+			);
+			path = WelcomeImages;
 			sourceTree = "<group>";
 		};
 		38C2590516A67B8300982568 /* Localytics */ = {
@@ -2233,19 +2258,20 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				38B4F73316B58AE600D73A3A /* pp_icon.png */,
-				38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */,
-				38B4F71C16B3725900D73A3A /* email.png */,
-				38B4F71D16B3725900D73A3A /* facebook-post.png */,
-				38B4F71E16B3725900D73A3A /* text-message.png */,
-				38B4F70016B1FB0800D73A3A /* grey-button.png */,
-				38B4F70116B1FB0900D73A3A /* popup-redcarpet-img.png */,
-				38B4F6F416B0926200D73A3A /* blank-no-glow.png */,
 				38B4F6F516B0926200D73A3A /* blank.png */,
-				38B4F6F616B0926200D73A3A /* nav-bg.png */,
+				38B4F6F416B0926200D73A3A /* blank-no-glow.png */,
+				38B4F71C16B3725900D73A3A /* email.png */,
 				38B4F6EE16B08FB900D73A3A /* facebook-button.png */,
+				38B4F71D16B3725900D73A3A /* facebook-post.png */,
+				38B4F72B16B4E11A00D73A3A /* green-suggest-button.png */,
+				38B4F70016B1FB0800D73A3A /* grey-button.png */,
 				38B4F6EF16B08FB900D73A3A /* landing-top-logo.png */,
+				38B4F6F616B0926200D73A3A /* nav-bg.png */,
 				38B4F6F016B08FB900D73A3A /* orange-button.png */,
+				38B4F70116B1FB0900D73A3A /* popup-redcarpet-img.png */,
+				38B4F73316B58AE600D73A3A /* pp_icon.png */,
+				38B4F71E16B3725900D73A3A /* text-message.png */,
+				38B4F73516B5A77300D73A3A /* WelcomeImages */,
 				8A7D081D1519BF9900B98387 /* BuyPunch */,
 				8A7D085D1519BF9900B98387 /* Common */,
 				8A7D08911519BF9900B98387 /* Feeds */,
@@ -3214,6 +3240,12 @@
 				38B4F72116B3725900D73A3A /* text-message.png in Resources */,
 				38B4F72C16B4E11A00D73A3A /* green-suggest-button.png in Resources */,
 				38B4F73416B58AE700D73A3A /* pp_icon.png in Resources */,
+				38B4F73C16B5A77400D73A3A /* bars.png in Resources */,
+				38B4F73D16B5A77400D73A3A /* cafes.png in Resources */,
+				38B4F73E16B5A77400D73A3A /* dry-cleaning.png in Resources */,
+				38B4F73F16B5A77400D73A3A /* restaurants.png in Resources */,
+				38B4F74016B5A77400D73A3A /* salons.png in Resources */,
+				38B4F74116B5A77400D73A3A /* spas.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
