@@ -98,6 +98,7 @@
 		38BC784516B77B8A00A77A3F /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BC784316B77B8A00A77A3F /* banner.png */; };
 		38BC784616B77B8A00A77A3F /* no-biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BC784416B77B8A00A77A3F /* no-biz.png */; };
 		38BC784C16B7A8B900A77A3F /* save-every-visit.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BC784B16B7A8B900A77A3F /* save-every-visit.png */; };
+		38BC785716B85E0F00A77A3F /* HiAccuracyLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BC785516B85E0F00A77A3F /* HiAccuracyLocator.m */; };
 		38BFA89E169C0B0700102715 /* FreeCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */; };
 		38BFA8A1169C0B6700102715 /* FreeCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BFA8A0169C0B6700102715 /* FreeCreditViewController.m */; };
 		38BFA8A3169CE69900102715 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BFA8A2169CE69800102715 /* MessageUI.framework */; };
@@ -687,6 +688,9 @@
 		38BC784316B77B8A00A77A3F /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		38BC784416B77B8A00A77A3F /* no-biz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-biz.png"; sourceTree = "<group>"; };
 		38BC784B16B7A8B900A77A3F /* save-every-visit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-every-visit.png"; sourceTree = "<group>"; };
+		38BC785416B85E0F00A77A3F /* HiAccuracyLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiAccuracyLocator.h; sourceTree = "<group>"; };
+		38BC785516B85E0F00A77A3F /* HiAccuracyLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiAccuracyLocator.m; sourceTree = "<group>"; };
+		38BC785616B85E0F00A77A3F /* HiAccuracyLocatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiAccuracyLocatorDelegate.h; sourceTree = "<group>"; };
 		38BFA89A169BEDEF00102715 /* SubviewInteractionEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubviewInteractionEventDelegate.h; sourceTree = "<group>"; };
 		38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeCreditViewController.xib; sourceTree = "<group>"; };
 		38BFA89F169C0B6600102715 /* FreeCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCreditViewController.h; sourceTree = "<group>"; };
@@ -1340,6 +1344,16 @@
 			path = External/PPRevealSideviewController;
 			sourceTree = "<group>";
 		};
+		38BC785816B860BB00A77A3F /* HiAccuracyLocator */ = {
+			isa = PBXGroup;
+			children = (
+				38BC785416B85E0F00A77A3F /* HiAccuracyLocator.h */,
+				38BC785516B85E0F00A77A3F /* HiAccuracyLocator.m */,
+				38BC785616B85E0F00A77A3F /* HiAccuracyLocatorDelegate.h */,
+			);
+			name = HiAccuracyLocator;
+			sourceTree = "<group>";
+		};
 		38C2590516A67B8300982568 /* Localytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1566,6 +1580,7 @@
 		8A78E1CE14976B2C00F79380 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				38BC785816B860BB00A77A3F /* HiAccuracyLocator */,
 				38AAE8421672627300BF4922 /* ServerAPI */,
 				8A7A7B01152AD4370097A3B4 /* FacebookFacade */,
 				8A78E1CF14976B2D00F79380 /* Database */,
@@ -3414,6 +3429,7 @@
 				38B4F74816B6FEBF00D73A3A /* PaidPunchHomeViewController.m in Sources */,
 				38B4F75216B72E2C00D73A3A /* SidebarViewController.m in Sources */,
 				38BC783316B77A7200A77A3F /* NoBizView.m in Sources */,
+				38BC785716B85E0F00A77A3F /* HiAccuracyLocator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

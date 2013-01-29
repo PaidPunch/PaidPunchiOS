@@ -10,6 +10,7 @@
 #import "AsyncHttpCallMgr.h"
 #import "iRate.h"
 #import "LocalyticsSession.h"
+#import "PaidPunchHomeViewController.h"
 #import "User.h"
 #import "SignInViewController.h"
 #import "WelcomePageViewController.h"
@@ -53,8 +54,8 @@ static NSString* kAppId = @"159848747459550";
     UINavigationController *navController;
     if (([[User getInstance] userId] != NULL) && ([[[User getInstance] userId] length] > 0))
     {
-        PaidPunchTabBarController *tabBarController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
-        navController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];;
+        navController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     }
     else
     {        

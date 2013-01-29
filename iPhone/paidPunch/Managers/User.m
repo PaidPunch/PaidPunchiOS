@@ -438,10 +438,38 @@ static double const refreshTime = -(30 * 60);
 - (void) storeUserInfo:(id)responseObject
 {
     _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-    _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
-    _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
+    
+    id obj = [responseObject valueForKeyPath:kKeyPhone];
+    if (obj == NULL || (NSNull *)obj == [NSNull null])
+    {
+        _phone = @"";
+    }
+    else
+    {
+       _phone = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyPhone]];
+    }
+    
+    obj = [responseObject valueForKeyPath:kKeyName];
+    if (obj == NULL || (NSNull *)obj == [NSNull null])
+    {
+        _username = @"";
+    }
+    else
+    {
+        _username = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyName]];
+    }
+    
+    obj = [responseObject valueForKeyPath:kKeyZipcode];
+    if (obj == NULL || (NSNull *)obj == [NSNull null])
+    {
+        _zipcode = @"";
+    }
+    else
+    {
+        _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
+    }
+    
     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
-    _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
     _lastUpdate = [NSDate date];

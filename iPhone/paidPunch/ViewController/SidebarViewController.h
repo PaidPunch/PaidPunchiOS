@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HiAccuracyLocatorDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface SidebarViewController : UITableViewController
+@interface SidebarViewController : UITableViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate>
+{
+    MBProgressHUD* _hud;
+    UIAlertView* _locationAlertView;
+}
 
 @end

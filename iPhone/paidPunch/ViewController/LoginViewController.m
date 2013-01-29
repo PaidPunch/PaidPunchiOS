@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
-#import "InviteFriendsViewController.h"
 #import "LoginViewController.h"
+#import "PaidPunchHomeViewController.h"
 #import "User.h"
 #import "Utilities.h"
 
@@ -87,9 +87,6 @@
 
 - (void)didPressEmailButton:(id)sender
 {
-    InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
-    /*
     [self dismissKeyboard];
     
     [User getInstance].email = _emailTextField.text;
@@ -98,7 +95,6 @@
     _hud.labelText = @"Logging in";
     
     [[User getInstance] loginUserWithEmail:self password:_passwordTextField.text];
-     */
 }
 
 - (void)didPressForgotPasswordButton:(id)sender
@@ -137,8 +133,8 @@
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         [[DatabaseManager sharedInstance] deleteBusinesses];
         
-        InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] initWithNibName:nil bundle:nil];
-        [self.navigationController presentModalViewController:inviteFriendsViewController animated:NO];
+        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+        [self.navigationController pushViewController:homeViewController animated:NO];
     }
     else
     {
