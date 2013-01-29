@@ -84,6 +84,11 @@
 		38B4F73F16B5A77400D73A3A /* restaurants.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73916B5A77400D73A3A /* restaurants.png */; };
 		38B4F74016B5A77400D73A3A /* salons.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73A16B5A77400D73A3A /* salons.png */; };
 		38B4F74116B5A77400D73A3A /* spas.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F73B16B5A77400D73A3A /* spas.png */; };
+		38B4F74516B6FC1100D73A3A /* PPRevealSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F74416B6FC1100D73A3A /* PPRevealSideViewController.m */; };
+		38B4F74816B6FEBF00D73A3A /* PaidPunchHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F74716B6FEBC00D73A3A /* PaidPunchHomeViewController.m */; };
+		38B4F74A16B701E000D73A3A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F74916B701E000D73A3A /* background.png */; };
+		38B4F74C16B7045400D73A3A /* list-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F74B16B7045300D73A3A /* list-button.png */; };
+		38B4F75216B72E2C00D73A3A /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F75116B72DFB00D73A3A /* SidebarViewController.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -653,6 +658,14 @@
 		38B4F73916B5A77400D73A3A /* restaurants.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurants.png; sourceTree = "<group>"; };
 		38B4F73A16B5A77400D73A3A /* salons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = salons.png; sourceTree = "<group>"; };
 		38B4F73B16B5A77400D73A3A /* spas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spas.png; sourceTree = "<group>"; };
+		38B4F74316B6FC1100D73A3A /* PPRevealSideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPRevealSideViewController.h; sourceTree = "<group>"; };
+		38B4F74416B6FC1100D73A3A /* PPRevealSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPRevealSideViewController.m; sourceTree = "<group>"; };
+		38B4F74616B6FEB800D73A3A /* PaidPunchHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaidPunchHomeViewController.h; sourceTree = "<group>"; };
+		38B4F74716B6FEBC00D73A3A /* PaidPunchHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaidPunchHomeViewController.m; sourceTree = "<group>"; };
+		38B4F74916B701E000D73A3A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		38B4F74B16B7045300D73A3A /* list-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-button.png"; sourceTree = "<group>"; };
+		38B4F75016B72DEC00D73A3A /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
+		38B4F75116B72DFB00D73A3A /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1258,6 +1271,7 @@
 		38AAE8431672636100BF4922 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				38B4F74216B6FC1100D73A3A /* PPRevealSideviewController */,
 				38C2590516A67B8300982568 /* Localytics */,
 				38AAE844167263A400BF4922 /* AFNetworking */,
 			);
@@ -1304,6 +1318,16 @@
 				38B4F73B16B5A77400D73A3A /* spas.png */,
 			);
 			path = WelcomeImages;
+			sourceTree = "<group>";
+		};
+		38B4F74216B6FC1100D73A3A /* PPRevealSideviewController */ = {
+			isa = PBXGroup;
+			children = (
+				38B4F74316B6FC1100D73A3A /* PPRevealSideViewController.h */,
+				38B4F74416B6FC1100D73A3A /* PPRevealSideViewController.m */,
+			);
+			name = PPRevealSideviewController;
+			path = External/PPRevealSideviewController;
 			sourceTree = "<group>";
 		};
 		38C2590516A67B8300982568 /* Localytics */ = {
@@ -1638,6 +1662,10 @@
 				38B4F72316B3B57D00D73A3A /* VoteBusinessesViewController.m */,
 				38B4F73016B4EACE00D73A3A /* ProposedBusinessesView.h */,
 				38B4F73116B4EAD100D73A3A /* ProposedBusinessesView.m */,
+				38B4F74616B6FEB800D73A3A /* PaidPunchHomeViewController.h */,
+				38B4F74716B6FEBC00D73A3A /* PaidPunchHomeViewController.m */,
+				38B4F75016B72DEC00D73A3A /* SidebarViewController.h */,
+				38B4F75116B72DFB00D73A3A /* SidebarViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2258,6 +2286,8 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38B4F74B16B7045300D73A3A /* list-button.png */,
+				38B4F74916B701E000D73A3A /* background.png */,
 				38B4F6F516B0926200D73A3A /* blank.png */,
 				38B4F6F416B0926200D73A3A /* blank-no-glow.png */,
 				38B4F71C16B3725900D73A3A /* email.png */,
@@ -3246,6 +3276,8 @@
 				38B4F73F16B5A77400D73A3A /* restaurants.png in Resources */,
 				38B4F74016B5A77400D73A3A /* salons.png in Resources */,
 				38B4F74116B5A77400D73A3A /* spas.png in Resources */,
+				38B4F74A16B701E000D73A3A /* background.png in Resources */,
+				38B4F74C16B7045400D73A3A /* list-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3359,6 +3391,9 @@
 				38B4F72716B4A14400D73A3A /* ProposedBusinesses.m in Sources */,
 				38B4F72A16B4A17100D73A3A /* ProposedBusiness.m in Sources */,
 				38B4F73216B4EAD300D73A3A /* ProposedBusinessesView.m in Sources */,
+				38B4F74516B6FC1100D73A3A /* PPRevealSideViewController.m in Sources */,
+				38B4F74816B6FEBF00D73A3A /* PaidPunchHomeViewController.m in Sources */,
+				38B4F75216B72E2C00D73A3A /* SidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

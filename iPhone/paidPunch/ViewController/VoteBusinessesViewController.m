@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import "PaidPunchHomeViewController.h"
 #import "ProposedBusinesses.h"
 #import "Utilities.h"
 #import "VoteBusinessesViewController.h"
@@ -88,6 +89,8 @@
 
 - (void)didPressDoneButton:(id)sender
 {
+    PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+    [self.navigationController pushViewController:homeViewController animated:NO];
 }
 
 - (void)didPressSuggestBusinessButton:(id)sender

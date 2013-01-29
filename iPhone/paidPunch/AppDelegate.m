@@ -24,6 +24,7 @@
 @synthesize permissions;
 @synthesize locationManager;
 @synthesize currentLocation;
+@synthesize revealControl = _revealControl;
 
 static NSString* kAppId = @"159848747459550";
 
@@ -48,22 +49,27 @@ static NSString* kAppId = @"159848747459550";
 }
 
 - (void)initView 
-{    
+{
+    UINavigationController *navController;
     if (([[User getInstance] userId] != NULL) && ([[[User getInstance] userId] length] > 0))
     {
         PaidPunchTabBarController *tabBarController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
-        self.window.rootViewController=tabBarController;
-        [self.window makeKeyAndVisible];
+        navController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
     }
     else
     {        
         WelcomePageViewController *welcomePageViewController = [[WelcomePageViewController alloc] init];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:welcomePageViewController];
-        self.navigationController = navController;
-        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-        self.window.rootViewController=self.navigationController;
-        [self.window makeKeyAndVisible];
+        navController = [[UINavigationController alloc] initWithRootViewController:welcomePageViewController];
     }
+    
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.revealControl = [[PPRevealSideViewController alloc] initWithRootViewController:navController];
+    
+    [self.revealControl setDirectionsToShowBounce:PPRevealSideDirectionNone];
+    [self.revealControl setPanInteractionsWhenClosed:PPRevealSideInteractionContentView | PPRevealSideInteractionNavigationBar];
+    
+    self.window.rootViewController = self.revealControl;
+    [self.window makeKeyAndVisible];
 }
 
 - (void) appInit
