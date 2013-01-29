@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#include "CommonDefinitions.h"
 #import "ProposedBusiness.h"
 #import "ProposedBusinesses.h"
 #import "ProposedBusinessesView.h"
 
-static CGFloat const stdiPhoneWidth = 320.0;
 static CGFloat const kRowHeight = 70.0;
 static CGFloat const kImageSize = 50.0;
 static CGFloat const kVoteButtonWidth = 50.0;

@@ -6,10 +6,15 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#include "CommonDefinitions.h"
 #import "SidebarViewController.h"
+#import "User.h"
 
-static CGFloat const stdiPhoneWidth = 320.0;
-static CGFloat const stdiPhoneHeight = 480.0;
+static NSUInteger const kSections = 2;
+static NSUInteger const kCellsInSection1 = 6;
+static NSUInteger const kCellsInSection2 = 1;
+static NSUInteger const kSizeOfCellsInSection1 = 50;
+static NSString* const kTextSpacing = @"   ";
 
 @interface SidebarViewController ()
 
@@ -30,12 +35,6 @@ static CGFloat const stdiPhoneHeight = 480.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -55,28 +54,88 @@ static CGFloat const stdiPhoneHeight = 480.0;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 20;
+    if (section == 0)
+    {
+        return kCellsInSection1;
+    }
+    else
+    {
+        return kCellsInSection2;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        return kSizeOfCellsInSection1;
+    }
+    else
+    {
+        return (stdiPhoneHeight - (kSizeOfCellsInSection1 * kCellsInSection1));
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PaidPunchSidebarCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (!cell) {
+    if (!cell)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if (self.navigationController)
-        cell.textLabel.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+    if (indexPath.section == 0)
+    {
+        switch (indexPath.row)
+        {
+            case 0:
+                // Can't select name
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.textLabel.text = [[User getInstance] username];
+                break;
+                
+            case 1:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Change My Location", kTextSpacing];
+                break;
+                
+            case 2:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@My Coupons", kTextSpacing];
+                break;
+                
+            case 3:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Share Feedback", kTextSpacing];
+                break;
+                
+            case 4:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
+                break;
+                
+            case 5:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Purchase More Credit", kTextSpacing];
+                break;
+                
+            default:
+                NSLog(@"Unknown indexPath.row %d detected!", indexPath.row);
+                break;
+        };
+        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+        [cell.textLabel setTextColor:[UIColor blackColor]];
+        [cell.textLabel setBackgroundColor:[UIColor orangeColor]];
+    }
     else
-        cell.textLabel.text = [NSString stringWithFormat:@"Left %d", indexPath.row];
+    {
+        // Can't select the bottom large cell
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     
     return cell;
 }
@@ -93,38 +152,5 @@ static CGFloat const stdiPhoneHeight = 480.0;
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
-
-/*
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    CGRect mainRect = CGRectMake(0, 0, stdiPhoneWidth, stdiPhoneHeight);
-    UIView* _mainView = [[UIView alloc] initWithFrame:mainRect];
-    self.view = _mainView;
-
-    NSString* inviteText = @"Testing";
-    
-    // Create non-bold label
-    UIFont* testFont = [UIFont fontWithName:@"ArialMT" size:16.0f];
-    CGSize sizeInviteText = [inviteText sizeWithFont:testFont
-                                   constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
-                                       lineBreakMode:UILineBreakModeWordWrap];
-    UILabel* inviteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, sizeInviteText.width, sizeInviteText.height)];
-    inviteLabel.text = inviteText;
-    inviteLabel.backgroundColor = [UIColor clearColor];
-    inviteLabel.textColor = [UIColor blackColor];
-    [inviteLabel setNumberOfLines:1];
-    [inviteLabel setFont:testFont];
-    inviteLabel.textAlignment = UITextAlignmentCenter;
-    [_mainView addSubview:inviteLabel];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
- */
 
 @end

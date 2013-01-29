@@ -9,10 +9,6 @@
 #import "BaseWithNavBarViewController.h"
 #import "Utilities.h"
 
-static NSUInteger kDistanceFromTop = 5;
-static CGFloat kButtonWidthSpacing = 20;
-static CGFloat kButtonHeightSpacing = 10;
-
 @implementation BaseWithNavBarViewController
 @synthesize emailTextField = _emailTextField;
 @synthesize passwordTextField = _passwordTextField;

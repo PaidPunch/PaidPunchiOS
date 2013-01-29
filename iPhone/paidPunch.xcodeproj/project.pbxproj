@@ -677,6 +677,7 @@
 		38B844341677C1060068D3C3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		38B844351677C1060068D3C3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		38B844371677FB460068D3C3 /* HttpCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpCallbackDelegate.h; path = ServerAPI/HttpCallbackDelegate.h; sourceTree = "<group>"; };
+		38BC782016B7525100A77A3F /* CommonDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDefinitions.h; sourceTree = "<group>"; };
 		38BFA89A169BEDEF00102715 /* SubviewInteractionEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubviewInteractionEventDelegate.h; sourceTree = "<group>"; };
 		38BFA89D169C0B0700102715 /* FreeCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeCreditViewController.xib; sourceTree = "<group>"; };
 		38BFA89F169C0B6600102715 /* FreeCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCreditViewController.h; sourceTree = "<group>"; };
@@ -1666,6 +1667,7 @@
 				38B4F74716B6FEBC00D73A3A /* PaidPunchHomeViewController.m */,
 				38B4F75016B72DEC00D73A3A /* SidebarViewController.h */,
 				38B4F75116B72DFB00D73A3A /* SidebarViewController.m */,
+				38BC782016B7525100A77A3F /* CommonDefinitions.h */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;

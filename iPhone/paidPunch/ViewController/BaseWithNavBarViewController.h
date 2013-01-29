@@ -6,17 +6,8 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#include "CommonDefinitions.h"
 #import <UIKit/UIKit.h>
-
-static CGFloat const stdiPhoneWidth = 320.0;
-static CGFloat const stdiPhoneHeight = 480.0;
-
-typedef enum
-{
-    leftJustify,
-    centerJustify,
-    rightJustify
-} JustificationType;
 
 @interface BaseWithNavBarViewController : UIViewController<UITextFieldDelegate>
 {

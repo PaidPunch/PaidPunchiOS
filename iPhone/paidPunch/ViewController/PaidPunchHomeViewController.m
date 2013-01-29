@@ -6,16 +6,11 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#include "CommonDefinitions.h"
 #import "PaidPunchHomeViewController.h"
 #import "PPRevealSideViewController.h"
 #import "SidebarViewController.h"
 #import "Utilities.h"
-
-static NSUInteger kDistanceFromTop = 5;
-static CGFloat const stdiPhoneWidth = 320.0;
-static CGFloat const stdiPhoneHeight = 480.0;
-static CGFloat kButtonWidthSpacing = 20;
-static CGFloat kButtonHeightSpacing = 10;
 
 @implementation PaidPunchHomeViewController
 
@@ -34,8 +29,14 @@ static CGFloat kButtonHeightSpacing = 10;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - private functions
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    SidebarViewController *sidebar = [[SidebarViewController alloc] init];
+    [self.revealSideViewController preloadViewController:sidebar forSide:PPRevealSideDirectionLeft];
+}
 
+#pragma mark - private functions
 
 - (void)createNavBar
 {    
@@ -167,8 +168,7 @@ static CGFloat kButtonHeightSpacing = 10;
 
 - (void)didPressListButton:(id)sender
 {
-    SidebarViewController *sidebar = [[SidebarViewController alloc] init];
-    [self.revealSideViewController pushViewController:sidebar onDirection:PPRevealSideDirectionLeft animated:YES];
+    [self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionLeft animated:YES];
 }
 
 - (void)didPressCreditsButton:(id)sender
