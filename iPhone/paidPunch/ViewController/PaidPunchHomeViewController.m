@@ -7,6 +7,7 @@
 //
 
 #include "CommonDefinitions.h"
+#import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
 #import "PPRevealSideViewController.h"
 #import "SidebarViewController.h"
@@ -21,6 +22,8 @@
     [self createNavBar];
     
     [self createSuggestBusinessButton];
+    
+    [self createNoBizView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,6 +165,13 @@
     [_mainView addSubview:suggestButton];
     
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
+}
+
+- (void)createNoBizView
+{
+    CGRect nobizRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10));
+    NoBizView* nobizView = [[NoBizView alloc] initWithFrame:nobizRect];
+    [_mainView addSubview:nobizView];
 }
 
 #pragma mark - event actions
