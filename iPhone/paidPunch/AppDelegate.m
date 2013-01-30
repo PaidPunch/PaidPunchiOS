@@ -25,7 +25,6 @@
 @synthesize permissions;
 @synthesize locationManager;
 @synthesize currentLocation;
-@synthesize revealControl = _revealControl;
 
 static NSString* kAppId = @"159848747459550";
 
@@ -63,13 +62,10 @@ static NSString* kAppId = @"159848747459550";
         navController = [[UINavigationController alloc] initWithRootViewController:welcomePageViewController];
     }
     
+    self.navigationController = navController;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.revealControl = [[PPRevealSideViewController alloc] initWithRootViewController:navController];
     
-    [self.revealControl setDirectionsToShowBounce:PPRevealSideDirectionNone];
-    [self.revealControl setPanInteractionsWhenClosed:PPRevealSideInteractionContentView | PPRevealSideInteractionNavigationBar];
-    
-    self.window.rootViewController = self.revealControl;
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 }
 

@@ -1,5 +1,5 @@
 //
-//  SidebarViewController.m
+//  AccountViewController.m
 //  paidPunch
 //
 //  Created by Aaron Khoo on 1/28/13.
@@ -7,36 +7,33 @@
 //
 
 #include "CommonDefinitions.h"
+#import <QuartzCore/QuartzCore.h>
+#import <QuartzCore/CAGradientLayer.h>
 #import "HiAccuracyLocator.h"
-#import "PPRevealSideViewController.h"
-#import "SidebarViewController.h"
+#import "AccountViewController.h"
 #import "User.h"
 
 static NSUInteger const kSections = 2;
-static NSUInteger const kCellsInSection1 = 7;
-static NSUInteger const kCellsInSection2 = 1;
-static NSUInteger const kSizeOfCellsInSection1 = 50;
+static NSUInteger const kCellsInSection1 = 4;
+static NSUInteger const kCellsInSection2 = 2;
+static NSUInteger const kSizeOfCells = 40;
 static NSString* const kTextSpacing = @"  ";
 
-@interface SidebarViewController ()
+@interface AccountViewController ()
 
 @end
 
-@implementation SidebarViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation AccountViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self createMainView:[UIColor blackColor]];
+    
+    [self createNavBar:@"Back" rightString:nil middle:@"Account Info" isMiddleImage:FALSE leftAction:nil rightAction:nil];
+    
+    [self createAccountTable];
 }
 
 - (void)viewDidUnload
@@ -47,6 +44,37 @@ static NSString* const kTextSpacing = @"  ";
 }
 
 #pragma mark - private functions
+
+- (void)createMainView:(UIColor*)backgroundColor
+{
+    CGRect mainRect = CGRectMake(0, 0, stdiPhoneWidth, stdiPhoneHeight);
+    _mainView = [[UIView alloc] initWithFrame:mainRect];
+    
+    CAGradientLayer* gradient = [CAGradientLayer layer];
+    gradient.frame = _mainView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor blackColor] CGColor],
+                       (id)[[UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0] CGColor], nil];
+    [_mainView.layer insertSublayer:gradient atIndex:0];
+    
+    self.view = _mainView;
+}
+
+- (void) createAccountTable
+{
+    CGFloat tableWidth = stdiPhoneWidth - 40;
+    CGFloat verticalSpacing = 25;
+    CGFloat tableHeight = stdiPhoneHeight - (verticalSpacing * 2) - _lowestYPos;
+    CGRect tableViewRect = CGRectMake((stdiPhoneWidth - tableWidth)/2, _lowestYPos + verticalSpacing, tableWidth, tableHeight);
+    _tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStyleGrouped];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    [_tableView setBackgroundColor:[UIColor clearColor]];
+    [_tableView setOpaque:NO];
+    [_tableView setScrollEnabled:NO];
+    
+    [_mainView addSubview:_tableView];
+}
 
 - (void) showLocationSelector
 {
@@ -63,6 +91,11 @@ static NSString* const kTextSpacing = @"  ";
 }
 
 #pragma mark - Event actions
+
+- (void)didPressBackButton:(id)sender
+{
+    
+}
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -82,16 +115,7 @@ static NSString* const kTextSpacing = @"  ";
             [[User getInstance] setZipcode:[[alertView textFieldAtIndex:0] text]];
             // TODO: refresh business list
             //[self refreshBusinessList];
-            
-            // Pop the sidebar to go back to main view
-            [self.revealSideViewController popViewControllerAnimated:YES];
         }
-    }
-    else
-    {
-        // This codepath handles error alert views from the locating user call
-        // Pop the sidebar to go back to main view
-        [self.revealSideViewController popViewControllerAnimated:YES];
     }
 }
 
@@ -122,8 +146,6 @@ static NSString* const kTextSpacing = @"  ";
                 
                 // TODO: Refresh business list
                 //[self refreshBusinessList];
-                
-                [self.revealSideViewController popViewControllerAnimated:YES];
             }
         }];
     }
@@ -167,14 +189,7 @@ static NSString* const kTextSpacing = @"  ";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
-        return kSizeOfCellsInSection1;
-    }
-    else
-    {
-        return (stdiPhoneHeight - (kSizeOfCellsInSection1 * kCellsInSection1));
-    }
+    return kSizeOfCells;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,17 +202,17 @@ static NSString* const kTextSpacing = @"  ";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+    [cell setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:1.0]];
+    [cell.contentView setBackgroundColor:[UIColor clearColor]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:16.0f]];
+    [cell.textLabel setTextColor:[UIColor blackColor]];
+    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     if (indexPath.section == 0)
     {
-        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
         switch (indexPath.row)
         {
             case 0:
-                // Can't select name
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.text = [[User getInstance] username];
-                [cell.textLabel setTextAlignment:UITextAlignmentCenter];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@My Coupons", kTextSpacing];
                 break;
                 
             case 1:
@@ -205,40 +220,73 @@ static NSString* const kTextSpacing = @"  ";
                 break;
                 
             case 2:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@My Coupons", kTextSpacing];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Settings", kTextSpacing];
                 break;
                 
             case 3:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@Share Feedback", kTextSpacing];
                 break;
                 
-            case 4:
+            default:
+                NSLog(@"Unknown indexPath.row %d detected in section 0!", indexPath.row);
+                break;
+        };
+    }
+    else if (indexPath.section == 1)
+    {
+        switch (indexPath.row)
+        {
+            case 0:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
                 break;
                 
-            case 5:
+            case 1:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@Purchase More Credit", kTextSpacing];
                 break;
                 
-            case 6:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@Settings", kTextSpacing];
-                break;
-                
             default:
-                NSLog(@"Unknown indexPath.row %d detected!", indexPath.row);
+                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
                 break;
-        };
-        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
-        [cell.textLabel setTextColor:[UIColor blackColor]];
-        [cell.textLabel setBackgroundColor:[UIColor orangeColor]];
-    }
-    else
-    {
-        // Can't select the bottom large cell
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
     }
     
     return cell;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *hView = [[UIView alloc] initWithFrame:CGRectMake(0,200,300,244)];
+    hView.backgroundColor=[UIColor clearColor];
+    
+    UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(15,0,300,44)];
+    
+    hLabel.backgroundColor=[UIColor clearColor];
+    hLabel.shadowColor = [UIColor grayColor];
+    hLabel.shadowOffset = CGSizeMake(0.5,1);  // closest as far as I could tell
+    hLabel.textColor = [UIColor whiteColor];  // or whatever you want
+    hLabel.font = [UIFont boldSystemFontOfSize:17];
+    
+    switch (section)
+    {
+        case 0:
+            hLabel.text = @"Account Info";
+            break;
+        case 1:
+            hLabel.text = @"Credits";
+            break;
+        default:
+            hLabel.text = @"";
+            break;
+    }
+    
+    [hView addSubview:hLabel];
+    
+    return hView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return kSizeOfCells;
 }
 
 #pragma mark - Table view delegate
@@ -274,13 +322,7 @@ static NSString* const kTextSpacing = @"  ";
         };
     }
     
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

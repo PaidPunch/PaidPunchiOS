@@ -20,6 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self createMainView:[UIColor whiteColor]];
 
     // Create nav bar on top
     [self createNavBar:@"Back" rightString:@"Done" middle:@"Give Free Credit" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressDoneButton:)];

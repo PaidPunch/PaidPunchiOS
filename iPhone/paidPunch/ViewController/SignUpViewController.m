@@ -19,6 +19,8 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self createMainView:[UIColor whiteColor]];
 	
     // Create nav bar on top
     [self createNavBar:@"Back" rightString:nil middle:@"Sign Up" isMiddleImage:FALSE leftAction:nil rightAction:nil];

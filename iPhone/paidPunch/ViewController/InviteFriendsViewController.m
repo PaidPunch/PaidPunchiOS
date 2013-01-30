@@ -47,6 +47,8 @@ typedef enum
 {
     [super viewDidLoad];
 	
+    [self createMainView:[UIColor whiteColor]];
+    
     // Create nav bar on top
     [self createNavBar:nil rightString:@"Next" middle:@"Give $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressNextButton:)];
     

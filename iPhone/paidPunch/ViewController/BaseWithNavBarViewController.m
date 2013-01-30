@@ -37,13 +37,16 @@
 
 #pragma mark - public functions
 
-- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction
+- (void)createMainView:(UIColor*)backgroundColor
 {
     CGRect mainRect = CGRectMake(0, 0, stdiPhoneWidth, stdiPhoneHeight);
     _mainView = [[UIView alloc] initWithFrame:mainRect];
-    _mainView.backgroundColor = [UIColor whiteColor];
+    _mainView.backgroundColor = backgroundColor;
     self.view = _mainView;
-    
+}
+
+- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction
+{    
     // Create background
     UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-bg.png"]];
     CGRect originalRect = CGRectMake(0, 0, backgrdImg.frame.size.width, backgrdImg.frame.size.height);

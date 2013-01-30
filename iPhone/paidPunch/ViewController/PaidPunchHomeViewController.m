@@ -9,8 +9,7 @@
 #include "CommonDefinitions.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
-#import "PPRevealSideViewController.h"
-#import "SidebarViewController.h"
+#import "AccountViewController.h"
 #import "Utilities.h"
 
 @implementation PaidPunchHomeViewController
@@ -37,8 +36,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    SidebarViewController *sidebar = [[SidebarViewController alloc] init];
-    [self.revealSideViewController preloadViewController:sidebar forSide:PPRevealSideDirectionLeft];
 }
 
 #pragma mark - private functions
@@ -60,7 +57,7 @@
     CGFloat maxElementWidth = navbarImg.frame.size.width - kButtonWidthSpacing;
     CGFloat maxElementHeight = navbarImg.frame.size.height - kButtonHeightSpacing;
     
-    UIButton* leftButton = [self createListButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
+    UIButton* leftButton = [self createAccountButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
     [_mainView addSubview:leftButton];
     
     UIButton* centerButton = [self createPaidPunchButton:stdiPhoneWidth ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
@@ -72,7 +69,7 @@
     _lowestYPos = navbarImg.frame.origin.y + navbarImg.frame.size.height;
 }
 
-- (UIButton*)createListButton:(CGFloat)xpos ypos:(CGFloat)ypos maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
+- (UIButton*)createAccountButton:(CGFloat)xpos ypos:(CGFloat)ypos maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
 {
     // Get imagedata
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list-button" ofType:@"png"];
@@ -80,7 +77,7 @@
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     
     UIButton* newButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [newButton addTarget:self action:@selector(didPressListButton:) forControlEvents:UIControlEventTouchUpInside];
+    [newButton addTarget:self action:@selector(didPressAccountButton:) forControlEvents:UIControlEventTouchUpInside];
     [newButton setBackgroundImage:image forState:UIControlStateNormal];
     
     CGRect buttonSize = CGRectMake(0, 0, image.size.width + 30, image.size.height + 10);
@@ -178,9 +175,10 @@
 
 #pragma mark - event actions
 
-- (void)didPressListButton:(id)sender
+- (void)didPressAccountButton:(id)sender
 {
-    [self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionLeft animated:YES];
+    AccountViewController *accountViewController = [[AccountViewController alloc] init];
+    [self.navigationController pushViewController:accountViewController animated:YES];
 }
 
 - (void)didPressCreditsButton:(id)sender

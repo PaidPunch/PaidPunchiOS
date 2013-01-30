@@ -1,5 +1,5 @@
 //
-//  SidebarViewController.h
+//  AccountViewController.h
 //  paidPunch
 //
 //  Created by Aaron Khoo on 1/28/13.
@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseWithNavBarViewController.h"
 #import "HiAccuracyLocatorDelegate.h"
 #import "MBProgressHUD.h"
 
-@interface SidebarViewController : UITableViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate>
+@interface AccountViewController : BaseWithNavBarViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate,UITableViewDataSource,UITableViewDelegate>
 {
+    UITableView* _tableView;
     MBProgressHUD* _hud;
     UIAlertView* _locationAlertView;
 }

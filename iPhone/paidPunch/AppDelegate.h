@@ -14,7 +14,6 @@
 #import "FacebookFacade.h"
 #import "FBConnect.h"
 #import "PaidPunchTabBarController.h"
-#import "PPRevealSideViewController.h"
 #import "User.h"
 
 @class DualSignInViewController, StartPageViewController;
@@ -32,8 +31,6 @@
     
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
-    
-    PPRevealSideViewController* _revealControl;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -47,7 +44,6 @@
 @property (nonatomic, strong) NSMutableDictionary *userPermissions;
 @property(nonatomic,strong) CLLocationManager *locationManager;
 @property(nonatomic,strong) CLLocation *currentLocation;
-@property(nonatomic,strong) PPRevealSideViewController* revealControl;
 
 - (NSURL*)applicationDocumentsDirectory;
 - (void) saveContext;
