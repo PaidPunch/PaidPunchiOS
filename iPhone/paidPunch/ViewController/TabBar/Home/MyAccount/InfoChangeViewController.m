@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "InfoChangeViewController.h"
 #import "User.h"
 
@@ -15,14 +14,13 @@
 @end
 
 @implementation InfoChangeViewController
-@synthesize scrollView = _scrollview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // Custom initialization
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
     }
     return self;
 }
@@ -31,45 +29,16 @@
 {
     [super viewDidLoad];
     
-    CGFloat startingYPos = 80.0;
-    CGFloat spacing = 20.0;
+    [self createMainView:[UIColor whiteColor]];
     
-    CGFloat textHeight = 50;
-    CGFloat textFieldWidth = self.view.frame.size.width - 40;
-    CGFloat leftSpacing = (self.view.frame.size.width - textFieldWidth)/2;
-    UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    [self createNavBar:@"Back" rightString:nil middle:@"Account Info" isMiddleImage:FALSE leftAction:nil rightAction:nil];
     
-    // Create textfield for username
-    CGRect usernameFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
-    NSString* usernameText = [NSString stringWithFormat:@"Name: %@", [[User getInstance] username]];
-    _usernameTF = [self initializeUITextField:usernameFrame placeholder:usernameText font:textFont];
-    _usernameTF.returnKeyType = UIReturnKeyNext;
-    [_scrollview addSubview:_usernameTF];
+    // Add a background to the mainview
+    UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    backgrdImg.frame = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
+    [_mainView addSubview:backgrdImg];
     
-    // Create textfield for mobile phone
-    startingYPos = _usernameTF.frame.origin.y + _usernameTF.frame.size.height + spacing;
-    CGRect mobilenoFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
-    NSString* mobilenoText = [NSString stringWithFormat:@"Phone: %@", [[User getInstance] phone]];
-    _mobilenoTF = [self initializeUITextField:mobilenoFrame placeholder:mobilenoText font:textFont];
-    _mobilenoTF.returnKeyType = UIReturnKeyNext;
-    [_scrollview addSubview:_mobilenoTF];
-    
-    // Create textfield for zipcode
-    startingYPos = _mobilenoTF.frame.origin.y + _mobilenoTF.frame.size.height + spacing;
-    CGRect zipcodeFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
-    NSString* zipcodeText = [NSString stringWithFormat:@"Zipcode: %@", [[User getInstance] zipcode]];
-    _zipcodeTF = [self initializeUITextField:zipcodeFrame placeholder:zipcodeText font:textFont];
-    [_scrollview addSubview:_zipcodeTF];
-  
-    // Create update button
-    startingYPos = _zipcodeTF.frame.origin.y + _zipcodeTF.frame.size.height + spacing;
-    _updateBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_updateBtn addTarget:self action:@selector(didPressUpdateButton:) forControlEvents:UIControlEventTouchUpInside];
-    NSString* updateText = @"Update";
-    [_updateBtn setFrame:CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight)];
-    [_updateBtn setTitle:updateText forState:UIControlStateNormal];
-    _updateBtn.titleLabel.font = textFont;
-    [_scrollview addSubview:_updateBtn];
+    [self createInputFields];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,13 +57,13 @@
     {
         [_mobilenoTF becomeFirstResponder];
     }
-    else if (textField == _mobilenoTF)
+    else if (textField == _oldpasswordTF)
     {
-        [_zipcodeTF becomeFirstResponder];
+        [_newpasswordTF becomeFirstResponder];
     }
     else
     {
-        [self.scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+        [_scrollview setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
     }
     
     return NO;
@@ -131,14 +100,122 @@
     return (([newVersion length] > 0) && ([newVersion compare:oldVersion] != NSOrderedSame));
 }
 
+-(BOOL) validatePassword
+{
+    if(_oldpasswordTF.text.length==0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter Old Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    }
+    if(_newpasswordTF.text.length==0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter New Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    }
+    if([_newpasswordTF.text isEqualToString:_oldpasswordTF.text])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Old Password and New Password should be different" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)createInputFields
+{
+    CGRect scrollRect = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
+    _scrollview = [[UIScrollView alloc] initWithFrame:scrollRect];
+    _scrollview.backgroundColor = [UIColor clearColor];
+    [_scrollview setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+	_scrollview.scrollEnabled = FALSE;
+    _scrollview.contentSize = CGSizeMake(stdiPhoneWidth, stdiPhoneHeight);
+    [_mainView addSubview:_scrollview];
+    
+    CGFloat startingYPos = 25;
+    CGFloat spacing = 10.0;
+    
+    CGFloat textHeight = 50;
+    CGFloat textFieldWidth = self.view.frame.size.width - 40;
+    CGFloat leftSpacing = (self.view.frame.size.width - textFieldWidth)/2;
+    UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    
+    // Create textfield for username
+    CGRect usernameFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+    NSString* usernameText = [NSString stringWithFormat:@"Name: %@", [[User getInstance] username]];
+    _usernameTF = [self initializeUITextField:usernameFrame placeholder:usernameText font:textFont];
+    _usernameTF.returnKeyType = UIReturnKeyNext;
+    [_scrollview addSubview:_usernameTF];
+    
+    // Create textfield for mobile phone
+    startingYPos = _usernameTF.frame.origin.y + _usernameTF.frame.size.height + spacing;
+    CGRect mobilenoFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+    NSString* mobilenoText = [NSString stringWithFormat:@"Phone: %@", [[User getInstance] phone]];
+    _mobilenoTF = [self initializeUITextField:mobilenoFrame placeholder:mobilenoText font:textFont];
+    _mobilenoTF.returnKeyType = UIReturnKeyDone;
+    [_scrollview addSubview:_mobilenoTF];
+    
+    // Create update button
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"grey-button" ofType:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    startingYPos = _mobilenoTF.frame.origin.y + _mobilenoTF.frame.size.height + spacing;
+    _updateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_updateBtn addTarget:self action:@selector(didPressUpdateButton:) forControlEvents:UIControlEventTouchUpInside];
+    NSString* updateText = @"Update";
+    [_updateBtn setFrame:CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight)];
+    [_updateBtn setTitle:updateText forState:UIControlStateNormal];
+    [_updateBtn setBackgroundImage:image forState:UIControlStateNormal];
+    _updateBtn.titleLabel.font = textFont;
+    [_updateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_scrollview addSubview:_updateBtn];
+    
+    // Create textfield for old password
+    startingYPos = _updateBtn.frame.origin.y + _updateBtn.frame.size.height + spacing;
+    CGRect oldpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+    NSString* oldpasswordText = [NSString stringWithFormat:@"Current Password"];
+    _oldpasswordTF = [self initializeUITextField:oldpasswordFrame placeholder:oldpasswordText font:textFont];
+    _oldpasswordTF.returnKeyType = UIReturnKeyNext;
+    [_scrollview addSubview:_oldpasswordTF];
+    
+    // Create textfield for mobile phone
+    startingYPos = _oldpasswordTF.frame.origin.y + _oldpasswordTF.frame.size.height + spacing;
+    CGRect newpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+    NSString* newpasswordText = [NSString stringWithFormat:@"New Password"];
+    _newpasswordTF = [self initializeUITextField:newpasswordFrame placeholder:newpasswordText font:textFont];
+    _newpasswordTF.returnKeyType = UIReturnKeyDone;
+    [_scrollview addSubview:_newpasswordTF];
+    
+    // Create password button
+    startingYPos = _newpasswordTF.frame.origin.y + _newpasswordTF.frame.size.height + spacing;
+    _passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_passwordBtn addTarget:self action:@selector(didPressPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
+    NSString* passwordText = @"Change Password";
+    [_passwordBtn setFrame:CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight)];
+    [_passwordBtn setTitle:passwordText forState:UIControlStateNormal];
+    [_passwordBtn setBackgroundImage:image forState:UIControlStateNormal];
+    _passwordBtn.titleLabel.font = textFont;
+    [_passwordBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_scrollview addSubview:_passwordBtn];
+}
+
 #pragma mark - Event actions
+
+-(IBAction)didPressPasswordButton:(id)sender
+{
+    if([self validatePassword])
+    {
+        [[User getInstance] changePassword:self oldPassword:_oldpasswordTF.text newPassword:_newpasswordTF.text];
+    }
+}
 
 -(IBAction)didPressUpdateButton:(id)sender
 {
     // Dismiss any keyboards
     [_usernameTF resignFirstResponder];
     [_mobilenoTF resignFirstResponder];
-    [_zipcodeTF resignFirstResponder];
     
     BOOL hasValidInput = false;
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -156,13 +233,6 @@
         hasValidInput = true;
     }
     
-    NSString* newZipcode = [_zipcodeTF text];
-    if ([self validateInput:newZipcode oldVersion:[[User getInstance] zipcode]])
-    {
-        [dict setObject:newZipcode forKey:@"zipcode"];
-        hasValidInput = true;
-    }
-    
     if (hasValidInput)
     {
         _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -175,18 +245,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"No changes found." delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-}
-
-- (IBAction)goBack:(id)sender
-{
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromLeft;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark - HttpCallbackDelegate

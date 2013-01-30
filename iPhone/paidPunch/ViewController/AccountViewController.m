@@ -9,6 +9,7 @@
 #include "CommonDefinitions.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QuartzCore/CAGradientLayer.h>
+#import "InfoChangeViewController.h"
 #import "HiAccuracyLocator.h"
 #import "AccountViewController.h"
 #import "User.h"
@@ -32,6 +33,11 @@ static NSString* const kTextSpacing = @"  ";
     [self createMainView:[UIColor blackColor]];
     
     [self createNavBar:@"Back" rightString:nil middle:@"Account Info" isMiddleImage:FALSE leftAction:nil rightAction:nil];
+    
+    // Add a background to the mainview
+    UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    backgrdImg.frame = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
+    [_mainView addSubview:backgrdImg];
     
     [self createAccountTable];
 }
@@ -90,12 +96,13 @@ static NSString* const kTextSpacing = @"  ";
     [_locationAlertView show];
 }
 
-#pragma mark - Event actions
-
-- (void)didPressBackButton:(id)sender
+- (void) showInfoChangeView
 {
-    
+    InfoChangeViewController *infoChangeViewController = [[InfoChangeViewController alloc] init];
+    [self.navigationController pushViewController:infoChangeViewController animated:NO];
 }
+
+#pragma mark - Event actions
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -143,6 +150,7 @@ static NSString* const kTextSpacing = @"  ";
                 NSLog(@"**Geocode successful; zip code: %@", [topResult postalCode]);
                 
                 [[User getInstance] setZipcode:[topResult postalCode]];
+                [[User getInstance] saveUserData];
                 
                 // TODO: Refresh business list
                 //[self refreshBusinessList];
@@ -292,34 +300,48 @@ static NSString* const kTextSpacing = @"  ";
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
         {
+            case 0:
+                
+                break;
+                
             case 1:
                 [self showLocationSelector];
                 break;
                 
             case 2:
+                [self showInfoChangeView];
                 break;
                 
             case 3:
-                break;
                 
-            case 4:
-                break;
-                
-            case 5:
-                break;
-                
-            case 6:
                 break;
                 
             default:
-                NSLog(@"Unknown indexPath.row %d detected!", indexPath.row);
+                NSLog(@"Unknown indexPath.row %d detected in section 0!", indexPath.row);
                 break;
         };
+    }
+    else if (indexPath.section == 1)
+    {
+        switch (indexPath.row)
+        {
+            case 0:
+                
+                break;
+                
+            case 1:
+                
+                break;
+                
+            default:
+                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
+                break;
+        }
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseWithNavBarViewController.h"
 #import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
 
-@interface InfoChangeViewController : UIViewController<HttpCallbackDelegate,UITextFieldDelegate>
+@interface InfoChangeViewController : BaseWithNavBarViewController<HttpCallbackDelegate,UITextFieldDelegate>
 {
-    UIScrollView *_scrollview;
+    //UIScrollView *_scrollview;
     UITextField *_usernameTF;
     UITextField *_mobilenoTF;
-    UITextField *_zipcodeTF;
+    UITextField *_oldpasswordTF;
+    UITextField *_newpasswordTF;
+    UIButton* _passwordBtn;
     UIButton *_updateBtn;
     MBProgressHUD* _hud;
 }
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
-- (IBAction)goBack:(id)sender;
 
 @end

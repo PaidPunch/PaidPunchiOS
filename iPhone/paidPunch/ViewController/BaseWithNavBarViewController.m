@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "BaseWithNavBarViewController.h"
 #import "Utilities.h"
 
@@ -334,6 +335,13 @@
 
 - (void)didPressLeftButton:(id)sender
 {
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromLeft;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    
     [self.navigationController popViewControllerAnimated:NO];
 }
 
