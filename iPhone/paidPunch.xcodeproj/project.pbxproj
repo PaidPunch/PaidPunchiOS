@@ -1657,8 +1657,7 @@
 				8A78E201149770BC00F79380 /* Registration */,
 				8A78E205149770BC00F79380 /* SignIn */,
 				8A78E209149770BC00F79380 /* TabBar */,
-				38280352169FF56C005A8A32 /* InfoChangeViewController.h */,
-				38280353169FF56C005A8A32 /* InfoChangeViewController.m */,
+				38BC782016B7525100A77A3F /* CommonDefinitions.h */,
 				38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */,
 				38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */,
 				38B4F6FA16B092A300D73A3A /* BaseWithNavBarViewController.h */,
@@ -1677,9 +1676,10 @@
 				38B4F74716B6FEBC00D73A3A /* PaidPunchHomeViewController.m */,
 				38B4F75016B72DEC00D73A3A /* AccountViewController.h */,
 				38B4F75116B72DFB00D73A3A /* AccountViewController.m */,
-				38BC782016B7525100A77A3F /* CommonDefinitions.h */,
 				38BC783116B77A7100A77A3F /* NoBizView.h */,
 				38BC783216B77A7200A77A3F /* NoBizView.m */,
+				38280352169FF56C005A8A32 /* InfoChangeViewController.h */,
+				38280353169FF56C005A8A32 /* InfoChangeViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;

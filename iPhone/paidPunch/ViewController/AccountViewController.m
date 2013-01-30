@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <QuartzCore/CAGradientLayer.h>
 #import "InfoChangeViewController.h"
+#import "InviteFriendsViewController.h"
 #import "HiAccuracyLocator.h"
 #import "AccountViewController.h"
 #import "User.h"
@@ -100,6 +101,12 @@ static NSString* const kTextSpacing = @"  ";
 {
     InfoChangeViewController *infoChangeViewController = [[InfoChangeViewController alloc] init];
     [self.navigationController pushViewController:infoChangeViewController animated:NO];
+}
+
+- (void) showFreeCreditViews
+{
+    InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:TRUE];
+    [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
 }
 
 #pragma mark - Event actions
@@ -331,7 +338,7 @@ static NSString* const kTextSpacing = @"  ";
         switch (indexPath.row)
         {
             case 0:
-                
+                [self showFreeCreditViews];
                 break;
                 
             case 1:

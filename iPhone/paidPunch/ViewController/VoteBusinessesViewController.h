@@ -18,4 +18,6 @@
     ProposedBusinessesView* _tableView;
 }
 
+- (id)init:(BOOL)popWhenDone;
+
 @end

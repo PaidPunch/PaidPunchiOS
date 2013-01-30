@@ -136,6 +136,8 @@
         [[DatabaseManager sharedInstance] deleteBusinesses];
         
         PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+        AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.rootController = homeViewController;
         [self.navigationController pushViewController:homeViewController animated:NO];
     }
     else

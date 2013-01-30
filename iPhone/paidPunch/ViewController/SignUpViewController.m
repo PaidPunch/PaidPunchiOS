@@ -7,6 +7,7 @@
 //
 
 #import "DatabaseManager.h"
+#import "InviteFriendsViewController.h"
 #import "SignUpViewController.h"
 #import "User.h"
 #import "Utilities.h"
@@ -151,8 +152,8 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         [[DatabaseManager sharedInstance] deleteBusinesses];
         
-        //PaidPunchTabBarController *tabBarViewController = [[PaidPunchTabBarController alloc] initWithNibName:nil bundle:nil];
-        //[self.navigationController presentModalViewController:tabBarViewController animated:NO];
+        InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE];
+        [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
     }
     else
     {

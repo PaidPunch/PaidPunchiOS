@@ -31,6 +31,8 @@
     
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
+    
+    UIViewController* _rootController;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -44,6 +46,7 @@
 @property (nonatomic, strong) NSMutableDictionary *userPermissions;
 @property(nonatomic,strong) CLLocationManager *locationManager;
 @property(nonatomic,strong) CLLocation *currentLocation;
+@property(nonatomic,strong) UIViewController* rootController;
 
 - (NSURL*)applicationDocumentsDirectory;
 - (void) saveContext;

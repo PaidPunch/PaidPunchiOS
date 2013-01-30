@@ -28,17 +28,19 @@ typedef enum
 @interface InviteFriendsViewController ()
 {
     AlertType _alertType;
+    BOOL _popWhenDone;
 }
 @end
 
 @implementation InviteFriendsViewController
 
-- (id)init
+- (id)init:(BOOL)popWhenDone
 {
     self = [super init];
     if (self)
     {
         _alertType = no_response;
+        _popWhenDone = popWhenDone;
     }
     return self;
 }
@@ -399,7 +401,7 @@ typedef enum
 
 -(IBAction)didPressNextButton:(id)sender
 {
-    VoteBusinessesViewController *voteBizViewController = [[VoteBusinessesViewController alloc] initWithNibName:nil bundle:nil];
+    VoteBusinessesViewController *voteBizViewController = [[VoteBusinessesViewController alloc] init:_popWhenDone];
     [self.navigationController pushViewController:voteBizViewController animated:NO];
 }
 

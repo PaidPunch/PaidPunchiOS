@@ -6,16 +6,30 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 #import "PaidPunchHomeViewController.h"
 #import "ProposedBusinesses.h"
 #import "Utilities.h"
 #import "VoteBusinessesViewController.h"
 
 @interface VoteBusinessesViewController ()
-
+{
+    BOOL _popWhenDone;
+}
 @end
 
 @implementation VoteBusinessesViewController
+
+- (id)init:(BOOL)popWhenDone
+{
+    self = [super init];
+    if (self)
+    {
+        _popWhenDone = popWhenDone;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -91,8 +105,24 @@
 
 - (void)didPressDoneButton:(id)sender
 {
-    PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
-    [self.navigationController pushViewController:homeViewController animated:NO];
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (_popWhenDone)
+    {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.5;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromLeft;
+        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+        
+        [self.navigationController popToViewController:[delegate rootController] animated:NO];
+    }
+    else
+    {
+        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+        delegate.rootController = homeViewController;
+        [self.navigationController pushViewController:homeViewController animated:NO];
+    }
 }
 
 - (void)didPressSuggestBusinessButton:(id)sender

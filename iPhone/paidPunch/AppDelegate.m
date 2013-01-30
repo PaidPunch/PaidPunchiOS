@@ -25,6 +25,7 @@
 @synthesize permissions;
 @synthesize locationManager;
 @synthesize currentLocation;
+@synthesize rootController = _rootController;
 
 static NSString* kAppId = @"159848747459550";
 
@@ -53,7 +54,8 @@ static NSString* kAppId = @"159848747459550";
     UINavigationController *navController;
     if (([[User getInstance] userId] != NULL) && ([[[User getInstance] userId] length] > 0))
     {
-        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];;
+        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+        _rootController = homeViewController;
         navController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     }
     else

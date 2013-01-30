@@ -25,4 +25,6 @@
     MBProgressHUD* _hud;
 }
 
+- (id)init:(BOOL)popWhenDone;
+
 @end
