@@ -20,12 +20,6 @@
     UILabel* _greyoutLabel;
     UIButton* _signinButton;
     UIButton* _signupButton;
-    
-    UIView* _inviteView;
-    UITextField* _inviteCodeTextField;
-    UIButton* _continueButton;
-    UIButton* _requestInviteButton;
-    UITapGestureRecognizer* _dismissTap;
 }
 
 @end

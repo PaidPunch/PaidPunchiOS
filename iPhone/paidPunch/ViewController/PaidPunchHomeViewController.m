@@ -11,6 +11,7 @@
 #import "BalanceViewController.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
+#import "SuggestBusinessView.h"
 #import "User.h"
 #import "Utilities.h"
 
@@ -194,6 +195,12 @@
 {
     BalanceViewController *balanceViewController = [[BalanceViewController alloc] init];
     [self.navigationController pushViewController:balanceViewController animated:NO];
+}
+
+- (void)didPressSuggestBusinessButton:(id)sender
+{
+    SuggestBusinessView* suggestBizView = [[SuggestBusinessView alloc] initWithFrame:self.view.frame];
+    [_mainView addSubview:suggestBizView];
 }
 
 #pragma mark - HttpCallbackDelegate
