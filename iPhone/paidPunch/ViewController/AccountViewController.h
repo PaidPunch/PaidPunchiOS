@@ -10,12 +10,14 @@
 #import "BaseWithNavBarViewController.h"
 #import "HiAccuracyLocatorDelegate.h"
 #import "MBProgressHUD.h"
+#import "NetworkManager.h"
 
-@interface AccountViewController : BaseWithNavBarViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface AccountViewController : BaseWithNavBarViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate,UITableViewDataSource,UITableViewDelegate,NetworkManagerDelegate>
 {
     UITableView* _tableView;
     MBProgressHUD* _hud;
     UIAlertView* _locationAlertView;
+    NetworkManager *_networkManager;
 }
 
 @end

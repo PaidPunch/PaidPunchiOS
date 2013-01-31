@@ -7,9 +7,11 @@
 //
 
 #include "CommonDefinitions.h"
+#import "AccountViewController.h"
+#import "BalanceViewController.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
-#import "AccountViewController.h"
+#import "User.h"
 #import "Utilities.h"
 
 @implementation PaidPunchHomeViewController
@@ -130,8 +132,7 @@
     
     // Set text
     UIFont* buttonFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
-    // TODO: Replace credits with real user credits
-    [newButton setTitle:@"$5.00" forState:UIControlStateNormal];
+    [newButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
     newButton.titleLabel.font = buttonFont;
     [newButton setTitleColor:[UIColor colorWithRed:0.0f green:153.0f/255.0f blue:51.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     
@@ -183,6 +184,8 @@
 
 - (void)didPressCreditsButton:(id)sender
 {
+    BalanceViewController *balanceViewController = [[BalanceViewController alloc] init];
+    [self.navigationController pushViewController:balanceViewController animated:NO];
 }
 
 @end

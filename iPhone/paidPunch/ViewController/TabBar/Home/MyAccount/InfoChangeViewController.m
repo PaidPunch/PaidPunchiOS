@@ -33,10 +33,7 @@
     
     [self createNavBar:@"Back" rightString:nil middle:@"Account Info" isMiddleImage:FALSE leftAction:nil rightAction:nil];
     
-    // Add a background to the mainview
-    UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    backgrdImg.frame = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
-    [_mainView addSubview:backgrdImg];
+    [self createSilverBackgroundWithImage];
     
     [self createInputFields];
 }

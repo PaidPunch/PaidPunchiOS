@@ -41,6 +41,7 @@
 		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
 		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
+		385441DB16B996C700419A68 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DA16B996C700419A68 /* BalanceViewController.m */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
 		38AAE8401672626400BF4922 /* AsyncHttpCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83B1672626300BF4922 /* AsyncHttpCall.m */; };
 		38AAE8411672626500BF4922 /* AsyncHttpCallMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83D1672626400BF4922 /* AsyncHttpCallMgr.m */; };
@@ -592,6 +593,8 @@
 		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoChangeViewController.m; path = TabBar/Home/MyAccount/InfoChangeViewController.m; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		385441D916B996C600419A68 /* BalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceViewController.h; sourceTree = "<group>"; };
+		385441DA16B996C700419A68 /* BalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceViewController.m; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		38AAE8381672626200BF4922 /* AFClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFClientManager.h; path = ServerAPI/AFClientManager.h; sourceTree = "<group>"; };
 		38AAE8391672626200BF4922 /* AFClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFClientManager.m; path = ServerAPI/AFClientManager.m; sourceTree = "<group>"; };
@@ -1098,11 +1101,11 @@
 		8A7D08F71519BF9900B98387 /* MyPunches.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MyPunches.png; sourceTree = "<group>"; };
 		8A7D08F81519BF9900B98387 /* MyPunches@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyPunches@2x.png"; sourceTree = "<group>"; };
 		8A7D08F91519BF9900B98387 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = TabBar/Settings.png; sourceTree = "<group>"; };
-		8A7D09CD1519C9A300B98387 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewController.h; sourceTree = "<group>"; };
-		8A7D09CE1519C9A300B98387 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
+		8A7D09CD1519C9A300B98387 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCardViewController.h; path = TabBar/BuyPunch/AddCard/AddCardViewController.h; sourceTree = "<group>"; };
+		8A7D09CE1519C9A300B98387 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCardViewController.m; path = TabBar/BuyPunch/AddCard/AddCardViewController.m; sourceTree = "<group>"; };
 		8A7D09D21519D38C00B98387 /* HomeStrip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeStrip.png; sourceTree = "<group>"; };
-		8A7D09EA1519DC3D00B98387 /* ConfirmPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPaymentViewController.h; sourceTree = "<group>"; };
-		8A7D09EB1519DC3D00B98387 /* ConfirmPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPaymentViewController.m; sourceTree = "<group>"; };
+		8A7D09EA1519DC3D00B98387 /* ConfirmPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmPaymentViewController.h; path = TabBar/BuyPunch/ConfirmPayment/ConfirmPaymentViewController.h; sourceTree = "<group>"; };
+		8A7D09EB1519DC3D00B98387 /* ConfirmPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmPaymentViewController.m; path = TabBar/BuyPunch/ConfirmPayment/ConfirmPaymentViewController.m; sourceTree = "<group>"; };
 		8A7D0A031519DD6300B98387 /* MiddleLinkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MiddleLinkBox@2x.png"; sourceTree = "<group>"; };
 		8A7D0A041519DD6300B98387 /* MiddleLinkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiddleLinkBox.png; sourceTree = "<group>"; };
 		8A7D0A071519DF2500B98387 /* AddCardBgStripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddCardBgStripes.png; sourceTree = "<group>"; };
@@ -1117,8 +1120,8 @@
 		8A7D0A1E1519E8AD00B98387 /* PayViaCreditCardBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PayViaCreditCardBtn.png; sourceTree = "<group>"; };
 		8A7D3EA21521958200B01637 /* SearchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchListViewController.h; sourceTree = "<group>"; };
 		8A7D3EA31521958200B01637 /* SearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchListViewController.m; sourceTree = "<group>"; };
-		8A7D876E1537027D001A0C89 /* CreditCardSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardSettingsViewController.h; sourceTree = "<group>"; };
-		8A7D876F1537027D001A0C89 /* CreditCardSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardSettingsViewController.m; sourceTree = "<group>"; };
+		8A7D876E1537027D001A0C89 /* CreditCardSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditCardSettingsViewController.h; path = TabBar/Home/CreditCard/CreditCardSettingsViewController.h; sourceTree = "<group>"; };
+		8A7D876F1537027D001A0C89 /* CreditCardSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditCardSettingsViewController.m; path = TabBar/Home/CreditCard/CreditCardSettingsViewController.m; sourceTree = "<group>"; };
 		8A7E6A7F151B2561000F9F32 /* AddCardViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewCell.h; sourceTree = "<group>"; };
 		8A7E6A80151B2561000F9F32 /* AddCardViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewCell.m; sourceTree = "<group>"; };
 		8A7EEEB91553B8EB0076E289 /* Zipcodes_Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zipcodes_Cache.h; sourceTree = "<group>"; };
@@ -1680,6 +1683,14 @@
 				38BC783216B77A7200A77A3F /* NoBizView.m */,
 				38280352169FF56C005A8A32 /* InfoChangeViewController.h */,
 				38280353169FF56C005A8A32 /* InfoChangeViewController.m */,
+				385441D916B996C600419A68 /* BalanceViewController.h */,
+				385441DA16B996C700419A68 /* BalanceViewController.m */,
+				8A7D876E1537027D001A0C89 /* CreditCardSettingsViewController.h */,
+				8A7D876F1537027D001A0C89 /* CreditCardSettingsViewController.m */,
+				8A7D09CD1519C9A300B98387 /* AddCardViewController.h */,
+				8A7D09CE1519C9A300B98387 /* AddCardViewController.m */,
+				8A7D09EA1519DC3D00B98387 /* ConfirmPaymentViewController.h */,
+				8A7D09EB1519DC3D00B98387 /* ConfirmPaymentViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2720,8 +2731,6 @@
 		8A7D09CC1519C97C00B98387 /* AddCard */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D09CD1519C9A300B98387 /* AddCardViewController.h */,
-				8A7D09CE1519C9A300B98387 /* AddCardViewController.m */,
 			);
 			path = AddCard;
 			sourceTree = "<group>";
@@ -2729,8 +2738,6 @@
 		8A7D09E91519DC1F00B98387 /* ConfirmPayment */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D09EA1519DC3D00B98387 /* ConfirmPaymentViewController.h */,
-				8A7D09EB1519DC3D00B98387 /* ConfirmPaymentViewController.m */,
 			);
 			path = ConfirmPayment;
 			sourceTree = "<group>";
@@ -2758,8 +2765,6 @@
 		8A7D876A15370231001A0C89 /* CreditCard */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D876E1537027D001A0C89 /* CreditCardSettingsViewController.h */,
-				8A7D876F1537027D001A0C89 /* CreditCardSettingsViewController.m */,
 			);
 			path = CreditCard;
 			sourceTree = "<group>";
@@ -3411,6 +3416,7 @@
 				38B4F75216B72E2C00D73A3A /* AccountViewController.m in Sources */,
 				38BC783316B77A7200A77A3F /* NoBizView.m in Sources */,
 				38BC785716B85E0F00A77A3F /* HiAccuracyLocator.m in Sources */,
+				385441DB16B996C700419A68 /* BalanceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

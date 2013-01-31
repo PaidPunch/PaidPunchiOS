@@ -9,15 +9,17 @@
 #include "CommonDefinitions.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QuartzCore/CAGradientLayer.h>
+#import "AccountViewController.h"
+#import "BalanceViewController.h"
+#import "CreditCardSettingsViewController.h"
+#import "HiAccuracyLocator.h"
 #import "InfoChangeViewController.h"
 #import "InviteFriendsViewController.h"
-#import "HiAccuracyLocator.h"
-#import "AccountViewController.h"
 #import "User.h"
 
 static NSUInteger const kSections = 2;
 static NSUInteger const kCellsInSection1 = 4;
-static NSUInteger const kCellsInSection2 = 2;
+static NSUInteger const kCellsInSection2 = 3;
 static NSUInteger const kSizeOfCells = 40;
 static NSString* const kTextSpacing = @"  ";
 
@@ -31,14 +33,14 @@ static NSString* const kTextSpacing = @"  ";
 {
     [super viewDidLoad];
     
-    [self createMainView:[UIColor blackColor]];
+    _networkManager=[[NetworkManager alloc] initWithView:self.view];
+    _networkManager.delegate=self;
+    
+    [self createMainView:[UIColor whiteColor]];
     
     [self createNavBar:@"Back" rightString:nil middle:@"Account Info" isMiddleImage:FALSE leftAction:nil rightAction:nil];
     
-    // Add a background to the mainview
-    UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    backgrdImg.frame = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
-    [_mainView addSubview:backgrdImg];
+    [self createSilverBackgroundWithImage];
     
     [self createAccountTable];
 }
@@ -52,25 +54,10 @@ static NSString* const kTextSpacing = @"  ";
 
 #pragma mark - private functions
 
-- (void)createMainView:(UIColor*)backgroundColor
-{
-    CGRect mainRect = CGRectMake(0, 0, stdiPhoneWidth, stdiPhoneHeight);
-    _mainView = [[UIView alloc] initWithFrame:mainRect];
-    
-    CAGradientLayer* gradient = [CAGradientLayer layer];
-    gradient.frame = _mainView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[[UIColor blackColor] CGColor],
-                       (id)[[UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0] CGColor], nil];
-    [_mainView.layer insertSublayer:gradient atIndex:0];
-    
-    self.view = _mainView;
-}
-
 - (void) createAccountTable
 {
     CGFloat tableWidth = stdiPhoneWidth - 40;
-    CGFloat verticalSpacing = 25;
+    CGFloat verticalSpacing = 10;
     CGFloat tableHeight = stdiPhoneHeight - (verticalSpacing * 2) - _lowestYPos;
     CGRect tableViewRect = CGRectMake((stdiPhoneWidth - tableWidth)/2, _lowestYPos + verticalSpacing, tableWidth, tableHeight);
     _tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStyleGrouped];
@@ -109,6 +96,32 @@ static NSString* const kTextSpacing = @"  ";
     [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
 }
 
+- (void) showBalanceView
+{
+    BalanceViewController *balanceViewController = [[BalanceViewController alloc] init];
+    [self.navigationController pushViewController:balanceViewController animated:NO];
+}
+
+- (void) showCreditCardSettings
+{
+    if([[User getInstance] isPaymentProfileCreated])
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hud.labelText = @"Retrieving credit card info";
+        [_networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
+    }
+    else
+    {
+        [self goToCreditCardSettingsView:nil];
+    }
+}
+
+-(void) goToCreditCardSettingsView:(NSString *)maskedId
+{
+    CreditCardSettingsViewController *creditCardSettingsView = [[CreditCardSettingsViewController alloc] init:maskedId];
+    [self.navigationController pushViewController:creditCardSettingsView animated:YES];
+}
+
 #pragma mark - Event actions
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -130,6 +143,20 @@ static NSString* const kTextSpacing = @"  ";
             // TODO: refresh business list
             //[self refreshBusinessList];
         }
+    }
+}
+
+-(void) didFinishGettingProfile:(NSString *)statusCode statusMessage:(NSString *)message withMaskedId:(NSString *)maskedId withPaymentId:(NSString *)paymentId
+{
+    [MBProgressHUD hideHUDForView:self.view animated:NO];
+    if([statusCode isEqualToString:@"00"])
+    {
+        [self goToCreditCardSettingsView:maskedId];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
 }
 
@@ -252,10 +279,14 @@ static NSString* const kTextSpacing = @"  ";
         switch (indexPath.row)
         {
             case 0:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Manage Credit Card", kTextSpacing];
                 break;
                 
             case 1:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
+                break;
+                
+            case 2:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@Purchase More Credit", kTextSpacing];
                 break;
                 
@@ -276,9 +307,9 @@ static NSString* const kTextSpacing = @"  ";
     UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(15,0,300,44)];
     
     hLabel.backgroundColor=[UIColor clearColor];
-    hLabel.shadowColor = [UIColor grayColor];
+    hLabel.shadowColor = [UIColor blackColor];
     hLabel.shadowOffset = CGSizeMake(0.5,1);  // closest as far as I could tell
-    hLabel.textColor = [UIColor whiteColor];  // or whatever you want
+    hLabel.textColor = [UIColor grayColor];  // or whatever you want
     hLabel.font = [UIFont boldSystemFontOfSize:17];
     
     switch (section)
@@ -338,11 +369,15 @@ static NSString* const kTextSpacing = @"  ";
         switch (indexPath.row)
         {
             case 0:
-                [self showFreeCreditViews];
+                [self showCreditCardSettings];
                 break;
                 
             case 1:
+                [self showFreeCreditViews];
+                break;
                 
+            case 2:
+                [self showBalanceView];
                 break;
                 
             default:

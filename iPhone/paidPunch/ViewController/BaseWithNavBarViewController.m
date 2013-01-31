@@ -91,7 +91,7 @@
     // Create middle text or image
     if (isMiddleImage)
     {
-        
+        // TODO:
     }
     else
     {
@@ -157,6 +157,14 @@
     
     // Setting lowestYPos value to indicate where the next UI element can start vertically
     _lowestYPos = _btnEmail.frame.origin.y + _btnEmail.frame.size.height;
+}
+
+- (void) createSilverBackgroundWithImage
+{
+    // Add a background to the mainview
+    UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    backgrdImg.frame = CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos);
+    [_mainView addSubview:backgrdImg];
 }
 
 #pragma mark - private functions
