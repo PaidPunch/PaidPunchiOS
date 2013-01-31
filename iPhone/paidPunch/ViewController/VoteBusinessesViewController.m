@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PaidPunchHomeViewController.h"
 #import "ProposedBusinesses.h"
+#import "SuggestBusinessView.h"
 #import "Utilities.h"
 #import "VoteBusinessesViewController.h"
 
@@ -127,6 +128,8 @@
 
 - (void)didPressSuggestBusinessButton:(id)sender
 {
+    SuggestBusinessView* suggestBizView = [[SuggestBusinessView alloc] initWithFrame:self.view.frame];
+    [_mainView addSubview:suggestBizView];
 }
 
 #pragma mark - HttpCallbackDelegate

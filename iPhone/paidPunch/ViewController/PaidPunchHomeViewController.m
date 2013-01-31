@@ -11,9 +11,9 @@
 #import "BalanceViewController.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
-#import "SuggestBusinessView.h"
 #import "User.h"
 #import "Utilities.h"
+#import "VoteBusinessesViewController.h"
 
 @implementation PaidPunchHomeViewController
 
@@ -199,8 +199,8 @@
 
 - (void)didPressSuggestBusinessButton:(id)sender
 {
-    SuggestBusinessView* suggestBizView = [[SuggestBusinessView alloc] initWithFrame:self.view.frame];
-    [_mainView addSubview:suggestBizView];
+    VoteBusinessesViewController *voteViewController = [[VoteBusinessesViewController alloc] init];
+    [self.navigationController pushViewController:voteViewController animated:NO];
 }
 
 #pragma mark - HttpCallbackDelegate

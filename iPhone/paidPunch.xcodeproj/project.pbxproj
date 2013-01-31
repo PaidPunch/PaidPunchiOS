@@ -45,6 +45,8 @@
 		385441DE16BA495E00419A68 /* PopUpBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DD16BA495C00419A68 /* PopUpBaseView.m */; };
 		385441E116BA575500419A68 /* SuggestBusinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E016BA575000419A68 /* SuggestBusinessView.m */; };
 		385441E416BADD9800419A68 /* InviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E316BADD9300419A68 /* InviteCodeView.m */; };
+		385441E616BB225A00419A68 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385441E516BB225800419A68 /* Twitter.framework */; };
+		385441E916BB248400419A68 /* RequestInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E816BB247F00419A68 /* RequestInviteView.m */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
 		38AAE8401672626400BF4922 /* AsyncHttpCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83B1672626300BF4922 /* AsyncHttpCall.m */; };
 		38AAE8411672626500BF4922 /* AsyncHttpCallMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83D1672626400BF4922 /* AsyncHttpCallMgr.m */; };
@@ -604,6 +606,9 @@
 		385441E016BA575000419A68 /* SuggestBusinessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestBusinessView.m; sourceTree = "<group>"; };
 		385441E216BADD9000419A68 /* InviteCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeView.h; sourceTree = "<group>"; };
 		385441E316BADD9300419A68 /* InviteCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeView.m; sourceTree = "<group>"; };
+		385441E516BB225800419A68 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		385441E716BB247B00419A68 /* RequestInviteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestInviteView.h; sourceTree = "<group>"; };
+		385441E816BB247F00419A68 /* RequestInviteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInviteView.m; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		38AAE8381672626200BF4922 /* AFClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFClientManager.h; path = ServerAPI/AFClientManager.h; sourceTree = "<group>"; };
 		38AAE8391672626200BF4922 /* AFClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFClientManager.m; path = ServerAPI/AFClientManager.m; sourceTree = "<group>"; };
@@ -1209,6 +1214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				385441E616BB225A00419A68 /* Twitter.framework in Frameworks */,
 				38C2591516A67F6D00982568 /* AdSupport.framework in Frameworks */,
 				38C2591316A67F4E00982568 /* libsqlite3.dylib in Frameworks */,
 				38C2591116A67F3D00982568 /* libz.dylib in Frameworks */,
@@ -1414,6 +1420,7 @@
 				3842B24A16407E28009203D0 /* libxml2.dylib */,
 				8A77CF3714C015A600F9560E /* libSDWebImage.a */,
 				8AFE25F9147F7A560039247A /* libiconv.dylib */,
+				385441E516BB225800419A68 /* Twitter.framework */,
 				38C2591416A67F6C00982568 /* AdSupport.framework */,
 				38BFA8A2169CE69800102715 /* MessageUI.framework */,
 				8A7C54631549265B002854FF /* MapKit.framework */,
@@ -1706,6 +1713,8 @@
 				385441E016BA575000419A68 /* SuggestBusinessView.m */,
 				385441E216BADD9000419A68 /* InviteCodeView.h */,
 				385441E316BADD9300419A68 /* InviteCodeView.m */,
+				385441E716BB247B00419A68 /* RequestInviteView.h */,
+				385441E816BB247F00419A68 /* RequestInviteView.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3435,6 +3444,7 @@
 				385441DE16BA495E00419A68 /* PopUpBaseView.m in Sources */,
 				385441E116BA575500419A68 /* SuggestBusinessView.m in Sources */,
 				385441E416BADD9800419A68 /* InviteCodeView.m in Sources */,
+				385441E916BB248400419A68 /* RequestInviteView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

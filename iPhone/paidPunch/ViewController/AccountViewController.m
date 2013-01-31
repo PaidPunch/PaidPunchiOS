@@ -18,8 +18,8 @@
 #import "User.h"
 
 static NSUInteger const kSections = 2;
-static NSUInteger const kCellsInSection1 = 4;
-static NSUInteger const kCellsInSection2 = 3;
+static NSUInteger const kCellsInSection1 = 3;
+static NSUInteger const kCellsInSection2 = 4;
 static NSUInteger const kSizeOfCells = 40;
 static NSString* const kTextSpacing = @"  ";
 
@@ -57,7 +57,7 @@ static NSString* const kTextSpacing = @"  ";
 - (void) createAccountTable
 {
     CGFloat tableWidth = stdiPhoneWidth - 40;
-    CGFloat verticalSpacing = 10;
+    CGFloat verticalSpacing = 00;
     CGFloat tableHeight = stdiPhoneHeight - (verticalSpacing * 2) - _lowestYPos;
     CGRect tableViewRect = CGRectMake((stdiPhoneWidth - tableWidth)/2, _lowestYPos + verticalSpacing, tableWidth, tableHeight);
     _tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStyleGrouped];
@@ -252,6 +252,27 @@ static NSString* const kTextSpacing = @"  ";
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
+        {                
+            case 0:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Manage Credit Card", kTextSpacing];
+                break;
+                
+            case 1:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
+                break;
+                
+            case 2:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Purchase More Credit", kTextSpacing];
+                break;
+                
+            default:
+                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
+                break;
+        };
+    }
+    else if (indexPath.section == 1)
+    {
+        switch (indexPath.row)
         {
             case 0:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@My Coupons", kTextSpacing];
@@ -271,27 +292,6 @@ static NSString* const kTextSpacing = @"  ";
                 
             default:
                 NSLog(@"Unknown indexPath.row %d detected in section 0!", indexPath.row);
-                break;
-        };
-    }
-    else if (indexPath.section == 1)
-    {
-        switch (indexPath.row)
-        {
-            case 0:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@Manage Credit Card", kTextSpacing];
-                break;
-                
-            case 1:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@Get FREE Credit", kTextSpacing];
-                break;
-                
-            case 2:
-                cell.textLabel.text = [NSString stringWithFormat:@"%@Purchase More Credit", kTextSpacing];
-                break;
-                
-            default:
-                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
                 break;
         }
     }
@@ -315,10 +315,10 @@ static NSString* const kTextSpacing = @"  ";
     switch (section)
     {
         case 0:
-            hLabel.text = @"Account Info";
+            hLabel.text = @"Credits";
             break;
         case 1:
-            hLabel.text = @"Credits";
+            hLabel.text = @"Account Info";
             break;
         default:
             hLabel.text = @"";
@@ -342,6 +342,27 @@ static NSString* const kTextSpacing = @"  ";
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
+        {                
+            case 0:
+                [self showCreditCardSettings];
+                break;
+                
+            case 1:
+                [self showFreeCreditViews];
+                break;
+                
+            case 2:
+                [self showBalanceView];
+                break;
+                
+            default:
+                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
+                break;
+        };
+    }
+    else if (indexPath.section == 1)
+    {
+        switch (indexPath.row)
         {
             case 0:
                 
@@ -361,27 +382,6 @@ static NSString* const kTextSpacing = @"  ";
                 
             default:
                 NSLog(@"Unknown indexPath.row %d detected in section 0!", indexPath.row);
-                break;
-        };
-    }
-    else if (indexPath.section == 1)
-    {
-        switch (indexPath.row)
-        {
-            case 0:
-                [self showCreditCardSettings];
-                break;
-                
-            case 1:
-                [self showFreeCreditViews];
-                break;
-                
-            case 2:
-                [self showBalanceView];
-                break;
-                
-            default:
-                NSLog(@"Unknown indexPath.row %d detected in section 1!", indexPath.row);
                 break;
         }
     }

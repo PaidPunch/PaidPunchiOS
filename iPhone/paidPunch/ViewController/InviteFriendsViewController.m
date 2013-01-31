@@ -16,6 +16,7 @@ static const CGFloat kButtonSize = 50;
 static const int kButtonsPerRow = 3;
 static const CGFloat kHorizontalSpacing = 40;
 static const CGFloat kVerticalSpacing = 30;
+static const CGFloat kInviteViewVerticalStartPos = 20;
 
 typedef enum
 {
@@ -206,7 +207,7 @@ typedef enum
 - (CGFloat)computeYPosByIndex:(int)index
 {
     int position = index / kButtonsPerRow;
-    return ((position + 1) * kVerticalSpacing);
+    return ((position + 1) * kVerticalSpacing) + kInviteViewVerticalStartPos;
 }
 
 - (void)createInviteFriendsView
@@ -216,20 +217,40 @@ typedef enum
     _inviteButtonsView = [[UIView alloc] initWithFrame:_offscreenRect];
     [_inviteButtonsView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.8]];
     
+    // Create invite friends label
+    UILabel* inviteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, stdiPhoneWidth, 20)];
+    [inviteLabel setTextColor:[UIColor whiteColor]];
+    [inviteLabel setFont:[UIFont fontWithName:@"ArialMT" size:15.0f]];
+    [inviteLabel setText:@"Choose Invite Method"];
+    [inviteLabel setTextAlignment:UITextAlignmentCenter];
+    [inviteLabel setBackgroundColor:[UIColor clearColor]];
+    [_inviteButtonsView addSubview:inviteLabel];
+    
     // Create facebook button
     int index = 0;
     UIButton* facebookButton = [self createInviteButton:@"facebook-post" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressFacebookButton:)];
     [_inviteButtonsView addSubview:facebookButton];
+    
+    UILabel* facebookLabel = [self createInviteButtonLabel:facebookButton currentText:@"facebook"];
+    [_inviteButtonsView addSubview:facebookLabel];
+    
     index++;
     
     // Create email button
     UIButton* emailButton = [self createInviteButton:@"email" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressEmailButton:)];
     [_inviteButtonsView addSubview:emailButton];
+    
+    UILabel* emailLabel = [self createInviteButtonLabel:emailButton currentText:@"email"];
+    [_inviteButtonsView addSubview:emailLabel];
+    
     index++;
     
     // Create SMS button
     UIButton* smsButton = [self createInviteButton:@"text-message" xpos:[self computeXPosByIndex:index] ypos:[self computeYPosByIndex:index] action:@selector(didPressSMSButton:)];
     [_inviteButtonsView addSubview:smsButton];
+    
+    UILabel* smsLabel = [self createInviteButtonLabel:smsButton currentText:@"SMS"];
+    [_inviteButtonsView addSubview:smsLabel];
     
     [self.view addSubview:_inviteButtonsView];
 }
@@ -272,6 +293,24 @@ typedef enum
     [newButton setFrame:CGRectMake(xpos, ypos, kButtonSize, kButtonSize)];
     
     return newButton;
+}
+
+- (UILabel*)createInviteButtonLabel:(UIButton*)currentButton currentText:(NSString*)currentText
+{
+    CGFloat additionalButtonWidth = 10;
+    CGFloat buttonWidth = currentButton.frame.size.width + additionalButtonWidth;
+    CGFloat buttonHeight = 15;
+    CGFloat buttonXPos = currentButton.frame.origin.x - (additionalButtonWidth/2);
+    CGFloat buttonYPos = currentButton.frame.origin.y + currentButton.frame.size.height + 2;
+    
+    UILabel* currentLabel = [[UILabel alloc] initWithFrame:CGRectMake(buttonXPos, buttonYPos, buttonWidth, buttonHeight)];
+    [currentLabel setTextColor:[UIColor whiteColor]];
+    [currentLabel setFont:[UIFont fontWithName:@"ArialMT" size:12.0f]];
+    [currentLabel setText:currentText];
+    [currentLabel setTextAlignment:UITextAlignmentCenter];
+    [currentLabel setBackgroundColor:[UIColor clearColor]];
+    
+    return currentLabel;
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller

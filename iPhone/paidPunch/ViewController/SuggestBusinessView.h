@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "PopUpBaseView.h"
 
-@interface SuggestBusinessView : PopUpBaseView
+@interface SuggestBusinessView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate>
+{
+    UITextField* _nameField;
+    UITextField* _infoField;
+}
 
 @end

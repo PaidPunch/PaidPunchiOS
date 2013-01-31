@@ -206,6 +206,11 @@
     {
         [[User getInstance] changePassword:self oldPassword:_oldpasswordTF.text newPassword:_newpasswordTF.text];
     }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please recheck password changes" delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 -(IBAction)didPressUpdateButton:(id)sender

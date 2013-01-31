@@ -194,7 +194,7 @@ static CGFloat const kVerticalSpacing = 10;
     _addCreditCardAlert = FALSE;
 }
 
-- (void) didPressFreeCreditButton
+- (void) didPressFreeCreditButton:(id)sender
 {
     InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:TRUE];
     [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
