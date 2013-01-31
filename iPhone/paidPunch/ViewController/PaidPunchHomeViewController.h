@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface PaidPunchHomeViewController : UIViewController
+@interface PaidPunchHomeViewController : UIViewController<HttpCallbackDelegate>
 {
     UIView* _mainView;
     CGFloat _lowestYPos;
+    MBProgressHUD* _hud;
+    UIButton* _creditsButton;
 }
 
 @end

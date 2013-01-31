@@ -38,6 +38,14 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // User info hasn't been updated in a while; update it
+    if ([[User getInstance] needsRefresh])
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Updating user info";
+        [[User getInstance] getUserInfoFromServer:self];
+    }
 }
 
 #pragma mark - private functions
@@ -65,8 +73,8 @@
     UIButton* centerButton = [self createPaidPunchButton:stdiPhoneWidth ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
     [_mainView addSubview:centerButton];
     
-    UIButton* rightButton = [self createCreditsButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
-    [_mainView addSubview:rightButton];
+    _creditsButton = [self createCreditsButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
+    [_mainView addSubview:_creditsButton];
     
     _lowestYPos = navbarImg.frame.origin.y + navbarImg.frame.size.height;
 }
@@ -186,6 +194,22 @@
 {
     BalanceViewController *balanceViewController = [[BalanceViewController alloc] init];
     [self.navigationController pushViewController:balanceViewController animated:NO];
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if (success)
+    {
+        [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end

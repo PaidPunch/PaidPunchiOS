@@ -89,6 +89,11 @@ static double const refreshTime = -(30 * 60);
     [self removeUserData];
 }
 
+- (void) forceRefresh
+{
+    _lastUpdate = nil;
+}
+
 - (NSString*) getCreditAsString
 {
     NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
@@ -478,16 +483,16 @@ static double const refreshTime = -(30 * 60);
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate
 {
     // get parameters
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+    /*NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 _userId, kKeyUserId,
                                 _uniqueId, kKeyUniqueId,
-                                nil];
+                                nil];*/
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@", _userId];
     [httpClient getPath:path
-             parameters:parameters
+             parameters:nil
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
                     [self storeUserInfo:responseObject];

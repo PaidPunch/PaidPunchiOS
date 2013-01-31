@@ -81,6 +81,7 @@ typedef enum
 - (NSString*) getCreditAsString;
 - (BOOL) needsRefresh;
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
+- (void) forceRefresh;
 
 + (User*) getInstance;
 + (void) destroyInstance;

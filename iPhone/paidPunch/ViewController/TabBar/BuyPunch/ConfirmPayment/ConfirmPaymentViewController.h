@@ -15,10 +15,11 @@
 @class NetworkManager;
 @protocol NetworkManagerDelegate;
 
-@interface ConfirmPaymentViewController : UIViewController<HttpCallbackDelegate,SDWebImageManagerDelegate>
+@interface ConfirmPaymentViewController : UIViewController<HttpCallbackDelegate,SDWebImageManagerDelegate,UIAlertViewDelegate>
 {
     MBProgressHUD* _hud;
     NSUInteger _index;
+    BOOL _popBackToHome;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *businessLogoImageView;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLbl;

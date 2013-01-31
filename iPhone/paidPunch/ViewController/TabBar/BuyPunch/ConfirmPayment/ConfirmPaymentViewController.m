@@ -25,6 +25,7 @@
     {
         // Custom initialization
         _index = index;
+        _popBackToHome = FALSE;
     }
     return self;
 }
@@ -97,13 +98,28 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0 && _popBackToHome)
+    {
+        AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.5;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromLeft;
+        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+        
+        [self.navigationController popToViewController:[delegate rootController] animated:NO];
+    }
+    _popBackToHome = FALSE;
+}
+
 #pragma mark -
 
 -(void)setUpUI
 {
     self.valueLbl.textColor=[UIColor colorWithRed:244.0/255.0 green:123.0/255.0 blue:39.0/255.0 alpha:1];
-    //self.businessLogoImageView.image=[UIImage imageWithData:self.punchCardDetails.business_logo_img];
-    //self.descriptionLbl.text=self.punchCardDetails.punch_card_desc;
     
     Product* current = [[[Products getInstance] productsArray] objectAtIndex:_index];
     
@@ -125,6 +141,11 @@
     
     if(success)
     {
+        // Force user data to be refreshed from server
+        [[User getInstance] forceRefresh];
+        
+        _popBackToHome = TRUE;
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Credit Purchased" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
