@@ -19,6 +19,7 @@ static NSString* const kKeyProposedBusinessesVote = @"proposedbusinesses_vote";
     
     NSDate* _lastUpdate;
     NSMutableArray* _proposedBusinessesArray;
+    NSMutableDictionary* _votedBusinesses;
 }
 @property (nonatomic,strong) NSMutableArray* proposedBusinessesArray;
 @property (nonatomic,readonly) NSDate* lastUpdate;
@@ -26,6 +27,8 @@ static NSString* const kKeyProposedBusinessesVote = @"proposedbusinesses_vote";
 - (void) retrieveProposedBusinesses:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) voteBusiness:(NSObject<HttpCallbackDelegate>*) delegate index:(NSUInteger)index;
 - (BOOL) needsRefresh;
+- (BOOL) alreadyVoted:(NSString*)businessId;
+- (void) recordVote:(NSString*)businessId;
 
 + (ProposedBusinesses*) getInstance;
 + (void) destroyInstance;

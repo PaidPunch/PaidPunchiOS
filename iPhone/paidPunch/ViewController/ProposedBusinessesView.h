@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface ProposedBusinessesView : UITableView<UITableViewDelegate, UITableViewDataSource>
+@interface ProposedBusinessesView : UITableView<UITableViewDelegate, UITableViewDataSource,HttpCallbackDelegate>
+{
+    UIButton* currentVotingButton;
+    NSUInteger currentBusinessIndex;
+    MBProgressHUD* _hud;
+}
 
 @end

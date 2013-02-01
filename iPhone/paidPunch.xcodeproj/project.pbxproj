@@ -60,6 +60,8 @@
 		38AAE861167263A400BF4922 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE855167263A400BF4922 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE862167263A400BF4922 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38AAE863167263A400BF4922 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		38B1667B16BB9744007703B7 /* grey-vote.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B1667916BB9744007703B7 /* grey-vote.png */; };
+		38B1667C16BB9744007703B7 /* orange-vote.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B1667A16BB9744007703B7 /* orange-vote.png */; };
 		38B1D809169E8D620087ECD2 /* Templates.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B1D808169E8D620087ECD2 /* Templates.m */; };
 		38B4F6ED16AF709300D73A3A /* WelcomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F6EC16AF709300D73A3A /* WelcomePageViewController.m */; };
 		38B4F6F116B08FB900D73A3A /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F6EE16B08FB900D73A3A /* facebook-button.png */; };
@@ -638,6 +640,8 @@
 		38AAE857167263A400BF4922 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		38AAE858167263A400BF4922 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		38AAE859167263A400BF4922 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		38B1667916BB9744007703B7 /* grey-vote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-vote.png"; sourceTree = "<group>"; };
+		38B1667A16BB9744007703B7 /* orange-vote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orange-vote.png"; sourceTree = "<group>"; };
 		38B1D807169E8D620087ECD2 /* Templates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Templates.h; sourceTree = "<group>"; };
 		38B1D808169E8D620087ECD2 /* Templates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Templates.m; sourceTree = "<group>"; };
 		38B4F6EB16AF709300D73A3A /* WelcomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomePageViewController.h; sourceTree = "<group>"; };
@@ -2332,6 +2336,8 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38B1667916BB9744007703B7 /* grey-vote.png */,
+				38B1667A16BB9744007703B7 /* orange-vote.png */,
 				8A7D08F91519BF9900B98387 /* Settings.png */,
 				38BC784B16B7A8B900A77A3F /* save-every-visit.png */,
 				38BC784316B77B8A00A77A3F /* banner.png */,
@@ -3323,6 +3329,8 @@
 				38BC784516B77B8A00A77A3F /* banner.png in Resources */,
 				38BC784616B77B8A00A77A3F /* no-biz.png in Resources */,
 				38BC784C16B7A8B900A77A3F /* save-every-visit.png in Resources */,
+				38B1667B16BB9744007703B7 /* grey-vote.png in Resources */,
+				38B1667C16BB9744007703B7 /* orange-vote.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

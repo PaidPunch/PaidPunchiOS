@@ -9,11 +9,14 @@
 #import "AFClientManager.h"
 #import "ProposedBusiness.h"
 #import "ProposedBusinesses.h"
+#import "User.h"
 #import "Utilities.h"
 
 static NSString* const kKeyVersion = @"version";
+static NSString* const kKeyUserId = @"user_id";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kKeyProposedBusinesses = @"proposedBusinesses";
+static NSString* const kKeyVotedBusinesses = @"votedBusinesses";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kProposedBusinessesFilename = @"proposedbusinesses.sav";
 
@@ -32,6 +35,7 @@ static double const refreshTime = -(24 * 60 * 60);
         _createdVersion = @"1.0";
         _lastUpdate = NULL;
         _proposedBusinessesArray = [[NSMutableArray alloc] init];
+        _votedBusinesses = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -42,6 +46,7 @@ static double const refreshTime = -(24 * 60 * 60);
     [aCoder encodeObject:_createdVersion forKey:kKeyVersion];
     [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
     [aCoder encodeObject:_proposedBusinessesArray forKey:kKeyProposedBusinesses];
+    [aCoder encodeObject:_votedBusinesses forKey:kKeyVotedBusinesses];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -49,7 +54,21 @@ static double const refreshTime = -(24 * 60 * 60);
     _createdVersion = [aDecoder decodeObjectForKey:kKeyVersion];
     _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
     _proposedBusinessesArray = [aDecoder decodeObjectForKey:kKeyProposedBusinesses];
+    _votedBusinesses = [aDecoder decodeObjectForKey:kKeyVotedBusinesses];
     return self;
+}
+
+#pragma mark - public functions
+
+- (BOOL) alreadyVoted:(NSString*)businessId
+{
+    return ([_votedBusinesses objectForKey:businessId] != nil);
+}
+
+- (void) recordVote:(NSString*)businessId
+{
+    [_votedBusinesses setObject:[NSDate date] forKey:businessId];
+    [self saveProposedBusinessesData];
 }
 
 #pragma mark - private functions
@@ -153,36 +172,27 @@ static double const refreshTime = -(24 * 60 * 60);
 
 - (void) voteBusiness:(NSObject<HttpCallbackDelegate>*) delegate index:(NSUInteger)index
 {
-    
-}
-
-/*
-- (void) purchaseProduct:(NSObject<HttpCallbackDelegate>*) delegate index:(NSUInteger)index
-{
     // put parameters
-    NSArray* productsArray = [[Products getInstance] productsArray];
-    Product* current = [productsArray objectAtIndex:index];
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [current productId], kKeyProductId,
                                 [[User getInstance] userId], kKeyUserId,
-                                [[User getInstance] uniqueId], kKeyUniqueId,
                                 nil];
+    
+    NSString* path = [NSString stringWithFormat:@"paid_punch/ProposedBusinesses/%@/vote", [[_proposedBusinessesArray objectAtIndex:index] proposedBusinessId]];
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient putPath:@"paid_punch/Products"
+    [httpClient putPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
-                    [delegate didCompleteHttpCallback:kKeyProductsPurchase, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
-                    NSLog(@"Downloading new Products from server has failed.");
-                    [delegate didCompleteHttpCallback:kKeyProductsPurchase, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    NSLog(@"Voting for proposed business failed with error: %@", error.description);
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
- */
 
 #pragma mark - Singleton
 static ProposedBusinesses* singleton = nil;
