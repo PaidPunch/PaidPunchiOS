@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PopUpBaseView.h"
 
-@interface RequestInviteView : PopUpBaseView
+@interface RequestInviteView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate>
+{
+    UITextField* _emailField;
+}
 
 @end

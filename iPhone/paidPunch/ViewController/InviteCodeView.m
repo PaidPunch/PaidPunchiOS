@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import "InviteCodeView.h"
+#import "RequestInviteView.h"
 #import "SignUpViewController.h"
 #import "Utilities.h"
 
@@ -210,6 +211,12 @@ static NSUInteger kMaxInviteCodeSize = 10;
         SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
         [_controller pushViewController:signUpViewController animated:YES];
     }
+}
+
+- (void)didPressRequestInviteButton:(id)sender
+{
+    RequestInviteView* inviteView = [[RequestInviteView alloc] initWithFrame:self.frame];
+    [_scrollview addSubview:inviteView];
 }
 
 @end

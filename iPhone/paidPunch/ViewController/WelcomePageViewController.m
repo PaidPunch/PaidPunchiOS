@@ -164,9 +164,4 @@
     [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
-- (void)didPressRequestInviteButton:(id)sender
-{
-    
-}
-
 @end
