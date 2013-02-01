@@ -169,33 +169,37 @@
     [_updateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_scrollview addSubview:_updateBtn];
     
-    // Create textfield for old password
-    startingYPos = _updateBtn.frame.origin.y + _updateBtn.frame.size.height + spacing;
-    CGRect oldpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
-    NSString* oldpasswordText = [NSString stringWithFormat:@"Current Password"];
-    _oldpasswordTF = [self initializeUITextField:oldpasswordFrame placeholder:oldpasswordText font:textFont];
-    _oldpasswordTF.returnKeyType = UIReturnKeyNext;
-    [_scrollview addSubview:_oldpasswordTF];
-    
-    // Create textfield for mobile phone
-    startingYPos = _oldpasswordTF.frame.origin.y + _oldpasswordTF.frame.size.height + spacing;
-    CGRect newpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
-    NSString* newpasswordText = [NSString stringWithFormat:@"New Password"];
-    _newpasswordTF = [self initializeUITextField:newpasswordFrame placeholder:newpasswordText font:textFont];
-    _newpasswordTF.returnKeyType = UIReturnKeyDone;
-    [_scrollview addSubview:_newpasswordTF];
-    
-    // Create password button
-    startingYPos = _newpasswordTF.frame.origin.y + _newpasswordTF.frame.size.height + spacing;
-    _passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_passwordBtn addTarget:self action:@selector(didPressPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
-    NSString* passwordText = @"Change Password";
-    [_passwordBtn setFrame:CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight)];
-    [_passwordBtn setTitle:passwordText forState:UIControlStateNormal];
-    [_passwordBtn setBackgroundImage:image forState:UIControlStateNormal];
-    _passwordBtn.titleLabel.font = textFont;
-    [_passwordBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_scrollview addSubview:_passwordBtn];
+    // Only non-facebook users have passwords
+    if (![[User getInstance] isFacebookProfile])
+    {
+        // Create textfield for old password
+        startingYPos = _updateBtn.frame.origin.y + _updateBtn.frame.size.height + spacing;
+        CGRect oldpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+        NSString* oldpasswordText = [NSString stringWithFormat:@"Current Password"];
+        _oldpasswordTF = [self initializeUITextField:oldpasswordFrame placeholder:oldpasswordText font:textFont];
+        _oldpasswordTF.returnKeyType = UIReturnKeyNext;
+        [_scrollview addSubview:_oldpasswordTF];
+        
+        // Create textfield for mobile phone
+        startingYPos = _oldpasswordTF.frame.origin.y + _oldpasswordTF.frame.size.height + spacing;
+        CGRect newpasswordFrame = CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight);
+        NSString* newpasswordText = [NSString stringWithFormat:@"New Password"];
+        _newpasswordTF = [self initializeUITextField:newpasswordFrame placeholder:newpasswordText font:textFont];
+        _newpasswordTF.returnKeyType = UIReturnKeyDone;
+        [_scrollview addSubview:_newpasswordTF];
+        
+        // Create password button
+        startingYPos = _newpasswordTF.frame.origin.y + _newpasswordTF.frame.size.height + spacing;
+        _passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_passwordBtn addTarget:self action:@selector(didPressPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
+        NSString* passwordText = @"Change Password";
+        [_passwordBtn setFrame:CGRectMake(leftSpacing, startingYPos, textFieldWidth, textHeight)];
+        [_passwordBtn setTitle:passwordText forState:UIControlStateNormal];
+        [_passwordBtn setBackgroundImage:image forState:UIControlStateNormal];
+        _passwordBtn.titleLabel.font = textFont;
+        [_passwordBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_scrollview addSubview:_passwordBtn];
+    }
 }
 
 #pragma mark - Event actions

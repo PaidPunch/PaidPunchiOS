@@ -137,7 +137,7 @@ typedef enum
         // Show the composer
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
-        [controller setSubject:@"My Subject"];
+        [controller setSubject:@"An invitation to save money"];
         [controller setMessageBody:[[Templates getInstance] getTemplateByName:@"email"] isHTML:YES];
         if (controller)
         {
