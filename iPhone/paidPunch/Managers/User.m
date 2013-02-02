@@ -507,6 +507,29 @@ static double const refreshTime = -(30 * 60);
      ];
 }
 
+- (void) requestInvite:(NSObject<HttpCallbackDelegate>*) delegate email:(NSString*)email
+{
+    // post parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                email, kKeyEmail,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    NSString* path = @"paid_punch/Users/requestinvite";
+    [httpClient postPath:path
+              parameters:parameters
+                 success:^(AFHTTPRequestOperation *operation, id responseObject){
+                     NSLog(@"%@", responseObject);
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                 }
+                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                     NSLog(@"Invite request failed with status code: %d", [operation.response statusCode]);
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                 }
+     ];
+}
+
 #pragma mark - Facebook data
 
 - (void)updateFacebookFeed:(NSString*)message

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 #import "PopUpBaseView.h"
 
-@interface RequestInviteView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate>
+@interface RequestInviteView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate,HttpCallbackDelegate>
 {
     UITextField* _emailField;
+    MBProgressHUD* _hud;
 }
 
 @end

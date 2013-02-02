@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import "RequestInviteView.h"
+#import "User.h"
 #import "Utilities.h"
 
 @implementation RequestInviteView
@@ -110,22 +111,43 @@
 {
     if(buttonIndex == 0)
     {
-        [_emailField resignFirstResponder];
         [self removeFromSuperview];
     }
 }
 
 -(void) didPressSubmitButton:(id)sender
 {
+    [_emailField resignFirstResponder];
+    [_scrollview setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+    
     if([self validateFields])
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        _hud.labelText = @"Requesting Invite";
+        
+        [[User getInstance] requestInvite:self email:_emailField.text];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please fill in your email" delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self animated:NO];
+    
+    if(success)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thanks!" message:@"Request received!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please fill in your email" delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
