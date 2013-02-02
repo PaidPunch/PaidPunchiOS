@@ -29,6 +29,7 @@ static NSString* const kKeyProposedBusinessesVote = @"proposedbusinesses_vote";
 - (BOOL) needsRefresh;
 - (BOOL) alreadyVoted:(NSString*)businessId;
 - (void) recordVote:(NSString*)businessId;
+- (void) suggestBusiness:(NSObject<HttpCallbackDelegate>*) delegate name:(NSString*)name info:(NSString*)info;
 
 + (ProposedBusinesses*) getInstance;
 + (void) destroyInstance;

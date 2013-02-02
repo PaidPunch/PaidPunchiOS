@@ -7,6 +7,7 @@
 //
 
 #include "CommonDefinitions.h"
+#import "ProposedBusinesses.h"
 #import "SuggestBusinessView.h"
 #import "Utilities.h"
 
@@ -132,23 +133,44 @@
 {
     if(buttonIndex == 0)
     {
-        [_nameField resignFirstResponder];
-        [_infoField resignFirstResponder];
         [self removeFromSuperview];
     }
 }
 
 -(void) didPressSuggestButton:(id)sender
 {
+    [_nameField resignFirstResponder];
+    [_infoField resignFirstResponder];
+    [_scrollview setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+    
     if([self validateFields])
-    {        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thanks!" message:@"Suggestion received!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        _hud.labelText = @"Submitting Suggestion";
+        
+        [[ProposedBusinesses getInstance] suggestBusiness:self name:_nameField.text info:_infoField.text];
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please fill in all fields" delegate:NULL cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+    }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+{
+    [MBProgressHUD hideHUDForView:self animated:NO];
+    
+    if(success)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thanks!" message:@"Suggestion received!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 @end

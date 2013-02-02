@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 #import "PopUpBaseView.h"
 
-@interface SuggestBusinessView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate>
+@interface SuggestBusinessView : PopUpBaseView<UITextFieldDelegate,UIAlertViewDelegate,HttpCallbackDelegate>
 {
     UITextField* _nameField;
     UITextField* _infoField;
+    MBProgressHUD* _hud;
 }
 
 @end

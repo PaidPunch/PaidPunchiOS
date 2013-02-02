@@ -17,6 +17,8 @@ static NSString* const kKeyUserId = @"user_id";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kKeyProposedBusinesses = @"proposedBusinesses";
 static NSString* const kKeyVotedBusinesses = @"votedBusinesses";
+static NSString* const kKeyBusinessName = @"business_name";
+static NSString* const kKeyBusinessInfo = @"business_info";
 static NSString* const kKeyStatusMessage = @"statusMessage";
 static NSString* const kProposedBusinessesFilename = @"proposedbusinesses.sav";
 
@@ -189,6 +191,30 @@ static double const refreshTime = -(24 * 60 * 60);
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Voting for proposed business failed with error: %@", error.description);
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                }
+     ];
+}
+
+- (void) suggestBusiness:(NSObject<HttpCallbackDelegate>*) delegate name:(NSString*)name info:(NSString*)info
+{
+    // put parameters
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [[User getInstance] userId], kKeyUserId,
+                                name, kKeyBusinessName,
+                                info, kKeyBusinessInfo,
+                                nil];
+    
+    // make a post request
+    AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
+    [httpClient putPath:@"paid_punch/ProposedBusinesses/suggest"
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject){
+                    NSLog(@"Retrieved: %@", responseObject);
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                }
+                failure:^(AFHTTPRequestOperation* operation, NSError* error){
+                    NSLog(@"Suggesting a new business failed with error: %@", error.description);
                     [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, FALSE, [Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
