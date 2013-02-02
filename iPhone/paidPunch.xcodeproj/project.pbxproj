@@ -101,6 +101,7 @@
 		38B84433167581420068D3C3 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84432167581410068D3C3 /* BaseView.m */; };
 		38B844361677C1060068D3C3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B844351677C1060068D3C3 /* User.m */; };
 		38B9AB8216BCCB70007FF512 /* MyCouponsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B9AB8116BCCB70007FF512 /* MyCouponsView.m */; };
+		38B9AB8916BCE328007FF512 /* MyCouponsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B9AB8816BCE328007FF512 /* MyCouponsTableView.m */; };
 		38BC783316B77A7200A77A3F /* NoBizView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BC783216B77A7200A77A3F /* NoBizView.m */; };
 		38BC784516B77B8A00A77A3F /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BC784316B77B8A00A77A3F /* banner.png */; };
 		38BC784616B77B8A00A77A3F /* no-biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BC784416B77B8A00A77A3F /* no-biz.png */; };
@@ -701,6 +702,8 @@
 		38B844371677FB460068D3C3 /* HttpCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpCallbackDelegate.h; path = ServerAPI/HttpCallbackDelegate.h; sourceTree = "<group>"; };
 		38B9AB8016BCCB70007FF512 /* MyCouponsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCouponsView.h; sourceTree = "<group>"; };
 		38B9AB8116BCCB70007FF512 /* MyCouponsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCouponsView.m; sourceTree = "<group>"; };
+		38B9AB8716BCE327007FF512 /* MyCouponsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCouponsTableView.h; sourceTree = "<group>"; };
+		38B9AB8816BCE328007FF512 /* MyCouponsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCouponsTableView.m; sourceTree = "<group>"; };
 		38BC782016B7525100A77A3F /* CommonDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonDefinitions.h; sourceTree = "<group>"; };
 		38BC783116B77A7100A77A3F /* NoBizView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoBizView.h; sourceTree = "<group>"; };
 		38BC783216B77A7200A77A3F /* NoBizView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoBizView.m; sourceTree = "<group>"; };
@@ -1724,6 +1727,8 @@
 				385441E816BB247F00419A68 /* RequestInviteView.m */,
 				38B9AB8016BCCB70007FF512 /* MyCouponsView.h */,
 				38B9AB8116BCCB70007FF512 /* MyCouponsView.m */,
+				38B9AB8716BCE327007FF512 /* MyCouponsTableView.h */,
+				38B9AB8816BCE328007FF512 /* MyCouponsTableView.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3459,6 +3464,7 @@
 				385441E416BADD9800419A68 /* InviteCodeView.m in Sources */,
 				385441E916BB248400419A68 /* RequestInviteView.m in Sources */,
 				38B9AB8216BCCB70007FF512 /* MyCouponsView.m in Sources */,
+				38B9AB8916BCE328007FF512 /* MyCouponsTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

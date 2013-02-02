@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyCouponsTableView.h"
 #import "PopUpBaseView.h"
 
 @interface MyCouponsView : PopUpBaseView
+{
+    CGFloat _lowestYPos;
+    UIScrollView* _myCouponsScrollView;
+    MyCouponsTableView* _myCouponsTable;
+}
 
 @end
