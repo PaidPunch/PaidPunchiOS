@@ -20,6 +20,8 @@
     UIAlertView* _locationAlertView;
     UIAlertView* _feedbackAlertView;
     NetworkManager *_networkManager;
+    __weak UIViewController* _parentController;
 }
+@property(nonatomic,weak) UIViewController* parentController;
 
 @end

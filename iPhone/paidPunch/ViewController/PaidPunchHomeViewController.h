@@ -16,6 +16,9 @@
     CGFloat _lowestYPos;
     MBProgressHUD* _hud;
     UIButton* _creditsButton;
+    
+    BOOL _launchMyCouponsOnWillAppear;
 }
+@property (nonatomic) BOOL launchMyCouponsOnWillAppear;
 
 @end

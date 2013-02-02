@@ -9,6 +9,7 @@
 #include "CommonDefinitions.h"
 #import "AccountViewController.h"
 #import "BalanceViewController.h"
+#import "MyCouponsView.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
 #import "User.h"
@@ -16,10 +17,13 @@
 #import "VoteBusinessesViewController.h"
 
 @implementation PaidPunchHomeViewController
+@synthesize launchMyCouponsOnWillAppear = _launchMyCouponsOnWillAppear;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _launchMyCouponsOnWillAppear = FALSE;
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 	
@@ -46,6 +50,12 @@
         _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         _hud.labelText = @"Updating user info";
         [[User getInstance] getUserInfoFromServer:self];
+    }
+    
+    // Launch my coupons view
+    if (_launchMyCouponsOnWillAppear)
+    {
+        [self showMyCoupons];
     }
 }
 
@@ -183,11 +193,22 @@
     [_mainView addSubview:nobizView];
 }
 
+- (void)showMyCoupons
+{
+    _launchMyCouponsOnWillAppear = FALSE;
+    MyCouponsView* myCouponsView = [[MyCouponsView alloc] initWithFrame:self.view.frame];
+    [_mainView addSubview:myCouponsView];
+}
+
 #pragma mark - event actions
 
 - (void)didPressAccountButton:(id)sender
 {
     AccountViewController *accountViewController = [[AccountViewController alloc] init];
+    
+    // Totally hacky way to communicate between the two view controllers
+    [accountViewController setParentController:self];
+    
     [self.navigationController pushViewController:accountViewController animated:YES];
 }
 
@@ -201,6 +222,11 @@
 {
     VoteBusinessesViewController *voteViewController = [[VoteBusinessesViewController alloc] init];
     [self.navigationController pushViewController:voteViewController animated:NO];
+}
+
+- (void)didPressPaidPunchButton:(id)sender
+{
+    [self showMyCoupons];
 }
 
 #pragma mark - HttpCallbackDelegate

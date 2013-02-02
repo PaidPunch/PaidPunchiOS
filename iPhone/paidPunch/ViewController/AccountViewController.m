@@ -15,6 +15,7 @@
 #import "HiAccuracyLocator.h"
 #import "InfoChangeViewController.h"
 #import "InviteFriendsViewController.h"
+#import "PaidPunchHomeViewController.h"
 #import "User.h"
 
 static NSUInteger const kSections = 2;
@@ -28,6 +29,7 @@ static NSString* const kTextSpacing = @"  ";
 @end
 
 @implementation AccountViewController
+@synthesize parentController = _parentController;
 
 - (void)viewDidLoad
 {
@@ -138,6 +140,23 @@ static NSString* const kTextSpacing = @"  ";
     {
         [self goToCreditCardSettingsView:nil];
     }
+}
+
+- (void) showMyCoupons
+{
+    // BIG NOTE: This is a hacky way of causing the coupons pop-up to show up on returning
+    // to the super view, but it's the only way I know of to do it.
+    PaidPunchHomeViewController* parent = (PaidPunchHomeViewController*)_parentController;
+    [parent setLaunchMyCouponsOnWillAppear:TRUE];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromLeft;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void) goToCreditCardSettingsView:(NSString *)maskedId
@@ -421,7 +440,7 @@ static NSString* const kTextSpacing = @"  ";
         switch (indexPath.row)
         {
             case 0:
-                
+                [self showMyCoupons];
                 break;
                 
             case 1:
