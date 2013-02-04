@@ -7,14 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 #import "MyCouponsTableView.h"
+#import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 #import "PopUpBaseView.h"
 
-@interface MyCouponsView : PopUpBaseView
+@interface MyCouponsView : PopUpBaseView<NetworkManagerDelegate>
 {
     CGFloat _lowestYPos;
     UIScrollView* _myCouponsScrollView;
     MyCouponsTableView* _myCouponsTable;
+    NetworkManager* _networkManager;
+    MBProgressHUD* _hud;
 }
 
 @end

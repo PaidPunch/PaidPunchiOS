@@ -13,14 +13,17 @@ static NSString* const kKeyPunchesPurchase = @"punches_purchase";
 
 @interface Punches : NSObject
 {
-    // HACK: This is a hack to mirror a legacy situation
-    //       involving UI refresh of punches. Unfortunately,
-    //       we are stuck with it until we have a chance to
-    //       to redesign the UI.
-    BOOL _justPurchased;
+    // internal
+    NSString* _createdVersion;
+    
+    NSDate* _lastUpdate;
+    NSArray* _punchesArray;
 }
-@property(nonatomic) BOOL justPurchased;
+@property (nonatomic,readonly) NSDate* lastUpdate;
+@property (nonatomic,strong) NSArray* punchesArray;
 
+- (void) updateDate;
+- (BOOL) needsRefresh;
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
 
 + (Punches*) getInstance;

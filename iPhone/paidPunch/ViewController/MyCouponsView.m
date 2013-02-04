@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import "MyCouponsView.h"
+#import "Punches.h"
 
 @implementation MyCouponsView
 
@@ -20,7 +21,22 @@
         
         [self createMyCouponsLabel];
         
-        [self createCouponsTable];
+        // Initializing punch cards retrieval
+        _networkManager=[[NetworkManager alloc] initWithView:self];
+        _networkManager.delegate=self;
+        
+        if ([[Punches getInstance] needsRefresh])
+        {
+            _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+            _hud.labelText = @"Retrieving Punches";
+            
+            [[DatabaseManager sharedInstance] deleteMyPunches];
+            [self getMyPunches];
+        }
+        else
+        {
+            [self createCouponsTable];
+        }
     }
     return self;
 }
@@ -51,8 +67,24 @@
     _myCouponsScrollView.contentSize = CGSizeMake(_popupView.frame.size.width, stdiPhoneHeight);
     [_popupView addSubview:_myCouponsScrollView];
     
-    _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:myCouponsRect];
+    _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:CGRectMake(0, 0, _popupView.frame.size.width, _popupView.frame.size.height)];
     [_myCouponsScrollView addSubview:_myCouponsTable];
+}
+
+-(void)getMyPunches
+{
+    [_networkManager getUserPunches:[[User getInstance] userId]];
+}
+
+#pragma mark - network manager delegate
+-(void) didFinishGetUsersPunch:(NSString*)statusCode
+{
+    [[DatabaseManager sharedInstance] saveEntity:nil];
+    NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
+    [[Punches getInstance] setPunchesArray:arr];
+    [[Punches getInstance] updateDate];
+    [self createCouponsTable];
+    [MBProgressHUD hideHUDForView:self animated:NO];
 }
 
 @end

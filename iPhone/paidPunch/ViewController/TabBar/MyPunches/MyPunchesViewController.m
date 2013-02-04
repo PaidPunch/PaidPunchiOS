@@ -52,7 +52,6 @@
     NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
     if(arr.count==0)
     {
-        [[Punches getInstance] setJustPurchased:FALSE];
         [self getMyPunches];
     }
     
@@ -79,10 +78,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ([[Punches getInstance] justPurchased])
+    //if ([[Punches getInstance] justPurchased])
     {
         [[DatabaseManager sharedInstance] deleteMyPunches];
-        [[Punches getInstance] setJustPurchased:FALSE];
+        //[[Punches getInstance] setJustPurchased:FALSE];
         self.lastRefreshTime=[NSDate date];
         [self getMyPunches];
     }
@@ -236,9 +235,10 @@
 
 #pragma mark -
 
-- (NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil)
+    {
         return _fetchedResultsController;
     }
     

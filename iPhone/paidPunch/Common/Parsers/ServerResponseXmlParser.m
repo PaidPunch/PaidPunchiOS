@@ -220,7 +220,8 @@
         if([newCurrentValue isEqualToString:@"true"])
         {
             [punchCardDetails setValue:[NSNumber numberWithBool:YES] forKey:@"is_mystery_punch"];
-            punchCardDetails.total_punches=[NSNumber numberWithInt:[punchCardDetails.total_punches intValue]+1];
+            // TODO: Do not add mystery punches to total_punches
+            //punchCardDetails.total_punches=[NSNumber numberWithInt:[punchCardDetails.total_punches intValue]+1];
         }
         else
             [punchCardDetails setValue:[NSNumber numberWithBool:NO] forKey:@"is_mystery_punch"];
