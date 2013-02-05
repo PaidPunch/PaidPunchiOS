@@ -69,7 +69,7 @@
 
 -(void)getMyPunches
 {
-    [[Punches getInstance] getMyPunches:self];
+    [[Punches getInstance] retrievePunchesFromServer:self];
 }
 
 #pragma mark - network manager delegate

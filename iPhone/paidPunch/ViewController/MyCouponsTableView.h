@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyCouponsTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
+{
+    NSArray* _currentPunchcards;
+}
 
 @end

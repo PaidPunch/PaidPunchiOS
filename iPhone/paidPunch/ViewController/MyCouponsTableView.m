@@ -24,6 +24,7 @@ static CGFloat const kCellHeight = 60.0;
     {
         self.dataSource = self;
         self.delegate = self;
+        _currentPunchcards = [[Punches getInstance] getAvailablePunches];
     }
     return self;
 }
@@ -36,7 +37,7 @@ static CGFloat const kCellHeight = 60.0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[Punches getInstance] punchesArray] count];
+    return [_currentPunchcards count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -56,7 +57,7 @@ static CGFloat const kCellHeight = 60.0;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    PunchCard* currentPunchcard = [[[Punches getInstance] punchesArray] objectAtIndex:indexPath.row];
+    PunchCard* currentPunchcard = [_currentPunchcards objectAtIndex:indexPath.row];
     UILabel* nameLabel = [self createNameLabel:currentPunchcard.punch_card_name];
     [cell addSubview:nameLabel];
     
@@ -110,7 +111,7 @@ static CGFloat const kCellHeight = 60.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self goToPunchView:[[[Punches getInstance] punchesArray] objectAtIndex:indexPath.row]];
+    [self goToPunchView:[_currentPunchcards objectAtIndex:indexPath.row]];
     [self deselectRowAtIndexPath:indexPath animated:YES];
 }
 

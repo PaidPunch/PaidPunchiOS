@@ -44,7 +44,7 @@ static double const refreshTime = -(60 * 60);
     return self;
 }
 
--(void)getMyPunches:(NSObject<HttpCallbackDelegate>*)delegate
+-(void)retrievePunchesFromServer:(NSObject<HttpCallbackDelegate>*)delegate
 {
     _mypunchesDelegate = delegate;
     [_networkManager getUserPunches:[[User getInstance] userId]];
@@ -80,6 +80,21 @@ static double const refreshTime = -(60 * 60);
 {
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
+
+- (NSArray*) getAvailablePunches
+{
+    NSMutableArray* arr = [[NSMutableArray alloc] init];
+    for (PunchCard* current in _punchesArray)
+    {
+        if ([current total_punches] > [current total_punches_used])
+        {
+            [arr addObject:current];
+        }
+    }
+    return arr;
+}
+
+#pragma mark - private functions
 
 - (void)replaceCardInfo:(PunchCard*)newPunch
 {

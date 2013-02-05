@@ -32,7 +32,8 @@ static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
 @property (nonatomic,strong) NSArray* punchesArray;
 
 - (BOOL) needsRefresh;
--(void)getMyPunches:(NSObject<HttpCallbackDelegate>*)delegate;
+- (NSArray*) getAvailablePunches;
+- (void)retrievePunchesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
 
 + (Punches*) getInstance;
