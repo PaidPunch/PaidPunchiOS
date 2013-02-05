@@ -197,7 +197,6 @@
 {
     _launchMyCouponsOnWillAppear = FALSE;
     MyCouponsView* myCouponsView = [[MyCouponsView alloc] initWithFrame:self.view.frame];
-    [myCouponsView setController:self.navigationController];
     [_mainView addSubview:myCouponsView];
 }
 

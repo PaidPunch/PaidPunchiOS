@@ -11,7 +11,6 @@
 #import "Punches.h"
 
 @implementation MyCouponsView
-@synthesize controller = _controller;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -65,7 +64,6 @@
     [_popupView addSubview:_myCouponsScrollView];
     
     _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:CGRectMake(0, 0, _popupView.frame.size.width, _popupView.frame.size.height)];
-    [_myCouponsTable setController:_controller];
     [_myCouponsScrollView addSubview:_myCouponsTable];
 }
 

@@ -18,8 +18,6 @@
     UIScrollView* _myCouponsScrollView;
     MyCouponsTableView* _myCouponsTable;
     MBProgressHUD* _hud;
-    UINavigationController* _controller;
 }
-@property(nonatomic,strong) UINavigationController* controller;
 
 @end

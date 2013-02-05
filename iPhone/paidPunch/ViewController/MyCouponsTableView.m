@@ -16,7 +16,6 @@ static CGFloat const kAmountSize = 100.0;
 static CGFloat const kCellHeight = 60.0;
 
 @implementation MyCouponsTableView
-@synthesize controller = _controller;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -120,14 +119,8 @@ static CGFloat const kCellHeight = 60.0;
 -(void) goToPunchView:(PunchCard *)punchCard
 {
     MyCouponViewController* myCoupon = [[MyCouponViewController alloc] initWithPunchcard:punchCard];
-    [_controller pushViewController:myCoupon animated:NO];
-    
-    /*
-    PunchViewController *punchView = [[PunchViewController alloc] initWithNibName:nil bundle:nil];
-    punchView.punchCardDetails=punchCard;
-    punchView.punchId=punchCard.punch_card_download_id;
-    [self.navigationController pushViewController:punchView animated:YES];
-    [punchView setUpUI];
-    */
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    UINavigationController* nav = appDelegate.navigationController;
+    [nav pushViewController:myCoupon animated:NO];
 }
 @end
