@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MyCouponsTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
+{
+    UINavigationController* _controller;
+}
+@property(nonatomic,strong) UINavigationController* controller;
 
 @end

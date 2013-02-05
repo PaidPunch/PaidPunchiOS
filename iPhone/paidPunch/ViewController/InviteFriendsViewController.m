@@ -56,7 +56,7 @@ typedef enum
     [self createNavBar:nil rightString:@"Next" middle:@"Give $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressNextButton:)];
     
     // Create green notification bar
-    [self createGreenNotificationBar:@"Sign Up Successful!"];
+    [self createNotificationBar:@"Sign Up Successful!" color:[[UIColor greenColor] colorWithAlphaComponent:0.3]];
     
     // Create text labels
     [self createInviteFriendsText];
@@ -71,7 +71,7 @@ typedef enum
     
     // Grey background bar for textfield
     UIFont* textFont = [UIFont fontWithName:@"ArialMT" size:17.0f];
-    NSString* invitecodeText = [NSString stringWithFormat:@"Your Invitation Code: %@", [[User getInstance] referralCode]];
+    NSString* invitecodeText = [NSString stringWithFormat:@"Your Invitation Code: %@", [[User getInstance] userCode]];
     CGSize sizeInvitecodeText = [invitecodeText sizeWithFont:textFont
                                                     forWidth:stdiPhoneWidth
                                                lineBreakMode:UILineBreakModeWordWrap];

@@ -13,6 +13,7 @@
 #import "PaidPunchHomeViewController.h"
 #import "User.h"
 #import "SignInViewController.h"
+#import "UrlImageManager.h"
 #import "WelcomePageViewController.h"
 
 @implementation AppDelegate
@@ -75,6 +76,7 @@ static NSString* kAppId = @"159848747459550";
 {
     [AsyncHttpCallMgr getInstance];
     [User getInstance];
+    [UrlImageManager getInstance];
     
     [[AsyncHttpCallMgr getInstance] addDelegateInstance:[AsyncHttpCallMgr getInstance]];
 }

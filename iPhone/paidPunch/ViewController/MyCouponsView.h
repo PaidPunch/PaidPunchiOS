@@ -20,6 +20,8 @@
     MyCouponsTableView* _myCouponsTable;
     NetworkManager* _networkManager;
     MBProgressHUD* _hud;
+    UINavigationController* _controller;
 }
+@property(nonatomic,strong) UINavigationController* controller;
 
 @end

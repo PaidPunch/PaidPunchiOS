@@ -39,4 +39,14 @@
 @dynamic redeem_time_diff;
 @dynamic business;
 
+- (NSString*)getRemainingAmountAsString
+{
+    // Amount of punchcard remaining
+    double remainder = [[self each_punch_value] doubleValue] * ([[self total_punches] integerValue] - [[self total_punches_used] integerValue]);
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:remainder]];
+    return amountAsString;
+}
+
 @end

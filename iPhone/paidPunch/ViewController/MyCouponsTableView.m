@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import "MyCouponsTableView.h"
+#import "MyCouponViewController.h"
 #import "PunchCard.h"
 #import "Punches.h"
 
@@ -15,6 +16,7 @@ static CGFloat const kAmountSize = 100.0;
 static CGFloat const kCellHeight = 60.0;
 
 @implementation MyCouponsTableView
+@synthesize controller = _controller;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -59,16 +61,10 @@ static CGFloat const kCellHeight = 60.0;
     UILabel* nameLabel = [self createNameLabel:currentPunchcard.punch_card_name];
     [cell addSubview:nameLabel];
     
-    // Amount of punchcard remaining
-    double remainder = [[currentPunchcard each_punch_value] doubleValue] * ([[currentPunchcard total_punches] integerValue] - [[currentPunchcard total_punches_used] integerValue]);
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:remainder]];
-    
     // Create amount label
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
     UILabel* amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - kAmountSize, 5, kAmountSize - 10  , kCellHeight)];
-    amountLabel.text = numberAsString;
+    amountLabel.text = [currentPunchcard getRemainingAmountAsString];
     amountLabel.backgroundColor = [UIColor clearColor];
     amountLabel.textColor = [UIColor colorWithRed:0.0f green:153.0f/255.0f blue:51.0f/255.0f alpha:1.0f];
     [amountLabel setNumberOfLines:1];
@@ -123,6 +119,9 @@ static CGFloat const kCellHeight = 60.0;
 
 -(void) goToPunchView:(PunchCard *)punchCard
 {
+    MyCouponViewController* myCoupon = [[MyCouponViewController alloc] initWithPunchcard:punchCard];
+    [_controller pushViewController:myCoupon animated:NO];
+    
     /*
     PunchViewController *punchView = [[PunchViewController alloc] initWithNibName:nil bundle:nil];
     punchView.punchCardDetails=punchCard;

@@ -40,4 +40,6 @@
 @property (nonatomic, strong) NSString * redeem_time_diff;
 @property (nonatomic, strong) Business *business;
 
+- (NSString*)getRemainingAmountAsString;
+
 @end

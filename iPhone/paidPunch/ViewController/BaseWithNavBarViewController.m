@@ -47,6 +47,12 @@
 }
 
 - (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction
+{
+    UIFont* middleFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
+    [self createNavBar:leftString rightString:rightString middle:middle middleFont:middleFont isMiddleImage:isMiddleImage leftAction:leftAction rightAction:rightAction];
+}
+
+- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle middleFont:(UIFont*)middleFont isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction
 {    
     // Create background
     UIImageView* backgrdImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-bg.png"]];
@@ -95,7 +101,6 @@
     }
     else
     {
-        UIFont* middleFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
         CGSize sizeMiddle = [middle sizeWithFont:middleFont
                                constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
                                    lineBreakMode:UILineBreakModeWordWrap];
@@ -113,23 +118,23 @@
     _lowestYPos = backgrdImg.frame.size.height;
 }
 
-- (void)createGreenNotificationBar:(NSString*)barText
+- (void)createNotificationBar:(NSString*)barText color:(UIColor*)color
 {
     UIFont* textFont = [UIFont fontWithName:@"ArialMT" size:15.0f];
     
     // Green bar for notifications
-    CGFloat greenbarLabelHeight = 50;
-    UILabel* greenbarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, greenbarLabelHeight)];
-    greenbarLabel.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
-    greenbarLabel.text = barText;
-    greenbarLabel.textColor = [UIColor blackColor];
-    [greenbarLabel setNumberOfLines:2];
-    [greenbarLabel setFont:textFont];
-    greenbarLabel.textAlignment = UITextAlignmentCenter;
+    CGFloat notificationHeight = 50;
+    _notificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, notificationHeight)];
+    _notificationLabel.backgroundColor = color; 
+    _notificationLabel.text = barText;
+    _notificationLabel.textColor = [UIColor blackColor];
+    [_notificationLabel setNumberOfLines:2];
+    [_notificationLabel setFont:textFont];
+    _notificationLabel.textAlignment = UITextAlignmentCenter;
     
-    [_mainView addSubview:greenbarLabel];
+    [_mainView addSubview:_notificationLabel];
     
-    _lowestYPos = greenbarLabelHeight + greenbarLabel.frame.origin.y;
+    _lowestYPos = notificationHeight + _notificationLabel.frame.origin.y;
 }
 
 - (void)createSignInOrUpButtons:(NSString*)currentText fbAction:(SEL)fbAction emailAction:(SEL)emailAction

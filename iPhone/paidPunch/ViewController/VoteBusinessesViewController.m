@@ -42,7 +42,7 @@
     [self createNavBar:@"Back" rightString:@"Done" middle:@"Give Free Credit" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressDoneButton:)];
     
     // Create green notification bar
-    [self createGreenNotificationBar:@"Vote for the businesses you want to be on PaidPunch. When they join, you get $2 each!"];
+    [self createNotificationBar:@"Vote for the businesses you want to be on PaidPunch. When they join, you get $2 each!"color:[[UIColor greenColor] colorWithAlphaComponent:0.3]];
     
     // Create suggest button
     [self createSuggestBusinessButton];
