@@ -22,10 +22,6 @@
         
         [self createMyCouponsLabel];
         
-        // Initializing punch cards retrieval
-        _networkManager=[[NetworkManager alloc] initWithView:self];
-        _networkManager.delegate=self;
-        
         if ([[Punches getInstance] needsRefresh])
         {
             _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
@@ -75,18 +71,23 @@
 
 -(void)getMyPunches
 {
-    [_networkManager getUserPunches:[[User getInstance] userId]];
+    [[Punches getInstance] getMyPunches:self];
 }
 
 #pragma mark - network manager delegate
--(void) didFinishGetUsersPunch:(NSString*)statusCode
+- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
 {
-    [[DatabaseManager sharedInstance] saveEntity:nil];
-    NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
-    [[Punches getInstance] setPunchesArray:arr];
-    [[Punches getInstance] updateDate];
-    [self createCouponsTable];
     [MBProgressHUD hideHUDForView:self animated:NO];
+    
+    if(success)
+    {
+        [self createCouponsTable];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end

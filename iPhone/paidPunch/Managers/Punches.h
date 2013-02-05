@@ -8,22 +8,31 @@
 
 #import <Foundation/Foundation.h>
 #import "HttpCallbackDelegate.h"
+#import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 
 static NSString* const kKeyPunchesPurchase = @"punches_purchase";
+static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
 
-@interface Punches : NSObject
+@interface Punches : NSObject<NetworkManagerDelegate>
 {
     // internal
     NSString* _createdVersion;
     
     NSDate* _lastUpdate;
-    NSArray* _punchesArray;
+    NSMutableArray* _punchesArray;
+    
+    NetworkManager* _networkManager;
+    
+    // Couple hacks to handle mypunches for now
+    __weak NSObject<HttpCallbackDelegate>* _mypunchesDelegate;
+    NSUInteger _numPunches;
 }
 @property (nonatomic,readonly) NSDate* lastUpdate;
 @property (nonatomic,strong) NSArray* punchesArray;
 
-- (void) updateDate;
 - (BOOL) needsRefresh;
+-(void)getMyPunches:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
 
 + (Punches*) getInstance;

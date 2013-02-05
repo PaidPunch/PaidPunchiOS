@@ -9,6 +9,7 @@
 #include "CommonDefinitions.h"
 #import <QuartzCore/CAGradientLayer.h>
 #import "MyCouponViewController.h"
+#import "RulesView.h"
 #import "UrlImageManager.h"
 #import "Utilities.h"
 
@@ -52,6 +53,9 @@ static CGFloat const barHeight = 30;
     [self createUseCouponButton];
     
     [self createRulesBar];
+    
+    RulesView* rulesView = [[RulesView alloc] initWithPunchcard:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) current:_punchcard];
+    [_mainView addSubview:rulesView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -177,9 +181,9 @@ static CGFloat const barHeight = 30;
     
     NSString* numPunchesText = [NSString stringWithFormat:@"%d x %@ Coupons Remaining", ([[_punchcard total_punches] integerValue] - [[_punchcard total_punches_used] integerValue]), amountAsString];
     CGFloat labelWidth = stdiPhoneWidth - 30;
-    CGFloat labelHeight = 40;
-    UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:16.0];
-    UILabel* numPunchesLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - labelWidth)/2, _remainingAmountBar.frame.origin.y + _remainingAmountBar.frame.size.height + 20, labelWidth, labelHeight)];
+    CGFloat labelHeight = 60;
+    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
+    UILabel* numPunchesLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - labelWidth)/2, _remainingAmountBar.frame.origin.y + _remainingAmountBar.frame.size.height + 40, labelWidth, labelHeight)];
     [numPunchesLabel setFont:textFont];
     numPunchesLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     numPunchesLabel.text = numPunchesText;
@@ -187,6 +191,10 @@ static CGFloat const barHeight = 30;
     [numPunchesLabel setNumberOfLines:1];
     [numPunchesLabel setFont:textFont];
     numPunchesLabel.textAlignment = UITextAlignmentCenter;
+    
+    numPunchesLabel.layer.cornerRadius = 5;
+    numPunchesLabel.layer.masksToBounds = YES;
+    
     [_mainView addSubview:numPunchesLabel];
 }
 

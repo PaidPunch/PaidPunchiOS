@@ -7,18 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
 #import "MyCouponsTableView.h"
-#import "NetworkManager.h"
-#import "NetworkManagerDelegate.h"
 #import "PopUpBaseView.h"
 
-@interface MyCouponsView : PopUpBaseView<NetworkManagerDelegate>
+@interface MyCouponsView : PopUpBaseView<HttpCallbackDelegate>
 {
     CGFloat _lowestYPos;
     UIScrollView* _myCouponsScrollView;
     MyCouponsTableView* _myCouponsTable;
-    NetworkManager* _networkManager;
     MBProgressHUD* _hud;
     UINavigationController* _controller;
 }

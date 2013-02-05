@@ -36,8 +36,18 @@ static double const refreshTime = -(60 * 60);
         _createdVersion = @"1.0";
         _lastUpdate = nil;
         _punchesArray = nil;
+        
+        // Initializing punch cards retrieval
+        _networkManager=[[NetworkManager alloc] init];
+        _networkManager.delegate=self;
     }
     return self;
+}
+
+-(void)getMyPunches:(NSObject<HttpCallbackDelegate>*)delegate
+{
+    _mypunchesDelegate = delegate;
+    [_networkManager getUserPunches:[[User getInstance] userId]];
 }
 
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid
@@ -71,9 +81,20 @@ static double const refreshTime = -(60 * 60);
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
-- (void) updateDate
+- (void)replaceCardInfo:(PunchCard*)newPunch
 {
-    _lastUpdate = [NSDate date];
+    NSUInteger index = 0;
+    while (index < [_punchesArray count])
+    {
+        PunchCard* current = [_punchesArray objectAtIndex:index];
+        if ([[current punch_card_id] compare:[newPunch punch_card_id]] == NSOrderedSame)
+        {
+            [current setRedeem_time_diff:[newPunch redeem_time_diff]];
+            [current setMinimum_value:[newPunch minimum_value]];
+            [current setExpire_days:[newPunch expire_days]];
+        }
+        index++;
+    }
 }
 
 #pragma mark - NSCoding
@@ -150,6 +171,41 @@ static double const refreshTime = -(60 * 60);
     if ([fileManager fileExistsAtPath:filepath])
     {
         [fileManager removeItemAtPath:filepath error:&error];
+    }
+}
+
+#pragma mark - network manager delegate
+-(void) didFinishGetUsersPunch:(NSString*)statusCode
+{
+    [[DatabaseManager sharedInstance] saveEntity:nil];
+    _punchesArray = [NSMutableArray arrayWithArray:[[DatabaseManager sharedInstance] fetchPunchCards]];
+    _numPunches = 0;
+    for (PunchCard* punchcard in _punchesArray)
+    {
+        NSLog(@"Requesting additional data for punchcard: %@", [punchcard business_name]);
+        [_networkManager getBusinessOffer:[punchcard business_name] loggedInUserId:[[User getInstance] userId]];
+    }
+}
+
+- (void) didFinishLoadingBusinessOffer:(NSString *)statusCode statusMessage:(NSString *)message punchCardDetails:(PunchCard*)punchCard
+{
+    if ([statusCode rangeOfString:@"00"].location == NSNotFound || punchCard == nil)
+    {
+        // Some failure occurred
+        NSLog(@"Loading Biz Offer: Error: %@", message);
+        [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesRetrieve, FALSE, message];
+    }
+    else
+    {
+        NSLog(@"Retrieved additional data for %@ with expire time: %@", [punchCard business_name], [punchCard redeem_time_diff]);
+        _numPunches++;
+        [self replaceCardInfo:punchCard];
+        if (_numPunches == [_punchesArray count])
+        {
+            NSLog(@"All punches retrieved");
+            _lastUpdate = [NSDate date];
+            [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesPurchase, TRUE, message];
+        }
     }
 }
 
