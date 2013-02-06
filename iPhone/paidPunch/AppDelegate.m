@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 mobimedia. All rights reserved.
 //
 
+#include "CommonDefinitions.h"
 #import "AppDelegate.h"
 #import "AsyncHttpCallMgr.h"
 #import "iRate.h"
@@ -192,7 +193,13 @@ static NSString* kAppId = @"159848747459550";
 	NSLog(@"Current Locale: %@", [[NSLocale currentLocale] localeIdentifier]);
 	NSLog(@"Current language: %@", currentLanguage);
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    float originX = 0.5f * (screenBounds.size.width - stdiPhoneWidth);
+    float originY = 0.5f * (screenBounds.size.height - stdiPhoneHeight);
+    self.window = [[UIWindow alloc] initWithFrame:CGRectMake(originX, originY, stdiPhoneWidth, stdiPhoneHeight)];
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+    self.window.clipsToBounds = YES;
    
     permissions=[[NSMutableArray alloc] initWithObjects:@"read_friendlists", @"user_about_me", @"publish_stream",@"email", nil];
     

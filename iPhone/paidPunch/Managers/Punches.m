@@ -26,7 +26,7 @@ static double const refreshTime = -(60 * 60);
 
 @implementation Punches
 @synthesize lastUpdate = _lastUpdate;
-@synthesize punchesArray = _punchesArray;
+@synthesize validPunchesArray = _validPunchesArray;
 
 - (id) init
 {
@@ -81,17 +81,22 @@ static double const refreshTime = -(60 * 60);
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
-- (NSArray*) getAvailablePunches
+- (void) forceRefresh
 {
-    NSMutableArray* arr = [[NSMutableArray alloc] init];
+    _lastUpdate = nil;
+}
+
+- (void) getAvailablePunches
+{
+    _validPunchesArray = [[NSMutableArray alloc] init];
     for (PunchCard* current in _punchesArray)
     {
-        if ([current total_punches] > [current total_punches_used])
+        NSLog(@"Current punch: %@, total punches: %d, used punches: %d", [current business_name], [[current total_punches] intValue], [[current total_punches_used] intValue]);
+        if ([[current total_punches] intValue] > [[current total_punches_used] intValue])
         {
-            [arr addObject:current];
+            [_validPunchesArray addObject:current];
         }
     }
-    return arr;
 }
 
 #pragma mark - private functions
@@ -219,6 +224,7 @@ static double const refreshTime = -(60 * 60);
         {
             NSLog(@"All punches retrieved");
             _lastUpdate = [NSDate date];
+            [self getAvailablePunches];
             [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesPurchase, TRUE, message];
         }
     }

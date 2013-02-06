@@ -21,6 +21,7 @@ static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
     
     NSDate* _lastUpdate;
     NSMutableArray* _punchesArray;
+    NSMutableArray* _validPunchesArray;
     
     NetworkManager* _networkManager;
     
@@ -29,10 +30,10 @@ static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
     NSUInteger _numPunches;
 }
 @property (nonatomic,readonly) NSDate* lastUpdate;
-@property (nonatomic,strong) NSArray* punchesArray;
+@property (nonatomic,strong) NSArray* validPunchesArray;
 
 - (BOOL) needsRefresh;
-- (NSArray*) getAvailablePunches;
+- (void) forceRefresh;
 - (void)retrievePunchesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
 

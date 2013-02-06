@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseWithNavBarViewController.h"
+#import "MBProgressHUD.h"
+#import "NetworkManager.h"
+#import "NetworkManagerDelegate.h"
 #import "PunchCard.h"
 
-@interface MyCouponViewController : BaseWithNavBarViewController
+@interface MyCouponViewController : BaseWithNavBarViewController<UIAlertViewDelegate,NetworkManagerDelegate>
 {
     UILabel* _remainingAmountBar;
+    NetworkManager* _networkManager;
+    MBProgressHUD* _hud;
 }
 
 - (id)initWithPunchcard:(PunchCard *)current;

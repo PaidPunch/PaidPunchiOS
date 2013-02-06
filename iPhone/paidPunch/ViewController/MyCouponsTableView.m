@@ -24,7 +24,7 @@ static CGFloat const kCellHeight = 60.0;
     {
         self.dataSource = self;
         self.delegate = self;
-        _currentPunchcards = [[Punches getInstance] getAvailablePunches];
+        _currentPunchcards = [[Punches getInstance] validPunchesArray];
     }
     return self;
 }

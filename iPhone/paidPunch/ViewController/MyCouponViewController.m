@@ -9,6 +9,8 @@
 #include "CommonDefinitions.h"
 #import <QuartzCore/CAGradientLayer.h>
 #import "MyCouponViewController.h"
+#import "PunchCompleteViewController.h"
+#import "Punches.h"
 #import "RulesView.h"
 #import "UrlImageManager.h"
 #import "Utilities.h"
@@ -30,6 +32,8 @@ static CGFloat const barHeight = 30;
     if (self)
     {
         _punchcard = current;
+        _networkManager =[[NetworkManager alloc] initWithView:self.view];
+        _networkManager.delegate = self;
     }
     return self;
 }
@@ -220,6 +224,88 @@ static CGFloat const barHeight = 30;
     [rulesBar addSubview:rulesLabel];
     
     _lowestYPos = barHeight + rulesBar.frame.origin.y;
+}
+
+#pragma mark - event actions
+
+- (void) didPressUseCouponButton:(id)sender
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Use Punch"
+                                                      message:@"Clicking OK will use one of your punches. Are you sure?"
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:@"Cancel",nil];
+    [message show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        /*
+        _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hud.labelText = @"Using Punch";
+        
+        [_networkManager markPunchUsed:_punchcard.punch_card_id punchCardDownloadId:_punchcard.punch_card_download_id loggedInUserId:[[User getInstance] userId] isMysteryPunch:NO isPunchExpired:[_punchcard.punch_expire boolValue]];
+         */
+        
+        PunchCompleteViewController* completeView = [[PunchCompleteViewController alloc] initWithPunchcard:_punchcard];
+        [self.navigationController pushViewController:completeView animated:NO];
+    }
+}
+
+-(void) didFinishMarkingPunchUsed:(NSString *)statusCode statusMessage:(NSString *)message barcodeImage:(NSData *)imageData barcodeValue:(NSString *)barcode;
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    
+    if([statusCode isEqualToString:@"00"] || [statusCode isEqualToString:@"03"])
+    {
+        int pc=[_punchcard.total_punches_used intValue];
+        [_punchcard setTotal_punches_used:[NSNumber numberWithInt:++pc]];
+        
+        /*
+        int remaining=[_punchcard.total_punches intValue]-[_punchcard.total_punches_used intValue];
+         // TODO: We don't do mystery punches right now
+        if([_punchcard.is_mystery_punch intValue]==1)
+        {
+            if(remaining==0)
+            {
+                [_punchcard setTotal_punches_used:[NSNumber numberWithInt:++pc]];
+            }
+        }
+         */
+        
+        [[DatabaseManager sharedInstance] saveEntity:_punchcard];
+        [[Punches getInstance] forceRefresh];
+        
+        //[self goToPunchUsedView:punchCardDetails barcodeImage:imageData barcodeValue:barcode];
+    }
+    else
+    {
+        if([statusCode isEqualToString:@"01"])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Not so fast!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+        else
+        {
+            if([statusCode isEqualToString:@"401"])
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+                _punchcard.punch_expire=[NSNumber numberWithBool:YES];
+                [[DatabaseManager sharedInstance] saveEntity:nil];
+                [[Punches getInstance] forceRefresh];
+                AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                [self.navigationController popToViewController:[delegate rootController] animated:NO];
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Whoops!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+        }
+    }
 }
 
 @end
