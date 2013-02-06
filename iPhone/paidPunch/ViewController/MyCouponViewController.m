@@ -242,15 +242,10 @@ static CGFloat const barHeight = 30;
 {
     if(buttonIndex == 0)
     {
-        /*
         _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         _hud.labelText = @"Using Punch";
         
         [_networkManager markPunchUsed:_punchcard.punch_card_id punchCardDownloadId:_punchcard.punch_card_download_id loggedInUserId:[[User getInstance] userId] isMysteryPunch:NO isPunchExpired:[_punchcard.punch_expire boolValue]];
-         */
-        
-        PunchCompleteViewController* completeView = [[PunchCompleteViewController alloc] initWithPunchcard:_punchcard];
-        [self.navigationController pushViewController:completeView animated:NO];
     }
 }
 
@@ -260,25 +255,25 @@ static CGFloat const barHeight = 30;
     
     if([statusCode isEqualToString:@"00"] || [statusCode isEqualToString:@"03"])
     {
+        /*
+         // TODO: We don't do mystery punches right now
+         int remaining=[_punchcard.total_punches intValue]-[_punchcard.total_punches_used intValue];
+         if([_punchcard.is_mystery_punch intValue]==1)
+         {
+         if(remaining==0)
+         {
+         [_punchcard setTotal_punches_used:[NSNumber numberWithInt:++pc]];
+         }
+         }
+         */
+        
         int pc=[_punchcard.total_punches_used intValue];
         [_punchcard setTotal_punches_used:[NSNumber numberWithInt:++pc]];
         
-        /*
-        int remaining=[_punchcard.total_punches intValue]-[_punchcard.total_punches_used intValue];
-         // TODO: We don't do mystery punches right now
-        if([_punchcard.is_mystery_punch intValue]==1)
-        {
-            if(remaining==0)
-            {
-                [_punchcard setTotal_punches_used:[NSNumber numberWithInt:++pc]];
-            }
-        }
-         */
-        
         [[DatabaseManager sharedInstance] saveEntity:_punchcard];
         [[Punches getInstance] forceRefresh];
-        
-        //[self goToPunchUsedView:punchCardDetails barcodeImage:imageData barcodeValue:barcode];
+        PunchCompleteViewController* completeView = [[PunchCompleteViewController alloc] initWithPunchcard:_punchcard];
+        [self.navigationController pushViewController:completeView animated:NO];
     }
     else
     {

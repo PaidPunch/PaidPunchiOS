@@ -7,6 +7,7 @@
 //
 
 #include "CommonDefinitions.h"
+#import "AppDelegate.h"
 #import "PunchCard.h"
 #import "PunchCompleteViewController.h"
 #import "Utilities.h"
@@ -145,6 +146,15 @@
     [doneButton addTarget:self action:@selector(didPressDoneButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [_mainView addSubview:doneButton];
+}
+
+#pragma mark - event actions
+
+- (void) didPressDoneButton:(id)sender
+{
+    //[self.navigationController popToRootViewControllerAnimated:NO];
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate initView];
 }
 
 @end
