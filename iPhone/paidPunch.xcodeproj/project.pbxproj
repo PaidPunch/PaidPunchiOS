@@ -133,6 +133,7 @@
 		38C69C7916C2CD06005383D1 /* RIGHT-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C69C7316C2CD06005383D1 /* RIGHT-selected.png */; };
 		38C69C7C16C2CD30005383D1 /* BusinessPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C69C7B16C2CD2D005383D1 /* BusinessPageViewController.m */; };
 		38C69C7F16C2F15D005383D1 /* BusinessDescView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C69C7E16C2F155005383D1 /* BusinessDescView.m */; };
+		38C69C8216C37239005383D1 /* BusinessMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C69C8116C37230005383D1 /* BusinessMapView.m */; };
 		38D686171679B62400DED3A0 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D686161679B62400DED3A0 /* Utilities.m */; };
 		848F468E156F61DC00332D31 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 848F468B156F61DC00332D31 /* iRate.bundle */; };
 		848F468F156F61DC00332D31 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F468D156F61DC00332D31 /* iRate.m */; };
@@ -768,6 +769,8 @@
 		38C69C7B16C2CD2D005383D1 /* BusinessPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPageViewController.m; sourceTree = "<group>"; };
 		38C69C7D16C2F150005383D1 /* BusinessDescView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDescView.h; sourceTree = "<group>"; };
 		38C69C7E16C2F155005383D1 /* BusinessDescView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDescView.m; sourceTree = "<group>"; };
+		38C69C8016C3722A005383D1 /* BusinessMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMapView.h; sourceTree = "<group>"; };
+		38C69C8116C37230005383D1 /* BusinessMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMapView.m; sourceTree = "<group>"; };
 		38D686151679B62400DED3A0 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		38D686161679B62400DED3A0 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		38D68618167B059D00DED3A0 /* FacebookPaidPunchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookPaidPunchDelegate.h; sourceTree = "<group>"; };
@@ -1762,6 +1765,8 @@
 				38C69C7B16C2CD2D005383D1 /* BusinessPageViewController.m */,
 				38C69C7D16C2F150005383D1 /* BusinessDescView.h */,
 				38C69C7E16C2F155005383D1 /* BusinessDescView.m */,
+				38C69C8016C3722A005383D1 /* BusinessMapView.h */,
+				38C69C8116C37230005383D1 /* BusinessMapView.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3519,6 +3524,7 @@
 				38C69C6B16C1D381005383D1 /* PunchCompleteViewController.m in Sources */,
 				38C69C7C16C2CD30005383D1 /* BusinessPageViewController.m in Sources */,
 				38C69C7F16C2F15D005383D1 /* BusinessDescView.m in Sources */,
+				38C69C8216C37239005383D1 /* BusinessMapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

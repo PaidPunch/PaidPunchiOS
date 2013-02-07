@@ -7,6 +7,7 @@
 //
 
 #import "BusinessDescView.h"
+#import "BusinessMapView.h"
 #import "BusinessPageViewController.h"
 #import "DatabaseManager.h"
 #import "Punches.h"
@@ -67,6 +68,13 @@ static CGFloat const kButtonHeight = 40;
     }
 }
 
+-(void)viewDidUnload
+{
+    // This is here to break any circular references that might have occurred
+    _business.punchCard = nil;
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -102,6 +110,7 @@ static CGFloat const kButtonHeight = 40;
     
     _descView = [[BusinessDescView alloc] initWithFrameAndBusiness:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) business:_business];
     [_mainView addSubview:_descView];
+    _currentView = _descView;
 }
 
 - (void)createTopTabBar
@@ -185,7 +194,12 @@ static CGFloat const kButtonHeight = 40;
     {
         [_descButton setSelected:TRUE];
         [_mapButton setSelected:FALSE];
-        [_callButton setSelected:FALSE];
+        
+        // Remove current view from _mainview
+        [_currentView removeFromSuperview];
+        
+        [_mainView addSubview:_descView];
+        _currentView = _descView;
     }
 }
 
@@ -195,18 +209,29 @@ static CGFloat const kButtonHeight = 40;
     {
         [_mapButton setSelected:TRUE];
         [_descButton setSelected:FALSE];
-        [_callButton setSelected:FALSE];
+        
+        // Remove current view from _mainview
+        [_currentView removeFromSuperview];
+        
+        if (_mapView == nil)
+        {
+            PunchCard* current = [_business punchCard];
+            [current setBusiness:_business];
+            NSMutableArray* punchcardArray = [[NSMutableArray alloc] init];
+            [punchcardArray addObject:current];
+            
+            _mapView = [[BusinessMapView alloc] initWithFrameAndPunches:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) punchcardArray:punchcardArray];
+        }
+        
+        [_mainView addSubview:_mapView];
+        _currentView = _mapView;
+        
     }
 }
 
 - (void)didPressCallButton:(id)sender
 {
-    if (!_callButton.selected)
-    {
-        [_descButton setSelected:FALSE];
-        [_mapButton setSelected:FALSE];
-        [_callButton setSelected:TRUE];
-    }
+
 }
 
 @end
