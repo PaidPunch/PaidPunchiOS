@@ -163,11 +163,11 @@ static double const refreshTime = -(24 * 60 * 60);
                     [self createProposedBusinessesArray:responseObject];
                     _lastUpdate = [NSDate date];
                     [self saveProposedBusinessesData];
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesRetrieve, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesRetrieve success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Downloading new proposed businesses from server has failed.");
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesRetrieve, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesRetrieve success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -187,11 +187,11 @@ static double const refreshTime = -(24 * 60 * 60);
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Voting for proposed business failed with error: %@", error.description);
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -211,11 +211,11 @@ static double const refreshTime = -(24 * 60 * 60);
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"Suggesting a new business failed with error: %@", error.description);
-                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyProposedBusinessesVote success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }

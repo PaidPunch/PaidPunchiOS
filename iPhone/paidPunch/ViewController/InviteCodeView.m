@@ -155,7 +155,7 @@ static NSUInteger kMaxInviteCodeSize = 10;
 - (BOOL) validateInputs:(NSString*) inviteCode
 {
     BOOL success = FALSE;
-    if (inviteCode == nil || inviteCode == @"" )
+    if (inviteCode == nil || [inviteCode isEqual: @""] )
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Missing Invite Code"
                                                           message:@"Please enter a invite code before continuing."

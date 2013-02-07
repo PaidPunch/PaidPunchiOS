@@ -221,7 +221,7 @@
 		858D12BE1504885C00ED48E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 858D12C11504885C00ED48E9 /* Build configuration list for PBXProject "SocialNetworkLibrary" */;
 			compatibilityVersion = "Xcode 3.2";

@@ -123,7 +123,7 @@ static CGFloat const kVerticalSpacing = 10;
     // Maximum of 5 products
     while (index < maxProductsCount)
     {
-        SEL currentAction;
+        SEL currentAction = nil;
         switch (index)
         {
             case 0:
@@ -226,7 +226,7 @@ static CGFloat const kVerticalSpacing = 10;
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     

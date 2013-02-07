@@ -128,7 +128,7 @@ static NSUInteger kMaxReferralCodeSize = 10;
         
         [message show];
     }
-    else if (referralCode == nil || referralCode == @"" )
+    else if (referralCode == nil || [referralCode isEqual:@""] )
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Missing Referral Code"
                                                           message:@"Please enter a referral code before continuing."
@@ -211,7 +211,7 @@ static NSUInteger kMaxReferralCodeSize = 10;
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     

@@ -103,7 +103,7 @@ static NSUInteger const kRowCount = 4;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    [cell setSelectionStyle:UITableViewCellEditingStyleNone];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UILabel* whiteBox;
     UILabel* whiteLabel;

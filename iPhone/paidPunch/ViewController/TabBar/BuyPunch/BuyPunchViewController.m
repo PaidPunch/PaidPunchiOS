@@ -159,7 +159,7 @@
 }
 
 #pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {    
     // Don't do anything if it is just the user info refreshing
     if ([type compare:kKeyPunchesPurchase] == NSOrderedSame)

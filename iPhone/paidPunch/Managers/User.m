@@ -256,11 +256,11 @@ static double const refreshTime = -(30 * 60);
                     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
                     _lastUpdate = [NSDate date];
                     [self saveUserData];
-                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersEmailRegister success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -298,11 +298,11 @@ static double const refreshTime = -(30 * 60);
                      _isUserValidated = TRUE;
                      _lastUpdate = [NSDate date];
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -326,11 +326,11 @@ static double const refreshTime = -(30 * 60);
                      [self storeUserInfo:responseObject];
                      _isUserValidated = TRUE;
                      [self saveUserData];
-                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailLogin success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -361,11 +361,11 @@ static double const refreshTime = -(30 * 60);
                      [self storeUserInfo:responseObject];
                      _isUserValidated = TRUE;
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -387,11 +387,11 @@ static double const refreshTime = -(30 * 60);
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
-                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User password change failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangePassword success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -431,11 +431,11 @@ static double const refreshTime = -(30 * 60);
                     
                     [self saveUserData];
                     
-                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User info change failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersChangeInfo success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -498,11 +498,11 @@ static double const refreshTime = -(30 * 60);
                     [self storeUserInfo:responseObject];
                     _isUserValidated = TRUE;
                     [self saveUserData];
-                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
                     NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
-                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                    [delegate didCompleteHttpCallback:kKeyUsersGetInfo success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
 }
@@ -521,11 +521,11 @@ static double const refreshTime = -(30 * 60);
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
-                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"Invite request failed with status code: %d", [operation.response statusCode]);
-                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }

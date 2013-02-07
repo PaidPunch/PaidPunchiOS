@@ -201,23 +201,23 @@
         self.businessList=[[DatabaseManager sharedInstance] getBusinessesNearMe:self.userLocation withMiles:[[User getInstance] totalMiles] withCategory:self.category];
     }
     
-    if(self.category==@"eat")
+    if([self.category isEqual:@"eat"])
     {
         self.categoryImageView.image=[UIImage imageNamed:@"Eat.png"];
     }
-    if(self.category==@"drink")
+    if([self.category isEqual:@"drink"])
     {
         self.categoryImageView.image=[UIImage imageNamed:@"Drink.png"];
     }
-    if(self.category==@"play")
+    if([self.category isEqual:@"play"])
     {
         self.categoryImageView.image=[UIImage imageNamed:@"Play.png"];
     }
-    if(self.category==@"relax")
+    if([self.category isEqual:@"relax"])
     {
         self.categoryImageView.image=[UIImage imageNamed:@"Relax.png"];
     }
-    if(self.category==@"essentials")
+    if([self.category isEqual:@"essentials"])
     {
         self.categoryImageView.image=[UIImage imageNamed:@"Essentials.png"];
     }

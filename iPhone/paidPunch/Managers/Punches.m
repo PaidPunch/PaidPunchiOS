@@ -67,11 +67,11 @@ static double const refreshTime = -(60 * 60);
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _lastUpdate = nil;
-                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase, TRUE, [responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"Punch purchase failed with code: %d", [operation.response statusCode]);
-                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase, FALSE, [Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyPunchesPurchase success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -225,7 +225,7 @@ static double const refreshTime = -(60 * 60);
     {
         // Some failure occurred
         NSLog(@"Loading Biz Offer: Error: %@", message);
-        [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesRetrieve, FALSE, message];
+        [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesRetrieve success:FALSE message:message];
     }
     else
     {
@@ -237,7 +237,7 @@ static double const refreshTime = -(60 * 60);
             NSLog(@"All punches retrieved");
             _lastUpdate = [NSDate date];
             [self getAvailablePunches];
-            [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesPurchase, TRUE, message];
+            [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesPurchase success:TRUE message:message];
         }
     }
 }

@@ -73,7 +73,7 @@
 }
 
 #pragma mark - network manager delegate
-- (void) didCompleteHttpCallback:(NSString*)type, BOOL success, NSString* message
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {
     [MBProgressHUD hideHUDForView:self animated:NO];
     

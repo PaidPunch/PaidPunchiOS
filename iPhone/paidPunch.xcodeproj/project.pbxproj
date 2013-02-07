@@ -925,8 +925,8 @@
 		8A7C545E154925DB002854FF /* BusinessLocatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLocatorViewController.h; sourceTree = "<group>"; };
 		8A7C545F154925DB002854FF /* BusinessLocatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLocatorViewController.m; sourceTree = "<group>"; };
 		8A7C54631549265B002854FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		8A7C546515492717002854FF /* BusinessLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLocationAnnotation.h; sourceTree = "<group>"; };
-		8A7C546615492717002854FF /* BusinessLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLocationAnnotation.m; sourceTree = "<group>"; };
+		8A7C546515492717002854FF /* BusinessLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessLocationAnnotation.h; path = TabBar/BuyPunch/BusinessLocator/BusinessLocationAnnotation/BusinessLocationAnnotation.h; sourceTree = "<group>"; };
+		8A7C546615492717002854FF /* BusinessLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessLocationAnnotation.m; path = TabBar/BuyPunch/BusinessLocator/BusinessLocationAnnotation/BusinessLocationAnnotation.m; sourceTree = "<group>"; };
 		8A7C54D315497F46002854FF /* CalloutMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalloutMapAnnotationView.h; sourceTree = "<group>"; };
 		8A7C54D415497F46002854FF /* CalloutMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutMapAnnotationView.m; sourceTree = "<group>"; };
 		8A7C771A1525C7F60068DDC1 /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
@@ -1767,6 +1767,8 @@
 				38C69C7E16C2F155005383D1 /* BusinessDescView.m */,
 				38C69C8016C3722A005383D1 /* BusinessMapView.h */,
 				38C69C8116C37230005383D1 /* BusinessMapView.m */,
+				8A7C546515492717002854FF /* BusinessLocationAnnotation.h */,
+				8A7C546615492717002854FF /* BusinessLocationAnnotation.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2274,20 +2276,10 @@
 			isa = PBXGroup;
 			children = (
 				8A7C54D215497F21002854FF /* BusinessLocationAnnotationView */,
-				8A7C545D154925B2002854FF /* BusinessLocationAnnotation */,
 				8A7C545E154925DB002854FF /* BusinessLocatorViewController.h */,
 				8A7C545F154925DB002854FF /* BusinessLocatorViewController.m */,
 			);
 			path = BusinessLocator;
-			sourceTree = "<group>";
-		};
-		8A7C545D154925B2002854FF /* BusinessLocationAnnotation */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C546515492717002854FF /* BusinessLocationAnnotation.h */,
-				8A7C546615492717002854FF /* BusinessLocationAnnotation.m */,
-			);
-			path = BusinessLocationAnnotation;
 			sourceTree = "<group>";
 		};
 		8A7C54D215497F21002854FF /* BusinessLocationAnnotationView */ = {
@@ -2942,7 +2934,7 @@
 		8A77DE2D147E677100E05277 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = PaidPunch;
 			};
 			buildConfigurationList = 8A77DE30147E677100E05277 /* Build configuration list for PBXProject "paidPunch" */;
@@ -3547,6 +3539,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PaidPunch, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PaidPunch, LLC";
 				COPY_PHASE_STRIP = YES;
@@ -3554,6 +3550,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -3608,8 +3605,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3622,12 +3623,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3637,6 +3639,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PaidPunch, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PaidPunch, LLC";
 				COPY_PHASE_STRIP = YES;
@@ -3644,6 +3650,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -3665,8 +3672,8 @@
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Skarlete Nabavi-Noori (ZP9H8P77DH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "paidPunch/paidPunch-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -3687,8 +3694,8 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D25E491C-2C7C-41C3-9064-53E1EC0AF668";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				WRAPPER_EXTENSION = app;
 			};
