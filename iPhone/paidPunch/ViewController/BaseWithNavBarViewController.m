@@ -101,16 +101,18 @@
     }
     else
     {
+        CGFloat maxWidth = 150;
         CGSize sizeMiddle = [middle sizeWithFont:middleFont
-                               constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
+                               constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)
                                    lineBreakMode:UILineBreakModeWordWrap];
-        UILabel *middleLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - sizeMiddle.width)/2, kDistanceFromTop, sizeMiddle.width, sizeMiddle.height + 20)];
+        UILabel *middleLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - sizeMiddle.width)/2, (backgrdImg.frame.size.height - sizeMiddle.height)/2, sizeMiddle.width, sizeMiddle.height)];
         middleLabel.text = middle;
         middleLabel.backgroundColor = [UIColor clearColor];
         middleLabel.textColor = [UIColor blackColor];
-        [middleLabel setNumberOfLines:1];
+        [middleLabel setNumberOfLines:2];
         [middleLabel setFont:middleFont];
         middleLabel.textAlignment = UITextAlignmentCenter;
+        [middleLabel setAdjustsFontSizeToFitWidth:TRUE];
         [_mainView addSubview:middleLabel];
     }
     

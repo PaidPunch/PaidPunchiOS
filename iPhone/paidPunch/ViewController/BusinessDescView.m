@@ -73,21 +73,24 @@ static CGFloat const kLabelHeight = 40;
 
 - (void)createBusinessDescriptionLabel
 {
-    CGFloat labelWidth = stdiPhoneWidth - 60;
-    CGFloat labelHeight = 60;
-    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];
-    UILabel* descLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - labelWidth)/2, 15, labelWidth, labelHeight)];
+    CGFloat labelHeight = 50;
+    UILabel* descBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, stdiPhoneWidth, labelHeight)];
+    descBackgroundLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    
+    CGFloat textlabelHeight = labelHeight - 10;
+    CGFloat textlabelWidth = stdiPhoneWidth - 20;
+    UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:12.0];
+    UILabel* descLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - textlabelWidth)/2, (descBackgroundLabel.frame.size.height - textlabelHeight)/2, textlabelWidth , textlabelHeight)];
     [descLabel setFont:textFont];
-    descLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    descLabel.backgroundColor = [UIColor clearColor];
     descLabel.text = [[_business punchCard] punch_card_desc];
     descLabel.textColor = [UIColor whiteColor];
     [descLabel setNumberOfLines:2];
     [descLabel setAdjustsFontSizeToFitWidth:TRUE];
     [descLabel setFont:textFont];
     descLabel.textAlignment = UITextAlignmentCenter;
-    descLabel.layer.cornerRadius = 5;
-    descLabel.layer.masksToBounds = YES;
     
+    [self addSubview:descBackgroundLabel];
     [self addSubview:descLabel];
 }
 
@@ -129,7 +132,6 @@ static CGFloat const kLabelHeight = 40;
     
     _lowestYPos =  _lowestYPos + kLabelHeight;
 }
-
 
 - (void)createBuyCouponButton
 {

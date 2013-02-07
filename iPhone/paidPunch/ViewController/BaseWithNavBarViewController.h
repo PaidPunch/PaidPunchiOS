@@ -31,7 +31,6 @@
 - (void) dismissKeyboard;
 - (void)createMainView:(UIColor*)backgroundColor;
 - (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction;
-- (void)createNavBar:(NSString*)leftString rightString:(NSString*)rightString middle:(NSString*)middle middleFont:(UIFont*)middleFont isMiddleImage:(BOOL)isMiddleImage leftAction:(SEL)leftAction rightAction:(SEL)rightAction;
 - (void)createSignInOrUpButtons:(NSString*)currentText fbAction:(SEL)fbAction emailAction:(SEL)emailAction;
 - (void)createNotificationBar:(NSString*)barText color:(UIColor*)color;
 - (void) createSilverBackgroundWithImage;

@@ -100,8 +100,7 @@ static CGFloat const kButtonHeight = 40;
 
 - (void)createBusinessView
 {
-    UIFont* middleFont = [UIFont fontWithName:@"Helvetica-Bold" size:13.0f];
-    [self createNavBar:@"Back" rightString:nil middle:[_business business_name] middleFont:middleFont isMiddleImage:FALSE leftAction:nil rightAction:nil];
+    [self createNavBar:@"Back" rightString:nil middle:[_business business_name] isMiddleImage:FALSE leftAction:nil rightAction:nil];
     
     [self createTopTabBar];
     
@@ -145,7 +144,7 @@ static CGFloat const kButtonHeight = 40;
     [newButton setBackgroundImage:[UIImage imageNamed:selected] forState:UIControlStateSelected | UIControlStateHighlighted];
     [newButton setTitle:btnText forState:UIControlStateNormal];
     [newButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [[newButton titleLabel] setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
+    [[newButton titleLabel] setFont:[UIFont fontWithName:@"Helvetica" size:13.0f]];
     
     return newButton;
 }

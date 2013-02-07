@@ -46,8 +46,7 @@ static CGFloat const barHeight = 30;
     [self createMainView:[UIColor whiteColor]];
     
     // Create nav bar on top
-    UIFont* middleFont = [UIFont fontWithName:@"Helvetica-Bold" size:13.0f];
-    [self createNavBar:@"Back" rightString:@"Business" middle:[_punchcard business_name] middleFont:middleFont isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressBusinessButton:)];
+    [self createNavBar:@"Back" rightString:@"Business" middle:[_punchcard business_name] isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressBusinessButton:)];
     
     [self createRemainingAmountBar];
     
