@@ -6,19 +6,17 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
-#import "Business.h"
-#import "BusinessLocationAnnotation.h"
 #import "BusinessMapView.h"
-#import "PunchCard.h"
 
 @implementation BusinessMapView
 
-- (id)initWithFrameAndPunches:(CGRect)frame punchcardArray:(NSArray *)punchcardArray
+- (id)initWithFrameAndPunches:(CGRect)frame punchcard:(PunchCard*)punchcard business:(Business*)business
 {
     self = [super initWithFrame:frame];
     if (self)
     {
-        _punchcardArray = punchcardArray;
+        _punchcard = punchcard;
+        _business = business;
         [self createMap:frame];
     }
     return self;
@@ -34,27 +32,22 @@
     _businessMap.showsUserLocation = YES;
     _businessMap.zoomEnabled = YES;
 	_businessMap.scrollEnabled = YES;
+    _businessMap.delegate = self;
     
     [self addAnnotations];
     
-    _annotationArray = [[NSMutableArray alloc] init];
-    for(int i = 0; i < [_punchcardArray count]; i++)
-    {
-        PunchCard *card = [_punchcardArray objectAtIndex:i];
-        
-        CLLocationCoordinate2D tempCoord;
-        tempCoord.latitude = [card.business.latitude doubleValue];
-        tempCoord.longitude = [card.business.longitude doubleValue];
-        
-        BusinessLocationAnnotation *tempAnn = [[BusinessLocationAnnotation alloc] initWithCoord:tempCoord];
-        tempAnn.title = card.business_name;
-        tempAnn.subtitle = card.business.address;
-        tempAnn.punchCard = card;
-        
-        [_annotationArray addObject:tempAnn];
-    }
-
-    [_businessMap addAnnotations:_annotationArray];
+    CLLocationCoordinate2D tempCoord;
+    tempCoord.latitude = [_business.latitude doubleValue];
+    tempCoord.longitude = [_business.longitude doubleValue];
+    
+    _annotation = [[BusinessLocationAnnotation alloc] initWithCoord:tempCoord];
+    _annotation.title = _business.business_name;
+    _annotation.subtitle = _business.address;
+    _annotation.punchCard = _punchcard;
+    
+    NSMutableArray* annotationArray = [[NSMutableArray alloc] init];
+    [annotationArray addObject:_annotation];
+    [_businessMap addAnnotations:annotationArray];
     
     [self addSubview:_businessMap];
 }
@@ -83,12 +76,9 @@
             [pinView setCanShowCallout:YES];
             [pinView setAnimatesDrop:YES];
             
-            //The button
-            if ([_punchcardArray count] > 1)
-            {
-                UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-                pinView.rightCalloutAccessoryView = detailButton;
-            }
+            // Directions button
+            UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            pinView.rightCalloutAccessoryView = detailButton;
         }
         else
         {
@@ -100,42 +90,37 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    /*
-    PunchCard *card = [(BusinessLocationAnnotation *)[view annotation] punchCard];
-    NSLog(@"Card Details: %@", card);
-    PunchCardOfferViewController *punchCardOfferViewController = [[PunchCardOfferViewController alloc] init:card.business_name punchCardDetails:card];
-    [self.navigationController pushViewController:punchCardOfferViewController animated:YES];
-     */
+    MKUserLocation *userLocation = _businessMap.userLocation;
+    NSString *urlToLaunch =[NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",userLocation.coordinate.latitude,userLocation.coordinate.longitude,[[_business latitude] doubleValue],[[_business longitude] doubleValue]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlToLaunch]];
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    for (id<MKAnnotation> currentAnnotation in mapView.annotations)
+    {
+        if ([currentAnnotation isEqual:_annotation])
+        {
+            [mapView selectAnnotation:currentAnnotation animated:TRUE];
+            break;
+        }
+    }
 }
 
 #pragma mark -
 
 -(void)addAnnotations
-{    
+{
     MKCoordinateRegion newRegion;
     MKCoordinateSpan span;
     span.latitudeDelta=0.1;
     span.longitudeDelta=0.1;
-    CLLocationCoordinate2D location = {[[[[_punchcardArray objectAtIndex:0] business] latitude] doubleValue],[[[[_punchcardArray objectAtIndex:0] business] longitude] doubleValue]};
+    CLLocationCoordinate2D location = {[[_business latitude] doubleValue],[[_business longitude] doubleValue]};
     newRegion.center=location;
     newRegion.span=span;
     [_businessMap setRegion:newRegion animated:YES];
     [_businessMap regionThatFits:newRegion];
     
-}
-
-- (PunchCard *)requestPunchCardFromArray:(NSString *)cardName
-{
-    NSLog(@"cardName: %@", cardName);
-    for(PunchCard *card in _punchcardArray)
-    {
-        if([card.business_name isEqualToString:cardName])
-        {
-            NSLog(@"Found Match: %@", card.business_name);
-            return card;
-        }
-    }
-    return nil;
 }
 
 @end

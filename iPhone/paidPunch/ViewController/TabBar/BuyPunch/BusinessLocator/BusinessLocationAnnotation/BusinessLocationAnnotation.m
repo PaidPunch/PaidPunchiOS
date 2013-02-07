@@ -12,7 +12,8 @@
 
 @synthesize title, subtitle, coordinate, punchCard;
 
-- (id)initWithCoord:(CLLocationCoordinate2D)coord {
+- (id)initWithCoord:(CLLocationCoordinate2D)coord
+{
 	if (self = [super init]) {
 		coordinate = coord;
 	}

@@ -214,12 +214,8 @@ static CGFloat const kButtonHeight = 40;
         
         if (_mapView == nil)
         {
-            PunchCard* current = [_business punchCard];
-            [current setBusiness:_business];
-            NSMutableArray* punchcardArray = [[NSMutableArray alloc] init];
-            [punchcardArray addObject:current];
-            
-            _mapView = [[BusinessMapView alloc] initWithFrameAndPunches:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) punchcardArray:punchcardArray];
+            PunchCard* current = [_business punchCard];            
+            _mapView = [[BusinessMapView alloc] initWithFrameAndPunches:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) punchcard:current business:_business];
         }
         
         [_mainView addSubview:_mapView];

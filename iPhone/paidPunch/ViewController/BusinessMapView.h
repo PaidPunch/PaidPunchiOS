@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "Business.h"
+#import "BusinessLocationAnnotation.h"
+#import "PunchCard.h"
 
 @interface BusinessMapView : UIView<MKMapViewDelegate,CLLocationManagerDelegate>
 {
     MKMapView* _businessMap;
-    NSArray* _punchcardArray;
-    NSMutableArray* _annotationArray;
+    PunchCard* _punchcard;
+    Business* _business;
+    BusinessLocationAnnotation* _annotation;
 }
-@property (strong, nonatomic) NSArray *punchcardArray;
 
-- (id)initWithFrameAndPunches:(CGRect)frame punchcardArray:(NSArray *)punchcardArray;
-- (void)addAnnotations;
-- (PunchCard *)requestPunchCardFromArray:(NSString *)cardName;
+- (id)initWithFrameAndPunches:(CGRect)frame punchcard:(PunchCard*)punchcard business:(Business*)business;
+
 
 @end
