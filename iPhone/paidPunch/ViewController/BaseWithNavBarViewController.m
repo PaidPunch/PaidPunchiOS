@@ -216,7 +216,10 @@
     
     [newButton setTitle:buttonText forState:UIControlStateNormal];
     newButton.titleLabel.font = buttonFont;
-    newButton.titleLabel.textColor = [UIColor blackColor];
+    
+    [newButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [newButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [newButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     
     return newButton;
 }

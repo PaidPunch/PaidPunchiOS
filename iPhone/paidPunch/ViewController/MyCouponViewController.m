@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import <QuartzCore/CAGradientLayer.h>
+#import "BusinessPageViewController.h"
 #import "MyCouponViewController.h"
 #import "PunchCompleteViewController.h"
 #import "Punches.h"
@@ -58,7 +59,7 @@ static CGFloat const barHeight = 30;
     
     [self createRulesBar];
     
-    RulesView* rulesView = [[RulesView alloc] initWithPunchcard:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) current:_punchcard];
+    RulesView* rulesView = [[RulesView alloc] initWithPunchcard:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) current:_punchcard  purchaseRules:FALSE];
     [_mainView addSubview:rulesView];
 }
 
@@ -133,7 +134,6 @@ static CGFloat const barHeight = 30;
 
 - (void)createBackgroundImage
 {
-    // Draw the player's facebook image
     UIImageView* bizImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, kImageHeight)];
     bizImageView.backgroundColor = [UIColor blackColor];
     UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[_punchcard business_logo_url]];
@@ -236,6 +236,12 @@ static CGFloat const barHeight = 30;
                                             cancelButtonTitle:@"OK"
                                             otherButtonTitles:@"Cancel",nil];
     [message show];
+}
+
+- (void) didPressBusinessButton:(id)sender
+{    
+    BusinessPageViewController* businessView = [[BusinessPageViewController alloc] initWithBusiness:[_punchcard business_id] business_name:[_punchcard business_name]];
+    [self.navigationController pushViewController:businessView animated:NO];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

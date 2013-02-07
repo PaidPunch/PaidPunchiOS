@@ -99,6 +99,18 @@ static double const refreshTime = -(60 * 60);
     }
 }
 
+- (PunchCard*) getPunchcardByBusinessId:(NSString*)business_id
+{
+    for (PunchCard* current in _punchesArray)
+    {
+        if ([business_id compare:[current business_id]] == NSOrderedSame)
+        {
+            return current;
+        }
+    }
+    return nil;
+}
+
 #pragma mark - private functions
 
 - (void)replaceCardInfo:(PunchCard*)newPunch

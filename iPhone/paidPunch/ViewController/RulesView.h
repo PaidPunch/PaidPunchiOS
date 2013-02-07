@@ -14,8 +14,9 @@
     UIScrollView* _rulesScroller;
     UITableView* _rulesList;
     PunchCard* _punchcard;
+    BOOL _purchaseRules;
 }
 
-- (id)initWithPunchcard:(CGRect)frame current:(PunchCard *)current;
+- (id)initWithPunchcard:(CGRect)frame current:(PunchCard *)current purchaseRules:(BOOL)purchaseRules;
 
 @end

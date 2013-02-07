@@ -34,8 +34,9 @@ static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
 
 - (BOOL) needsRefresh;
 - (void) forceRefresh;
-- (void)retrievePunchesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
+- (void) retrievePunchesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) purchasePunchWithCredit:(NSObject<HttpCallbackDelegate>*)delegate punchid:(NSString*)punchid;
+- (PunchCard*) getPunchcardByBusinessId:(NSString*)business_id;
 
 + (Punches*) getInstance;
 + (void) destroyInstance;

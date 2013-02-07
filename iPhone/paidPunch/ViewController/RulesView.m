@@ -11,23 +11,38 @@
 #import "RulesView.h"
 
 static CGFloat const kRowHeight = 40;
+static CGFloat const kFinalPurchaseRulesRowHeight = 125;
 static CGFloat const kOrangeBoxWidth = 60;
 static NSUInteger const kRowCount = 4;
 
 @implementation RulesView
 
-- (id)initWithPunchcard:(CGRect)frame current:(PunchCard *)current
+- (id)initWithPunchcard:(CGRect)frame current:(PunchCard *)current purchaseRules:(BOOL)purchaseRules 
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         _punchcard = current;
+        // The rules can be for purchase or usage. The display to the user is slight different in either case
+        _purchaseRules = purchaseRules;
         
-        _rulesScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kRowHeight * kRowCount)];
+        CGFloat totalHeight;
+        if (_purchaseRules)
+        {
+            totalHeight = (kRowHeight * (kRowCount - 1)) + kFinalPurchaseRulesRowHeight + 100;
+        }
+        else
+        {
+            totalHeight = kRowHeight * kRowCount + 50;
+        }
+        
+        _rulesScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:_rulesScroller];
         
-        _rulesList = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _rulesScroller.frame.size.width, kRowHeight * kRowCount)];
+        _rulesList = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _rulesScroller.frame.size.width, totalHeight)];
+        [_rulesScroller setContentSize:_rulesList.frame.size];
         _rulesList.dataSource = self;
+        _rulesList.delegate = self;
         _rulesList.rowHeight = kRowHeight;
         [_rulesScroller addSubview:_rulesList];
     }
@@ -94,17 +109,27 @@ static NSUInteger const kRowCount = 4;
     UILabel* whiteLabel;
     if (indexPath.row == 0)
     {
-        NSDateFormatter *dateFormat=[[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"MM-dd-yyyy"];
-        NSString* expireDaysString = [NSString stringWithFormat:@"Coupons Expire: %@", [dateFormat stringFromDate:[_punchcard expiry_date]]];
-        UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:16.0];
-        whiteBox = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, stdiPhoneWidth, kRowHeight)];
-        [whiteBox setText:expireDaysString];
-        [whiteBox setTextColor:[UIColor blackColor]];
-        [whiteBox setBackgroundColor:[UIColor whiteColor]];
-        [whiteBox setFont:textFont];
-        [whiteBox setTextAlignment:UITextAlignmentCenter];
-        [cell addSubview:whiteBox];
+        if (_purchaseRules)
+        {
+            whiteBox = [self createWhiteBox:@"1"];
+            whiteLabel = [self createWhiteLabel:@"  Coupon"];
+            [cell addSubview:whiteBox];
+            [cell addSubview:whiteLabel];
+        }
+        else
+        {
+            NSDateFormatter *dateFormat=[[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"MM-dd-yyyy"];
+            NSString* expireDaysString = [NSString stringWithFormat:@"Coupons Expire: %@", [dateFormat stringFromDate:[_punchcard expiry_date]]];
+            UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:16.0];
+            whiteBox = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, stdiPhoneWidth, kRowHeight)];
+            [whiteBox setText:expireDaysString];
+            [whiteBox setTextColor:[UIColor blackColor]];
+            [whiteBox setBackgroundColor:[UIColor whiteColor]];
+            [whiteBox setFont:textFont];
+            [whiteBox setTextAlignment:UITextAlignmentCenter];
+            [cell addSubview:whiteBox];
+        }
     }
     else if (indexPath.row == 1)
     {
@@ -126,18 +151,39 @@ static NSUInteger const kRowCount = 4;
     else
     {
         UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:13.0];
-        whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kRowHeight)];
-        [whiteLabel setText:@"Cannot be used in combination with other coupons or discounts."];
+        if (_purchaseRules)
+        {
+            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kFinalPurchaseRulesRowHeight)];
+            [whiteLabel setText:[NSString stringWithFormat:@"You are purchasing a set of coupons. The Promotional Value of the coupons will expire in %d days. The PaidPunch coupon applies to the total guest check before tips and taxes. Discount applies only to orders placed during the valid time period of the PaidPunch offer. Only one PaidPunch coupon may be redeemed per guest check.", [[_punchcard expire_days] intValue]]];
+            [whiteLabel setNumberOfLines:0];
+        }
+        else
+        {
+            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kRowHeight)];
+            [whiteLabel setText:@"Cannot be used in combination with other coupons or discounts."];
+            [whiteLabel setNumberOfLines:2];
+        }
         [whiteLabel setTextColor:[UIColor blackColor]];
         [whiteLabel setBackgroundColor:[UIColor whiteColor]];
         [whiteLabel setFont:textFont];
         [whiteLabel setAdjustsFontSizeToFitWidth:YES];
-        [whiteLabel setNumberOfLines:2];
         [whiteLabel setTextAlignment:UITextAlignmentLeft];
         [cell addSubview:whiteLabel];
     }
     
    	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == (kRowCount - 1) && _purchaseRules)
+    {
+        return kFinalPurchaseRulesRowHeight;
+    }
+    else
+    {
+        return tableView.rowHeight;
+    }
 }
 
 @end
