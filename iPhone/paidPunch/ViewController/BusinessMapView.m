@@ -6,7 +6,10 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import "Business.h"
+#import "BusinessLocationAnnotation.h"
 #import "BusinessMapView.h"
+#import "PunchCard.h"
 
 @implementation BusinessMapView
 
