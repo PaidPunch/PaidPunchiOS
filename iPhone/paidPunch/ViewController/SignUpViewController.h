@@ -17,6 +17,7 @@
     NSString* _inviteCode;
     MBProgressHUD* _hud;
 }
-@property(nonatomic,strong) NSString* inviteCode;
+
+- (id)initWithInviteCode:(NSString*)inviteCode;
 
 @end

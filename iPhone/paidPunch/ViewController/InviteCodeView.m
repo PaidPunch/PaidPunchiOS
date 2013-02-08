@@ -208,7 +208,7 @@ static NSUInteger kMaxInviteCodeSize = 10;
     NSString* inviteCode = [_inviteCodeTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ([self validateInputs:inviteCode])
     {
-        SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+        SignUpViewController *signUpViewController = [[SignUpViewController alloc] initWithInviteCode:inviteCode];
         [_controller pushViewController:signUpViewController animated:YES];
     }
 }

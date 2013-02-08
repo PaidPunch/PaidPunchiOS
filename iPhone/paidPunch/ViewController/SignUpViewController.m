@@ -15,7 +15,16 @@
 static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
 
 @implementation SignUpViewController
-@synthesize inviteCode = _inviteCode;
+
+- (id)initWithInviteCode:(NSString*)inviteCode
+{
+    self = [super init];
+    if (self)
+    {
+        _inviteCode = inviteCode;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -109,7 +118,7 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     [self dismissKeyboard];
     
     // Store the current referralCode
-    [User getInstance].referralCode = _inviteCode;
+    [[User getInstance] setReferralCode:_inviteCode];
     
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Registering User";
@@ -122,7 +131,7 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     [self dismissKeyboard];
     
     // Store the current referralCode
-    [User getInstance].referralCode = _inviteCode;
+    [[User getInstance] setReferralCode:_inviteCode];
     
     if([self validate])
     {
@@ -152,8 +161,16 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         [[DatabaseManager sharedInstance] deleteBusinesses];
         
-        InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE];
-        [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+        if ([type compare:kKeyUsersEmailRegister] == NSOrderedSame)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+        else
+        {
+            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE];
+            [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+        }
     }
     else
     {

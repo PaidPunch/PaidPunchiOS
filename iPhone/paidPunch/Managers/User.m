@@ -82,6 +82,7 @@ static double const refreshTime = -(30 * 60);
     _isUserValidated = FALSE;
     _totalMiles = [NSNumber numberWithInt:10];
     _credits = 0;
+    _phone = @"";
     
     _callType = no_call;
     
