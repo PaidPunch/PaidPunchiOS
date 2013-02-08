@@ -12,6 +12,7 @@
 #import "MyCouponsView.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
+#import "Punches.h"
 #import "User.h"
 #import "Utilities.h"
 #import "VoteBusinessesViewController.h"
@@ -52,6 +53,11 @@
         [[User getInstance] getUserInfoFromServer:self];
     }
     
+    if ([[Punches getInstance] justPurchasedPunch])
+    {
+        [_paidpunchButton startPPGlow];
+    }
+    
     // Launch my coupons view
     if (_launchMyCouponsOnWillAppear)
     {
@@ -81,8 +87,8 @@
     UIButton* leftButton = [self createAccountButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
     [_mainView addSubview:leftButton];
     
-    UIButton* centerButton = [self createPaidPunchButton:stdiPhoneWidth ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
-    [_mainView addSubview:centerButton];
+    _paidpunchButton = [self createPaidPunchButton:stdiPhoneWidth ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
+    [_mainView addSubview:_paidpunchButton];
     
     _creditsButton = [self createCreditsButton:5 ypos:kDistanceFromTop maxWidth:maxElementWidth maxHeight:maxElementHeight];
     [_mainView addSubview:_creditsButton];
@@ -111,16 +117,12 @@
     return newButton;
 }
 
-- (UIButton*)createPaidPunchButton:(CGFloat)xpos ypos:(CGFloat)ypos maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
+- (HomePaidPunchButton*)createPaidPunchButton:(CGFloat)xpos ypos:(CGFloat)ypos maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
 {
     // Get imagedata
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"pp_icon" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
-    UIButton* newButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [newButton addTarget:self action:@selector(didPressPaidPunchButton:) forControlEvents:UIControlEventTouchUpInside];
-    [newButton setBackgroundImage:image forState:UIControlStateNormal];
     
     CGRect buttonSize = CGRectMake(0, 0, image.size.width + 30, image.size.height + 10);
     buttonSize = [Utilities resizeProportionally:buttonSize maxWidth:maxWidth maxHeight:maxHeight];
@@ -128,7 +130,9 @@
     CGFloat buttonHeight = buttonSize.size.height;
     
     CGFloat realXPos = (xpos - buttonWidth)/2;
-    [newButton setFrame:CGRectMake(realXPos, ypos, buttonWidth, buttonHeight)];
+    CGRect frame = CGRectMake(realXPos, ypos, buttonWidth, buttonHeight);
+    
+    HomePaidPunchButton* newButton = [[HomePaidPunchButton alloc] initCustom:frame image:image delegate:self];
     
     return newButton;
 }
@@ -224,8 +228,9 @@
     [self.navigationController pushViewController:voteViewController animated:NO];
 }
 
-- (void)didPressPaidPunchButton:(id)sender
+- (void)didPressHomePaidPunchButton
 {
+    [_paidpunchButton stopPPGlow];
     [self showMyCoupons];
 }
 

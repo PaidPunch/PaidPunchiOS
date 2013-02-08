@@ -42,6 +42,8 @@
 		382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */; };
 		382BF27116C58F5300711781 /* large-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF26F16C58F5300711781 /* large-green-button.png */; };
 		382BF27216C58F5300711781 /* punchpurchasecomplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF27016C58F5300711781 /* punchpurchasecomplete.png */; };
+		382BF27616C5A1E100711781 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF27516C5A1E100711781 /* UIView+Glow.m */; };
+		382BF27916C5A27E00711781 /* HomePaidPunchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF27816C5A27D00711781 /* HomePaidPunchButton.m */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
 		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		385441DB16B996C700419A68 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DA16B996C700419A68 /* BalanceViewController.m */; };
@@ -622,6 +624,11 @@
 		382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchPurchaseCompleteViewController.m; sourceTree = "<group>"; };
 		382BF26F16C58F5300711781 /* large-green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-green-button.png"; sourceTree = "<group>"; };
 		382BF27016C58F5300711781 /* punchpurchasecomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = punchpurchasecomplete.png; sourceTree = "<group>"; };
+		382BF27416C5A1E100711781 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
+		382BF27516C5A1E100711781 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
+		382BF27716C5A27C00711781 /* HomePaidPunchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePaidPunchButton.h; sourceTree = "<group>"; };
+		382BF27816C5A27D00711781 /* HomePaidPunchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePaidPunchButton.m; sourceTree = "<group>"; };
+		382BF27A16C5B9AE00711781 /* HomePaidPunchButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePaidPunchButtonDelegate.h; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		385441D916B996C600419A68 /* BalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceViewController.h; sourceTree = "<group>"; };
@@ -1335,6 +1342,16 @@
 			name = StartPage;
 			sourceTree = "<group>";
 		};
+		382BF27316C5A1E100711781 /* UIView-Glow */ = {
+			isa = PBXGroup;
+			children = (
+				382BF27416C5A1E100711781 /* UIView+Glow.h */,
+				382BF27516C5A1E100711781 /* UIView+Glow.m */,
+			);
+			name = "UIView-Glow";
+			path = "External/UIView-Glow";
+			sourceTree = "<group>";
+		};
 		38AAE8421672627300BF4922 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1353,6 +1370,7 @@
 		38AAE8431672636100BF4922 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				382BF27316C5A1E100711781 /* UIView-Glow */,
 				38C2590516A67B8300982568 /* Localytics */,
 				38AAE844167263A400BF4922 /* AFNetworking */,
 			);
@@ -1778,6 +1796,9 @@
 				8A7C546615492717002854FF /* BusinessLocationAnnotation.m */,
 				382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */,
 				382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */,
+				382BF27716C5A27C00711781 /* HomePaidPunchButton.h */,
+				382BF27816C5A27D00711781 /* HomePaidPunchButton.m */,
+				382BF27A16C5B9AE00711781 /* HomePaidPunchButtonDelegate.h */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -3531,6 +3552,8 @@
 				38C69C7F16C2F15D005383D1 /* BusinessDescView.m in Sources */,
 				38C69C8216C37239005383D1 /* BusinessMapView.m in Sources */,
 				382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */,
+				382BF27616C5A1E100711781 /* UIView+Glow.m in Sources */,
+				382BF27916C5A27E00711781 /* HomePaidPunchButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
