@@ -12,7 +12,7 @@
 #import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
 
-@interface SignUpViewController : BaseWithNavBarViewController<HttpCallbackDelegate>
+@interface SignUpViewController : BaseWithNavBarViewController<HttpCallbackDelegate,UIAlertViewDelegate>
 {
     NSString* _inviteCode;
     MBProgressHUD* _hud;

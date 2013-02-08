@@ -17,6 +17,7 @@
 @dynamic business_name;
 @dynamic category;
 @dynamic city;
+@dynamic contactno;
 @dynamic country;
 @dynamic latitude;
 @dynamic longitude;

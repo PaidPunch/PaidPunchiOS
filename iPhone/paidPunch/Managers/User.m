@@ -252,11 +252,6 @@ static double const refreshTime = -(30 * 60);
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"%@", responseObject);
-                    _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-                    _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
-                    _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-                    _lastUpdate = [NSDate date];
-                    [self saveUserData];
                     [delegate didCompleteHttpCallback:kKeyUsersEmailRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
@@ -294,7 +289,7 @@ static double const refreshTime = -(30 * 60);
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
                      NSLog(@"%@", responseObject);
                      _userId = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserId]];
-                     _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+                     _credits = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyCredits]]];
                      _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
                      _isUserValidated = TRUE;
                      _lastUpdate = [NSDate date];
@@ -475,7 +470,7 @@ static double const refreshTime = -(30 * 60);
         _zipcode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyZipcode]];
     }
     
-    _credits = [NSDecimalNumber decimalNumberWithString:[responseObject valueForKeyPath:kKeyCredits]];
+    _credits = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyCredits]]];
     _userCode = [NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:kKeyUserCode]];
     _isPaymentProfileCreated = [[responseObject valueForKeyPath:kKeyPaymentProfileCreated] boolValue];
     _lastUpdate = [NSDate date];

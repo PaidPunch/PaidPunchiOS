@@ -111,7 +111,8 @@ static CGFloat const kCellHeight = 60.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self goToPunchView:[_currentPunchcards objectAtIndex:indexPath.row]];
+    PunchCard* current = [_currentPunchcards objectAtIndex:indexPath.row];
+    [self goToPunchView:current];
     [self deselectRowAtIndexPath:indexPath animated:YES];
 }
 

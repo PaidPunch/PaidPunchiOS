@@ -152,7 +152,6 @@
 
 - (void) didPressDoneButton:(id)sender
 {
-    //[self.navigationController popToRootViewControllerAnimated:NO];
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate initView];
 }

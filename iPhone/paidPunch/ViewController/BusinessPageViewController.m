@@ -50,7 +50,7 @@ static CGFloat const kButtonHeight = 40;
     _business = [[DatabaseManager sharedInstance] getBusinessByBusinessId:_bizId];
     if (_business == nil)
     {
-        _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         _hud.labelText = @"Retrieving business info";
         
         [_networkManager searchByName:_bizname loggedInUserId:[[User getInstance] userId]];
@@ -63,7 +63,7 @@ static CGFloat const kButtonHeight = 40;
         }
         else
         {
-            [_networkManager getBusinessOffer:_business.business_name loggedInUserId:[[User getInstance] userId]];
+            [_networkManager getBusinessOffer:_bizname loggedInUserId:[[User getInstance] userId]];
         }
     }
 }
@@ -153,8 +153,10 @@ static CGFloat const kButtonHeight = 40;
 
 - (void)didFinishSearchByName:(NSString *)statusCode
 {
+    _business = [[DatabaseManager sharedInstance] getBusinessByBusinessId:_bizId];
     if ([statusCode rangeOfString:@"00"].location == NSNotFound)
     {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
         UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to locate business information" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
@@ -167,13 +169,14 @@ static CGFloat const kButtonHeight = 40;
         }
         else
         {
-            [_networkManager getBusinessOffer:_business.business_name loggedInUserId:[[User getInstance] userId]];
+            [_networkManager getBusinessOffer:_bizname loggedInUserId:[[User getInstance] userId]];
         }
     }
 }
 
 - (void) didFinishLoadingBusinessOffer:(NSString *)statusCode statusMessage:(NSString *)message punchCardDetails:(PunchCard*)punchCard
 {
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
     if ([statusCode rangeOfString:@"00"].location == NSNotFound || punchCard == nil)
     {
         UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to locate business information" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -181,7 +184,6 @@ static CGFloat const kButtonHeight = 40;
     }
     else
     {
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
         _business.punchCard = punchCard;
         [self createBusinessView];
     }
@@ -226,7 +228,12 @@ static CGFloat const kButtonHeight = 40;
 
 - (void)didPressCallButton:(id)sender
 {
-
+    NSString* contactUrl = [NSString stringWithFormat:@"telprompt://%@", [_business contactno]];
+    if (![[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactUrl]])
+    {
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"No Phone Available" message:@"This device is incapable of making phonecalls." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
 }
 
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString * business_name;
 @property (nonatomic, strong) NSString * category;
 @property (nonatomic, strong) NSString * city;
+@property (nonatomic, strong) NSString * contactno;
 @property (nonatomic, strong) NSString * country;
 @property (nonatomic, strong) NSNumber * latitude;
 @property (nonatomic, strong) NSNumber * longitude;

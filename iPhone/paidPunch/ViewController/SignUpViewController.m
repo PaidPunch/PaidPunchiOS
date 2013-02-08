@@ -151,6 +151,13 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsURL]];
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // This is called on email registration success, where we take the use back to the main welcome screen
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate initView];
+}
+
 #pragma mark - HttpCallbackDelegate
 - (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {
@@ -163,7 +170,7 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
         
         if ([type compare:kKeyUsersEmailRegister] == NSOrderedSame)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
         }
         else

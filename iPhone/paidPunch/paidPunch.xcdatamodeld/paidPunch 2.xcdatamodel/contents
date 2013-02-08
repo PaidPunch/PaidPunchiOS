@@ -1,80 +1,212 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="864" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Business" representedClassName="Business">
-        <attribute name="address" optional="YES" attributeType="String"/>
-        <attribute name="business_id" optional="YES" attributeType="String"/>
-        <attribute name="business_name" optional="YES" attributeType="String"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
-        <attribute name="city" optional="YES" attributeType="String"/>
-        <attribute name="country" optional="YES" attributeType="String"/>
-        <attribute name="diff_in_miles" optional="YES" transient="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="modified_date" optional="YES" attributeType="Date"/>
-        <attribute name="pincode" optional="YES" attributeType="String"/>
-        <attribute name="qrcode" optional="YES" attributeType="String"/>
-        <attribute name="state" optional="YES" attributeType="String"/>
-        <attribute name="time" optional="YES" attributeType="Date"/>
-        <relationship name="punchCard" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PunchCard" inverseName="business" inverseEntity="PunchCard"/>
+        <attribute name="address" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_id" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="category" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="city" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="contactno" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="diff_in_miles" optional="YES" transient="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="modified_date" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="pincode" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="qrcode" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="state" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="time" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <relationship name="punchCard" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PunchCard" inverseName="business" inverseEntity="PunchCard">
+            <userInfo/>
+        </relationship>
+        <userInfo/>
     </entity>
     <entity name="Feed" representedClassName="Feed">
-        <attribute name="action" optional="YES" attributeType="String"/>
-        <attribute name="actual_value_of_each_punch" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="business_name" optional="YES" attributeType="String"/>
-        <attribute name="discount_value_of_each_punch" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="each_punch_value" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="fbid" optional="YES" attributeType="String"/>
-        <attribute name="is_friend" optional="YES" attributeType="Boolean"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="no_of_punches" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
-        <attribute name="offer" optional="YES" attributeType="String"/>
-        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="selling_price" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="time_stamp" optional="YES" attributeType="Date"/>
+        <attribute name="action" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="actual_value_of_each_punch" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="discount_value_of_each_punch" optional="YES" attributeType="Float" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="each_punch_value" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="fbid" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="is_friend" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="no_of_punches" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="offer" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="selling_price" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="time_stamp" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
     </entity>
     <entity name="PunchCard" representedClassName="PunchCard">
-        <attribute name="actual_price" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="business_id" optional="YES" attributeType="String"/>
-        <attribute name="business_logo_img" optional="YES" attributeType="Binary"/>
-        <attribute name="business_logo_url" optional="YES" attributeType="String"/>
-        <attribute name="business_name" optional="YES" attributeType="String"/>
-        <attribute name="discount" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="discount_value_of_each_punch" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="each_punch_value" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="expire_days" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
-        <attribute name="expiry_date" optional="YES" attributeType="Date"/>
-        <attribute name="flag" optional="YES" attributeType="Boolean"/>
-        <attribute name="is_free_punch" optional="YES" attributeType="Boolean"/>
-        <attribute name="is_mystery_punch" optional="YES" attributeType="Boolean"/>
-        <attribute name="is_mystery_used" optional="YES" attributeType="Boolean"/>
-        <attribute name="minimum_value" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="offer" optional="YES" attributeType="String"/>
-        <attribute name="punch_card_desc" optional="YES" attributeType="String"/>
-        <attribute name="punch_card_download_id" optional="YES" attributeType="String"/>
-        <attribute name="punch_card_id" optional="YES" attributeType="String"/>
-        <attribute name="punch_card_name" optional="YES" attributeType="String"/>
-        <attribute name="punch_expire" optional="YES" attributeType="Boolean"/>
-        <attribute name="redeem_time_diff" optional="YES" attributeType="String"/>
-        <attribute name="selling_price" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="total_punches" optional="YES" attributeType="Integer 16" defaultValueString="0.0"/>
-        <attribute name="total_punches_used" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
-        <relationship name="business" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="punchCard" inverseEntity="Business"/>
+        <attribute name="actual_price" optional="YES" attributeType="Float" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_id" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_logo_img" optional="YES" attributeType="Binary">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_logo_url" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="business_name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="discount" optional="YES" attributeType="Float" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="discount_value_of_each_punch" optional="YES" attributeType="Float" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="each_punch_value" optional="YES" attributeType="Float" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="expire_days" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="expiry_date" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="flag" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="is_free_punch" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="is_mystery_punch" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="is_mystery_used" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="minimum_value" optional="YES" attributeType="Float" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="offer" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="punch_card_desc" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="punch_card_download_id" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="punch_card_id" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="punch_card_name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="punch_expire" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="redeem_time_diff" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="selling_price" optional="YES" attributeType="Float" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="total_punches" optional="YES" attributeType="Integer 16" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="total_punches_used" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <relationship name="business" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="punchCard" inverseEntity="Business">
+            <userInfo/>
+        </relationship>
+        <userInfo/>
     </entity>
     <entity name="Registration" representedClassName="Registration">
-        <attribute name="confirm_password" optional="YES" attributeType="String"/>
-        <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="mobile" optional="YES" attributeType="String"/>
-        <attribute name="password" optional="YES" attributeType="String"/>
-        <attribute name="username" optional="YES" attributeType="String"/>
-        <attribute name="zipcode" optional="YES" attributeType="String"/>
+        <attribute name="confirm_password" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="email" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="mobile" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="password" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="username" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="zipcode" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
     </entity>
     <entity name="Zipcodes_Cache" representedClassName="Zipcodes_Cache">
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="zip_code" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="zip_code" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
     </entity>
     <elements>
-        <element name="Business" positionX="160" positionY="192" width="128" height="270"/>
+        <element name="Business" positionX="160" positionY="192" width="128" height="285"/>
         <element name="Feed" positionX="160" positionY="192" width="128" height="240"/>
         <element name="PunchCard" positionX="160" positionY="192" width="128" height="390"/>
         <element name="Registration" positionX="160" positionY="192" width="128" height="135"/>
