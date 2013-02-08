@@ -8,8 +8,10 @@
 
 #import <QuartzCore/CAGradientLayer.h>
 #include "CommonDefinitions.h"
+#import "AppDelegate.h"
 #import "BusinessDescView.h"
 #import "PunchCard.h"
+#import "PunchPurchaseCompleteViewController.h"
 #import "RulesView.h"
 #import "UrlImage.h"
 #import "UrlImageManager.h"
@@ -193,6 +195,15 @@ static CGFloat const kLabelHeight = 40;
     [rulesBar addSubview:rulesLabel];
     
     _lowestYPos = barHeight + rulesBar.frame.origin.y;
+}
+
+#pragma mark - event actions
+
+- (void) didPressBuyCouponButton:(id)sender
+{
+    PunchPurchaseCompleteViewController* purchaseCompleteView = [[PunchPurchaseCompleteViewController alloc] init];
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[delegate navigationController] pushViewController:purchaseCompleteView animated:NO];
 }
 
 @end

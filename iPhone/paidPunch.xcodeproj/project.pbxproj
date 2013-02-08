@@ -39,6 +39,9 @@
 		38099F901697648D00BFD3CC /* Products.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F8F1697648D00BFD3CC /* Products.m */; };
 		38099F9316978F0100BFD3CC /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F9216978F0100BFD3CC /* Product.m */; };
 		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
+		382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */; };
+		382BF27116C58F5300711781 /* large-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF26F16C58F5300711781 /* large-green-button.png */; };
+		382BF27216C58F5300711781 /* punchpurchasecomplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF27016C58F5300711781 /* punchpurchasecomplete.png */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
 		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		385441DB16B996C700419A68 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DA16B996C700419A68 /* BalanceViewController.m */; };
@@ -615,6 +618,10 @@
 		38099F9216978F0100BFD3CC /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		38280352169FF56C005A8A32 /* InfoChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoChangeViewController.h; path = TabBar/Home/MyAccount/InfoChangeViewController.h; sourceTree = "<group>"; };
 		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoChangeViewController.m; path = TabBar/Home/MyAccount/InfoChangeViewController.m; sourceTree = "<group>"; };
+		382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchPurchaseCompleteViewController.h; sourceTree = "<group>"; };
+		382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchPurchaseCompleteViewController.m; sourceTree = "<group>"; };
+		382BF26F16C58F5300711781 /* large-green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-green-button.png"; sourceTree = "<group>"; };
+		382BF27016C58F5300711781 /* punchpurchasecomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = punchpurchasecomplete.png; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		385441D916B996C600419A68 /* BalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceViewController.h; sourceTree = "<group>"; };
@@ -1769,6 +1776,8 @@
 				38C69C8116C37230005383D1 /* BusinessMapView.m */,
 				8A7C546515492717002854FF /* BusinessLocationAnnotation.h */,
 				8A7C546615492717002854FF /* BusinessLocationAnnotation.m */,
+				382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */,
+				382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2376,6 +2385,8 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				382BF26F16C58F5300711781 /* large-green-button.png */,
+				382BF27016C58F5300711781 /* punchpurchasecomplete.png */,
 				38C69C6E16C2CD05005383D1 /* CENTER-NOTselected.png */,
 				38C69C6F16C2CD05005383D1 /* CENTER-selected.png */,
 				38C69C7016C2CD05005383D1 /* LEFT-NOTselected.png */,
@@ -3385,6 +3396,8 @@
 				38C69C7716C2CD06005383D1 /* LEFT-selected.png in Resources */,
 				38C69C7816C2CD06005383D1 /* RIGHT-NOTselected.png in Resources */,
 				38C69C7916C2CD06005383D1 /* RIGHT-selected.png in Resources */,
+				382BF27116C58F5300711781 /* large-green-button.png in Resources */,
+				382BF27216C58F5300711781 /* punchpurchasecomplete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3517,6 +3530,7 @@
 				38C69C7C16C2CD30005383D1 /* BusinessPageViewController.m in Sources */,
 				38C69C7F16C2F15D005383D1 /* BusinessDescView.m in Sources */,
 				38C69C8216C37239005383D1 /* BusinessMapView.m in Sources */,
+				382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,6 +31,7 @@ static NSString* const kKeyPunchesRetrieve = @"punches_retrieve";
 }
 @property (nonatomic,readonly) NSDate* lastUpdate;
 @property (nonatomic,strong) NSArray* validPunchesArray;
+@property (nonatomic) BOOL justPurchasedPunch;
 
 - (BOOL) needsRefresh;
 - (void) forceRefresh;
