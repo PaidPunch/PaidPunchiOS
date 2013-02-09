@@ -14,6 +14,7 @@
 @interface BalanceViewController : BaseWithNavBarViewController<HttpCallbackDelegate,UIAlertViewDelegate>
 {
     MBProgressHUD* _hud;
+    UILabel* _whitebarLabel;
 }
 
 @end

@@ -891,10 +891,6 @@ response
 	NSLog(@"request response ------%@",temp);
     [xmlParser parse:temp];
     
-    NSArray *arr=[[DatabaseManager sharedInstance] fetchPunchCards];
-    PunchCard* current = (PunchCard*)[arr objectAtIndex:0];
-    NSLog(@"%d", [[current total_punches] intValue]);
-    
     if([self.requestType isEqualToString:SEARCHBYBUSINESSNAME_REQ])
     {
         SBJsonParser *parser=[SBJsonParser new];

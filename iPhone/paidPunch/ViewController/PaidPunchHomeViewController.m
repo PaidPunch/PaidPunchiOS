@@ -52,6 +52,10 @@
         _hud.labelText = @"Updating user info";
         [[User getInstance] getUserInfoFromServer:self];
     }
+    else
+    {
+        [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
+    }
     
     if ([[Punches getInstance] justPurchasedPunch])
     {

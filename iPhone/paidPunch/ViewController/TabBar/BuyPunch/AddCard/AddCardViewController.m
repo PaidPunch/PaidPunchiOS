@@ -367,17 +367,7 @@
     {
         [[User getInstance] setIsPaymentProfileCreated:TRUE];
         
-        if(self.punchCardDetails==nil)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        else
-        {
-            [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
-        }
+        [networkManager getProfileRequest:[[User getInstance] userId] withName:@""];
     }
     else
     {
@@ -392,10 +382,8 @@
     
     if([statusCode isEqualToString:@"00"])
     {
-        if(self.navigationController.visibleViewController==self)
-        {
-            [self goToConfirmPaymentView:paymentId withMaskedId:maskedId];
-        }
+        [[User getInstance] setMaskedId:maskedId];
+        [self.navigationController popViewControllerAnimated:NO];
     }
     else
     {
@@ -648,17 +636,5 @@
     [pickerView reloadAllComponents];
     
 }
-
-#pragma mark -
-
-- (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId
-{
-    /*
-    [[User getInstance] setMaskedId:maskedId];
-    ConfirmPaymentViewController *confirmPaymentViewController = [[ConfirmPaymentViewController alloc] init:self.punchCardDetails withMaskedId:maskedId withPaymentId:paymentId];
-    [self.navigationController pushViewController:confirmPaymentViewController animated:YES];
-     */
-}
-
 
 @end

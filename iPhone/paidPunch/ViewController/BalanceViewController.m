@@ -52,7 +52,10 @@ static CGFloat const kVerticalSpacing = 10;
     [purchaseLabel setTextAlignment:UITextAlignmentCenter];
     [_mainView addSubview:purchaseLabel];
     _lowestYPos = purchaseLabel.frame.origin.y + purchaseLabel.frame.size.height;
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
     if ([[Products getInstance] needsRefresh])
     {
         _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -63,6 +66,12 @@ static CGFloat const kVerticalSpacing = 10;
     else
     {
         [self createProductButtons];
+        if ([[User getInstance] needsRefresh])
+        {
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"Retrieving User Info";
+            [[User getInstance] getUserInfoFromServer:self];
+        }
     }
 }
 
@@ -100,17 +109,17 @@ static CGFloat const kVerticalSpacing = 10;
     
     // Green bar for notifications
     CGFloat whitebarLabelHeight = 50;
-    UILabel* whitebarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, whitebarLabelHeight)];
-    whitebarLabel.backgroundColor = [UIColor whiteColor];
-    whitebarLabel.text = barText;
-    whitebarLabel.textColor = [UIColor colorWithRed:0.0f green:153.0f/255.0f blue:51.0f/255.0f alpha:1.0f];
-    [whitebarLabel setNumberOfLines:2];
-    [whitebarLabel setFont:textFont];
-    whitebarLabel.textAlignment = UITextAlignmentCenter;
+    _whitebarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, whitebarLabelHeight)];
+    _whitebarLabel.backgroundColor = [UIColor whiteColor];
+    _whitebarLabel.text = barText;
+    _whitebarLabel.textColor = [UIColor colorWithRed:0.0f green:153.0f/255.0f blue:51.0f/255.0f alpha:1.0f];
+    [_whitebarLabel setNumberOfLines:2];
+    [_whitebarLabel setFont:textFont];
+    _whitebarLabel.textAlignment = UITextAlignmentCenter;
     
-    [_mainView addSubview:whitebarLabel];
+    [_mainView addSubview:_whitebarLabel];
     
-    _lowestYPos = whitebarLabelHeight + whitebarLabel.frame.origin.y;
+    _lowestYPos = whitebarLabelHeight + _whitebarLabel.frame.origin.y;
 }
 
 - (void) createProductButtons
@@ -227,23 +236,36 @@ static CGFloat const kVerticalSpacing = 10;
 
 #pragma mark - HttpCallbackDelegate
 - (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
-{
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
-    
+{    
     if (success)
     {
         if ([type compare:kKeyProductsRetrieve] == NSOrderedSame)
         {
             [self createProductButtons];
+            if ([[User getInstance] needsRefresh])
+            {
+                _hud.labelText = @"Retrieving User Info";
+                [[User getInstance] getUserInfoFromServer:self];
+            }
+            else
+            {
+                [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+            }
         }
         else if ([type compare:kKeyProductsPurchase] == NSOrderedSame)
         {
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Credit Updated"
                                                               message:@"Additional credit has been purchased and added to your account"
                                                              delegate:self
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
             [message show];
+        }
+        else if ([type compare:kKeyUsersGetInfo] == NSOrderedSame)
+        {
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+            [_whitebarLabel setText:[[User getInstance] getCreditAsString]];
         }
         else
         {

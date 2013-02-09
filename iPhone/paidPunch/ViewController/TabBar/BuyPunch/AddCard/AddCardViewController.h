@@ -47,7 +47,6 @@
 @property(nonatomic,strong)NSMutableArray *yearsDataSource;
 
 - (id)init:(PunchCard *)punchCard;
-- (void)goToConfirmPaymentView:(NSString *)paymentId withMaskedId:(NSString *)maskedId;
 
 - (IBAction)saveBtnTouchUpInsideHandler:(id)sender;
 
