@@ -131,6 +131,7 @@
     // Indicate that a new punch was just purchased
     [[Punches getInstance] setJustPurchasedPunch:TRUE];
     [[Punches getInstance] forceRefresh];
+    [[User getInstance] forceRefresh];
     
     // Go back to home page
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];

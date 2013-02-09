@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Business.h"
+#import "HttpCallbackDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface BusinessDescView : UIView
+@interface BusinessDescView : UIView<UIAlertViewDelegate,HttpCallbackDelegate>
 {
     Business* _business;
     CGFloat _lowestYPos;
+    
+    UIAlertView* _notEnoughCreditsAlert;
+    UIAlertView* _confirmPurchaseAlert;
+    
+    MBProgressHUD* _hud;
 }
 
 - (id)initWithFrameAndBusiness:(CGRect)frame business:(Business*)business;

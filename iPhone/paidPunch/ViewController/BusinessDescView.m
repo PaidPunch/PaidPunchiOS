@@ -9,8 +9,10 @@
 #import <QuartzCore/CAGradientLayer.h>
 #include "CommonDefinitions.h"
 #import "AppDelegate.h"
+#import "BalanceViewController.h"
 #import "BusinessDescView.h"
 #import "PunchCard.h"
+#import "Punches.h"
 #import "PunchPurchaseCompleteViewController.h"
 #import "RulesView.h"
 #import "UrlImage.h"
@@ -197,13 +199,84 @@ static CGFloat const kLabelHeight = 40;
     _lowestYPos = barHeight + rulesBar.frame.origin.y;
 }
 
-#pragma mark - event actions
-
-- (void) didPressBuyCouponButton:(id)sender
+- (void)completeCouponPurchase
 {
     PunchPurchaseCompleteViewController* purchaseCompleteView = [[PunchPurchaseCompleteViewController alloc] init];
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [[delegate navigationController] pushViewController:purchaseCompleteView animated:NO];
+}
+
+- (void)getMoreCredits
+{
+    BalanceViewController* balanceView = [[BalanceViewController alloc] init];
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[delegate navigationController] pushViewController:balanceView animated:NO];
+}
+
+#pragma mark - event actions
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView == _confirmPurchaseAlert && buttonIndex == 0)
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        _hud.labelText = @"Purchasing Coupon";
+        
+        [[Punches getInstance] purchasePunchWithCredit:self punchid:_business.punchCard.punch_card_id];
+    }
+    else if (alertView == _notEnoughCreditsAlert && buttonIndex == 0)
+    {
+        [self getMoreCredits];
+    }
+    else
+    {
+        NSLog(@"Unknown alert pressed");
+    }
+}
+
+- (void) didPressBuyCouponButton:(id)sender
+{
+    double credits = [[[User getInstance] credits] doubleValue];
+    if (credits < [_business.punchCard.selling_price doubleValue])
+    {
+        // Not enough credits to purchase
+        _notEnoughCreditsAlert = [[UIAlertView alloc] initWithTitle:@"Insufficient Credits"
+                                                          message:@"You don't have enough credits to purchase the current punchcard. Would you like to add more credits to your account?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:@"Cancel",nil];
+        
+        [_notEnoughCreditsAlert show];
+    }
+    else
+    {
+        NSString* confirmString = [NSString stringWithFormat:@"This transaction will deduct $%.2f from your credit balance. Continue?", [_business.punchCard.selling_price doubleValue]];
+        _confirmPurchaseAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Purchase"
+                                                          message:confirmString
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:@"Cancel",nil];
+        
+        [_confirmPurchaseAlert show];
+    }
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
+{
+    [MBProgressHUD hideHUDForView:self animated:NO];
+    if ([type compare:kKeyPunchesPurchase] == NSOrderedSame)
+    {
+        if(success)
+        {
+            [self completeCouponPurchase];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+    }
 }
 
 @end
