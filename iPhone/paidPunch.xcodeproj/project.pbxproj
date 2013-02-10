@@ -100,6 +100,8 @@
 		38B4F74A16B701E000D73A3A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F74916B701E000D73A3A /* background.png */; };
 		38B4F74C16B7045400D73A3A /* list-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B4F74B16B7045300D73A3A /* list-button.png */; };
 		38B4F75216B72E2C00D73A3A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4F75116B72DFB00D73A3A /* AccountViewController.m */; };
+		38B5A5B916C629CE002DDE8A /* Businesses.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5A5B816C629CD002DDE8A /* Businesses.m */; };
+		38B5A5C416C7022B002DDE8A /* BusinessOffers.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5A5C316C7022A002DDE8A /* BusinessOffers.m */; };
 		38B84418167434390068D3C3 /* StartPageViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B84417167434390068D3C3 /* StartPageViewcontroller.m */; };
 		38B8441E1674391A0068D3C3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8441D1674391A0068D3C3 /* LoginView.m */; };
 		38B8443016744CD30068D3C3 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B8442F16744CD30068D3C3 /* SignupView.m */; };
@@ -718,6 +720,10 @@
 		38B4F74B16B7045300D73A3A /* list-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-button.png"; sourceTree = "<group>"; };
 		38B4F75016B72DEC00D73A3A /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		38B4F75116B72DFB00D73A3A /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		38B5A5B716C629CD002DDE8A /* Businesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Businesses.h; sourceTree = "<group>"; };
+		38B5A5B816C629CD002DDE8A /* Businesses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Businesses.m; sourceTree = "<group>"; };
+		38B5A5C216C7022A002DDE8A /* BusinessOffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessOffers.h; sourceTree = "<group>"; };
+		38B5A5C316C7022A002DDE8A /* BusinessOffers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessOffers.m; sourceTree = "<group>"; };
 		38B84416167434390068D3C3 /* StartPageViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewcontroller.h; sourceTree = "<group>"; };
 		38B84417167434390068D3C3 /* StartPageViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewcontroller.m; sourceTree = "<group>"; };
 		38B8441C1674391A0068D3C3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -1681,6 +1687,10 @@
 				38011C9816A4D99C008395E6 /* Template.m */,
 				38C2590216A648B200982568 /* Punches.h */,
 				38C2590316A648B200982568 /* Punches.m */,
+				38B5A5B716C629CD002DDE8A /* Businesses.h */,
+				38B5A5B816C629CD002DDE8A /* Businesses.m */,
+				38B5A5C216C7022A002DDE8A /* BusinessOffers.h */,
+				38B5A5C316C7022A002DDE8A /* BusinessOffers.m */,
 				38B4F72816B4A17100D73A3A /* ProposedBusiness.h */,
 				38B4F72916B4A17100D73A3A /* ProposedBusiness.m */,
 				38B4F72516B4A14300D73A3A /* ProposedBusinesses.h */,
@@ -3554,6 +3564,8 @@
 				382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */,
 				382BF27616C5A1E100711781 /* UIView+Glow.m in Sources */,
 				382BF27916C5A27E00711781 /* HomePaidPunchButton.m in Sources */,
+				38B5A5B916C629CE002DDE8A /* Businesses.m in Sources */,
+				38B5A5C416C7022B002DDE8A /* BusinessOffers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -385,7 +385,8 @@ static DatabaseManager *sharedInstance=nil;
     {
         for(Business *bObj in businesses)
         {
-            if([bObj.category isEqualToString:category])
+            // If category is the empty string, then all categories match
+            if (category.length == 0 || [bObj.category isEqualToString:category])
             {
                 CLLocation *item1 =location;
                 CLLocation *item2 = [[CLLocation alloc] initWithLatitude:[bObj.latitude doubleValue] longitude:[bObj.longitude doubleValue]];
