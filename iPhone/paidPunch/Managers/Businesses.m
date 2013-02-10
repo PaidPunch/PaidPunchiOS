@@ -12,6 +12,9 @@
 #import "BusinessOffers.h"
 #import "Utilities.h"
 
+#define kOneMileMeters 1609.344
+#define kMaxMiles 20
+
 static NSString* const kKeyVersion = @"version";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kKeyStatusMessage = @"statusMessage";
@@ -44,6 +47,31 @@ static double const refreshTime = -(60 * 60);
 {
     _businessesDelegate = delegate;
     [_networkManager searchByName:@"" loggedInUserId:[[User getInstance] userId]];
+}
+
+- (NSArray*) getBusinessesCloseby:(CLLocation*)location
+{
+    NSNumber* maxDistance = [NSNumber numberWithInt:kMaxMiles];
+    
+    NSMutableArray* bizArray = [[NSMutableArray alloc] init];
+    for (id bizId in _businessesDict)
+    {
+        BusinessOffers* current = [_businessesDict objectForKey:bizId];
+        Business* currentBiz = [current business];
+        
+        CLLocation *bizLocation = [[CLLocation alloc] initWithLatitude:[currentBiz.latitude doubleValue] longitude:[currentBiz.longitude doubleValue]];
+        
+        CLLocationDistance meters = [location distanceFromLocation:bizLocation];
+        NSLog(@"Distance in metres: %f", meters);
+        double distanceInMiles = meters/kOneMileMeters;
+        NSLog(@"%@ Distance in miles: %f", currentBiz.business_name , distanceInMiles);
+        [currentBiz setDiff_in_miles:[NSNumber numberWithDouble:distanceInMiles]];
+        if (distanceInMiles < [maxDistance doubleValue])
+        {
+            [bizArray addObject:current];
+        }
+    }
+    return bizArray;
 }
 
 - (BOOL) needsRefresh

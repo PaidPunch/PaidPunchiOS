@@ -13,6 +13,7 @@
 static double const refreshTime = -(60 * 60);
 
 @implementation BusinessOffers
+@synthesize business = _business;
 
 - (id) initWithBusiness:(Business*)current
 {

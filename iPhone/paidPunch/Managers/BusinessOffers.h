@@ -22,6 +22,7 @@ static NSString* const kKeyBusinessOffersRetrieval = @"businessoffer_retrieval";
     __weak NSObject<HttpCallbackDelegate>* _delegate;
     NetworkManager* _networkManager;
 }
+@property (nonatomic,strong) Business* business;
 
 - (id) initWithBusiness:(Business*)current;
 - (BOOL) needsRefresh;

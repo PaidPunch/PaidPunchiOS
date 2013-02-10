@@ -30,6 +30,7 @@ static NSString* const kKeyBusinessesRetrieval = @"businesses_retrieval";
 - (BOOL) needsRefresh;
 - (void) forceRefresh;
 - (void) retrieveBusinessesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
+- (NSArray*) getBusinessesCloseby:(CLLocation*)location;
 
 + (Businesses*) getInstance;
 + (void) destroyInstance;

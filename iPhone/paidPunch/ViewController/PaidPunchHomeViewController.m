@@ -9,6 +9,8 @@
 #include "CommonDefinitions.h"
 #import "AccountViewController.h"
 #import "BalanceViewController.h"
+#import "Businesses.h"
+#import "HiAccuracyLocator.h"
 #import "MyCouponsView.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
@@ -45,11 +47,13 @@
 {
     [super viewWillAppear:animated];
     
+    _updatingBusinesses = FALSE;
+    _updatingUserInfo = FALSE;
+    
     // User info hasn't been updated in a while; update it
     if ([[User getInstance] needsRefresh])
     {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"Updating user info";
+        _updatingUserInfo = TRUE;
         [[User getInstance] getUserInfoFromServer:self];
     }
     else
@@ -67,9 +71,28 @@
     {
         [self showMyCoupons];
     }
+    
+    // Start by locating user
+    _updatingUserInfo = TRUE;
+    [[HiAccuracyLocator getInstance] setDelegate:self];
+    [[HiAccuracyLocator getInstance] startUpdatingLocation];
+    
+    if (_updatingUserInfo || _updatingBusinesses)
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Updating";
+    }
 }
 
 #pragma mark - private functions
+
+- (void)removeProgressSpinnerIfNecessary
+{
+    if (!_updatingUserInfo && !_updatingBusinesses)
+    {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    }
+}
 
 - (void)createNavBar
 {    
@@ -194,6 +217,19 @@
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
 }
 
+- (void)createHomePageView
+{
+    NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:[[HiAccuracyLocator getInstance] bestLocation]];
+    if ([businesses count] > 0)
+    {
+        
+    }
+    else
+    {
+        [self createNoBizView];
+    }
+}
+
 - (void)createNoBizView
 {
     CGRect nobizRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10));
@@ -241,16 +277,72 @@
 #pragma mark - HttpCallbackDelegate
 - (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
 {
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
-    
-    if (success)
+    if ([type compare:kKeyUsersGetInfo] == NSOrderedSame)
     {
-        [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
+        _updatingUserInfo = FALSE;
+        [self removeProgressSpinnerIfNecessary];
+        if (success)
+        {
+            [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+    }
+    else if ([type compare:kKeyBusinessesRetrieval])
+    {
+        _updatingBusinesses = FALSE;
+        [self removeProgressSpinnerIfNecessary];
+        if (success)
+        {
+            [self createHomePageView];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            [self createNoBizView];
+        }
     }
     else
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        NSLog(@"Unknown HTTP completion call");
+    }
+}
+
+#pragma mark - HiAccuracyLocatorDelegate
+- (void) locator:(HiAccuracyLocator *)locator didLocateUser:(BOOL)didLocateUser reason:(StopReason)reason
+{
+    if(didLocateUser)
+    {
+        if ([[Businesses getInstance] needsRefresh])
+        {
+            [[Businesses getInstance] retrieveBusinessesFromServer:self];
+        }
+        else
+        {
+            _updatingBusinesses = FALSE;
+            [self removeProgressSpinnerIfNecessary];
+            [self createHomePageView];
+        }
+    }
+    else
+    {
+        _updatingBusinesses = FALSE;
+        [self removeProgressSpinnerIfNecessary];
+        if (reason == kStopReasonDenied)
+        {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Unable to locate!" message:@"We were not find your current location. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+        [self createNoBizView];
     }
 }
 
