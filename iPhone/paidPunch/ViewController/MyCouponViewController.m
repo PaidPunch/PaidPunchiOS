@@ -138,7 +138,14 @@ static CGFloat const barHeight = 30;
     UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[_punchcard business_logo_url]];
     if(urlImage)
     {
-        [bizImageView setImage:[urlImage image]];
+        if ([urlImage image])
+        {
+            [bizImageView setImage:[urlImage image]];    
+        }
+        else
+        {
+            [urlImage addImageView:bizImageView];
+        }
     }
     else
     {

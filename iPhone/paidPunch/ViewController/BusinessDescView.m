@@ -57,12 +57,7 @@ static CGFloat const kLabelHeight = 40;
         }
         else
         {
-            // HACK: There is a situation where the image might be loading when it is requested from
-            //       UrlImageManager. This needs to be fixed inside UrlImageManager itself.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-variable"
-            UrlImage* urlImage = [[UrlImage alloc] initWithUrl:[[_business punchCard] business_logo_url] forImageView:bizImageView];
-#pragma clang diagnostic pop
+            [urlImage addImageView:bizImageView];
         }
     }
     else

@@ -16,33 +16,21 @@
     self = [super init];
     if(self)
     {
-        _imageView = imageView;
+        _imageviewArray = [[NSMutableArray alloc] init];
+        [_imageviewArray addObject:imageView];
         _dataBuffer = [[NSMutableData alloc] init];
         _image = nil;
         
         NSURL* url = [NSURL URLWithString:urlString];
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
         _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        _completionBlock = nil;
     }
     return self;
 }
 
-- (id) initWithUrl:(NSString*)urlString completion:(LoadCompletionBlock)completion
+- (void) addImageView:(UIImageView*)imageView
 {
-    self = [super init];
-    if(self)
-    {
-        _imageView = nil;
-        _dataBuffer = [[NSMutableData alloc] init];
-        _image = nil;
-        
-        NSURL* url = [NSURL URLWithString:urlString];
-        NSURLRequest* request = [NSURLRequest requestWithURL:url];
-        _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        _completionBlock = completion;
-    }
-    return self;
+    [_imageviewArray addObject:imageView];
 }
 
 #pragma mark - NSURLConnectionDelegate
@@ -54,16 +42,16 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     _image = [UIImage imageWithData:_dataBuffer];
-    if(_imageView)
+    if (_imageviewArray)
     {
-        [_imageView setImage:_image];
-        // We've set the imageview. Clear it so we don't leave it hanging around in memory.
-        _imageView = nil;
+        for (UIImageView* imageView in _imageviewArray)
+        {
+            [imageView setImage:_image];
+        }
     }
-    if(_completionBlock)
-    {
-        _completionBlock(self);
-    }
+    // We've set the imageview. Clear the imageView array so we don't leave
+    // the imageViews hanging around in memory.
+    _imageviewArray = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error

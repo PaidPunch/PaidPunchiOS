@@ -13,13 +13,12 @@ typedef void (^LoadCompletionBlock)(UrlImage* urlImage);
 
 @interface UrlImage : NSObject<NSURLConnectionDelegate>
 {
-    UIImageView* _imageView;
+    NSMutableArray* _imageviewArray;
     UIImage* _image;
     NSURLConnection* _connection;
     NSMutableData* _dataBuffer;
-    LoadCompletionBlock _completionBlock;
 }
 @property (nonatomic,readonly) UIImage* image;
 - (id) initWithUrl:(NSString*)urlString forImageView:(UIImageView*)imageView;
-- (id) initWithUrl:(NSString *)urlString completion:(LoadCompletionBlock)completion;
+- (void) addImageView:(UIImageView*)imageView;
 @end
