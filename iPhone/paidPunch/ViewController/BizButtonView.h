@@ -15,9 +15,12 @@
     BusinessOffers* _businessOffers;
     CGFloat _width;
     
-    UILabel* _upsellLabel;
+    UILabel* _upsellTextLabel;
+    UIImageView* _nameLabel;
     UIImageView* _logoImage;
+    UIImageView* _upsellLabel;
     UIActivityIndicatorView* _spinner;
+    UIButton* _overlayButton;
 }
 
 - (id)initWithFrameAndBusiness:(CGRect)frame current:(BusinessOffers*)current;

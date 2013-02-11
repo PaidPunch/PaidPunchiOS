@@ -24,19 +24,20 @@ static CGFloat const kLabelHeight = 40;
 
 @implementation BusinessDescView
 
-- (id)initWithFrameAndBusiness:(CGRect)frame business:(Business*)business
+- (id)initWithFrameAndBusiness:(CGRect)frame business:(Business*)business punchcard:(PunchCard*)punchcard
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         _business = business;
+        _punchcard = punchcard;
         [self createBackgroundImage];
         [self createBusinessDescriptionLabel];
         [self createInfoLabels];
         [self createBuyCouponButton];
         [self createRulesBar];
         
-        RulesView* rulesView = [[RulesView alloc] initWithPunchcard:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) current:_business.punchCard purchaseRules:TRUE];
+        RulesView* rulesView = [[RulesView alloc] initWithPunchcard:CGRectMake(0, _lowestYPos, stdiPhoneWidth, stdiPhoneHeight - _lowestYPos) current:_punchcard purchaseRules:TRUE];
         [self addSubview:rulesView];
     }
     return self;
@@ -48,7 +49,7 @@ static CGFloat const kLabelHeight = 40;
 {
     UIImageView* bizImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, stdiPhoneWidth, kImageHeight)];
     bizImageView.backgroundColor = [UIColor blackColor];
-    UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[[_business punchCard] business_logo_url]];
+    UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[_punchcard business_logo_url]];
     if(urlImage)
     {
         if (urlImage.image)
@@ -62,8 +63,8 @@ static CGFloat const kLabelHeight = 40;
     }
     else
     {
-        UrlImage* urlImage = [[UrlImage alloc] initWithUrl:[[_business punchCard] business_logo_url] forImageView:bizImageView];
-        [[UrlImageManager getInstance] insertImageToCache:[[_business punchCard] business_logo_url] image:urlImage];
+        UrlImage* urlImage = [[UrlImage alloc] initWithUrl:[_punchcard business_logo_url] forImageView:bizImageView];
+        [[UrlImageManager getInstance] insertImageToCache:[_punchcard business_logo_url] image:urlImage];
     }
     [self addSubview:bizImageView];
     
@@ -82,7 +83,7 @@ static CGFloat const kLabelHeight = 40;
     UILabel* descLabel = [[UILabel alloc] initWithFrame:CGRectMake((stdiPhoneWidth - textlabelWidth)/2, (descBackgroundLabel.frame.size.height - textlabelHeight)/2, textlabelWidth , textlabelHeight)];
     [descLabel setFont:textFont];
     descLabel.backgroundColor = [UIColor clearColor];
-    descLabel.text = [[_business punchCard] punch_card_desc];
+    descLabel.text = [_punchcard punch_card_desc];
     descLabel.textColor = [UIColor whiteColor];
     [descLabel setNumberOfLines:2];
     [descLabel setAdjustsFontSizeToFitWidth:TRUE];
@@ -101,9 +102,9 @@ static CGFloat const kLabelHeight = 40;
     // Create left label
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_business.punchCard each_punch_value] doubleValue]]];
+    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]];
     
-    NSString* numPunchesText = [NSString stringWithFormat:@"%d x %@ Coupons", [[_business.punchCard total_punches] integerValue], amountAsString];
+    NSString* numPunchesText = [NSString stringWithFormat:@"%d x %@ Coupons", [[_punchcard total_punches] integerValue], amountAsString];
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
     UILabel* numPunchesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kImageHeight, leftLabelWidth, kLabelHeight)];
     [numPunchesLabel setFont:textFont];
@@ -116,7 +117,7 @@ static CGFloat const kLabelHeight = 40;
     [self addSubview:numPunchesLabel];
     
     // Create right label
-    NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[_business.punchCard each_punch_value] doubleValue] * [[_business.punchCard total_punches] integerValue])]];
+    NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[_punchcard each_punch_value] doubleValue] * [[_punchcard total_punches] integerValue])]];
     
     NSString* totalAmountText = [NSString stringWithFormat:@"%@ value", totalAmountAsString];
     UILabel* totalAmountLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftLabelWidth, kImageHeight, rightLabelWidth, kLabelHeight)];
@@ -137,7 +138,7 @@ static CGFloat const kLabelHeight = 40;
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString* couponText = [NSString stringWithFormat:@"Buy now for only %@", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_business.punchCard selling_price] doubleValue]]]];
+    NSString* couponText = [NSString stringWithFormat:@"Buy now for only %@", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard selling_price] doubleValue]]]];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
@@ -217,7 +218,7 @@ static CGFloat const kLabelHeight = 40;
         _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         _hud.labelText = @"Purchasing Coupon";
         
-        [[Punches getInstance] purchasePunchWithCredit:self punchid:_business.punchCard.punch_card_id];
+        [[Punches getInstance] purchasePunchWithCredit:self punchid:_punchcard.punch_card_id];
     }
     else if (alertView == _notEnoughCreditsAlert && buttonIndex == 0)
     {
@@ -232,7 +233,7 @@ static CGFloat const kLabelHeight = 40;
 - (void) didPressBuyCouponButton:(id)sender
 {
     double credits = [[[User getInstance] credits] doubleValue];
-    if (credits < [_business.punchCard.selling_price doubleValue])
+    if (credits < [_punchcard.selling_price doubleValue])
     {
         // Not enough credits to purchase
         _notEnoughCreditsAlert = [[UIAlertView alloc] initWithTitle:@"Insufficient Credits"
@@ -245,7 +246,7 @@ static CGFloat const kLabelHeight = 40;
     }
     else
     {
-        NSString* confirmString = [NSString stringWithFormat:@"This transaction will deduct $%.2f from your credit balance. Continue?", [_business.punchCard.selling_price doubleValue]];
+        NSString* confirmString = [NSString stringWithFormat:@"This transaction will deduct $%.2f from your credit balance. Continue?", [_punchcard.selling_price doubleValue]];
         _confirmPurchaseAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Purchase"
                                                           message:confirmString
                                                          delegate:self

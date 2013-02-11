@@ -24,19 +24,19 @@ static const CGFloat kLogoHeight = 100;
         _businessOffers = current;
         _width = frame.size.width;
         
-        UIImageView* nameLabel = [self createNameLabel];
-        _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, nameLabel.frame.size.height, _width, kLogoHeight)];
-        [_logoImage setBackgroundColor:[UIColor greenColor]];
-        UIImageView* upsellLabel = [self createUpsellLabel:(_logoImage.frame.origin.y + _logoImage.frame.size.height)];
+        _nameLabel = [self createNameLabel];
+        _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, _nameLabel.frame.size.height, _width, kLogoHeight)];
+        [_logoImage setBackgroundColor:[UIColor blackColor]];
+        _upsellLabel = [self createUpsellLabel:(_logoImage.frame.origin.y + _logoImage.frame.size.height)];
         
-        CGFloat totalHeight = nameLabel.frame.size.height + _logoImage.frame.size.height + upsellLabel.frame.size.height;
+        CGFloat totalHeight = _nameLabel.frame.size.height + _logoImage.frame.size.height + _upsellLabel.frame.size.height;
         CGRect finalRect = self.frame;
         finalRect.size.height = totalHeight;
-        self.frame = finalRect;
+        self.frame = finalRect;        
         
-        [self addSubview:nameLabel];
+        [self addSubview:_nameLabel];
         [self addSubview:_logoImage];
-        [self addSubview:upsellLabel];
+        [self addSubview:_upsellLabel];
         
         NSArray* offers = [_businessOffers getOffers];
         if (offers != nil)
@@ -53,6 +53,13 @@ static const CGFloat kLogoHeight = 100;
 
             [_businessOffers retrieveOffersFromServer:self];
         }
+        
+        // Create invisible button that goes on top of uiview
+        _overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_overlayButton addTarget:self action:@selector(didTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+        [_overlayButton addTarget:self action:@selector(didTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [_overlayButton addTarget:self action:@selector(didDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+        [_overlayButton setFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
     }
     return self;
 }
@@ -108,17 +115,17 @@ static const CGFloat kLogoHeight = 100;
     CGRect originalRect = CGRectMake(0, ypos, image.size.width, image.size.height);
     CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:_width maxHeight:image.size.height];
     
-    _upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
-    [_upsellLabel setBackgroundColor:[UIColor clearColor]];
-    [_upsellLabel setTextColor:[UIColor whiteColor]];
-    [_upsellLabel setTextAlignment:UITextAlignmentCenter];
-    [_upsellLabel setFont:textFont];
-    [_upsellLabel setAdjustsFontSizeToFitWidth:YES];
-    [_upsellLabel setNumberOfLines:1];
+    _upsellTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
+    [_upsellTextLabel setBackgroundColor:[UIColor clearColor]];
+    [_upsellTextLabel setTextColor:[UIColor whiteColor]];
+    [_upsellTextLabel setTextAlignment:UITextAlignmentCenter];
+    [_upsellTextLabel setFont:textFont];
+    [_upsellTextLabel setAdjustsFontSizeToFitWidth:YES];
+    [_upsellTextLabel setNumberOfLines:1];
     
     UIImageView* upsellBackground = [[UIImageView alloc] initWithImage:image];
     upsellBackground.frame = finalRect;
-    [upsellBackground addSubview:_upsellLabel];
+    [upsellBackground addSubview:_upsellTextLabel];
     
     return upsellBackground;
 }
@@ -130,7 +137,7 @@ static const CGFloat kLogoHeight = 100;
     NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[current each_punch_value] doubleValue] * [[current total_punches] integerValue])]];
     NSString *saleAmountAsString = [numberFormatter stringFromNumber:[current selling_price]];
     NSString* upsellText = [NSString stringWithFormat:@"%@ for %@", totalAmountAsString, saleAmountAsString];
-    [_upsellLabel setText:upsellText];
+    [_upsellTextLabel setText:upsellText];
     
     UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[current business_logo_url]];
     if(urlImage)
@@ -149,6 +156,22 @@ static const CGFloat kLogoHeight = 100;
         UrlImage* urlImage = [[UrlImage alloc] initWithUrl:[current business_logo_url] forImageView:_logoImage];
         [[UrlImageManager getInstance] insertImageToCache:[current business_logo_url] image:urlImage];
     }
+    
+    [self addSubview:_overlayButton];
+}
+
+- (void)greyoutView
+{
+    [_nameLabel setAlpha:0.5];
+    [_logoImage setAlpha:0.5];
+    [_upsellLabel setAlpha:0.5];
+}
+
+- (void)restoreView
+{
+    [_nameLabel setAlpha:1.0];
+    [_logoImage setAlpha:1.0];
+    [_upsellLabel setAlpha:1.0];
 }
 
 #pragma mark - HttpCallbackDelegate
@@ -164,6 +187,23 @@ static const CGFloat kLogoHeight = 100;
         }
     }
     // Fail silently
+}
+
+#pragma mark - event actions
+
+- (void) didTouchDown:(id)sender
+{
+    [self greyoutView];
+}
+
+- (void) didDragOutside:(id)sender
+{
+    [self restoreView];
+}
+
+- (void) didTouchUpInside:(id)sender
+{
+    [self restoreView];
 }
 
 @end

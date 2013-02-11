@@ -9,7 +9,6 @@
 #import "AFClientManager.h"
 #import "AFHTTPRequestOperation.h"
 #import "Businesses.h"
-#import "BusinessOffers.h"
 #import "Utilities.h"
 
 #define kOneMileMeters 1609.344
@@ -81,6 +80,11 @@ static double const refreshTime = -(60 * 60);
     NSArray *dateSortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"diff_in_miles" ascending:YES]];
     
     return [bizArray sortedArrayUsingDescriptors:dateSortDescriptors];;
+}
+
+- (BusinessOffers*)getBusinessOffersById:(NSString*)business_id
+{
+    return [_businessesDict objectForKey:business_id];
 }
 
 - (BOOL) needsRefresh

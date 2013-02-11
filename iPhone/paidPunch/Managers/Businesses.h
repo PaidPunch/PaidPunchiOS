@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BusinessOffers.h"
 #import "HttpCallbackDelegate.h"
 #import "NetworkManager.h"
 #import "NetworkManagerDelegate.h"
@@ -29,6 +30,7 @@ static NSString* const kKeyBusinessesRetrieval = @"businesses_retrieval";
 
 - (BOOL) needsRefresh;
 - (void) forceRefresh;
+- (BusinessOffers*)getBusinessOffersById:(NSString*)business_id;
 - (void) retrieveBusinessesFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (NSArray*) getBusinessesCloseby:(CLLocation*)location;
 

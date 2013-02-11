@@ -8,20 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseWithNavBarViewController.h"
-#import "Business.h"
+#import "BusinessOffers.h"
+#import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
-#import "NetworkManager.h"
 
-@interface BusinessPageViewController : BaseWithNavBarViewController<NetworkManagerDelegate>
+@interface BusinessPageViewController : BaseWithNavBarViewController<HttpCallbackDelegate>
 {
     NSString* _bizId;
     NSString* _bizname;
-    Business* _business;
+    BusinessOffers* _business;
     UIButton* _descButton;
     UIButton* _mapButton;
     UIButton* _callButton;
     
-    NetworkManager* _networkManager;
     MBProgressHUD* _hud;
     
     UIView* _descView;

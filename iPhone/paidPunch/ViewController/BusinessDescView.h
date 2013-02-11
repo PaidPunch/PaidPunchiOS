@@ -10,10 +10,12 @@
 #import "Business.h"
 #import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
+#import "PunchCard.h"
 
 @interface BusinessDescView : UIView<UIAlertViewDelegate,HttpCallbackDelegate>
 {
     Business* _business;
+    PunchCard* _punchcard;
     CGFloat _lowestYPos;
     
     UIAlertView* _notEnoughCreditsAlert;
@@ -22,6 +24,6 @@
     MBProgressHUD* _hud;
 }
 
-- (id)initWithFrameAndBusiness:(CGRect)frame business:(Business*)business;
+- (id)initWithFrameAndBusiness:(CGRect)frame business:(Business*)business punchcard:(PunchCard*)punchcard;
 
 @end

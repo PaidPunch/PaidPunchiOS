@@ -34,6 +34,11 @@
     [self createNavBar];
     
     [self createSuggestBusinessButton];
+    
+    // Start by locating user
+    _updatingBusinesses = TRUE;
+    [[HiAccuracyLocator getInstance] setDelegate:self];
+    [[HiAccuracyLocator getInstance] startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,11 +75,6 @@
     {
         [self showMyCoupons];
     }
-    
-    // Start by locating user
-    _updatingBusinesses = TRUE;
-    [[HiAccuracyLocator getInstance] setDelegate:self];
-    [[HiAccuracyLocator getInstance] startUpdatingLocation];
     
     if (_updatingUserInfo || _updatingBusinesses)
     {
