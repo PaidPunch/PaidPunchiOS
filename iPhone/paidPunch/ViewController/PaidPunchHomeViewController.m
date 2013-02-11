@@ -9,6 +9,7 @@
 #include "CommonDefinitions.h"
 #import "AccountViewController.h"
 #import "BalanceViewController.h"
+#import "BizView.h"
 #import "Businesses.h"
 #import "HiAccuracyLocator.h"
 #import "MyCouponsView.h"
@@ -33,8 +34,6 @@
     [self createNavBar];
     
     [self createSuggestBusinessButton];
-    
-    [self createNoBizView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,7 +72,7 @@
     }
     
     // Start by locating user
-    _updatingUserInfo = TRUE;
+    _updatingBusinesses = TRUE;
     [[HiAccuracyLocator getInstance] setDelegate:self];
     [[HiAccuracyLocator getInstance] startUpdatingLocation];
     
@@ -222,12 +221,19 @@
     NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:[[HiAccuracyLocator getInstance] bestLocation]];
     if ([businesses count] > 0)
     {
-        
+        [self createBizView:businesses];
     }
     else
     {
         [self createNoBizView];
     }
+}
+
+- (void)createBizView:(NSArray*)businesses
+{
+    CGRect bizRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10));
+    BizView* bizView = [[BizView alloc] initWithFrameAndBusinesses:bizRect businesses:businesses];
+    [_mainView addSubview:bizView];
 }
 
 - (void)createNoBizView
@@ -291,7 +297,7 @@
             [alertView show];
         }
     }
-    else if ([type compare:kKeyBusinessesRetrieval])
+    else if ([type compare:kKeyBusinessesRetrieval] == NSOrderedSame)
     {
         _updatingBusinesses = FALSE;
         [self removeProgressSpinnerIfNecessary];

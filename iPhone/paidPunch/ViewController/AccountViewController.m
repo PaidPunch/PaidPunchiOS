@@ -241,7 +241,8 @@ static NSString* const kTextSpacing = @"  ";
     if(didLocateUser)
     {
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder reverseGeocodeLocation:[[HiAccuracyLocator getInstance] bestLocation] completionHandler:^(NSArray *placemarks, NSError *error) {
+        [geocoder reverseGeocodeLocation:[[HiAccuracyLocator getInstance] bestLocation] completionHandler:^(NSArray *placemarks, NSError *error)
+        {
             NSLog(@"**reverseGeocodeLocation:completionHandler: Completion Handler called!");
             
             if (error)
@@ -260,9 +261,6 @@ static NSString* const kTextSpacing = @"  ";
                 
                 [[User getInstance] setZipcode:[topResult postalCode]];
                 [[User getInstance] saveUserData];
-                
-                // TODO: Refresh business list
-                //[self refreshBusinessList];
             }
         }];
     }

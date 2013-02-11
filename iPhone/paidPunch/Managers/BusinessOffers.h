@@ -21,8 +21,10 @@ static NSString* const kKeyBusinessOffersRetrieval = @"businessoffer_retrieval";
     NSDate* _lastUpdate;
     __weak NSObject<HttpCallbackDelegate>* _delegate;
     NetworkManager* _networkManager;
+    NSNumber* _diff_in_miles;
 }
 @property (nonatomic,strong) Business* business;
+@property (nonatomic, strong) NSNumber* diff_in_miles;
 
 - (id) initWithBusiness:(Business*)current;
 - (BOOL) needsRefresh;

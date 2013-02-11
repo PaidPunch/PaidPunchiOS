@@ -51,6 +51,11 @@ static double const refreshTime = -(60 * 60);
 
 - (NSArray*) getBusinessesCloseby:(CLLocation*)location
 {
+    //TODO: Remove these lines
+    CLLocationCoordinate2D coords = [self geoCodeUsingAddress:@"98053"];
+    NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
+    location = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
+    
     NSNumber* maxDistance = [NSNumber numberWithInt:kMaxMiles];
     
     NSMutableArray* bizArray = [[NSMutableArray alloc] init];
@@ -65,13 +70,17 @@ static double const refreshTime = -(60 * 60);
         NSLog(@"Distance in metres: %f", meters);
         double distanceInMiles = meters/kOneMileMeters;
         NSLog(@"%@ Distance in miles: %f", currentBiz.business_name , distanceInMiles);
-        [currentBiz setDiff_in_miles:[NSNumber numberWithDouble:distanceInMiles]];
+        [current setDiff_in_miles:[NSNumber numberWithDouble:distanceInMiles]];
         if (distanceInMiles < [maxDistance doubleValue])
         {
             [bizArray addObject:current];
         }
     }
-    return bizArray;
+    
+    //Sort by diff_in_miles
+    NSArray *dateSortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"diff_in_miles" ascending:YES]];
+    
+    return [bizArray sortedArrayUsingDescriptors:dateSortDescriptors];;
 }
 
 - (BOOL) needsRefresh
@@ -178,6 +187,69 @@ static double const refreshTime = -(60 * 60);
             [_businessesDict setObject:currentBiz forKey:[current business_id]];
         }
         [_businessesDelegate didCompleteHttpCallback:kKeyBusinessesRetrieval success:TRUE message:@"Businesses retrieved"];
+    }
+}
+
+#pragma mark - testing function
+// For testing purposes
+
+- (CLLocationCoordinate2D) geoCodeUsingAddress: (NSString *) address
+{
+    Zipcodes_Cache *zipCodeCache=[[DatabaseManager sharedInstance] getZipcodesCacheObject:address];
+    if(zipCodeCache==nil)
+    {
+        CLLocationCoordinate2D myLocation;
+        
+        // -- modified from the stackoverflow page - we use the SBJson parser instead of the string scanner --
+        
+        NSString       *esc_addr = [address stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+        NSString            *req = [NSString stringWithFormat: @"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
+        
+        SBJsonParser *parser=[SBJsonParser new];
+        NSDictionary *googleResponse=[parser objectWithString:[NSString stringWithContentsOfURL: [NSURL URLWithString: req] encoding: NSUTF8StringEncoding error: NULL]];
+        
+        //NSDictionary *googleResponse = [[NSString stringWithContentsOfURL: [NSURL URLWithString: req] encoding: NSUTF8StringEncoding error: NULL] JSONValue];
+        
+        NSDictionary    *resultsDict = [googleResponse valueForKey:  @"results"];   // get the results dictionary
+        NSDictionary   *geometryDict = [   resultsDict valueForKey: @"geometry"];   // geometry dictionary within the  results dictionary
+        NSDictionary   *locationDict = [  geometryDict valueForKey: @"location"];   // location dictionary within the geometry dictionary
+        
+        // -- you should be able to strip the latitude & longitude from google's location information (while understanding what the json parser returns) --
+        
+        //DLog (@"-- returning latitude & longitude from google --");
+        
+        NSArray *latArray = [locationDict valueForKey: @"lat"]; NSString *latString = [latArray lastObject];     // (one element) array entries provided by the json parser
+        NSArray *lngArray = [locationDict valueForKey: @"lng"]; NSString *lngString = [lngArray lastObject];     // (one element) array entries provided by the json parser
+        
+        myLocation.latitude = [latString doubleValue];     // the json parser uses NSArrays which don't support "doubleValue"
+        myLocation.longitude = [lngString doubleValue];
+        
+        if(myLocation.latitude==0)
+        {
+            
+        }
+        else
+        {
+            if([address isEqualToString:@""])
+            {
+            }
+            else
+            {
+                Zipcodes_Cache *zipcode=[[DatabaseManager sharedInstance] getZipcodes_CacheObject];
+                [zipcode setValue:[NSNumber numberWithDouble:myLocation.latitude] forKey:@"latitude"];
+                [zipcode setValue:[NSNumber numberWithDouble:myLocation.longitude] forKey:@"longitude"];
+                [zipcode setValue:address forKey:@"zip_code"];
+                [[DatabaseManager sharedInstance] saveEntity:nil];
+            }
+        }
+        return myLocation;
+    }
+    else
+    {
+        CLLocationCoordinate2D myLocation;
+        myLocation.latitude=[zipCodeCache.latitude doubleValue];
+        myLocation.longitude=[zipCodeCache.longitude doubleValue];
+        return myLocation;
     }
 }
 

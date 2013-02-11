@@ -14,6 +14,7 @@ static double const refreshTime = -(60 * 60);
 
 @implementation BusinessOffers
 @synthesize business = _business;
+@synthesize diff_in_miles = _diff_in_miles;
 
 - (id) initWithBusiness:(Business*)current
 {
