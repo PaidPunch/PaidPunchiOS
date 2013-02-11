@@ -7,6 +7,7 @@
 //
 
 #include "CommonDefinitions.h"
+#import "BizButtonView.h"
 #import "BizView.h"
 #import "BusinessOffers.h"
 #import "Utilities.h"
@@ -26,7 +27,7 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
     if (self)
     {
         // Create a backing scrollview first
-        _bizScrollView = [[UIScrollView alloc] initWithFrame:frame];
+        _bizScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _bizScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:_bizScrollView];
         
@@ -46,6 +47,7 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
         }
         
         _bizScrollView.contentSize = CGSizeMake(stdiPhoneWidth, _lowestYPos);
+        [_bizScrollView flashScrollIndicators];
     }
     return self;
 }
@@ -56,7 +58,7 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
     UIImageView* silverBanner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner.png"]];
     silverBanner.frame = CGRectMake(0, _lowestYPos, silverBanner.frame.size.width, silverBanner.frame.size.height);
     silverBanner.frame = [Utilities resizeProportionally:silverBanner.frame maxWidth:stdiPhoneWidth maxHeight:kBannerHeight];
-    [self addSubview:silverBanner];
+    [_bizScrollView addSubview:silverBanner];
     
     _lowestYPos = silverBanner.frame.origin.y + silverBanner.frame.size.height + kGapBetweenElements;
     
@@ -91,9 +93,7 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
     NSUInteger arraySize = [businesses count];
     NSUInteger i = startIndex;
     while (i < arraySize)
-    {
-        UIFont* buttonFont = [UIFont systemFontOfSize:13];
-        
+    {        
         // Do left side
         current = [businesses objectAtIndex:i];
         if ([[current diff_in_miles] doubleValue] > distance)
@@ -101,18 +101,11 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
             break;
         }
         else
-        {
-            UIButton* leftbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            NSString* leftText = [[current business] business_name];
-            CGSize sizeLeftText = [leftText sizeWithFont:buttonFont
-                                       constrainedToSize:CGSizeMake(kMaxButtonWidth, CGFLOAT_MAX)
-                                           lineBreakMode:UILineBreakModeWordWrap];
-            [leftbutton setFrame:CGRectMake((kHalfScreen - kMaxButtonWidth)/2, lowestLeftYPos, kMaxButtonWidth, sizeLeftText.height)];
-            [leftbutton setTitle:leftText forState:UIControlStateNormal];
-            leftbutton.titleLabel.font = buttonFont;
-            [self addSubview:leftbutton];
+        {            
+            BizButtonView* leftButton = [[BizButtonView alloc] initWithFrameAndBusiness:CGRectMake((kHalfScreen - kMaxButtonWidth)/2, lowestLeftYPos, kMaxButtonWidth, 20) current:current];
+            [_bizScrollView addSubview:leftButton];
             
-            lowestLeftYPos = leftbutton.frame.origin.y + leftbutton.frame.size.height + kGapBetweenElements;
+            lowestLeftYPos = leftButton.frame.origin.y + leftButton.frame.size.height + kGapBetweenElements;
             
             i++;
         }
@@ -131,15 +124,8 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
         }
         else
         {
-            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            NSString* rightText = [[current business] business_name];
-            CGSize sizeRightText = [rightText sizeWithFont:buttonFont
-                                       constrainedToSize:CGSizeMake(kMaxButtonWidth, CGFLOAT_MAX)
-                                           lineBreakMode:UILineBreakModeWordWrap];
-            [rightButton setFrame:CGRectMake((kHalfScreen - kMaxButtonWidth)/2 + kHalfScreen, lowestRightYPos, kMaxButtonWidth, sizeRightText.height)];
-            [rightButton setTitle:rightText forState:UIControlStateNormal];
-            rightButton.titleLabel.font = buttonFont;
-            [self addSubview:rightButton];
+            BizButtonView* rightButton = [[BizButtonView alloc] initWithFrameAndBusiness:CGRectMake((kHalfScreen - kMaxButtonWidth)/2 + kHalfScreen, lowestRightYPos, kMaxButtonWidth, 20) current:current];
+            [_bizScrollView addSubview:rightButton];
             
             lowestRightYPos = rightButton.frame.origin.y + rightButton.frame.size.height + kGapBetweenElements;
             
