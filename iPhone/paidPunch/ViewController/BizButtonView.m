@@ -8,6 +8,8 @@
 
 #import "BizButtonView.h"
 #import "PunchCard.h"
+#import "UrlImage.h"
+#import "UrlImageManager.h"
 #import "Utilities.h"
 
 static const CGFloat kLogoHeight = 100;
@@ -36,13 +38,21 @@ static const CGFloat kLogoHeight = 100;
         [self addSubview:_logoImage];
         [self addSubview:upsellLabel];
         
-        /*
         NSArray* offers = [_businessOffers getOffers];
         if (offers != nil)
         {
-            
+            [self fillInRemainingButtonDetails:[offers objectAtIndex:0]];
         }
-         */
+        else
+        {
+            _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            _spinner.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+            _spinner.hidesWhenStopped = YES;
+            [self addSubview:_spinner];
+            [_spinner startAnimating];
+
+            [_businessOffers retrieveOffersFromServer:self];
+        }
     }
     return self;
 }
@@ -98,13 +108,13 @@ static const CGFloat kLogoHeight = 100;
     CGRect originalRect = CGRectMake(0, ypos, image.size.width, image.size.height);
     CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:_width maxHeight:image.size.height];
     
-    _upsellLabel = [[UILabel alloc] initWithFrame:finalRect];
+    _upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
     [_upsellLabel setBackgroundColor:[UIColor clearColor]];
     [_upsellLabel setTextColor:[UIColor whiteColor]];
     [_upsellLabel setTextAlignment:UITextAlignmentCenter];
     [_upsellLabel setFont:textFont];
     [_upsellLabel setAdjustsFontSizeToFitWidth:YES];
-    [_upsellLabel setNumberOfLines:2];
+    [_upsellLabel setNumberOfLines:1];
     
     UIImageView* upsellBackground = [[UIImageView alloc] initWithImage:image];
     upsellBackground.frame = finalRect;
@@ -113,23 +123,47 @@ static const CGFloat kLogoHeight = 100;
     return upsellBackground;
 }
 
-#pragma mark - HttpCallbackDelegate
-- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
+- (void) fillInRemainingButtonDetails:(PunchCard*)current
 {
-    /*
-    [MBProgressHUD hideHUDForView:self animated:NO];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[current each_punch_value] doubleValue] * [[current total_punches] integerValue])]];
+    NSString *saleAmountAsString = [numberFormatter stringFromNumber:[current selling_price]];
+    NSString* upsellText = [NSString stringWithFormat:@"%@ for %@", totalAmountAsString, saleAmountAsString];
+    [_upsellLabel setText:upsellText];
     
-    if(success)
+    UrlImage* urlImage = [[UrlImageManager getInstance] getCachedImage:[current business_logo_url]];
+    if(urlImage)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thanks!" message:@"Request received!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        if ([urlImage image])
+        {
+            [_logoImage setImage:[urlImage image]];
+        }
+        else
+        {
+            [urlImage addImageView:_logoImage];
+        }
     }
     else
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        UrlImage* urlImage = [[UrlImage alloc] initWithUrl:[current business_logo_url] forImageView:_logoImage];
+        [[UrlImageManager getInstance] insertImageToCache:[current business_logo_url] image:urlImage];
     }
-     */
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
+{
+    [_spinner stopAnimating];
+    if(success)
+    {
+        NSArray* offers = [_businessOffers getOffers];
+        if (offers != nil)
+        {
+            [self fillInRemainingButtonDetails:[offers objectAtIndex:0]];
+        }
+    }
+    // Fail silently
 }
 
 @end

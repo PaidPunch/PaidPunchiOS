@@ -17,6 +17,7 @@
     
     UILabel* _upsellLabel;
     UIImageView* _logoImage;
+    UIActivityIndicatorView* _spinner;
 }
 
 - (id)initWithFrameAndBusiness:(CGRect)frame current:(BusinessOffers*)current;
