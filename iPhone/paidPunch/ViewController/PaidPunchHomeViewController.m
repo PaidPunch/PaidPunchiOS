@@ -36,7 +36,7 @@
     
     [self createSuggestBusinessButton];
     
-    _bizBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10))];
+    _bizBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, _lowestYPos + 3, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10))];
     [_mainView addSubview:_bizBaseView];
 }
 
@@ -76,11 +76,18 @@
     }
     
     if ([[User getInstance] locationNeedsRefresh])
-    {        
-        // Start by locating user
-        _updatingBusinesses = TRUE;
-        [[HiAccuracyLocator getInstance] setDelegate:self];
-        [[HiAccuracyLocator getInstance] startUpdatingLocation];
+    {
+        if ([[User getInstance] useZipcodeForLocation])
+        {
+            [self createHomePageView:nil];
+        }
+        else
+        {
+            // Start by locating user
+            _updatingBusinesses = TRUE;
+            [[HiAccuracyLocator getInstance] setDelegate:self];
+            [[HiAccuracyLocator getInstance] startUpdatingLocation];
+        }
     }
     
     if (_updatingUserInfo || _updatingBusinesses)
@@ -207,7 +214,7 @@
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     UIButton* suggestButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    CGRect originalRect = CGRectMake(0, _lowestYPos + 10, image.size.width, image.size.height);
+    CGRect originalRect = CGRectMake(0, _lowestYPos + 3, image.size.width, image.size.height);
     CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:(stdiPhoneWidth - 60) maxHeight:stdiPhoneHeight];
     finalRect.origin.x = (stdiPhoneWidth - finalRect.size.width)/2;
     
@@ -223,9 +230,9 @@
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
 }
 
-- (void)createHomePageView
+- (void)createHomePageView:(CLLocation*)location
 {
-    NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:[[HiAccuracyLocator getInstance] bestLocation]];
+    NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:location];
     if ([businesses count] > 0)
     {
         [self createBizView:businesses];
@@ -320,7 +327,7 @@
         [self removeProgressSpinnerIfNecessary];
         if (success)
         {
-            [self createHomePageView];
+            [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
         }
         else
         {
@@ -351,7 +358,7 @@
                 // Businesses don't need to be refreshed yet
                 _updatingBusinesses = FALSE;
                 [self removeProgressSpinnerIfNecessary];
-                [self createHomePageView];
+                [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
             }
         }
         else

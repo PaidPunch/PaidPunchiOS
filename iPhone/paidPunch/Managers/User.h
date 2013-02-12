@@ -47,6 +47,7 @@ typedef enum
     NSDecimalNumber* _credits;
     NSString* _maskedId;
     
+    BOOL _useZipcodeForLocation;
     CLLocation* _lastLocation;
     NSDate* _locationLastUpdated;
     
@@ -70,6 +71,7 @@ typedef enum
 @property(nonatomic) NSNumber* totalMiles;
 @property(nonatomic) NSDecimalNumber* credits;
 @property(nonatomic,readonly) NSDate* lastUpdate;
+@property(nonatomic) BOOL useZipcodeForLocation;
 
 - (void) clearUser;
 - (void) saveUserData;
@@ -88,6 +90,7 @@ typedef enum
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) requestInvite:(NSObject<HttpCallbackDelegate>*) delegate email:(NSString*)email;
 - (void) forceRefresh;
+- (void) forceLocationRefresh;
 - (BOOL) isUserInNewLocation:(CLLocation*)current;
 
 + (User*) getInstance;

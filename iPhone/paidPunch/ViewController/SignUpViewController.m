@@ -7,6 +7,7 @@
 //
 
 #import "DatabaseManager.h"
+#import "HiAccuracyLocator.h"
 #import "InviteFriendsViewController.h"
 #import "SignUpViewController.h"
 #import "User.h"
@@ -123,7 +124,11 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Registering User";
     
-    [[User getInstance] registerUserWithFacebook:self];
+    // This indicates it's a facebook signup
+    _emailSignup = FALSE;
+    
+    [[HiAccuracyLocator getInstance] setDelegate:self];
+    [[HiAccuracyLocator getInstance] startUpdatingLocation];
 }
 
 - (void)didPressEmailButton:(id)sender
@@ -141,8 +146,10 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
         // Set the values into the User instance
         [User getInstance].email = _emailTextField.text;
         
-        // Register user
-        [[User getInstance] registerUserWithEmail:self password:_passwordTextField.text];
+        _emailSignup = TRUE;
+        
+        [[HiAccuracyLocator getInstance] setDelegate:self];
+        [[HiAccuracyLocator getInstance] startUpdatingLocation];
     }
 }
 
@@ -183,6 +190,58 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+    }
+}
+
+#pragma mark - HiAccuracyLocatorDelegate
+- (void) locator:(HiAccuracyLocator *)locator didLocateUser:(BOOL)didLocateUser reason:(StopReason)reason
+{
+    if(didLocateUser)
+    {
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation:[[HiAccuracyLocator getInstance] bestLocation] completionHandler:^(NSArray *placemarks, NSError *error)
+         {
+             NSLog(@"**reverseGeocodeLocation:completionHandler: Completion Handler called!");
+             
+             if (error)
+             {
+                 NSLog(@"**Geocode failed with error: %@", error);
+                 return;
+                 
+             }
+             
+             if(placemarks && placemarks.count > 0)
+                 
+             {
+                 //do something
+                 CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                 NSLog(@"**Geocode successful; zip code: %@", [topResult postalCode]);
+                 
+                 [[User getInstance] setZipcode:[topResult postalCode]];
+                 
+                 if (_emailSignup)
+                 {
+                     [[User getInstance] registerUserWithEmail:self password:_passwordTextField.text];
+                 }
+                 else
+                 {
+                     [[User getInstance] registerUserWithFacebook:self];
+                 }
+             }
+         }];
+    }
+    else
+    {
+        if (reason == kStopReasonDenied)
+        {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Unable to locate!" message:@"We were not find your current location. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
     }
 }
 

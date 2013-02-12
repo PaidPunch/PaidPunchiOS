@@ -44,6 +44,12 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
                 // Finally, create two columns of businesses
                 bizIndex = [self createBusinessButtonsForDistance:kDistances[i] businesses:businesses startIndex:bizIndex];
             }
+            
+            // Check that we haven't reached the end of the businesses array
+            if (bizIndex >= [businesses count])
+            {
+                break;
+            }
         }
         
         _bizScrollView.contentSize = CGSizeMake(stdiPhoneWidth, _lowestYPos);

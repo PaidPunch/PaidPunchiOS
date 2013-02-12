@@ -50,10 +50,17 @@ static double const refreshTime = -(60 * 60);
 
 - (NSArray*) getBusinessesCloseby:(CLLocation*)location
 {
-    //TODO: Remove these lines
-    CLLocationCoordinate2D coords = [self geoCodeUsingAddress:@"98053"];
-    NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
-    location = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
+    CLLocation* currentLocation;
+    if (location == nil)
+    {
+        CLLocationCoordinate2D coords = [self geoCodeUsingAddress:[[User getInstance] zipcode]];
+        NSLog(@"Reverse %f %f",coords.latitude,coords.longitude);
+        currentLocation = [[CLLocation alloc] initWithLatitude:coords.latitude longitude:coords.longitude];
+    }
+    else
+    {
+        currentLocation = location;
+    }
     
     NSNumber* maxDistance = [NSNumber numberWithInt:kMaxMiles];
     
@@ -65,7 +72,7 @@ static double const refreshTime = -(60 * 60);
         
         CLLocation *bizLocation = [[CLLocation alloc] initWithLatitude:[currentBiz.latitude doubleValue] longitude:[currentBiz.longitude doubleValue]];
         
-        CLLocationDistance meters = [location distanceFromLocation:bizLocation];
+        CLLocationDistance meters = [currentLocation distanceFromLocation:bizLocation];
         NSLog(@"Distance in metres: %f", meters);
         double distanceInMiles = meters/kOneMileMeters;
         NSLog(@"%@ Distance in miles: %f", currentBiz.business_name , distanceInMiles);

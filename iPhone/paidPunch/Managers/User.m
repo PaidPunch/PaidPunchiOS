@@ -18,6 +18,7 @@ static NSString* const kKeyReferral = @"refer_code";
 static NSString* const kKeyName = @"username";
 static NSString* const kKeyEmail = @"email";
 static NSString* const kKeyZipcode = @"zipcode";
+static NSString* const kKeyUseZipcode = @"usezipcode";
 static NSString* const kKeyPhone = @"mobile_no";
 static NSString* const kTxType = @"txtype";
 static NSString* const kKeyPassword = @"password";
@@ -60,6 +61,7 @@ static double const locationRefreshTime = -(5 * 60);
 @synthesize maskedId = _maskedId;
 @synthesize credits = _credits;
 @synthesize lastUpdate = _lastUpdate;
+@synthesize useZipcodeForLocation = _useZipcodeForLocation;
 
 - (id) init
 {
@@ -86,6 +88,7 @@ static double const locationRefreshTime = -(5 * 60);
     _totalMiles = [NSNumber numberWithInt:10];
     _credits = 0;
     _phone = @"";
+    _useZipcodeForLocation = FALSE;
     
     _callType = no_call;
     
@@ -96,6 +99,12 @@ static double const locationRefreshTime = -(5 * 60);
 - (void) forceRefresh
 {
     _lastUpdate = nil;
+}
+
+- (void) forceLocationRefresh
+{
+    _locationLastUpdated = nil;
+    _lastLocation = nil;
 }
 
 - (NSString*) getCreditAsString
@@ -151,6 +160,7 @@ static double const locationRefreshTime = -(5 * 60);
     [aCoder encodeObject:_credits forKey:kKeyCredits];
     [aCoder encodeObject:_userCode forKey:kKeyUserCode];
     [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
+    [aCoder encodeBool:_useZipcodeForLocation forKey:kKeyUseZipcode];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -170,6 +180,7 @@ static double const locationRefreshTime = -(5 * 60);
     _credits = [aDecoder decodeObjectForKey:kKeyCredits];
     _userCode = [aDecoder decodeObjectForKey:kKeyUserCode];
     _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
+    _useZipcodeForLocation = [aDecoder decodeBoolForKey:kKeyUseZipcode];
     return self;
 }
 

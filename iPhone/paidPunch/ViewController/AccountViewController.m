@@ -188,20 +188,15 @@ static NSString* const kTextSpacing = @"  ";
 {
     if (alertView == _locationAlertView)
     {
+        [[User getInstance] forceLocationRefresh];
         if (buttonIndex == 0)
         {
-            // Start by locating user
-            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            _hud.labelText = @"Locating user";
-            
-            [[HiAccuracyLocator getInstance] setDelegate:self];
-            [[HiAccuracyLocator getInstance] startUpdatingLocation];
+            [[User getInstance] setUseZipcodeForLocation:FALSE];
         }
         else if (buttonIndex == 1)
         {
             [[User getInstance] setZipcode:[[alertView textFieldAtIndex:0] text]];
-            // TODO: refresh business list
-            //[self refreshBusinessList];
+            [[User getInstance] setUseZipcodeForLocation:TRUE];
         }
     }
     else if (alertView == _feedbackAlertView)
