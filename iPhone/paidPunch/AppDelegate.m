@@ -13,7 +13,6 @@
 #import "LocalyticsSession.h"
 #import "PaidPunchHomeViewController.h"
 #import "User.h"
-#import "SignInViewController.h"
 #import "UrlImageManager.h"
 #import "WelcomePageViewController.h"
 

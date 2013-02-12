@@ -8,7 +8,6 @@
 
 #import "BuyPunchViewController.h"
 #import "PunchCardOfferViewController.h"
-#import "SettingsViewController.h"
 
 @implementation PunchCardOfferViewController
 
@@ -295,9 +294,6 @@
 {
     if(buttonIndex == 0)
     {
-        // Navigate to settings view
-        SettingsViewController *settingsViewController= [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
-        [self.navigationController pushViewController:settingsViewController animated:YES];
     }
 }
 

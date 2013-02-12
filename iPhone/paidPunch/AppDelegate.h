@@ -16,8 +16,6 @@
 #import "PaidPunchTabBarController.h"
 #import "User.h"
 
-@class DualSignInViewController, StartPageViewController;
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 {
     @private
