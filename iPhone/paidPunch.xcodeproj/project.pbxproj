@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		117F069D15CF6A96003C3EC3 /* StartPageViewcontroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117F069C15CF6A96003C3EC3 /* StartPageViewcontroller.xib */; };
 		118E23FE15CC3F5800C943F5 /* SearchByCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E23FD15CC3F5800C943F5 /* SearchByCategoryViewController.m */; };
 		118E240115CC3F7000C943F5 /* SearchByCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118E240015CC3F7000C943F5 /* SearchByCategoryViewController.xib */; };
 		119509E115C1D9140039876A /* CompanyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 119509D115C1D9140039876A /* CompanyLogo.png */; };
@@ -37,7 +36,6 @@
 		382BF27616C5A1E100711781 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF27516C5A1E100711781 /* UIView+Glow.m */; };
 		382BF27916C5A27E00711781 /* HomePaidPunchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF27816C5A27D00711781 /* HomePaidPunchButton.m */; };
 		3842B24B16407E28009203D0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3842B24A16407E28009203D0 /* libxml2.dylib */; };
-		3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3842B26E1641D37D009203D0 /* Default-568h@2x.png */; };
 		385441DB16B996C700419A68 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DA16B996C700419A68 /* BalanceViewController.m */; };
 		385441DE16BA495E00419A68 /* PopUpBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441DD16BA495C00419A68 /* PopUpBaseView.m */; };
 		385441E116BA575500419A68 /* SuggestBusinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E016BA575000419A68 /* SuggestBusinessView.m */; };
@@ -45,6 +43,7 @@
 		385441E616BB225A00419A68 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385441E516BB225800419A68 /* Twitter.framework */; };
 		385441E916BB248400419A68 /* RequestInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E816BB247F00419A68 /* RequestInviteView.m */; };
 		38810BFC16CAA6350090B4FF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38810BFA16CAA6350090B4FF /* libTestFlight.a */; };
+		38810C0016CAFD510090B4FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38810BFF16CAFD510090B4FF /* Default-568h@2x.png */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
 		38AAE8401672626400BF4922 /* AsyncHttpCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83B1672626300BF4922 /* AsyncHttpCall.m */; };
 		38AAE8411672626500BF4922 /* AsyncHttpCallMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83D1672626400BF4922 /* AsyncHttpCallMgr.m */; };
@@ -227,8 +226,6 @@
 		8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */; };
 		8A7C44F8153ECEB8003282D1 /* FeedsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F4153ECEB8003282D1 /* FeedsViewCell.xib */; };
 		8A7C44F9153ECEB8003282D1 /* SearchlistViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F6153ECEB8003282D1 /* SearchlistViewCell.xib */; };
-		8A7C44FE153ECF69003282D1 /* DualSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44FB153ECF69003282D1 /* DualSignInViewController.xib */; };
-		8A7C44FF153ECF69003282D1 /* TermsAndConditionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44FD153ECF69003282D1 /* TermsAndConditionsViewController.xib */; };
 		8A7C5461154925DB002854FF /* BusinessLocatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C545F154925DB002854FF /* BusinessLocatorViewController.m */; };
 		8A7C54641549265B002854FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7C54631549265B002854FF /* MapKit.framework */; };
 		8A7C546715492717002854FF /* BusinessLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C546615492717002854FF /* BusinessLocationAnnotation.m */; };
@@ -538,8 +535,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		117F069A15CF667B003C3EC3 /* StartPageViewcontroller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StartPageViewcontroller.xib; path = paidPunch/View/DualSignIn/StartPageViewcontroller.xib; sourceTree = "<group>"; };
-		117F069C15CF6A96003C3EC3 /* StartPageViewcontroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartPageViewcontroller.xib; sourceTree = "<group>"; };
 		118E23FC15CC3F5800C943F5 /* SearchByCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByCategoryViewController.h; sourceTree = "<group>"; };
 		118E23FD15CC3F5800C943F5 /* SearchByCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByCategoryViewController.m; sourceTree = "<group>"; };
 		118E240015CC3F7000C943F5 /* SearchByCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchByCategoryViewController.xib; sourceTree = "<group>"; };
@@ -582,7 +577,6 @@
 		382BF27816C5A27D00711781 /* HomePaidPunchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePaidPunchButton.m; sourceTree = "<group>"; };
 		382BF27A16C5B9AE00711781 /* HomePaidPunchButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePaidPunchButtonDelegate.h; sourceTree = "<group>"; };
 		3842B24A16407E28009203D0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		3842B26E1641D37D009203D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		385441D916B996C600419A68 /* BalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceViewController.h; sourceTree = "<group>"; };
 		385441DA16B996C700419A68 /* BalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceViewController.m; sourceTree = "<group>"; };
 		385441DC16BA495900419A68 /* PopUpBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpBaseView.h; sourceTree = "<group>"; };
@@ -596,6 +590,7 @@
 		385441E816BB247F00419A68 /* RequestInviteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInviteView.m; sourceTree = "<group>"; };
 		38810BFA16CAA6350090B4FF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		38810BFB16CAA6350090B4FF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		38810BFF16CAFD510090B4FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		38AAE8381672626200BF4922 /* AFClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFClientManager.h; path = ServerAPI/AFClientManager.h; sourceTree = "<group>"; };
 		38AAE8391672626200BF4922 /* AFClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFClientManager.m; path = ServerAPI/AFClientManager.m; sourceTree = "<group>"; };
@@ -873,8 +868,6 @@
 		8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewCell.xib; sourceTree = "<group>"; };
 		8A7C44F4153ECEB8003282D1 /* FeedsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedsViewCell.xib; sourceTree = "<group>"; };
 		8A7C44F6153ECEB8003282D1 /* SearchlistViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchlistViewCell.xib; sourceTree = "<group>"; };
-		8A7C44FB153ECF69003282D1 /* DualSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DualSignInViewController.xib; sourceTree = "<group>"; };
-		8A7C44FD153ECF69003282D1 /* TermsAndConditionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndConditionsViewController.xib; sourceTree = "<group>"; };
 		8A7C545E154925DB002854FF /* BusinessLocatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLocatorViewController.h; sourceTree = "<group>"; };
 		8A7C545F154925DB002854FF /* BusinessLocatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLocatorViewController.m; sourceTree = "<group>"; };
 		8A7C54631549265B002854FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -1370,9 +1363,7 @@
 		8A77DE2B147E677100E05277 = {
 			isa = PBXGroup;
 			children = (
-				3842B26E1641D37D009203D0 /* Default-568h@2x.png */,
 				8BAE652515D48B720075E5D8 /* AppIcon@2x.png */,
-				117F069A15CF667B003C3EC3 /* StartPageViewcontroller.xib */,
 				8A3B1D0C154006F200BD0AAE /* SocialNetworkLibrary.xcodeproj */,
 				8A9D2C1C14C400AD0034BD16 /* SDWebImage.xcodeproj */,
 				848F468A156F61DC00332D31 /* iRate */,
@@ -1825,8 +1816,6 @@
 		8A78E2771497757B00F79380 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8A7C44FC153ECF69003282D1 /* TermsAndConditions */,
-				8A7C44FA153ECF68003282D1 /* DualSignIn */,
 				8A78E27A1497757B00F79380 /* CustomCell */,
 				8A78E2851497757B00F79380 /* TabBar */,
 			);
@@ -2079,23 +2068,6 @@
 			path = SearchCell;
 			sourceTree = "<group>";
 		};
-		8A7C44FA153ECF68003282D1 /* DualSignIn */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C44FB153ECF69003282D1 /* DualSignInViewController.xib */,
-				117F069C15CF6A96003C3EC3 /* StartPageViewcontroller.xib */,
-			);
-			path = DualSignIn;
-			sourceTree = "<group>";
-		};
-		8A7C44FC153ECF69003282D1 /* TermsAndConditions */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C44FD153ECF69003282D1 /* TermsAndConditionsViewController.xib */,
-			);
-			path = TermsAndConditions;
-			sourceTree = "<group>";
-		};
 		8A7C545C154925B2002854FF /* BusinessLocator */ = {
 			isa = PBXGroup;
 			children = (
@@ -2150,6 +2122,7 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38810BFF16CAFD510090B4FF /* Default-568h@2x.png */,
 				38B5A5C816C87BDD002DDE8A /* grey-banner-on-tile.png */,
 				38B5A5C916C87BDD002DDE8A /* orange-tab.png */,
 				38B5A5CA16C87BDD002DDE8A /* tile-header-large.png */,
@@ -2993,8 +2966,6 @@
 				8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */,
 				8A7C44F8153ECEB8003282D1 /* FeedsViewCell.xib in Resources */,
 				8A7C44F9153ECEB8003282D1 /* SearchlistViewCell.xib in Resources */,
-				8A7C44FE153ECF69003282D1 /* DualSignInViewController.xib in Resources */,
-				8A7C44FF153ECF69003282D1 /* TermsAndConditionsViewController.xib in Resources */,
 				8A7C110C15452430004C8FAE /* ClosedLock@2x.png in Resources */,
 				8A7C110D15452430004C8FAE /* ClosedLock.png in Resources */,
 				8A80F0C8154A990300378622 /* BusinessLocatorViewController.xib in Resources */,
@@ -3020,7 +2991,6 @@
 				11D4D9C615CBA3D800FEF636 /* FAQ.html in Resources */,
 				11D4D9C715CBA3D800FEF636 /* style.css in Resources */,
 				118E240115CC3F7000C943F5 /* SearchByCategoryViewController.xib in Resources */,
-				117F069D15CF6A96003C3EC3 /* StartPageViewcontroller.xib in Resources */,
 				8B9FEC4815D0978F00D559DB /* Settings@2x.png in Resources */,
 				8B9FEC9815D0C23700D559DB /* BackButton.png in Resources */,
 				8B9FEC9915D0C23700D559DB /* BackButton@2x.png in Resources */,
@@ -3050,7 +3020,6 @@
 				8BD3D34515D230F10024B079 /* DoneButton.png in Resources */,
 				8BD3D34615D230F10024B079 /* DoneButton@2x.png in Resources */,
 				8BAE652815D48B7D0075E5D8 /* AppIcon@2x.png in Resources */,
-				3842B26F1641D37E009203D0 /* Default-568h@2x.png in Resources */,
 				38C2590116A6087500982568 /* BuyPunchViewController.xib in Resources */,
 				38B4F6F116B08FB900D73A3A /* facebook-button.png in Resources */,
 				38B4F6F216B08FB900D73A3A /* landing-top-logo.png in Resources */,
@@ -3091,6 +3060,7 @@
 				38B5A5CD16C87BDD002DDE8A /* orange-tab.png in Resources */,
 				38B5A5CE16C87BDD002DDE8A /* tile-header-large.png in Resources */,
 				38B5A5CF16C87BDD002DDE8A /* tile-header-small.png in Resources */,
+				38810C0016CAFD510090B4FF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
