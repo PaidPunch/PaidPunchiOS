@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 PaidPunch. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
 #import "FacebookPaidPunchDelegate.h"
 #import "FBRequest.h"
@@ -46,6 +47,9 @@ typedef enum
     NSDecimalNumber* _credits;
     NSString* _maskedId;
     
+    CLLocation* _lastLocation;
+    NSDate* _locationLastUpdated;
+    
     __weak NSObject<HttpCallbackDelegate>* facebookDelegate;
     
     CallType _callType;
@@ -80,9 +84,11 @@ typedef enum
 - (BOOL) isFacebookProfile;
 - (NSString*) getCreditAsString;
 - (BOOL) needsRefresh;
+- (BOOL) locationNeedsRefresh;
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) requestInvite:(NSObject<HttpCallbackDelegate>*) delegate email:(NSString*)email;
 - (void) forceRefresh;
+- (BOOL) isUserInNewLocation:(CLLocation*)current;
 
 + (User*) getInstance;
 + (void) destroyInstance;

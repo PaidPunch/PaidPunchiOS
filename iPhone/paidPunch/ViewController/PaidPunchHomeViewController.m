@@ -28,6 +28,7 @@
     [super viewDidLoad];
     
     _launchMyCouponsOnWillAppear = FALSE;
+    _currentBizView = nil;
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 	
@@ -35,10 +36,8 @@
     
     [self createSuggestBusinessButton];
     
-    // Start by locating user
-    _updatingBusinesses = TRUE;
-    [[HiAccuracyLocator getInstance] setDelegate:self];
-    [[HiAccuracyLocator getInstance] startUpdatingLocation];
+    _bizBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10))];
+    [_mainView addSubview:_bizBaseView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +73,14 @@
     if (_launchMyCouponsOnWillAppear)
     {
         [self showMyCoupons];
+    }
+    
+    if ([[User getInstance] locationNeedsRefresh])
+    {        
+        // Start by locating user
+        _updatingBusinesses = TRUE;
+        [[HiAccuracyLocator getInstance] setDelegate:self];
+        [[HiAccuracyLocator getInstance] startUpdatingLocation];
     }
     
     if (_updatingUserInfo || _updatingBusinesses)
@@ -231,16 +238,26 @@
 
 - (void)createBizView:(NSArray*)businesses
 {
-    CGRect bizRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10));
+    if (_currentBizView != nil)
+    {
+        [_currentBizView removeFromSuperview];
+    }
+    CGRect bizRect = CGRectMake(0, 0, _bizBaseView.frame.size.width, _bizBaseView.frame.size.height);
     BizView* bizView = [[BizView alloc] initWithFrameAndBusinesses:bizRect businesses:businesses];
-    [_mainView addSubview:bizView];
+    [_bizBaseView addSubview:bizView];
+    _currentBizView = bizView;
 }
 
 - (void)createNoBizView
 {
-    CGRect nobizRect = CGRectMake(0, _lowestYPos + 10, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10));
+    if (_currentBizView != nil)
+    {
+        [_currentBizView removeFromSuperview];
+    }
+    CGRect nobizRect = CGRectMake(0, 0, _bizBaseView.frame.size.width, _bizBaseView.frame.size.height);
     NoBizView* nobizView = [[NoBizView alloc] initWithFrame:nobizRect];
-    [_mainView addSubview:nobizView];
+    [_bizBaseView addSubview:nobizView];
+    _currentBizView = nobizView;
 }
 
 - (void)showMyCoupons
@@ -323,15 +340,25 @@
 {
     if(didLocateUser)
     {
-        if ([[Businesses getInstance] needsRefresh])
+        if ([[User getInstance] isUserInNewLocation:[[HiAccuracyLocator getInstance] bestLocation]])
         {
-            [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            if ([[Businesses getInstance] needsRefresh])
+            {
+                [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            }
+            else
+            {
+                // Businesses don't need to be refreshed yet
+                _updatingBusinesses = FALSE;
+                [self removeProgressSpinnerIfNecessary];
+                [self createHomePageView];
+            }
         }
         else
         {
+            // User hasn't moved much. Don't bother updating businesses. 
             _updatingBusinesses = FALSE;
             [self removeProgressSpinnerIfNecessary];
-            [self createHomePageView];
         }
     }
     else

@@ -38,9 +38,12 @@ static NSString* const kFacebookLogin = @"FACEBOOK-LOGIN";
 static NSString* const kPasswordChange = @"PASSWORD-CHANGE";
 static NSString* const kInfoChange = @"INFO-CHANGE";
 static NSString* const kUserFilename = @"user.sav";
+static CLLocationDistance const kMaxDistance = 5000; // 5 kilometers
 
-// 1 hour refresh schedule
+// 30 min refresh schedule
 static double const refreshTime = -(30 * 60);
+// 5 min refresh schedule
+static double const locationRefreshTime = -(5 * 60);
 
 @implementation User
 @synthesize referralCode = _referralCode;
@@ -106,6 +109,28 @@ static double const refreshTime = -(30 * 60);
 - (BOOL) needsRefresh
 {
     return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
+}
+
+- (BOOL) locationNeedsRefresh
+{
+    return (!_locationLastUpdated) || ([_locationLastUpdated timeIntervalSinceNow] < locationRefreshTime);
+}
+
+- (BOOL) isUserInNewLocation:(CLLocation*)current
+{
+    BOOL newLocation = FALSE;
+    if (_lastLocation != nil)
+    {
+        CLLocationDistance meters = [current distanceFromLocation:_lastLocation];
+        newLocation = (meters > kMaxDistance);
+    }
+    else
+    {
+        newLocation = TRUE;
+    }
+    _lastLocation = current;
+    _locationLastUpdated = [NSDate date];
+    return newLocation;
 }
 
 #pragma mark - NSCoding

@@ -16,6 +16,8 @@
 @interface PaidPunchHomeViewController : UIViewController<HttpCallbackDelegate,HomePaidPunchButtonDelegate,HiAccuracyLocatorDelegate>
 {
     UIView* _mainView;
+    UIView* _bizBaseView;
+    UIView* _currentBizView;
     CGFloat _lowestYPos;
     MBProgressHUD* _hud;
     UIButton* _creditsButton;

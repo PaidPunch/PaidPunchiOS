@@ -7,6 +7,7 @@
 //
 
 #import "BizButtonView.h"
+#import "BusinessPageViewController.h"
 #import "PunchCard.h"
 #import "UrlImage.h"
 #import "UrlImageManager.h"
@@ -204,6 +205,10 @@ static const CGFloat kLogoHeight = 100;
 - (void) didTouchUpInside:(id)sender
 {
     [self restoreView];
+    Business* business = [_businessOffers business];
+    BusinessPageViewController* businessView = [[BusinessPageViewController alloc] initWithBusiness:[business business_id] business_name:[business business_name]];
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[delegate navigationController] pushViewController:businessView animated:NO];
 }
 
 @end
