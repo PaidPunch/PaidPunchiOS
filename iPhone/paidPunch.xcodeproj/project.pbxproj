@@ -52,6 +52,7 @@
 		385441E416BADD9800419A68 /* InviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E316BADD9300419A68 /* InviteCodeView.m */; };
 		385441E616BB225A00419A68 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385441E516BB225800419A68 /* Twitter.framework */; };
 		385441E916BB248400419A68 /* RequestInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385441E816BB247F00419A68 /* RequestInviteView.m */; };
+		38810BFC16CAA6350090B4FF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38810BFA16CAA6350090B4FF /* libTestFlight.a */; };
 		38AAE83F1672626400BF4922 /* AFClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE8391672626200BF4922 /* AFClientManager.m */; };
 		38AAE8401672626400BF4922 /* AsyncHttpCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83B1672626300BF4922 /* AsyncHttpCall.m */; };
 		38AAE8411672626500BF4922 /* AsyncHttpCallMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAE83D1672626400BF4922 /* AsyncHttpCallMgr.m */; };
@@ -650,6 +651,8 @@
 		385441E516BB225800419A68 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		385441E716BB247B00419A68 /* RequestInviteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestInviteView.h; sourceTree = "<group>"; };
 		385441E816BB247F00419A68 /* RequestInviteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInviteView.m; sourceTree = "<group>"; };
+		38810BFA16CAA6350090B4FF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		38810BFB16CAA6350090B4FF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		38AAE8381672626200BF4922 /* AFClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFClientManager.h; path = ServerAPI/AFClientManager.h; sourceTree = "<group>"; };
 		38AAE8391672626200BF4922 /* AFClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFClientManager.m; path = ServerAPI/AFClientManager.m; sourceTree = "<group>"; };
@@ -1322,6 +1325,7 @@
 				8A77DE60147E67F700E05277 /* CoreData.framework in Frameworks */,
 				8A77DE3B147E677100E05277 /* UIKit.framework in Frameworks */,
 				8A77DE3D147E677100E05277 /* Foundation.framework in Frameworks */,
+				38810BFC16CAA6350090B4FF /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1372,6 +1376,16 @@
 			path = "External/UIView-Glow";
 			sourceTree = "<group>";
 		};
+		38810BF916CAA6350090B4FF /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				38810BFA16CAA6350090B4FF /* libTestFlight.a */,
+				38810BFB16CAA6350090B4FF /* TestFlight.h */,
+			);
+			name = TestFlight;
+			path = External/TestFlight;
+			sourceTree = "<group>";
+		};
 		38AAE8421672627300BF4922 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,6 +1404,7 @@
 		38AAE8431672636100BF4922 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				38810BF916CAA6350090B4FF /* TestFlight */,
 				382BF27316C5A1E100711781 /* UIView-Glow */,
 				38C2590516A67B8300982568 /* Localytics */,
 				38AAE844167263A400BF4922 /* AFNetworking */,
@@ -3664,7 +3679,10 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/paidPunch/External/TestFlight\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -3708,6 +3726,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -3764,7 +3783,10 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/paidPunch/External/TestFlight\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -3801,7 +3823,10 @@
 				);
 				INFOPLIST_FILE = "paidPunch/paidPunch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/paidPunch/External/TestFlight\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

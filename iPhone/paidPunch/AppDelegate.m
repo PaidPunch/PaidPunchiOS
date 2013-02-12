@@ -17,6 +17,8 @@
 #import "UrlImageManager.h"
 #import "WelcomePageViewController.h"
 
+#define TESTING 1
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -182,6 +184,11 @@ static NSString* kAppId = @"159848747459550";
 {
     // Override point for customization after application launch.
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"add06e1e22ef9ab10bc2e72-5406e6da-5fa0-11e2-3c3f-004b50a28849"];
+    
+#ifdef TESTFLIGHT
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [TestFlight takeOff:@"48283637a453926066c478613208a5ec_MTg2MTg4MjAxMy0wMi0xMiAxMTo0Mjo1Mi4wMjU2Mjg"];
+#endif
     
     //Splash screen waiting time
 	[NSThread sleepForTimeInterval:1];
