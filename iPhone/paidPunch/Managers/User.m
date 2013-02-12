@@ -107,6 +107,11 @@ static double const locationRefreshTime = -(5 * 60);
     _lastLocation = nil;
 }
 
+- (void) indicateLocationRefreshed
+{
+    _locationLastUpdated = [NSDate date];
+}
+
 - (NSString*) getCreditAsString
 {
     NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
@@ -117,12 +122,13 @@ static double const locationRefreshTime = -(5 * 60);
 
 - (BOOL) needsRefresh
 {
-    return (!_lastUpdate) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
+    return (_lastUpdate == nil) || ([_lastUpdate timeIntervalSinceNow] < refreshTime);
 }
 
 - (BOOL) locationNeedsRefresh
 {
-    return (!_locationLastUpdated) || ([_locationLastUpdated timeIntervalSinceNow] < locationRefreshTime);
+    // Zipcode for location never has to be refreshed if _locationLastUpdated is not null
+    return (_locationLastUpdated == nil) || ((!_useZipcodeForLocation) && ([_locationLastUpdated timeIntervalSinceNow] < locationRefreshTime));
 }
 
 - (BOOL) isUserInNewLocation:(CLLocation*)current
@@ -513,13 +519,7 @@ static double const locationRefreshTime = -(5 * 60);
 }
 
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate
-{
-    // get parameters
-    /*NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                _userId, kKeyUserId,
-                                _uniqueId, kKeyUniqueId,
-                                nil];*/
-    
+{    
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
     NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@", _userId];

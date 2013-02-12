@@ -52,7 +52,7 @@ static const NSUInteger kMaxButtonWidth = kHalfScreen - 15;
             }
         }
         
-        _bizScrollView.contentSize = CGSizeMake(stdiPhoneWidth, _lowestYPos);
+        _bizScrollView.contentSize = CGSizeMake(stdiPhoneWidth, _lowestYPos + 20);
         [_bizScrollView flashScrollIndicators];
     }
     return self;

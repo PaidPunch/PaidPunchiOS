@@ -79,7 +79,17 @@
     {
         if ([[User getInstance] useZipcodeForLocation])
         {
-            [self createHomePageView:nil];
+            // Indicate that location does not need to be refreshed
+            [[User getInstance] indicateLocationRefreshed];
+            
+            if ([[Businesses getInstance] needsRefresh])
+            {
+                [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            }
+            else
+            {
+                [self createHomePageView:nil];
+            }
         }
         else
         {
@@ -327,7 +337,14 @@
         [self removeProgressSpinnerIfNecessary];
         if (success)
         {
-            [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
+            if ([[User getInstance] useZipcodeForLocation])
+            {
+                [self createHomePageView:nil];
+            }
+            else
+            {
+                [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];    
+            }
         }
         else
         {

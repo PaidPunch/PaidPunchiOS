@@ -87,6 +87,7 @@ typedef enum
 - (NSString*) getCreditAsString;
 - (BOOL) needsRefresh;
 - (BOOL) locationNeedsRefresh;
+- (void) indicateLocationRefreshed;
 - (void) getUserInfoFromServer:(NSObject<HttpCallbackDelegate>*)delegate;
 - (void) requestInvite:(NSObject<HttpCallbackDelegate>*) delegate email:(NSString*)email;
 - (void) forceRefresh;
