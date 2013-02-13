@@ -12,7 +12,6 @@
 #import "User.h"
 
 @implementation ConfirmPaymentViewController
-@synthesize businessLogoImageView;
 @synthesize descriptionLbl;
 @synthesize valueLbl;
 @synthesize pinLbl;
@@ -76,14 +75,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark -
-#pragma mark SDWebImageManagerDelegate methods Implementation
-
--(void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
-{
-    self.businessLogoImageView.image=image;
 }
 
 #pragma mark -
