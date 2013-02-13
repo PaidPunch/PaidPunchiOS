@@ -9,7 +9,8 @@
 #include "CommonDefinitions.h"
 #import "AppDelegate.h"
 #import "AsyncHttpCallMgr.h"
-#import "iRate.h"
+#import "ATAppRatingFlow.h"
+#import "ATConnect.h"
 #import "LocalyticsSession.h"
 #import "PaidPunchHomeViewController.h"
 #import "User.h"
@@ -21,7 +22,6 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-//@synthesize viewController = _viewController;
 @synthesize navigationController;
 @synthesize facebook;
 @synthesize userPermissions;
@@ -162,28 +162,12 @@ static NSString* kAppId = @"159848747459550";
 
 #pragma mark -
 
-+ (void)initialize
-{
-    //configure iRate
-    [iRate sharedInstance].appStoreID = 501977872;
-    [iRate sharedInstance].applicationName = @"PaidPunch";
-    [iRate sharedInstance].applicationBundleID = @"com.PaidPunch.CustomerApp";
-    [iRate sharedInstance].daysUntilPrompt = 4;
-    [iRate sharedInstance].usesUntilPrompt = 4;
-    [iRate sharedInstance].eventsUntilPrompt = 8;
-    [iRate sharedInstance].messageTitle = @"We want to hear from you!";
-    [iRate sharedInstance].message = @"Do you love PaidPunch? Please take a few seconds out of your day to let us know how we're doing and rate PaidPunch in the App Store!";
-    [iRate sharedInstance].cancelButtonLabel = @"No, Thanks";
-    [iRate sharedInstance].rateButtonLabel = @"Rate Now";
-    [iRate sharedInstance].remindButtonLabel = @"Rate Later";
-
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
+{    
+    // Localytics
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"add06e1e22ef9ab10bc2e72-5406e6da-5fa0-11e2-3c3f-004b50a28849"];
     
+    // Testflight
 #ifdef TESTFLIGHT
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     [TestFlight takeOff:@"48283637a453926066c478613208a5ec_MTg2MTg4MjAxMy0wMi0xMiAxMTo0Mjo1Mi4wMjU2Mjg"];
@@ -220,6 +204,7 @@ static NSString* kAppId = @"159848747459550";
     [self appInit];
     [self initFB];
     [self initView];
+    
     return YES;
 }
 
