@@ -10,7 +10,7 @@
 
 @implementation SecurityImageView
 
--(void) awakeFromNib
+-(void) prepareAnimation
 {
     NSArray *myImages=[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"a.png"],
                        [UIImage imageNamed:@"b.png"],
@@ -27,13 +27,7 @@
                        nil];
     [self setAnimationImages:myImages];
     [self setAnimationDuration:1.50];
-    self.animationRepeatCount=0;
-    [self startAnimating];
-    
-}
--(void) stop
-{
-    [self stopAnimating];
+    self.animationRepeatCount=0;    
 }
 
 

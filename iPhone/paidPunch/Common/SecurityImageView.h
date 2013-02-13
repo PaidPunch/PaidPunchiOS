@@ -10,4 +10,6 @@
 
 @interface SecurityImageView : UIImageView
 
+-(void) prepareAnimation;
+
 @end

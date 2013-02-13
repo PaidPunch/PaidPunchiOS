@@ -46,6 +46,12 @@
     [self createDoneButton];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_secImage startAnimating];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -68,13 +74,14 @@
     [textLabel setAdjustsFontSizeToFitWidth:YES];
     [_mainView addSubview:textLabel];
     
-    UIImageView* ppBanner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"l.png"]];
-    CGRect finalRect = [Utilities resizeProportionally:ppBanner.frame maxWidth:stdiPhoneWidth maxHeight:stdiPhoneHeight];
+    _secImage = [[SecurityImageView alloc] initWithImage:[UIImage imageNamed:@"l.png"]];
+    CGRect finalRect = [Utilities resizeProportionally:_secImage.frame maxWidth:stdiPhoneWidth maxHeight:stdiPhoneHeight];
     finalRect.origin.y = banner.frame.size.height + 20;
-    ppBanner.frame = finalRect;
-    [_mainView addSubview:ppBanner];
+    _secImage.frame = finalRect;
+    [_secImage prepareAnimation];
+    [_mainView addSubview:_secImage];
     
-    _lowestYPos = ppBanner.frame.size.height + ppBanner.frame.origin.y;
+    _lowestYPos = _secImage.frame.size.height + _secImage.frame.origin.y;
 }
 
 - (void) createLabels

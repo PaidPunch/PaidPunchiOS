@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseWithNavBarViewController.h"
+#import "SecurityImageView.h"
 
 @interface PunchCompleteViewController : BaseWithNavBarViewController
+{
+    SecurityImageView* _secImage;
+}
 
 - (id)initWithPunchcard:(PunchCard *)current;
 
