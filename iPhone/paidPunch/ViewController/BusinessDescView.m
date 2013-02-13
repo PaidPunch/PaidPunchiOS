@@ -100,9 +100,7 @@ static CGFloat const kLabelHeight = 40;
     CGFloat rightLabelWidth = (stdiPhoneWidth/5) * 2;
     
     // Create left label
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]];
+    NSString *amountAsString = [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]];
     
     NSString* numPunchesText = [NSString stringWithFormat:@"%d x %@ Coupons", [[_punchcard total_punches] integerValue], amountAsString];
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
@@ -117,7 +115,7 @@ static CGFloat const kLabelHeight = 40;
     [self addSubview:numPunchesLabel];
     
     // Create right label
-    NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[_punchcard each_punch_value] doubleValue] * [[_punchcard total_punches] integerValue])]];
+    NSString *totalAmountAsString = [Utilities currencyAsString:[NSNumber numberWithFloat:([[_punchcard each_punch_value] doubleValue] * [[_punchcard total_punches] integerValue])]];
     
     NSString* totalAmountText = [NSString stringWithFormat:@"%@ value", totalAmountAsString];
     UILabel* totalAmountLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftLabelWidth, kImageHeight, rightLabelWidth, kLabelHeight)];
@@ -136,9 +134,7 @@ static CGFloat const kLabelHeight = 40;
 - (void)createBuyCouponButton
 {
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString* couponText = [NSString stringWithFormat:@"Buy now for only %@", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard selling_price] doubleValue]]]];
+    NSString* couponText = [NSString stringWithFormat:@"Buy now for only %@", [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard selling_price] doubleValue]]]];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];

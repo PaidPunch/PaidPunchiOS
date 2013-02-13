@@ -14,5 +14,6 @@
 + (NSString*) getStatusMessageFromResponse:(AFHTTPRequestOperation*)operation;
 + (BOOL) validateEmail: (NSString *) emailId;
 + (CGRect) resizeProportionally:(CGRect)original maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight;
++ (NSString*) currencyAsString:(NSNumber*)amount;
 
 @end

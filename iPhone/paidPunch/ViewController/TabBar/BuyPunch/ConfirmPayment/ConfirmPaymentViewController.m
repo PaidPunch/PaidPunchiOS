@@ -10,6 +10,7 @@
 #import "Product.h"
 #import "Products.h"
 #import "User.h"
+#import "Utilities.h"
 
 @implementation ConfirmPaymentViewController
 @synthesize descriptionLbl;
@@ -114,10 +115,8 @@
     
     Product* current = [[[Products getInstance] productsArray] objectAtIndex:_index];
     
-    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString* costString = [formatter stringFromNumber:[current cost]];
-    NSString* creditString = [formatter stringFromNumber:[current credits]];
+    NSString* costString = [Utilities currencyAsString:[current cost]];
+    NSString* creditString = [Utilities currencyAsString:[current credits]];
     
     self.valueLbl.text=[NSString stringWithFormat:@"PAY $%@",costString];
     self.creditCardLbl.textColor=[UIColor colorWithRed:0/255.0 green:114/255.0 blue:180/255.0 alpha:1];

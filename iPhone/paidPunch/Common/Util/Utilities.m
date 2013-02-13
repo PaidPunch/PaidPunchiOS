@@ -49,4 +49,18 @@
     return newFrame;
 }
 
++ (NSString*) currencyAsString:(NSNumber*)amount
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString* current = [numberFormatter stringFromNumber: amount];
+    NSString* cents = [current substringFromIndex:([current length] - 3)];
+    // Strip 00 cents if necessary
+    if ([cents compare:@".00"] == NSOrderedSame)
+    {
+        current = [current substringToIndex:([current length] - 3)];
+    }
+    return current;
+}
+
 @end

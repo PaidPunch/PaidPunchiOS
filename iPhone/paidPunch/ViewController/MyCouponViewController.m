@@ -159,9 +159,7 @@ static CGFloat const barHeight = 30;
 - (void)createUseCouponButton
 {
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString* couponText = [NSString stringWithFormat:@"Use a %@ coupon", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]]];
+    NSString* couponText = [NSString stringWithFormat:@"Use a %@ coupon", [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]]];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
@@ -185,9 +183,7 @@ static CGFloat const barHeight = 30;
 
 - (void)createNumPunchesLabel
 {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]];
+    NSString *amountAsString = [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]];
     
     NSString* numPunchesText = [NSString stringWithFormat:@"%d x %@ Coupons Remaining", ([[_punchcard total_punches] integerValue] - [[_punchcard total_punches_used] integerValue]), amountAsString];
     CGFloat labelWidth = stdiPhoneWidth - 30;

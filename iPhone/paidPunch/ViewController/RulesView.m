@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #include "CommonDefinitions.h"
 #import "RulesView.h"
+#import "Utilities.h"
 
 static CGFloat const kRowHeight = 40;
 static CGFloat const kFinalPurchaseRulesRowHeight = 125;
@@ -133,9 +134,7 @@ static NSUInteger const kRowCount = 4;
     }
     else if (indexPath.row == 1)
     {
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-        NSString *amountAsString = [numberFormatter stringFromNumber:[_punchcard minimum_value]];
+        NSString *amountAsString = [Utilities currencyAsString:[_punchcard minimum_value]];
         whiteBox = [self createWhiteBox:amountAsString];
         whiteLabel = [self createWhiteLabel:@"  Minimum spend to use each coupon"];
         [cell addSubview:whiteBox];

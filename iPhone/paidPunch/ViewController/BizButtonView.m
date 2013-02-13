@@ -13,8 +13,6 @@
 #import "UrlImageManager.h"
 #import "Utilities.h"
 
-static const CGFloat kLogoHeight = 100;
-
 @implementation BizButtonView
 
 - (id)initWithFrameAndBusiness:(CGRect)frame current:(BusinessOffers*)current
@@ -26,7 +24,7 @@ static const CGFloat kLogoHeight = 100;
         _width = frame.size.width;
         
         _nameLabel = [self createNameLabel];
-        _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, _nameLabel.frame.size.height, _width, kLogoHeight)];
+        _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, _nameLabel.frame.size.height, _width, _width)];
         [_logoImage setBackgroundColor:[UIColor blackColor]];
         _upsellLabel = [self createUpsellLabel:(_logoImage.frame.origin.y + _logoImage.frame.size.height)];
         
@@ -133,10 +131,8 @@ static const CGFloat kLogoHeight = 100;
 
 - (void) fillInRemainingButtonDetails:(PunchCard*)current
 {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *totalAmountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:([[current each_punch_value] doubleValue] * [[current total_punches] integerValue])]];
-    NSString *saleAmountAsString = [numberFormatter stringFromNumber:[current selling_price]];
+    NSString *totalAmountAsString = [Utilities currencyAsString:[NSNumber numberWithFloat:([[current each_punch_value] doubleValue] * [[current total_punches] integerValue])]];
+    NSString *saleAmountAsString = [Utilities currencyAsString:[current selling_price]];
     NSString* upsellText = [NSString stringWithFormat:@"%@ for %@", totalAmountAsString, saleAmountAsString];
     [_upsellTextLabel setText:upsellText];
     

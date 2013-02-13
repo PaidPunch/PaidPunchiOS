@@ -8,7 +8,7 @@
 
 #import "PunchCard.h"
 #import "Business.h"
-
+#import "Utilities.h"
 
 @implementation PunchCard
 
@@ -43,9 +43,7 @@
 {
     // Amount of punchcard remaining
     double remainder = [[self each_punch_value] doubleValue] * ([[self total_punches] integerValue] - [[self total_punches_used] integerValue]);
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    NSString *amountAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:remainder]];
+    NSString *amountAsString = [Utilities currencyAsString:[NSNumber numberWithFloat:remainder]];
     return amountAsString;
 }
 

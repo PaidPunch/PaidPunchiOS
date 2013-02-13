@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PunchCard.h"
 #import "PunchCompleteViewController.h"
+#import "Punches.h"
 #import "Utilities.h"
 
 @interface PunchCompleteViewController ()
@@ -78,7 +79,7 @@
 
 - (void) createLabels
 {
-    CGFloat gapsBetweenLabels = 20;
+    CGFloat gapsBetweenLabels = 10;
     
     // Name of business
     UIFont* bizFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
@@ -93,14 +94,12 @@
     _lowestYPos = bizLabel.frame.size.height + bizLabel.frame.origin.y;
     
     // terms
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    UIFont* termsFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
-    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, 60)];
+    UIFont* termsFont = [UIFont fontWithName:@"Helvetica-Bold" size:30.0f];
+    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, 100)];
     termsLabel.backgroundColor = [UIColor clearColor];
     termsLabel.textColor = [UIColor orangeColor];
     termsLabel.textAlignment = UITextAlignmentCenter;
-    termsLabel.text = [NSString stringWithFormat:@"%@ off purchase of\n %@ or more", [numberFormatter stringFromNumber:[_punchcard each_punch_value]], [numberFormatter stringFromNumber:[_punchcard minimum_value]]];
+    termsLabel.text = [NSString stringWithFormat:@"%@ off purchase of\n %@ or more", [Utilities currencyAsString:[_punchcard each_punch_value]], [Utilities currencyAsString:[_punchcard minimum_value]]];
     [termsLabel setAdjustsFontSizeToFitWidth:YES];
     [termsLabel setNumberOfLines:2];
     [termsLabel setFont:termsFont];
@@ -128,7 +127,7 @@
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
     NSString* couponText = @"Done";
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"large-green-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -136,7 +135,7 @@
     CGRect originalRect = CGRectMake(0, 0, image.size.width, image.size.height);
     CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:(stdiPhoneWidth - 60) maxHeight:stdiPhoneHeight];
     finalRect.origin.x = (stdiPhoneWidth - finalRect.size.width)/2;
-    finalRect.origin.y = stdiPhoneHeight - (finalRect.size.height + 50);
+    finalRect.origin.y = stdiPhoneHeight - (finalRect.size.height + 30);
     
     doneButton.frame = finalRect;
     [doneButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -152,6 +151,10 @@
 
 - (void) didPressDoneButton:(id)sender
 {
+    [[Punches getInstance] forceRefresh];
+    [[User getInstance] forceRefresh];
+    [[User getInstance] forceLocationRefresh];
+    
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate initView];
 }
