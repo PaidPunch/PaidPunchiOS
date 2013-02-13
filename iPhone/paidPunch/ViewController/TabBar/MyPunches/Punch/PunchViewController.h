@@ -16,7 +16,6 @@
 #import "UILabelStrikethrough.h"
 #import "SDWebImageManager.h"
 #import "SDWebImageManagerDelegate.h"
-#import "SlideToConfirmDialog.h"
 #import "MarqueeLabel.h"
 
 @class NetworkManager;

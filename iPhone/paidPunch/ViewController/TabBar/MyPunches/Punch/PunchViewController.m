@@ -449,9 +449,6 @@
 
 -(void)goToConfirmView:(NSString *)moffer
 {
-    SlideToConfirmDialog *confirmViewController = [[SlideToConfirmDialog alloc] init:self.punchCardDetails withMysteryOffer:moffer];
-    confirmViewController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:confirmViewController animated:YES];
 }
 
 -(void) goToPunchUsedView:(PunchCard *)punchCard barcodeImage:(NSData *)imageData barcodeValue:(NSString *)barcode;
