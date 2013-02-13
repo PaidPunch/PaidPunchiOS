@@ -27,6 +27,10 @@
 		38011C9916A4D99D008395E6 /* Template.m in Sources */ = {isa = PBXBuildFile; fileRef = 38011C9816A4D99C008395E6 /* Template.m */; };
 		38099F901697648D00BFD3CC /* Products.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F8F1697648D00BFD3CC /* Products.m */; };
 		38099F9316978F0100BFD3CC /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 38099F9216978F0100BFD3CC /* Product.m */; };
+		38177F2616CC56580019C9FC /* CreditCardSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38177F2516CC56580019C9FC /* CreditCardSettingsViewController.xib */; };
+		38177F2C16CC571A0019C9FC /* AddCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38177F2A16CC571A0019C9FC /* AddCardViewCell.xib */; };
+		38177F2D16CC571A0019C9FC /* AddCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38177F2B16CC571A0019C9FC /* AddCardViewController.xib */; };
+		38177F2F16CC578B0019C9FC /* ConfirmPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38177F2E16CC578B0019C9FC /* ConfirmPaymentViewController.xib */; };
 		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
 		382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */; };
 		382BF27116C58F5300711781 /* large-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF26F16C58F5300711781 /* large-green-button.png */; };
@@ -218,11 +222,8 @@
 		8A7C44DB153ECB73003282D1 /* FeedsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44DA153ECB73003282D1 /* FeedsTableViewController.xib */; };
 		8A7C44E0153ECC2A003282D1 /* InstructionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44DD153ECC2A003282D1 /* InstructionsView.xib */; };
 		8A7C44E1153ECC2A003282D1 /* SlideToConfirmDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44DF153ECC2A003282D1 /* SlideToConfirmDialog.xib */; };
-		8A7C44EC153ECD3D003282D1 /* AddCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E3153ECD3D003282D1 /* AddCardViewController.xib */; };
-		8A7C44ED153ECD3D003282D1 /* ConfirmPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */; };
 		8A7C44EF153ECD3D003282D1 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44E9153ECD3D003282D1 /* SearchViewController.xib */; };
 		8A7C44F0153ECD3D003282D1 /* SearchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44EB153ECD3D003282D1 /* SearchListViewController.xib */; };
-		8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */; };
 		8A7C44F8153ECEB8003282D1 /* FeedsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F4153ECEB8003282D1 /* FeedsViewCell.xib */; };
 		8A7C44F9153ECEB8003282D1 /* SearchlistViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7C44F6153ECEB8003282D1 /* SearchlistViewCell.xib */; };
 		8A7C5461154925DB002854FF /* BusinessLocatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C545F154925DB002854FF /* BusinessLocatorViewController.m */; };
@@ -545,6 +546,10 @@
 		38099F8F1697648D00BFD3CC /* Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Products.m; sourceTree = "<group>"; };
 		38099F9116978F0100BFD3CC /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		38099F9216978F0100BFD3CC /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		38177F2516CC56580019C9FC /* CreditCardSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardSettingsViewController.xib; sourceTree = "<group>"; };
+		38177F2A16CC571A0019C9FC /* AddCardViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewCell.xib; sourceTree = "<group>"; };
+		38177F2B16CC571A0019C9FC /* AddCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewController.xib; sourceTree = "<group>"; };
+		38177F2E16CC578B0019C9FC /* ConfirmPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPaymentViewController.xib; sourceTree = "<group>"; };
 		38280352169FF56C005A8A32 /* InfoChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoChangeViewController.h; path = TabBar/Home/MyAccount/InfoChangeViewController.h; sourceTree = "<group>"; };
 		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoChangeViewController.m; path = TabBar/Home/MyAccount/InfoChangeViewController.m; sourceTree = "<group>"; };
 		382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchPurchaseCompleteViewController.h; sourceTree = "<group>"; };
@@ -576,8 +581,8 @@
 		38AAC8D016CB218C00D69926 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = paidPunch/External/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
 		38AAC8DC16CB21E900D69926 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		38AAC8DE16CB21F500D69926 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		38AAC8E616CB33D100D69926 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATConnect.h; path = External/ApptentiveConnect/source/ATConnect.h; sourceTree = "<group>"; };
-		38AAC8E716CB37D900D69926 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATAppRatingFlow.h; path = "External/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
+		38AAC8E616CB33D100D69926 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATConnect.h; path = External/ApptentiveConnect/source/ATConnect.h; sourceTree = "<group>"; };
+		38AAC8E716CB37D900D69926 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "External/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
 		38AAE8371671B94F00BF4922 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		38AAE8381672626200BF4922 /* AFClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFClientManager.h; path = ServerAPI/AFClientManager.h; sourceTree = "<group>"; };
 		38AAE8391672626200BF4922 /* AFClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFClientManager.m; path = ServerAPI/AFClientManager.m; sourceTree = "<group>"; };
@@ -840,11 +845,8 @@
 		8A7C44DA153ECB73003282D1 /* FeedsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedsTableViewController.xib; sourceTree = "<group>"; };
 		8A7C44DD153ECC2A003282D1 /* InstructionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstructionsView.xib; sourceTree = "<group>"; };
 		8A7C44DF153ECC2A003282D1 /* SlideToConfirmDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideToConfirmDialog.xib; sourceTree = "<group>"; };
-		8A7C44E3153ECD3D003282D1 /* AddCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewController.xib; sourceTree = "<group>"; };
-		8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPaymentViewController.xib; sourceTree = "<group>"; };
 		8A7C44E9153ECD3D003282D1 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		8A7C44EB153ECD3D003282D1 /* SearchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchListViewController.xib; sourceTree = "<group>"; };
-		8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewCell.xib; sourceTree = "<group>"; };
 		8A7C44F4153ECEB8003282D1 /* FeedsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedsViewCell.xib; sourceTree = "<group>"; };
 		8A7C44F6153ECEB8003282D1 /* SearchlistViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchlistViewCell.xib; sourceTree = "<group>"; };
 		8A7C545E154925DB002854FF /* BusinessLocatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLocatorViewController.h; sourceTree = "<group>"; };
@@ -1738,6 +1740,10 @@
 		8A78E2771497757B00F79380 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38177F2E16CC578B0019C9FC /* ConfirmPaymentViewController.xib */,
+				38177F2A16CC571A0019C9FC /* AddCardViewCell.xib */,
+				38177F2B16CC571A0019C9FC /* AddCardViewController.xib */,
+				38177F2516CC56580019C9FC /* CreditCardSettingsViewController.xib */,
 				8A78E27A1497757B00F79380 /* CustomCell */,
 				8A78E2851497757B00F79380 /* TabBar */,
 			);
@@ -1801,8 +1807,6 @@
 				118E23FF15CC3F7000C943F5 /* SearchByCategory */,
 				8A7C44E8153ECD3D003282D1 /* Search */,
 				8A7C44EA153ECD3D003282D1 /* SearchList */,
-				8A7C44E4153ECD3D003282D1 /* ConfirmPayment */,
-				8A7C44E2153ECD3D003282D1 /* AddCard */,
 				8A78E2881497757B00F79380 /* Congratulations */,
 				8A78E28C1497757B00F79380 /* PunchCardOffer */,
 				8A78E28E1497757B00F79380 /* SearchByBusiness */,
@@ -1925,22 +1929,6 @@
 			path = SlideToConfirmDialog;
 			sourceTree = "<group>";
 		};
-		8A7C44E2153ECD3D003282D1 /* AddCard */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C44E3153ECD3D003282D1 /* AddCardViewController.xib */,
-			);
-			path = AddCard;
-			sourceTree = "<group>";
-		};
-		8A7C44E4153ECD3D003282D1 /* ConfirmPayment */ = {
-			isa = PBXGroup;
-			children = (
-				8A7C44E5153ECD3D003282D1 /* ConfirmPaymentViewController.xib */,
-			);
-			path = ConfirmPayment;
-			sourceTree = "<group>";
-		};
 		8A7C44E8153ECD3D003282D1 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1960,7 +1948,6 @@
 		8A7C44F1153ECEB8003282D1 /* AddCardCell */ = {
 			isa = PBXGroup;
 			children = (
-				8A7C44F2153ECEB8003282D1 /* AddCardViewCell.xib */,
 			);
 			path = AddCardCell;
 			sourceTree = "<group>";
@@ -2782,11 +2769,8 @@
 				8A7C44DB153ECB73003282D1 /* FeedsTableViewController.xib in Resources */,
 				8A7C44E0153ECC2A003282D1 /* InstructionsView.xib in Resources */,
 				8A7C44E1153ECC2A003282D1 /* SlideToConfirmDialog.xib in Resources */,
-				8A7C44EC153ECD3D003282D1 /* AddCardViewController.xib in Resources */,
-				8A7C44ED153ECD3D003282D1 /* ConfirmPaymentViewController.xib in Resources */,
 				8A7C44EF153ECD3D003282D1 /* SearchViewController.xib in Resources */,
 				8A7C44F0153ECD3D003282D1 /* SearchListViewController.xib in Resources */,
-				8A7C44F7153ECEB8003282D1 /* AddCardViewCell.xib in Resources */,
 				8A7C44F8153ECEB8003282D1 /* FeedsViewCell.xib in Resources */,
 				8A7C44F9153ECEB8003282D1 /* SearchlistViewCell.xib in Resources */,
 				8A7C110C15452430004C8FAE /* ClosedLock@2x.png in Resources */,
@@ -2877,6 +2861,10 @@
 				38810C0316CB0FB90090B4FF /* AppIcon.png in Resources */,
 				38810C0416CB0FB90090B4FF /* AppIcon@2x.png in Resources */,
 				38AAC8E516CB33A200D69926 /* ApptentiveResources.bundle in Resources */,
+				38177F2616CC56580019C9FC /* CreditCardSettingsViewController.xib in Resources */,
+				38177F2C16CC571A0019C9FC /* AddCardViewCell.xib in Resources */,
+				38177F2D16CC571A0019C9FC /* AddCardViewController.xib in Resources */,
+				38177F2F16CC578B0019C9FC /* ConfirmPaymentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
