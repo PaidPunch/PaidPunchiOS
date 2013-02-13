@@ -212,10 +212,17 @@ static double const refreshTime = -(60 * 60);
     [[DatabaseManager sharedInstance] saveEntity:nil];
     _punchesArray = [NSMutableArray arrayWithArray:[[DatabaseManager sharedInstance] fetchPunchCards]];
     _numPunches = 0;
-    for (PunchCard* punchcard in _punchesArray)
+    if ([_punchesArray count] > 0)
     {
-        NSLog(@"Requesting additional data for punchcard: %@", [punchcard business_name]);
-        [_networkManager getBusinessOffer:[punchcard business_name] loggedInUserId:[[User getInstance] userId]];
+        for (PunchCard* punchcard in _punchesArray)
+        {
+            NSLog(@"Requesting additional data for punchcard: %@", [punchcard business_name]);
+            [_networkManager getBusinessOffer:[punchcard business_name] loggedInUserId:[[User getInstance] userId]];
+        }
+    }
+    else
+    {
+        [_mypunchesDelegate didCompleteHttpCallback:kKeyPunchesPurchase success:TRUE message:@"No punches for current user"];
     }
 }
 

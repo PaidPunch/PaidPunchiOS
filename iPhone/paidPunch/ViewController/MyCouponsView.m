@@ -24,7 +24,7 @@
         if ([[Punches getInstance] needsRefresh])
         {
             _hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
-            _hud.labelText = @"Retrieving Punches";
+            _hud.labelText = @"Retrieving Coupons";
             
             [[DatabaseManager sharedInstance] deleteMyPunches];
             [self getMyPunches];
@@ -54,17 +54,30 @@
 
 - (void)createCouponsTable
 {
-    // create a scrollview
-    CGRect myCouponsRect = CGRectMake(0, _lowestYPos, _popupView.frame.size.width, _popupView.frame.size.height - _lowestYPos);
-    _myCouponsScrollView = [[UIScrollView alloc] initWithFrame:myCouponsRect];
-    _myCouponsScrollView.backgroundColor = [UIColor clearColor];
-    [_myCouponsScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-	_myCouponsScrollView.scrollEnabled = FALSE;
-    _myCouponsScrollView.contentSize = CGSizeMake(_popupView.frame.size.width, stdiPhoneHeight);
-    [_popupView addSubview:_myCouponsScrollView];
-    
-    _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:CGRectMake(0, 0, _popupView.frame.size.width, _popupView.frame.size.height)];
-    [_myCouponsScrollView addSubview:_myCouponsTable];
+    if ([[[Punches getInstance] validPunchesArray] count] > 0)
+    {
+        // create a scrollview
+        CGRect myCouponsRect = CGRectMake(0, _lowestYPos, _popupView.frame.size.width, _popupView.frame.size.height - _lowestYPos);
+        _myCouponsScrollView = [[UIScrollView alloc] initWithFrame:myCouponsRect];
+        _myCouponsScrollView.backgroundColor = [UIColor clearColor];
+        [_myCouponsScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+        _myCouponsScrollView.scrollEnabled = FALSE;
+        [_popupView addSubview:_myCouponsScrollView];
+        
+        _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:CGRectMake(0, 0, _popupView.frame.size.width, _popupView.frame.size.height)];
+        [_myCouponsScrollView addSubview:_myCouponsTable];
+        
+        _myCouponsScrollView.contentSize = _myCouponsTable.contentSize;
+    }
+    else
+    {
+        // Handle the case where there are no punches
+        UILabel* noCouponLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, _popupView.frame.size.width, 50)];
+        [noCouponLabel setBackgroundColor:[UIColor clearColor]];
+        [noCouponLabel setText:@"No Current Coupons"];
+        [noCouponLabel setTextAlignment:UITextAlignmentCenter];
+        [_popupView addSubview:noCouponLabel];
+    }
 }
 
 -(void)getMyPunches
