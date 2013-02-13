@@ -25,6 +25,8 @@ static CGFloat const kCellHeight = 60.0;
         self.dataSource = self;
         self.delegate = self;
         _currentPunchcards = [[Punches getInstance] validPunchesArray];
+        [self setRowHeight:kCellHeight];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -40,22 +42,10 @@ static CGFloat const kCellHeight = 60.0;
     return [_currentPunchcards count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    cell.backgroundColor = [UIColor whiteColor];    
-    return cell;
-}
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
-    static NSString *CellIdentifier = @"MyCouponCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+{
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
     PunchCard* currentPunchcard = [_currentPunchcards objectAtIndex:indexPath.row];
     UILabel* nameLabel = [self createNameLabel:currentPunchcard.punch_card_name];
@@ -80,34 +70,19 @@ static CGFloat const kCellHeight = 60.0;
     CGFloat maxWidth = self.frame.size.width - kAmountSize;
     float startingSize = 18.0f;
     UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:startingSize];
-    CGSize sizeText = [name sizeWithFont:textFont
-                       constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
-                           lineBreakMode:UILineBreakModeWordWrap];
-    while (sizeText.width > maxWidth && startingSize > 12.0f)
-    {
-        startingSize -= 1.0f;
-        textFont = [UIFont fontWithName:@"Helvetica" size:startingSize];
-        sizeText = [name sizeWithFont:textFont
-                    constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
-                        lineBreakMode:UILineBreakModeWordWrap];
-    }
     UILabel* newLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, maxWidth, kCellHeight)];
     newLabel.text = name;
     newLabel.backgroundColor = [UIColor clearColor];
     newLabel.textColor = [UIColor blackColor];
-    [newLabel setNumberOfLines:1];
+    [newLabel setNumberOfLines:2];
     [newLabel setFont:textFont];
+    [newLabel setAdjustsFontSizeToFitWidth:TRUE];
     newLabel.textAlignment = UITextAlignmentLeft;
     
     return newLabel;
 }
 
 #pragma mark UITableViewDelegate methods Implementation
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return kCellHeight;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

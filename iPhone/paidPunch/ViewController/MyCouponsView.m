@@ -56,18 +56,9 @@
 {
     if ([[[Punches getInstance] validPunchesArray] count] > 0)
     {
-        // create a scrollview
-        CGRect myCouponsRect = CGRectMake(0, _lowestYPos, _popupView.frame.size.width, _popupView.frame.size.height - _lowestYPos);
-        _myCouponsScrollView = [[UIScrollView alloc] initWithFrame:myCouponsRect];
-        _myCouponsScrollView.backgroundColor = [UIColor clearColor];
-        [_myCouponsScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-        _myCouponsScrollView.scrollEnabled = FALSE;
-        [_popupView addSubview:_myCouponsScrollView];
-        
-        _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:CGRectMake(0, 0, _popupView.frame.size.width, _popupView.frame.size.height)];
-        [_myCouponsScrollView addSubview:_myCouponsTable];
-        
-        _myCouponsScrollView.contentSize = _myCouponsTable.contentSize;
+        CGRect myCouponsRect = CGRectMake(0, _lowestYPos, _popupView.frame.size.width, _popupView.frame.size.height - _lowestYPos);        
+        _myCouponsTable = [[MyCouponsTableView alloc] initWithFrame:myCouponsRect];
+        [_popupView addSubview:_myCouponsTable];
     }
     else
     {

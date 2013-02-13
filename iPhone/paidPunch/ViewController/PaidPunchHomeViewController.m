@@ -230,7 +230,7 @@
     
     suggestButton.frame = finalRect;
     [suggestButton setBackgroundImage:image forState:UIControlStateNormal];
-    [suggestButton setTitle:@"Suggest A Business" forState:UIControlStateNormal];
+    [suggestButton setTitle:@"Vote For Businesses" forState:UIControlStateNormal];
     [suggestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     suggestButton.titleLabel.font = textFont;
     [suggestButton addTarget:self action:@selector(didPressSuggestBusinessButton:) forControlEvents:UIControlEventTouchUpInside];

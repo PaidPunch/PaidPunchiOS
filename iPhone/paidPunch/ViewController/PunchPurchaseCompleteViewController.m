@@ -132,6 +132,7 @@
     [[Punches getInstance] setJustPurchasedPunch:TRUE];
     [[Punches getInstance] forceRefresh];
     [[User getInstance] forceRefresh];
+    [[User getInstance] forceLocationRefresh];
     
     // Go back to home page
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];

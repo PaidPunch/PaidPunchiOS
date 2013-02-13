@@ -197,6 +197,13 @@ static NSString* const kTextSpacing = @"  ";
         {
             [[User getInstance] setZipcode:[[alertView textFieldAtIndex:0] text]];
             [[User getInstance] setUseZipcodeForLocation:TRUE];
+            
+            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            _hud.labelText = @"Updating zipcode";
+            
+            NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+            [dict setObject:[[User getInstance] zipcode] forKey:@"zipcode"];
+            [[User getInstance] changeInfo:self parameters:dict];
         }
     }
     else if (alertView == _feedbackAlertView)
@@ -228,52 +235,6 @@ static NSString* const kTextSpacing = @"  ";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-}
-
-#pragma mark - HiAccuracyLocatorDelegate
-- (void) locator:(HiAccuracyLocator *)locator didLocateUser:(BOOL)didLocateUser reason:(StopReason)reason
-{
-    if(didLocateUser)
-    {
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder reverseGeocodeLocation:[[HiAccuracyLocator getInstance] bestLocation] completionHandler:^(NSArray *placemarks, NSError *error)
-        {
-            NSLog(@"**reverseGeocodeLocation:completionHandler: Completion Handler called!");
-            
-            if (error)
-            {
-                NSLog(@"**Geocode failed with error: %@", error);
-                return;
-                
-            }
-            
-            if(placemarks && placemarks.count > 0)
-                
-            {
-                //do something
-                CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                NSLog(@"**Geocode successful; zip code: %@", [topResult postalCode]);
-                
-                [[User getInstance] setZipcode:[topResult postalCode]];
-                [[User getInstance] saveUserData];
-            }
-        }];
-    }
-    else
-    {
-        if (reason == kStopReasonDenied)
-        {
-            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Whoops!" message:@"We could not find your current location. Make sure you are sharing your location with us. Go to Settings >> Location Services >> PaidPunch." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-        }
-        else
-        {
-            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Unable to locate!" message:@"We were not find your current location. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-        }
-    }
-    
-    [MBProgressHUD hideHUDForView:self.view animated:NO];
 }
 
 #pragma mark - Table view data source
@@ -375,8 +336,6 @@ static NSString* const kTextSpacing = @"  ";
     UILabel *hLabel=[[UILabel alloc] initWithFrame:CGRectMake(15,0,300,44)];
     
     hLabel.backgroundColor=[UIColor clearColor];
-    hLabel.shadowColor = [UIColor blackColor];
-    hLabel.shadowOffset = CGSizeMake(0.5,1);  // closest as far as I could tell
     hLabel.textColor = [UIColor grayColor];  // or whatever you want
     hLabel.font = [UIFont boldSystemFontOfSize:17];
     
@@ -455,6 +414,15 @@ static NSString* const kTextSpacing = @"  ";
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - HttpCallbackDelegate
+- (void) didCompleteHttpCallback:(NSString*)type success:(BOOL)success message:(NSString*)message
+{
+    [MBProgressHUD hideHUDForView:self.view animated:NO];
+
+    // Display no message. Even if the update to server fails, this is only to update the user's
+    // zipcode and isn't a catastrophic failure.
 }
 
 @end

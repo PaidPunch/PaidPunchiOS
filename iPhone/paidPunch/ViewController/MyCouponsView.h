@@ -15,7 +15,6 @@
 @interface MyCouponsView : PopUpBaseView<HttpCallbackDelegate>
 {
     CGFloat _lowestYPos;
-    UIScrollView* _myCouponsScrollView;
     MyCouponsTableView* _myCouponsTable;
     MBProgressHUD* _hud;
 }

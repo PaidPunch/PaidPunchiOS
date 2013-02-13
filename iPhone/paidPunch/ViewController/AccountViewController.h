@@ -9,11 +9,11 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <UIKit/UIKit.h>
 #import "BaseWithNavBarViewController.h"
-#import "HiAccuracyLocatorDelegate.h"
+#import "HttpCallbackDelegate.h"
 #import "MBProgressHUD.h"
 #import "NetworkManager.h"
 
-@interface AccountViewController : BaseWithNavBarViewController<UIAlertViewDelegate,HiAccuracyLocatorDelegate,UITableViewDataSource,UITableViewDelegate,NetworkManagerDelegate,MFMailComposeViewControllerDelegate>
+@interface AccountViewController : BaseWithNavBarViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,NetworkManagerDelegate,MFMailComposeViewControllerDelegate,HttpCallbackDelegate>
 {
     UITableView* _tableView;
     MBProgressHUD* _hud;

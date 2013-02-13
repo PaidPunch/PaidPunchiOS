@@ -533,7 +533,7 @@ static double const locationRefreshTime = -(5 * 60);
                     [delegate didCompleteHttpCallback:kKeyUsersGetInfo success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                 }
                 failure:^(AFHTTPRequestOperation* operation, NSError* error){
-                    NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
+                    NSLog(@"User info retrieval failed with status code: %d", [operation.response statusCode]);
                     [delegate didCompleteHttpCallback:kKeyUsersGetInfo success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                 }
      ];
