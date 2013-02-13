@@ -259,7 +259,7 @@ static CGFloat const barHeight = 30;
 
 -(void) didFinishMarkingPunchUsed:(NSString *)statusCode statusMessage:(NSString *)message barcodeImage:(NSData *)imageData barcodeValue:(NSString *)barcode;
 {
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+    [MBProgressHUD hideHUDForView:self.view animated:NO];
     
     if([statusCode isEqualToString:@"00"] || [statusCode isEqualToString:@"03"])
     {
