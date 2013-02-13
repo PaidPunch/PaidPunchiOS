@@ -236,8 +236,8 @@ static CGFloat const barHeight = 30;
 
 - (void) didPressUseCouponButton:(id)sender
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Use Punch"
-                                                      message:@"Clicking OK will use one of your punches. Are you sure?"
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Use Coupon"
+                                                      message:@"Clicking OK will use one of your coupons. Are you sure?"
                                                      delegate:self
                                             cancelButtonTitle:@"OK"
                                             otherButtonTitles:@"Cancel",nil];
