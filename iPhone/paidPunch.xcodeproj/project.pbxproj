@@ -3045,7 +3045,10 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"OTHER_LDFLAGS[arch=*]" = "";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-all_load",
+				);
 				PROVISIONING_PROFILE = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
 				SDKROOT = iphoneos;
@@ -3081,6 +3084,10 @@
 					"\"$(SRCROOT)/paidPunch/External/TestFlight\"",
 				);
 				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
 					"-all_load",
 					"-ObjC",
 				);
@@ -3155,7 +3162,10 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"OTHER_LDFLAGS[arch=*]" = "";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-all_load",
+				);
 				PROVISIONING_PROFILE = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
 				SDKROOT = iphoneos;
@@ -3194,7 +3204,10 @@
 					"-all_load",
 					"-ObjC",
 				);
-				"OTHER_LDFLAGS[arch=*]" = "";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -3231,6 +3244,10 @@
 					"\"$(SRCROOT)/paidPunch/External/TestFlight\"",
 				);
 				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
 					"-all_load",
 					"-ObjC",
 				);

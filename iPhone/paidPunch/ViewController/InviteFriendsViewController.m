@@ -30,18 +30,20 @@ typedef enum
 {
     AlertType _alertType;
     BOOL _popWhenDone;
+    BOOL _duringSignup;
 }
 @end
 
 @implementation InviteFriendsViewController
 
-- (id)init:(BOOL)popWhenDone
+- (id)init:(BOOL)popWhenDone duringSignup:(BOOL)duringSignup
 {
     self = [super init];
     if (self)
     {
         _alertType = no_response;
         _popWhenDone = popWhenDone;
+        _duringSignup = duringSignup;
     }
     return self;
 }
@@ -53,20 +55,19 @@ typedef enum
     [self createMainView:[UIColor whiteColor]];
     
     // Create nav bar on top
-    [self createNavBar:nil rightString:@"Next" middle:@"Give $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressNextButton:)];
+    [self createNavBar:nil rightString:@"Next" middle:@"Send $5, Get $5" isMiddleImage:FALSE leftAction:nil rightAction:@selector(didPressNextButton:)];
     
-    // Create green notification bar
-    [self createNotificationBar:@"Sign Up Successful!" color:[[UIColor greenColor] colorWithAlphaComponent:0.3]];
-    
-    // Create text labels
-    [self createInviteFriendsText];
+    if (_duringSignup)
+    {
+        // Create green notification bar
+        [self createNotificationBar:@"Sign Up Successful!" color:[[UIColor greenColor] colorWithAlphaComponent:0.3]];
+    }
     
     // Insert background image
     UIImageView* bkgdImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invite-friends.png"]];
-    CGRect originalRect = CGRectMake(0, 0, bkgdImage.frame.size.width, bkgdImage.frame.size.height);
-    originalRect = [Utilities resizeProportionally:originalRect maxWidth:stdiPhoneWidth maxHeight:stdiPhoneHeight];
-    originalRect.origin.y = stdiPhoneHeight - originalRect.size.height;
-    bkgdImage.frame = originalRect;
+    CGFloat bkgdImageHeight = (stdiPhoneHeight*3)/5 - 10;
+    CGRect bkgdImageRect = CGRectMake(0, stdiPhoneHeight - bkgdImageHeight, stdiPhoneWidth, bkgdImageHeight);
+    bkgdImage.frame = bkgdImageRect;
     [_mainView addSubview:bkgdImage];
     
     // Grey background bar for textfield
@@ -82,13 +83,16 @@ typedef enum
     [invitecodeLabel setTextAlignment:NSTextAlignmentCenter];
     [_mainView addSubview:invitecodeLabel];
     
+    // Create text labels
+    [self createInviteFriendsText];
+    
     // Create orange sign in/up button
     UIFont* orangeButtonFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"orange-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     _btnInvite = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect originalInviteButtonRect = CGRectMake(0, _lowestYPos + 100, image.size.width, image.size.height);
+    CGRect originalInviteButtonRect = CGRectMake(0, invitecodeLabel.frame.origin.y - image.size.height - 15, image.size.width, image.size.height);
     CGRect finalInviteButtonRect = [Utilities resizeProportionally:originalInviteButtonRect maxWidth:(stdiPhoneWidth - 80) maxHeight:160];
     finalInviteButtonRect.origin.x = (stdiPhoneWidth - finalInviteButtonRect.size.width)/2;
     _btnInvite.frame = finalInviteButtonRect;
@@ -164,15 +168,25 @@ typedef enum
 
 - (void)createInviteFriendsText
 {
-    NSString* inviteText = @"Invite friends with your invitation code!\rThey get $5 free.";
-    NSString* upsellText = @"You get $5 free per signup!";
+    NSString* inviteText = @"Send your friends $5 on us!\nWhen each friend signs up,";
+    NSString* upsellText = @"you get $5 free!";
     
     // Create non-bold label
-    UIFont* nonboldFont = [UIFont fontWithName:@"ArialMT" size:16.0f];
+    UIFont* nonboldFont = [UIFont fontWithName:@"ArialMT" size:20.0f];
     CGSize sizeInviteText = [inviteText sizeWithFont:nonboldFont
                                    constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
                                        lineBreakMode:UILineBreakModeWordWrap];
-    UILabel* inviteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + 8, stdiPhoneWidth, sizeInviteText.height)];
+    CGFloat gapFromTopElement;
+    if (_duringSignup)
+    {
+        gapFromTopElement = 8;
+    }
+    else
+    {
+        gapFromTopElement = 20;
+    }
+    
+    UILabel* inviteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapFromTopElement, stdiPhoneWidth, sizeInviteText.height)];
     inviteLabel.text = inviteText;
     inviteLabel.backgroundColor = [UIColor clearColor];
     inviteLabel.textColor = [UIColor blackColor];
@@ -182,11 +196,11 @@ typedef enum
     [_mainView addSubview:inviteLabel];
     
     // Create bold label
-    UIFont* boldFont = [UIFont fontWithName:@"Arial-BoldMT" size:16.0f];
+    UIFont* boldFont = [UIFont fontWithName:@"Arial-BoldMT" size:20.0f];
     CGSize sizeUpsellText = [upsellText sizeWithFont:boldFont
                                    constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
                                        lineBreakMode:UILineBreakModeWordWrap];
-    UILabel* upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + sizeInviteText.height + 10, stdiPhoneWidth, sizeUpsellText.height)];
+    UILabel* upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, inviteLabel.frame.origin.y + inviteLabel.frame.size.height + 10, stdiPhoneWidth, sizeUpsellText.height)];
     upsellLabel.text = upsellText;
     upsellLabel.backgroundColor = [UIColor clearColor];
     upsellLabel.textColor = [UIColor blackColor];

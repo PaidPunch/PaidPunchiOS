@@ -163,7 +163,12 @@ static NSString* kAppId = @"159848747459550";
 #pragma mark -
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    NSString *kApptentiveAPIKey =
+    @"dad9a546eb3ce256943a2e1ec47497650d46b51d47db341ebbb70777f7b7db6b";
+    ATConnect *connection = [ATConnect sharedConnection];
+    connection.apiKey = kApptentiveAPIKey;
+    
     // Localytics
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"add06e1e22ef9ab10bc2e72-5406e6da-5fa0-11e2-3c3f-004b50a28849"];
     
@@ -204,6 +209,10 @@ static NSString* kAppId = @"159848747459550";
     [self appInit];
     [self initFB];
     [self initView];
+    
+    ATAppRatingFlow *sharedFlow =
+    [ATAppRatingFlow sharedRatingFlowWithAppID:@"501977872"];
+    [sharedFlow appDidLaunch:YES viewController:self.navigationController];
     
     return YES;
 }
@@ -248,6 +257,9 @@ static NSString* kAppId = @"159848747459550";
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     [[self facebook] extendAccessTokenIfNeeded];
+    
+    ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlowWithAppID:@"501977872"];
+    [sharedFlow appDidLaunch:YES viewController:self.navigationController];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

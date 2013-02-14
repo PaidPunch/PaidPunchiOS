@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <QuartzCore/CAGradientLayer.h>
 #import "AccountViewController.h"
+#import "ATConnect.h"
 #import "BalanceViewController.h"
 #import "CreditCardSettingsViewController.h"
 #import "HiAccuracyLocator.h"
@@ -96,7 +97,7 @@ static NSString* const kTextSpacing = @"  ";
 
 - (void) showFreeCreditViews
 {
-    InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:TRUE];
+    InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:TRUE duringSignup:FALSE];
     [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
 }
 
@@ -109,8 +110,6 @@ static NSString* const kTextSpacing = @"  ";
 - (void) signOut
 {
     [[User getInstance] clearUser];
-    [[User getInstance] forceRefresh];
-    [[User getInstance] forceLocationRefresh];
     [[Punches getInstance] forceRefresh];
     
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -119,6 +118,9 @@ static NSString* const kTextSpacing = @"  ";
 
 - (void) sendFeedbackCheck
 {
+    ATConnect *connection = [ATConnect sharedConnection];
+    [connection presentFeedbackControllerFromViewController:self];
+    /*
     if ([MFMailComposeViewController canSendMail])
     {
         _feedbackAlertView = [[UIAlertView alloc] initWithTitle:@"Send Email Feedback"
@@ -139,6 +141,7 @@ static NSString* const kTextSpacing = @"  ";
         
         [message show];
     }
+     */
 }
 
 - (void) showCreditCardSettings

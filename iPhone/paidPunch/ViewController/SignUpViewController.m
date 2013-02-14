@@ -182,7 +182,7 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
         }
         else
         {
-            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE];
+            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
             [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
         }
     }

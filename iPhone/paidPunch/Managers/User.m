@@ -90,6 +90,9 @@ static double const locationRefreshTime = -(5 * 60);
     _phone = @"";
     _useZipcodeForLocation = FALSE;
     
+    [self forceLocationRefresh];
+    [self forceRefresh];
+    
     _callType = no_call;
     
     // Remove any stored user data

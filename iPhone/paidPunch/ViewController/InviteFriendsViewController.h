@@ -25,6 +25,6 @@
     MBProgressHUD* _hud;
 }
 
-- (id)init:(BOOL)popWhenDone;
+- (id)init:(BOOL)popWhenDone duringSignup:(BOOL)duringSignup;
 
 @end
