@@ -6,12 +6,16 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
+#import "InviteFriendsViewController.h"
 #import "LoginViewController.h"
 #import "PaidPunchHomeViewController.h"
 #import "User.h"
 #import "Utilities.h"
 
 @interface LoginViewController ()
+{
+    BOOL _loginViaEmail;
+}
 
 @end
 
@@ -84,6 +88,7 @@
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Logging in";
     
+    _loginViaEmail = FALSE;
     [[User getInstance] loginUserWithFacebook:self];
 }
 
@@ -96,6 +101,7 @@
     _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hud.labelText = @"Logging in";
     
+    _loginViaEmail = TRUE;
     [[User getInstance] loginUserWithEmail:self password:_passwordTextField.text];
 }
 
@@ -135,10 +141,21 @@
         [[DatabaseManager sharedInstance] deleteAllPunchCards];
         [[DatabaseManager sharedInstance] deleteBusinesses];
         
-        PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
-        AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-        delegate.rootController = homeViewController;
-        [self.navigationController pushViewController:homeViewController animated:NO];
+        if (_loginViaEmail && ![[User getInstance] launchedInvitesForEmailUsers])
+        {
+            [[User getInstance] setLaunchedInvitesForEmailUsers:TRUE];
+            
+            // First time logging in via email signup
+            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
+            [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+        }
+        else
+        {
+            PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+            AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+            delegate.rootController = homeViewController;
+            [self.navigationController pushViewController:homeViewController animated:NO];
+        }
     }
     else
     {

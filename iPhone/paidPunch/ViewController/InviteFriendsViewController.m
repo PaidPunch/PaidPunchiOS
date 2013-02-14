@@ -65,7 +65,7 @@ typedef enum
     
     // Insert background image
     UIImageView* bkgdImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invite-friends.png"]];
-    CGFloat bkgdImageHeight = (stdiPhoneHeight*3)/5 - 10;
+    CGFloat bkgdImageHeight = (stdiPhoneHeight*3)/5 - 15;
     CGRect bkgdImageRect = CGRectMake(0, stdiPhoneHeight - bkgdImageHeight, stdiPhoneWidth, bkgdImageHeight);
     bkgdImage.frame = bkgdImageRect;
     [_mainView addSubview:bkgdImage];
@@ -152,7 +152,6 @@ typedef enum
     {
         MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         controller.body = @"Use my code and get $5 free! http://goo.gl/NOuKr";
-		//controller.recipients = [NSArray arrayWithObjects:@"12345678", @"87654321", nil];
 		controller.messageComposeDelegate = self;
         if (controller)
         {
@@ -168,11 +167,11 @@ typedef enum
 
 - (void)createInviteFriendsText
 {
-    NSString* inviteText = @"Send your friends $5 on us!\nWhen each friend signs up,";
+    NSString* inviteText = @"Send your friends $5 on us!\n\nWhen each friend signs up,";
     NSString* upsellText = @"you get $5 free!";
     
     // Create non-bold label
-    UIFont* nonboldFont = [UIFont fontWithName:@"ArialMT" size:20.0f];
+    UIFont* nonboldFont = [UIFont fontWithName:@"ArialMT" size:18.0f];
     CGSize sizeInviteText = [inviteText sizeWithFont:nonboldFont
                                    constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
                                        lineBreakMode:UILineBreakModeWordWrap];
@@ -196,11 +195,11 @@ typedef enum
     [_mainView addSubview:inviteLabel];
     
     // Create bold label
-    UIFont* boldFont = [UIFont fontWithName:@"Arial-BoldMT" size:20.0f];
+    UIFont* boldFont = [UIFont fontWithName:@"Arial-BoldMT" size:18.0f];
     CGSize sizeUpsellText = [upsellText sizeWithFont:boldFont
                                    constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
                                        lineBreakMode:UILineBreakModeWordWrap];
-    UILabel* upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, inviteLabel.frame.origin.y + inviteLabel.frame.size.height + 10, stdiPhoneWidth, sizeUpsellText.height)];
+    UILabel* upsellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, inviteLabel.frame.origin.y + inviteLabel.frame.size.height + 2, stdiPhoneWidth, sizeUpsellText.height)];
     upsellLabel.text = upsellText;
     upsellLabel.backgroundColor = [UIColor clearColor];
     upsellLabel.textColor = [UIColor blackColor];

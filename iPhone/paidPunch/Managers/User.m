@@ -31,6 +31,7 @@ static NSString* const kKeyPaymentProfileCreated = @"isprofile_created";
 static NSString* const kKeyTotalMiles = @"totalMiles";
 static NSString* const kKeyCredits = @"credit";
 static NSString* const kKeyUserCode = @"user_code";
+static NSString* const kKeyLaunchedFlow = @"launchedflow";
 static NSString* const kKeyLastUpdate = @"lastUpdate";
 static NSString* const kEmailRegister = @"EMAIL-REGISTER";
 static NSString* const kFacebookRegister = @"FACEBOOK-REGISTER";
@@ -62,12 +63,14 @@ static double const locationRefreshTime = -(5 * 60);
 @synthesize credits = _credits;
 @synthesize lastUpdate = _lastUpdate;
 @synthesize useZipcodeForLocation = _useZipcodeForLocation;
+@synthesize launchedInvitesForEmailUsers = _launchedInvitesForEmailUsers;
 
 - (id) init
 {
     self = [super init];
     if(self)
     {
+        _launchedInvitesForEmailUsers = FALSE;
         [self clearUser];
     }
     return self;
@@ -170,6 +173,7 @@ static double const locationRefreshTime = -(5 * 60);
     [aCoder encodeObject:_userCode forKey:kKeyUserCode];
     [aCoder encodeObject:_lastUpdate forKey:kKeyLastUpdate];
     [aCoder encodeBool:_useZipcodeForLocation forKey:kKeyUseZipcode];
+    [aCoder encodeBool:_launchedInvitesForEmailUsers forKey:kKeyLaunchedFlow];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -190,6 +194,7 @@ static double const locationRefreshTime = -(5 * 60);
     _userCode = [aDecoder decodeObjectForKey:kKeyUserCode];
     _lastUpdate = [aDecoder decodeObjectForKey:kKeyLastUpdate];
     _useZipcodeForLocation = [aDecoder decodeBoolForKey:kKeyUseZipcode];
+    _launchedInvitesForEmailUsers = [aDecoder decodeBoolForKey:kKeyLaunchedFlow];
     return self;
 }
 

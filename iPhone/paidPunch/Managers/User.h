@@ -46,6 +46,7 @@ typedef enum
     NSNumber* _totalMiles;
     NSDecimalNumber* _credits;
     NSString* _maskedId;
+    BOOL _launchedInvitesForEmailUsers;
     
     BOOL _useZipcodeForLocation;
     CLLocation* _lastLocation;
@@ -72,6 +73,7 @@ typedef enum
 @property(nonatomic) NSDecimalNumber* credits;
 @property(nonatomic,readonly) NSDate* lastUpdate;
 @property(nonatomic) BOOL useZipcodeForLocation;
+@property(nonatomic) BOOL launchedInvitesForEmailUsers;
 
 - (void) clearUser;
 - (void) saveUserData;
