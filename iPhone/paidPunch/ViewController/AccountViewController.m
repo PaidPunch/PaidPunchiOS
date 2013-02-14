@@ -16,12 +16,13 @@
 #import "InfoChangeViewController.h"
 #import "InviteFriendsViewController.h"
 #import "PaidPunchHomeViewController.h"
+#import "Punches.h"
 #import "User.h"
 
 static NSUInteger const kSections = 2;
 static NSUInteger const kCellsInSection1 = 3;
-static NSUInteger const kCellsInSection2 = 4;
-static NSUInteger const kSizeOfCells = 40;
+static NSUInteger const kCellsInSection2 = 5;
+static NSUInteger const kSizeOfCells = 37;
 static NSString* const kTextSpacing = @"  ";
 
 @interface AccountViewController ()
@@ -68,6 +69,7 @@ static NSString* const kTextSpacing = @"  ";
     [_tableView setBackgroundColor:[UIColor clearColor]];
     [_tableView setOpaque:NO];
     [_tableView setScrollEnabled:NO];
+    [_tableView setRowHeight:kSizeOfCells];
     
     [_mainView addSubview:_tableView];
 }
@@ -102,6 +104,17 @@ static NSString* const kTextSpacing = @"  ";
 {
     BalanceViewController *balanceViewController = [[BalanceViewController alloc] init];
     [self.navigationController pushViewController:balanceViewController animated:NO];
+}
+
+- (void) signOut
+{
+    [[User getInstance] clearUser];
+    [[User getInstance] forceRefresh];
+    [[User getInstance] forceLocationRefresh];
+    [[Punches getInstance] forceRefresh];
+    
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate initView];
 }
 
 - (void) sendFeedbackCheck
@@ -258,11 +271,6 @@ static NSString* const kTextSpacing = @"  ";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return kSizeOfCells;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PaidPunchSidebarCell";
@@ -317,6 +325,10 @@ static NSString* const kTextSpacing = @"  ";
                 
             case 3:
                 cell.textLabel.text = [NSString stringWithFormat:@"%@Share Feedback", kTextSpacing];
+                break;
+                
+            case 4:
+                cell.textLabel.text = [NSString stringWithFormat:@"%@Sign Out", kTextSpacing];
                 break;
                 
             default:
@@ -405,6 +417,10 @@ static NSString* const kTextSpacing = @"  ";
                 
             case 3:
                 [self sendFeedbackCheck];
+                break;
+                
+            case 4:
+                [self signOut];
                 break;
                 
             default:
