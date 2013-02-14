@@ -22,7 +22,7 @@
 	
     [self createView];
     
-    _fadeTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+    _fadeTimer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
