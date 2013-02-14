@@ -62,7 +62,7 @@ typedef enum
     [self createInviteFriendsText];
     
     // Insert background image
-    UIImageView* bkgdImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"popup-redcarpet-img.png"]];
+    UIImageView* bkgdImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invite-friends.png"]];
     CGRect originalRect = CGRectMake(0, 0, bkgdImage.frame.size.width, bkgdImage.frame.size.height);
     originalRect = [Utilities resizeProportionally:originalRect maxWidth:stdiPhoneWidth maxHeight:stdiPhoneHeight];
     originalRect.origin.y = stdiPhoneHeight - originalRect.size.height;
