@@ -3037,7 +3037,10 @@
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "";
 				PROVISIONING_PROFILE = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D2EFEE6E-EB43-4EA1-9CA1-1BAF22E2D873";
@@ -3112,7 +3115,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3141,7 +3147,10 @@
 				HEADER_SEARCH_PATHS = "$(SDK_DIR)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "";
 				PROVISIONING_PROFILE = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2C483767-BB45-4DC0-9B7F-47DE016801DA";
