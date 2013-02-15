@@ -121,9 +121,6 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     // Store the current referralCode
     [[User getInstance] setReferralCode:_inviteCode];
     
-    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    _hud.labelText = @"Registering User";
-    
     // This indicates it's a facebook signup
     _emailSignup = FALSE;
     
@@ -135,14 +132,14 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
 {
     [self dismissKeyboard];
     
+    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    _hud.labelText = @"Registering User";
+    
     // Store the current referralCode
     [[User getInstance] setReferralCode:_inviteCode];
     
     if([self validate])
-    {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"Registering User";
-        
+    {        
         // Set the values into the User instance
         [User getInstance].email = _emailTextField.text;
         
@@ -172,18 +169,28 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
     
     if(success)
     {
-        [[DatabaseManager sharedInstance] deleteAllPunchCards];
-        [[DatabaseManager sharedInstance] deleteBusinesses];
-        
-        if ([type compare:kKeyUsersEmailRegister] == NSOrderedSame)
+        if ([type compare:kKeyUsersFacebookPermission] == NSOrderedSame)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"Registering User";
+            
+            [[User getInstance] registerUserWithFacebookToPaidPunch:self];
         }
         else
         {
-            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
-            [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+            [[DatabaseManager sharedInstance] deleteAllPunchCards];
+            [[DatabaseManager sharedInstance] deleteBusinesses];
+            
+            if ([type compare:kKeyUsersEmailRegister] == NSOrderedSame)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+            else
+            {
+                InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
+                [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+            }
         }
     }
     else

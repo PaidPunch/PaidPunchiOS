@@ -318,7 +318,7 @@ static double const locationRefreshTime = -(5 * 60);
     _callType = register_call;
 }
 
-- (void) registerUserWithFacebookInternal
+- (void) registerUserWithFacebookToPaidPunch:(NSObject<HttpCallbackDelegate>*) delegate
 {
     // post parameters
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -344,11 +344,11 @@ static double const locationRefreshTime = -(5 * 60);
                      _isUserValidated = TRUE;
                      _lastUpdate = [NSDate date];
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User registration failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyUsersFacebookRegister success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -388,7 +388,7 @@ static double const locationRefreshTime = -(5 * 60);
     _callType = login_call;
 }
 
-- (void) loginUserWithFacebookInternal
+- (void) loginUserWithFacebookToPaidPunch:(NSObject<HttpCallbackDelegate>*) delegate
 {
     // post parameters
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -407,11 +407,11 @@ static double const locationRefreshTime = -(5 * 60);
                      [self storeUserInfo:responseObject];
                      _isUserValidated = TRUE;
                      [self saveUserData];
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
+                     [delegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:TRUE message:[responseObject valueForKeyPath:kKeyStatusMessage]];
                  }
                  failure:^(AFHTTPRequestOperation* operation, NSError* error){
                      NSLog(@"User login failed with status code: %d", [operation.response statusCode]);
-                     [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
+                     [delegate didCompleteHttpCallback:kKeyUsersFacebookLogin success:FALSE message:[Utilities getStatusMessageFromResponse:operation]];
                  }
      ];
 }
@@ -638,13 +638,11 @@ static double const locationRefreshTime = -(5 * 60);
             
             if (_callType == register_call)
             {
-                // Call the facebook registration API
-                [self registerUserWithFacebookInternal];
+                [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookPermission success:TRUE message:@"Success"];
             }
             else if (_callType == login_call)
             {
-                // Call the facebook login API
-                [self loginUserWithFacebookInternal];
+                [facebookDelegate didCompleteHttpCallback:kKeyUsersFacebookPermission success:TRUE message:@"Success"];
             }
             else
             {

@@ -12,6 +12,7 @@
 #import "FBRequest.h"
 #import "HttpCallbackDelegate.h"
 
+static NSString* const kKeyUsersFacebookPermission = @"facebook_permission_response";
 static NSString* const kKeyUsersEmailRegister = @"users_email_register";
 static NSString* const kKeyUsersFacebookRegister = @"users_facebook_register";
 static NSString* const kKeyUsersEmailLogin = @"users_email_login";
@@ -80,8 +81,10 @@ typedef enum
 - (void)updateFacebookFeed:(NSString*)message;
 - (void) registerUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) registerUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) registerUserWithFacebookToPaidPunch:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) loginUserWithEmail:(NSObject<HttpCallbackDelegate>*)delegate password:(NSString*)password;
 - (void) loginUserWithFacebook:(NSObject<HttpCallbackDelegate>*) delegate;
+- (void) loginUserWithFacebookToPaidPunch:(NSObject<HttpCallbackDelegate>*) delegate;
 - (void) changePassword:(NSObject<HttpCallbackDelegate>*)delegate oldPassword:(NSString*)oldPassword newPassword:(NSString*)newPassword;
 - (void) changeInfo:(NSObject<HttpCallbackDelegate>*)delegate parameters:(NSMutableDictionary*)parameters;
 - (void) getUserProfileInfo;

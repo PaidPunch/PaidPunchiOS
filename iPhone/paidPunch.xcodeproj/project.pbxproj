@@ -552,6 +552,7 @@
 		38177F2B16CC571A0019C9FC /* AddCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardViewController.xib; sourceTree = "<group>"; };
 		38177F2E16CC578B0019C9FC /* ConfirmPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPaymentViewController.xib; sourceTree = "<group>"; };
 		38177F3016CCB94C0019C9FC /* invite-friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite-friends.png"; sourceTree = "<group>"; };
+		38177F3216CDCC080019C9FC /* ATSurveys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATSurveys.h; path = External/ApptentiveConnect/source/Surveys/ATSurveys.h; sourceTree = "<group>"; };
 		38280352169FF56C005A8A32 /* InfoChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoChangeViewController.h; path = TabBar/Home/MyAccount/InfoChangeViewController.h; sourceTree = "<group>"; };
 		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoChangeViewController.m; path = TabBar/Home/MyAccount/InfoChangeViewController.m; sourceTree = "<group>"; };
 		382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchPurchaseCompleteViewController.h; sourceTree = "<group>"; };
@@ -1209,6 +1210,7 @@
 		38AAE8431672636100BF4922 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				38177F3216CDCC080019C9FC /* ATSurveys.h */,
 				38AAC8E716CB37D900D69926 /* ATAppRatingFlow.h */,
 				38AAC8E616CB33D100D69926 /* ATConnect.h */,
 				38810BF916CAA6350090B4FF /* TestFlight */,

@@ -8,6 +8,7 @@
 
 #include "CommonDefinitions.h"
 #import "AccountViewController.h"
+#import "ATSurveys.h"
 #import "BalanceViewController.h"
 #import "BizView.h"
 #import "Businesses.h"
@@ -26,6 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Check for surveys
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(surveyBecameAvailable:)
+                                                 name:ATSurveyNewSurveyAvailableNotification object:nil];
+    [ATSurveys checkForAvailableSurveys];
     
     _launchMyCouponsOnWillAppear = FALSE;
     _currentBizView = nil;
@@ -312,6 +319,11 @@
 {
     [_paidpunchButton stopPPGlow];
     [self showMyCoupons];
+}
+
+- (void)surveyBecameAvailable:(NSNotification *)notification
+{
+    [ATSurveys presentSurveyControllerFromViewController:self];
 }
 
 #pragma mark - HttpCallbackDelegate

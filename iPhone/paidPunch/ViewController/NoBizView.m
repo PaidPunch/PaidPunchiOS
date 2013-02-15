@@ -63,7 +63,7 @@
         blackbar.backgroundColor = [UIColor blackColor];
         blackbar.layer.cornerRadius = 5;
         blackbar.layer.masksToBounds = YES;
-        [blackbar setText:@"Tell us where you want to save by\rclicking on the Suggest A Business button"];
+        [blackbar setText:@"Tell us where you want to save by\rclicking on the Vote For Business button"];
         blackbar.textColor = [UIColor whiteColor];
         [blackbar setNumberOfLines:2];
         [blackbar setFont:blackbarFont];

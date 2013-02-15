@@ -85,9 +85,6 @@
 {
     [self dismissKeyboard];
     
-    _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    _hud.labelText = @"Logging in";
-    
     _loginViaEmail = FALSE;
     [[User getInstance] loginUserWithFacebook:self];
 }
@@ -138,23 +135,33 @@
     
     if(success)
     {
-        [[DatabaseManager sharedInstance] deleteAllPunchCards];
-        [[DatabaseManager sharedInstance] deleteBusinesses];
-        
-        if (_loginViaEmail && ![[User getInstance] launchedInvitesForEmailUsers])
+        if ([type compare:kKeyUsersFacebookPermission] == NSOrderedSame)
         {
-            [[User getInstance] setLaunchedInvitesForEmailUsers:TRUE];
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"Logging in";
             
-            // First time logging in via email signup
-            InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
-            [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+            [[User getInstance] loginUserWithFacebookToPaidPunch:self];
         }
         else
         {
-            PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
-            AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-            delegate.rootController = homeViewController;
-            [self.navigationController pushViewController:homeViewController animated:NO];
+            [[DatabaseManager sharedInstance] deleteAllPunchCards];
+            [[DatabaseManager sharedInstance] deleteBusinesses];
+            
+            if (_loginViaEmail && ![[User getInstance] launchedInvitesForEmailUsers])
+            {
+                [[User getInstance] setLaunchedInvitesForEmailUsers:TRUE];
+                
+                // First time logging in via email signup
+                InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
+                [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+            }
+            else
+            {
+                PaidPunchHomeViewController *homeViewController = [[PaidPunchHomeViewController alloc] init];
+                AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                delegate.rootController = homeViewController;
+                [self.navigationController pushViewController:homeViewController animated:NO];
+            }
         }
     }
     else
