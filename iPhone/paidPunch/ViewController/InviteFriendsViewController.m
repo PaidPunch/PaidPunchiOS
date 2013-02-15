@@ -151,7 +151,7 @@ typedef enum
     else if (_alertType == sms_response)
     {
         MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-        controller.body = @"Use my code and get $5 free! http://goo.gl/NOuKr";
+        controller.body = [[Templates getInstance] getTemplateByName:@"sms"];
 		controller.messageComposeDelegate = self;
         if (controller)
         {
@@ -389,13 +389,25 @@ typedef enum
 
 -(IBAction)didPressFacebookButton:(id)sender
 {
-    _alertType = facebook_response;
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
-                                                      message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will post a invitation to your Facebook wall."
-                                                     delegate:self
-                                            cancelButtonTitle:@"Cancel"
-                                            otherButtonTitles:@"OK",nil];
-    
+    UIAlertView *message;
+    if ([[User getInstance] isFacebookProfile])
+    {
+        _alertType = facebook_response;
+        message = [[UIAlertView alloc] initWithTitle:@"Invite Your Friends"
+                                                          message:@"Get free credits by inviting your friends to download the PaidPunch app. Clicking OK will post a invitation to your Facebook wall."
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"OK",nil];
+        
+    }
+    else
+    {
+        message = [[UIAlertView alloc] initWithTitle:@"Not a Facebook profile"
+                                             message:@"The current PaidPunch account is not associated with a Facebook account and cannot post to Facebook."
+                                            delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil];
+    }
     [message show];
 }
 
