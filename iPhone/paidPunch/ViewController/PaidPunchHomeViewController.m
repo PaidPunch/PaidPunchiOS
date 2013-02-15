@@ -106,6 +106,24 @@
             [[HiAccuracyLocator getInstance] startUpdatingLocation];
         }
     }
+    else
+    {
+        if ([[User getInstance] useZipcodeForLocation])
+        {
+            if ([[Businesses getInstance] needsRefresh])
+            {
+                [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            }
+            else
+            {
+                [self createHomePageView:nil];
+            }
+        }
+        else
+        {
+            [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
+        }
+    }
     
     if (_updatingUserInfo || _updatingBusinesses)
     {
