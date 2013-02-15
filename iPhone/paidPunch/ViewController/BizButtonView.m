@@ -37,6 +37,13 @@
         [self addSubview:_logoImage];
         [self addSubview:_upsellLabel];
         
+        // Create invisible button that goes on top of uiview
+        _overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_overlayButton addTarget:self action:@selector(didTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+        [_overlayButton addTarget:self action:@selector(didTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [_overlayButton addTarget:self action:@selector(didDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+        [_overlayButton setFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
+        
         NSArray* offers = [_businessOffers getOffers];
         if (offers != nil)
         {
@@ -52,13 +59,6 @@
 
             [_businessOffers retrieveOffersFromServer:self];
         }
-        
-        // Create invisible button that goes on top of uiview
-        _overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_overlayButton addTarget:self action:@selector(didTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-        [_overlayButton addTarget:self action:@selector(didTouchDown:) forControlEvents:UIControlEventTouchDown];
-        [_overlayButton addTarget:self action:@selector(didDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-        [_overlayButton setFrame:CGRectMake(0, 0, finalRect.size.width, finalRect.size.height)];
     }
     return self;
 }

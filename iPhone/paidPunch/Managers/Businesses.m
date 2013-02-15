@@ -197,6 +197,7 @@ static double const refreshTime = -(60 * 60);
             BusinessOffers* currentBiz = [[BusinessOffers alloc] initWithBusiness:current];
             [_businessesDict setObject:currentBiz forKey:[current business_id]];
         }
+        _lastUpdate =[NSDate date];
         [_businessesDelegate didCompleteHttpCallback:kKeyBusinessesRetrieval success:TRUE message:@"Businesses retrieved"];
     }
 }

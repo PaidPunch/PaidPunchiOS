@@ -82,42 +82,21 @@
         [self showMyCoupons];
     }
     
-    if ([[User getInstance] locationNeedsRefresh])
+    if ([[User getInstance] useZipcodeForLocation])
     {
-        if ([[User getInstance] useZipcodeForLocation])
-        {
-            // Indicate that location does not need to be refreshed
-            [[User getInstance] indicateLocationRefreshed];
-            
-            if ([[Businesses getInstance] needsRefresh])
-            {
-                [[Businesses getInstance] retrieveBusinessesFromServer:self];
-            }
-            else
-            {
-                [self createHomePageView:nil];
-            }
-        }
-        else
+        // Indicate that location does not need to be refreshed
+        [[User getInstance] indicateLocationRefreshed];
+        
+        [self RefreshBusinessesOrCreateHomepage];
+    }
+    else
+    {
+        if ([[User getInstance] locationNeedsRefresh])
         {
             // Start by locating user
             _updatingBusinesses = TRUE;
             [[HiAccuracyLocator getInstance] setDelegate:self];
             [[HiAccuracyLocator getInstance] startUpdatingLocation];
-        }
-    }
-    else
-    {
-        if ([[User getInstance] useZipcodeForLocation])
-        {
-            if ([[Businesses getInstance] needsRefresh])
-            {
-                [[Businesses getInstance] retrieveBusinessesFromServer:self];
-            }
-            else
-            {
-                [self createHomePageView:nil];
-            }
         }
         else
         {
@@ -265,6 +244,18 @@
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
 }
 
+- (void)RefreshBusinessesOrCreateHomepage
+{
+    if ([[Businesses getInstance] needsRefresh])
+    {
+        [[Businesses getInstance] retrieveBusinessesFromServer:self];
+    }
+    else
+    {
+        [self createHomePageView:nil];
+    }
+}
+
 - (void)createHomePageView:(CLLocation*)location
 {
     NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:location];
@@ -394,25 +385,17 @@
 {
     if(didLocateUser)
     {
-        if ([[User getInstance] isUserInNewLocation:[[HiAccuracyLocator getInstance] bestLocation]])
+        if ([[User getInstance] isUserInNewLocation:[[HiAccuracyLocator getInstance] bestLocation]] &&
+            [[Businesses getInstance] needsRefresh])
         {
-            if ([[Businesses getInstance] needsRefresh])
-            {
-                [[Businesses getInstance] retrieveBusinessesFromServer:self];
-            }
-            else
-            {
-                // Businesses don't need to be refreshed yet
-                _updatingBusinesses = FALSE;
-                [self removeProgressSpinnerIfNecessary];
-                [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
-            }
+            [[Businesses getInstance] retrieveBusinessesFromServer:self];
         }
         else
         {
-            // User hasn't moved much. Don't bother updating businesses. 
+            // User hasn't moved much or businesses don't need to be refreshed yet
             _updatingBusinesses = FALSE;
             [self removeProgressSpinnerIfNecessary];
+            [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
         }
     }
     else
