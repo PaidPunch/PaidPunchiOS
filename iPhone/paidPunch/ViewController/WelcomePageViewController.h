@@ -16,6 +16,7 @@
     NSArray* _businessTypeTexts;
     UILabel* _businessTypeLabel;
     NSUInteger _currentIndex;
+    UIView* _imageContainerView;
     UIImageView* _mainImageView;
     UILabel* _greyoutLabel;
     UIButton* _signinButton;

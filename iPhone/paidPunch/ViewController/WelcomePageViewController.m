@@ -50,10 +50,10 @@
     _currentIndex = 0;
     UIImage* currentImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [_imageFiles objectAtIndex:_currentIndex]]];
     CGRect imageRect = CGRectMake(0, logoImage.frame.origin.y + logoImage.frame.size.height, stdiPhoneWidth, 310);
-    //imageRect = [Utilities resizeProportionally:imageRect maxWidth:stdiPhoneWidth maxHeight:320];
-    _mainImageView = [[UIImageView alloc] initWithFrame:imageRect];
+    _imageContainerView = [[UIView alloc] initWithFrame:imageRect];
+    _mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageRect.size.width, imageRect.size.height)];
     [_mainImageView setImage:currentImage];
-    [_mainView addSubview:_mainImageView];
+    [_imageContainerView addSubview:_mainImageView];
     
     // Create white label across the images with upsell text
     CGFloat constrainedSize = 265.0f;
@@ -69,7 +69,7 @@
     [textLabel setNumberOfLines:1];
     [textLabel setFont:upsellFont];
     textLabel.textAlignment = UITextAlignmentLeft;
-    [_mainView addSubview:textLabel];
+    [_imageContainerView addSubview:textLabel];
     
     // Create clear label with business types in orange text
     _businessTypeTexts = [NSArray arrayWithObjects:@"spas", @"cafes", @"restaurants", @"salons", @"laundromats", @"bars", nil];
@@ -81,10 +81,12 @@
     [_businessTypeLabel setNumberOfLines:1];
     [_businessTypeLabel setFont:businessTypeFont];
     _businessTypeLabel.textAlignment = UITextAlignmentLeft;
-    [_mainView addSubview:_businessTypeLabel];
+    [_imageContainerView addSubview:_businessTypeLabel];
+    
+     [_mainView addSubview:_imageContainerView];
     
     // Create signup button    
-    CGFloat ypos = _mainImageView.frame.origin.y + _mainImageView.frame.size.height + 10;
+    CGFloat ypos = _imageContainerView.frame.origin.y + _imageContainerView.frame.size.height + 10;
     CGFloat xpos = 5;
     CGFloat buttonSize = (stdiPhoneWidth/2 - xpos*2);
     _signupButton = [self createCustomButton:@"Sign Up" btnImage:@"orange-button" btnWidth:buttonSize xpos:xpos ypos:ypos justification:leftJustify action:@selector(didPressSignupButton:)];
@@ -139,7 +141,7 @@
     }
 
     UIImage * toImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [_imageFiles objectAtIndex:_currentIndex]]];
-    [UIView transitionWithView:self.view
+    [UIView transitionWithView:_imageContainerView
                       duration:1.75f
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
