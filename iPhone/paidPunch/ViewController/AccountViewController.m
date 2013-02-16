@@ -120,28 +120,6 @@ static NSString* const kTextSpacing = @"  ";
 {
     ATConnect *connection = [ATConnect sharedConnection];
     [connection presentFeedbackControllerFromViewController:self];
-    /*
-    if ([MFMailComposeViewController canSendMail])
-    {
-        _feedbackAlertView = [[UIAlertView alloc] initWithTitle:@"Send Email Feedback"
-                                                        message:@"Clicking OK will launch an email client for sending feedback to us"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:@"Cancel", nil];
-        [_feedbackAlertView show];
-    }
-    else
-    {
-        // Current device is not configured for email
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Email Available"
-                                                          message:@"You need to configure an email client before sending feedback"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        
-        [message show];
-    }
-     */
 }
 
 - (void) showCreditCardSettings

@@ -876,8 +876,8 @@
 		8A7CD761152D6E8D00F5789B /* bluedonebtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluedonebtn@2x.png"; sourceTree = "<group>"; };
 		8A7CD762152D6E8E00F5789B /* greydonebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greydonebtn.png; sourceTree = "<group>"; };
 		8A7CD763152D6E8E00F5789B /* greydonebtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greydonebtn@2x.png"; sourceTree = "<group>"; };
-		8A7D079E152C2C2F00765302 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		8A7D079F152C2C2F00765302 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		8A7D079E152C2C2F00765302 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EGORefreshTableHeaderView.h; path = ViewController/TabBar/Feeds/RefreshTableHeaderView/EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		8A7D079F152C2C2F00765302 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGORefreshTableHeaderView.m; path = ViewController/TabBar/Feeds/RefreshTableHeaderView/EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		8A7D07B1152C306B00765302 /* FeedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedsTableViewController.h; sourceTree = "<group>"; };
 		8A7D07B2152C306C00765302 /* FeedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedsTableViewController.m; sourceTree = "<group>"; };
 		8A7D07B7152C3E5200765302 /* FeedsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedsViewCell.h; sourceTree = "<group>"; };
@@ -1162,6 +1162,15 @@
 			path = SearchByCategory;
 			sourceTree = "<group>";
 		};
+		38177F3316D011670019C9FC /* EGORefreshTableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				8A7D079E152C2C2F00765302 /* EGORefreshTableHeaderView.h */,
+				8A7D079F152C2C2F00765302 /* EGORefreshTableHeaderView.m */,
+			);
+			name = EGORefreshTableHeaderView;
+			sourceTree = "<group>";
+		};
 		382BF27316C5A1E100711781 /* UIView-Glow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,6 +1222,7 @@
 				38177F3216CDCC080019C9FC /* ATSurveys.h */,
 				38AAC8E716CB37D900D69926 /* ATAppRatingFlow.h */,
 				38AAC8E616CB33D100D69926 /* ATConnect.h */,
+				38177F3316D011670019C9FC /* EGORefreshTableHeaderView */,
 				38810BF916CAA6350090B4FF /* TestFlight */,
 				382BF27316C5A1E100711781 /* UIView-Glow */,
 				38C2590516A67B8300982568 /* Localytics */,
@@ -1994,20 +2004,10 @@
 		8A7C8FF115107BEF00F99863 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D079D152C2C2E00765302 /* RefreshTableHeaderView */,
 				8A7D07B1152C306B00765302 /* FeedsTableViewController.h */,
 				8A7D07B2152C306C00765302 /* FeedsTableViewController.m */,
 			);
 			path = Feeds;
-			sourceTree = "<group>";
-		};
-		8A7D079D152C2C2E00765302 /* RefreshTableHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				8A7D079E152C2C2F00765302 /* EGORefreshTableHeaderView.h */,
-				8A7D079F152C2C2F00765302 /* EGORefreshTableHeaderView.m */,
-			);
-			path = RefreshTableHeaderView;
 			sourceTree = "<group>";
 		};
 		8A7D07B6152C3E2300765302 /* FeedsCell */ = {

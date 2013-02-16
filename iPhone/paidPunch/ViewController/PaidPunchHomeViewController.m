@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     
+    _hud = nil;
+    
     // Check for surveys
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(surveyBecameAvailable:)
@@ -87,7 +89,15 @@
         // Indicate that location does not need to be refreshed
         [[User getInstance] indicateLocationRefreshed];
         
-        [self RefreshBusinessesOrCreateHomepage];
+        if ([[Businesses getInstance] needsRefresh])
+        {
+            _updatingBusinesses = TRUE;
+            [[Businesses getInstance] retrieveBusinessesFromServer:self];
+        }
+        else
+        {
+            [self createHomePageView:nil];
+        }
     }
     else
     {
@@ -118,6 +128,7 @@
     if (!_updatingUserInfo && !_updatingBusinesses)
     {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+        _hud = nil;
     }
 }
 
@@ -242,18 +253,6 @@
     [_mainView addSubview:suggestButton];
     
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
-}
-
-- (void)RefreshBusinessesOrCreateHomepage
-{
-    if ([[Businesses getInstance] needsRefresh])
-    {
-        [[Businesses getInstance] retrieveBusinessesFromServer:self];
-    }
-    else
-    {
-        [self createHomePageView:nil];
-    }
 }
 
 - (void)createHomePageView:(CLLocation*)location
@@ -385,6 +384,7 @@
 {
     if(didLocateUser)
     {
+        [[User getInstance] indicateLocationRefreshed];
         if ([[User getInstance] isUserInNewLocation:[[HiAccuracyLocator getInstance] bestLocation]] &&
             [[Businesses getInstance] needsRefresh])
         {
