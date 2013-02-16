@@ -184,12 +184,7 @@ static double const refreshTime = -(60 * 60);
 #pragma mark - network manager delegate
 - (void)didFinishSearchByName:(NSString *)statusCode
 {
-    if ([statusCode rangeOfString:@"00"].location == NSNotFound)
-    {
-        NSLog(@"SearchByName received a failure from the server: %@", statusCode);
-        [_businessesDelegate didCompleteHttpCallback:kKeyBusinessesRetrieval success:FALSE message:@"Failed to retrieve list of businesses from the server"];
-    }
-    else
+    if ([statusCode compare:@"00"]== NSOrderedSame)
     {
         NSArray* bizArray = [[DatabaseManager sharedInstance] getAllBusinesses];
         for (Business* current in bizArray)
@@ -199,6 +194,11 @@ static double const refreshTime = -(60 * 60);
         }
         _lastUpdate =[NSDate date];
         [_businessesDelegate didCompleteHttpCallback:kKeyBusinessesRetrieval success:TRUE message:@"Businesses retrieved"];
+    }
+    else
+    {        
+        NSLog(@"SearchByName received a failure from the server: %@", statusCode);
+        [_businessesDelegate didCompleteHttpCallback:kKeyBusinessesRetrieval success:FALSE message:@"Failed to retrieve list of businesses from the server"];
     }
 }
 
