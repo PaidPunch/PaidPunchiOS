@@ -8,7 +8,7 @@
 
 #import "DatabaseManager.h"
 #import "HiAccuracyLocator.h"
-#import "InviteFriendsViewController.h"
+#import "TutorialViewController.h"
 #import "SignUpViewController.h"
 #import "User.h"
 #import "Utilities.h"
@@ -188,8 +188,9 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
             }
             else
             {
-                InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
-                [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+                // Transition to next tutorial screen
+                TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithStep:1];
+                [self.navigationController pushViewController:tutorialViewController animated:NO];
             }
         }
     }

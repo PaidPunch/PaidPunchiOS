@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 PaidPunch. All rights reserved.
 //
 
-#import "InviteFriendsViewController.h"
 #import "LoginViewController.h"
 #import "PaidPunchHomeViewController.h"
+#import "TutorialViewController.h"
 #import "User.h"
 #import "Utilities.h"
 
@@ -152,8 +152,9 @@
                 [[User getInstance] setLaunchedInvitesForEmailUsers:TRUE];
                 
                 // First time logging in via email signup
-                InviteFriendsViewController *inviteFriendsViewController = [[InviteFriendsViewController alloc] init:FALSE duringSignup:TRUE];
-                [self.navigationController pushViewController:inviteFriendsViewController animated:NO];
+                // Transition to next tutorial screen
+                TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithStep:1];
+                [self.navigationController pushViewController:tutorialViewController animated:NO];
             }
             else
             {
