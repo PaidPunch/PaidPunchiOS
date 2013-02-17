@@ -47,6 +47,8 @@
     
     _bizBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, _lowestYPos + 3, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10))];
     [_mainView addSubview:_bizBaseView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDataForView:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,23 +57,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    _updatingBusinesses = FALSE;
-    _updatingUserInfo = FALSE;
-    
-    // User info hasn't been updated in a while; update it
-    if ([[User getInstance] needsRefresh])
-    {
-        _updatingUserInfo = TRUE;
-        [[User getInstance] getUserInfoFromServer:self];
-    }
-    else
-    {
-        [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
-    }
     
     if ([[Punches getInstance] justPurchasedPunch])
     {
@@ -84,13 +77,7 @@
         [self showMyCoupons];
     }
     
-    [self refreshBizView];
-    
-    if (_updatingUserInfo || _updatingBusinesses)
-    {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"Updating";
-    }
+    [self refreshDataForView:nil];    
 }
 
 #pragma mark - private functions
@@ -104,35 +91,59 @@
     }
 }
 
-- (void)refreshBizView
+- (void)refreshDataForView:(NSNotification *)notification
 {
-    if ([[User getInstance] useZipcodeForLocation])
+    // hud is not nil means that the view is already waiting on work
+    if (_hud == nil)
     {
-        // Indicate that location does not need to be refreshed
-        [[User getInstance] indicateLocationRefreshed];
+        _updatingBusinesses = FALSE;
+        _updatingUserInfo = FALSE;
         
-        if ([[Businesses getInstance] needsRefresh])
+        // User info hasn't been updated in a while; update it
+        if ([[User getInstance] needsRefresh])
         {
-            _updatingBusinesses = TRUE;
-            [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            _updatingUserInfo = TRUE;
+            [[User getInstance] getUserInfoFromServer:self];
         }
         else
         {
-            [self createHomePageView:nil];
+            [_creditsButton setTitle:[NSString stringWithFormat:@"%@", [[User getInstance] getCreditAsString]] forState:UIControlStateNormal];
         }
-    }
-    else
-    {
-        if ([[User getInstance] locationNeedsRefresh])
+        
+        if ([[User getInstance] useZipcodeForLocation])
         {
-            // Start by locating user
-            _updatingBusinesses = TRUE;
-            [[HiAccuracyLocator getInstance] setDelegate:self];
-            [[HiAccuracyLocator getInstance] startUpdatingLocation];
+            // Indicate that location does not need to be refreshed
+            [[User getInstance] indicateLocationRefreshed];
+            
+            if ([[Businesses getInstance] needsRefresh])
+            {
+                _updatingBusinesses = TRUE;
+                [[Businesses getInstance] retrieveBusinessesFromServer:self];
+            }
+            else
+            {
+                [self createHomePageView:nil];
+            }
         }
         else
         {
-            [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
+            if ([[User getInstance] locationNeedsRefresh])
+            {
+                // Start by locating user
+                _updatingBusinesses = TRUE;
+                [[HiAccuracyLocator getInstance] setDelegate:self];
+                [[HiAccuracyLocator getInstance] startUpdatingLocation];
+            }
+            else
+            {
+                [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
+            }
+        }
+        
+        if (_updatingUserInfo || _updatingBusinesses)
+        {
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            _hud.labelText = @"Updating";
         }
     }
 }
@@ -351,12 +362,7 @@
 - (void)didPressRefreshButton:(id)sender
 {
     [[User getInstance] forceLocationRefresh];
-    [self refreshBizView];
-    if (_updatingBusinesses)
-    {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"Updating";
-    }
+    [self refreshDataForView:nil];
 }
 
 - (void)surveyBecameAvailable:(NSNotification *)notification
