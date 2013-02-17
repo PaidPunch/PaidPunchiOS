@@ -12,9 +12,9 @@
 #import "Utilities.h"
 
 static CGFloat const kRowHeight = 40;
-static CGFloat const kFinalPurchaseRulesRowHeight = 125;
+static CGFloat const kFinalPurchaseRulesRowHeight = 300;
 static CGFloat const kOrangeBoxWidth = 60;
-static NSUInteger const kRowCount = 4;
+static NSUInteger const kRowCount = 3;
 
 @implementation RulesView
 
@@ -109,11 +109,19 @@ static NSUInteger const kRowCount = 4;
     UILabel* whiteBox;
     UILabel* whiteLabel;
     if (indexPath.row == 0)
+    {        
+        NSString *amountAsString = [Utilities currencyAsString:[_punchcard minimum_value]];
+        whiteBox = [self createWhiteBox:amountAsString];
+        whiteLabel = [self createWhiteLabel:@"  Minimum spend to use each coupon"];
+        [cell addSubview:whiteBox];
+        [cell addSubview:whiteLabel];
+    }
+    else if (indexPath.row == 1)
     {
         if (_purchaseRules)
         {
-            whiteBox = [self createWhiteBox:@"1"];
-            whiteLabel = [self createWhiteLabel:@"  Coupon"];
+            whiteBox = [self createWhiteBox:[NSString stringWithFormat:@"%d", [[_punchcard expire_days] intValue]]];
+            whiteLabel = [self createWhiteLabel:@"  days until promotional value expires"];
             [cell addSubview:whiteBox];
             [cell addSubview:whiteLabel];
         }
@@ -132,28 +140,13 @@ static NSUInteger const kRowCount = 4;
             [cell addSubview:whiteBox];
         }
     }
-    else if (indexPath.row == 1)
-    {
-        NSString *amountAsString = [Utilities currencyAsString:[_punchcard minimum_value]];
-        whiteBox = [self createWhiteBox:amountAsString];
-        whiteLabel = [self createWhiteLabel:@"  Minimum spend to use each coupon"];
-        [cell addSubview:whiteBox];
-        [cell addSubview:whiteLabel];
-    }
-    else if (indexPath.row == 2)
-    {
-        whiteBox = [self createWhiteBox:[_punchcard redeem_time_diff]];
-        whiteLabel = [self createWhiteLabel:@"  Minutes between each coupon use"];
-        [cell addSubview:whiteBox];
-        [cell addSubview:whiteLabel];
-    }
     else
     {
         UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:13.0];
         if (_purchaseRules)
         {
             whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kFinalPurchaseRulesRowHeight)];
-            [whiteLabel setText:[NSString stringWithFormat:@"You are purchasing a set of coupons. The Promotional Value of the coupons will expire in %d days. The PaidPunch coupon applies to the total guest check before tips and taxes. Discount applies only to orders placed during the valid time period of the PaidPunch offer. Only one PaidPunch coupon may be redeemed per guest check.", [[_punchcard expire_days] intValue]]];
+            [whiteLabel setText:[NSString stringWithFormat:@"You are purchasing a set of digital coupons. Coupons on PaidPunch are purchased using digital credits which you can either earn or purchase. The Promotional Value of coupons will expire in %d days. Paid Value, which is the amount of digital credits you used to purchase coupons, of coupons that expire unused will be fully refunded to your account automatically on a pro rata basis. Coupon applies to the total guest check before tip and taxes. Discount applies only to purchases made during the valid time period of the PaidPunch offer. Only one PaidPunch coupon may be redeemed per guest check. Must present digital coupon upon purchase. Cannot be used in combination with other coupons and discounts. 30 minutes must elapse between coupon uses.", [[_punchcard expire_days] intValue]]];
             [whiteLabel setNumberOfLines:0];
         }
         else
