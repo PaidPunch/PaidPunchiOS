@@ -16,7 +16,7 @@
 #import "UrlImageManager.h"
 #import "Utilities.h"
 
-static CGFloat const kImageHeight = 200;
+static CGFloat const kImageHeight = 260;
 static CGFloat const barHeight = 30;
 
 @interface MyCouponViewController ()
@@ -158,27 +158,28 @@ static CGFloat const barHeight = 30;
 
 - (void)createUseCouponButton
 {
-    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
     NSString* couponText = [NSString stringWithFormat:@"Use a %@ coupon", [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard each_punch_value] doubleValue]]]];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"large-green-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-    UIButton* suggestButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton* useCouponButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     CGRect originalRect = CGRectMake(0, 0, image.size.width, image.size.height);
     CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:(stdiPhoneWidth - 60) maxHeight:stdiPhoneHeight];
     finalRect.origin.x = (stdiPhoneWidth - finalRect.size.width)/2;
     finalRect.origin.y = _lowestYPos - (finalRect.size.height + 20);
     
-    suggestButton.frame = finalRect;
-    [suggestButton setBackgroundImage:image forState:UIControlStateNormal];
-    [suggestButton setTitle:couponText forState:UIControlStateNormal];
-    [suggestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    suggestButton.titleLabel.font = textFont;
-    [suggestButton addTarget:self action:@selector(didPressUseCouponButton:) forControlEvents:UIControlEventTouchUpInside];
+    useCouponButton.frame = finalRect;
+    [useCouponButton setBackgroundImage:image forState:UIControlStateNormal];
+    [useCouponButton setTitle:couponText forState:UIControlStateNormal];
+    [useCouponButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    useCouponButton.titleLabel.font = textFont;
+    [useCouponButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE];
+    [useCouponButton addTarget:self action:@selector(didPressUseCouponButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_mainView addSubview:suggestButton];
+    [_mainView addSubview:useCouponButton];
 }
 
 - (void)createNumPunchesLabel

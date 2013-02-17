@@ -19,7 +19,7 @@
 #import "UrlImageManager.h"
 #import "Utilities.h"
 
-static CGFloat const kImageHeight = 120;
+static CGFloat const kImageHeight = 150;
 static CGFloat const kLabelHeight = 40;
 
 @implementation BusinessDescView
@@ -133,10 +133,10 @@ static CGFloat const kLabelHeight = 40;
 
 - (void)createBuyCouponButton
 {
-    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
+    UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
     NSString* couponText = [NSString stringWithFormat:@"Buy now for only %@", [Utilities currencyAsString:[NSNumber numberWithFloat:[[_punchcard selling_price] doubleValue]]]];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"large-green-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     UIButton* buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -151,6 +151,7 @@ static CGFloat const kLabelHeight = 40;
     [buyButton setTitle:couponText forState:UIControlStateNormal];
     [buyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     buyButton.titleLabel.font = textFont;
+    [buyButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE];
     [buyButton addTarget:self action:@selector(didPressBuyCouponButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:buyButton];

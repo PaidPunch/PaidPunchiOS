@@ -12,10 +12,9 @@
 #import "Utilities.h"
 
 static CGFloat const kRowHeight = 40;
-static CGFloat const kFinalPurchaseRulesRowHeight = 300;
+static CGFloat const kFinalPurchaseRulesRowHeight = 280;
 static CGFloat const kOrangeBoxWidth = 60;
-static NSUInteger const kRowCount = 3;
-
+static NSUInteger const kRowCount = 6;
 @implementation RulesView
 
 - (id)initWithPunchcard:(CGRect)frame current:(PunchCard *)current purchaseRules:(BOOL)purchaseRules 
@@ -27,25 +26,8 @@ static NSUInteger const kRowCount = 3;
         // The rules can be for purchase or usage. The display to the user is slight different in either case
         _purchaseRules = purchaseRules;
         
-        CGFloat totalHeight;
-        if (_purchaseRules)
-        {
-            totalHeight = (kRowHeight * (kRowCount - 1)) + kFinalPurchaseRulesRowHeight + 100;
-        }
-        else
-        {
-            totalHeight = kRowHeight * kRowCount + 50;
-        }
-        
-        _rulesScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        [self addSubview:_rulesScroller];
-        
-        _rulesList = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _rulesScroller.frame.size.width, totalHeight)];
-        [_rulesScroller setContentSize:_rulesList.frame.size];
-        _rulesList.dataSource = self;
-        _rulesList.delegate = self;
-        _rulesList.rowHeight = kRowHeight;
-        [_rulesScroller addSubview:_rulesList];
+        self.dataSource = self;
+        self.delegate = self;
     }
     return self;
 }
@@ -84,7 +66,14 @@ static NSUInteger const kRowCount = 3;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return kRowCount;
+    if (_purchaseRules)
+    {
+        return kRowCount;    
+    }
+    else
+    {
+        return kRowCount - 2;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,15 +84,9 @@ static NSUInteger const kRowCount = 3;
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"RuleCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
+{    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];;
+
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UILabel* whiteBox;
@@ -140,18 +123,18 @@ static NSUInteger const kRowCount = 3;
             [cell addSubview:whiteBox];
         }
     }
-    else
+    else if (indexPath.row == 2)
     {
         UIFont* textFont = [UIFont fontWithName:@"Helvetica" size:13.0];
         if (_purchaseRules)
         {
-            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kFinalPurchaseRulesRowHeight)];
+            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, stdiPhoneWidth - 10, kFinalPurchaseRulesRowHeight)];
             [whiteLabel setText:[NSString stringWithFormat:@"You are purchasing a set of digital coupons. Coupons on PaidPunch are purchased using digital credits which you can either earn or purchase. The Promotional Value of coupons will expire in %d days. Paid Value, which is the amount of digital credits you used to purchase coupons, of coupons that expire unused will be fully refunded to your account automatically on a pro rata basis. Coupon applies to the total guest check before tip and taxes. Discount applies only to purchases made during the valid time period of the PaidPunch offer. Only one PaidPunch coupon may be redeemed per guest check. Must present digital coupon upon purchase. Cannot be used in combination with other coupons and discounts. 30 minutes must elapse between coupon uses.", [[_punchcard expire_days] intValue]]];
             [whiteLabel setNumberOfLines:0];
         }
         else
         {
-            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, stdiPhoneWidth - 10, kRowHeight)];
+            whiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, stdiPhoneWidth - 10, kRowHeight)];
             [whiteLabel setText:@"Cannot be used in combination with other coupons or discounts."];
             [whiteLabel setNumberOfLines:2];
         }
@@ -168,13 +151,13 @@ static NSUInteger const kRowCount = 3;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == (kRowCount - 1) && _purchaseRules)
+    if (_purchaseRules && indexPath.row == (kRowCount - 4))
     {
         return kFinalPurchaseRulesRowHeight;
     }
     else
     {
-        return tableView.rowHeight;
+        return kRowHeight;
     }
 }
 

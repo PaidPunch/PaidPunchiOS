@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PunchCard.h"
 
-@interface RulesView : UIView<UITableViewDelegate, UITableViewDataSource>
+@interface RulesView : UITableView<UITableViewDelegate, UITableViewDataSource>
 {
-    UIScrollView* _rulesScroller;
-    UITableView* _rulesList;
     PunchCard* _punchcard;
     BOOL _purchaseRules;
 }
