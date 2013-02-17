@@ -43,7 +43,7 @@
 	
     [self createNavBar];
     
-    [self createSuggestBusinessButton];
+    [self createTopButtons];
     
     _bizBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, _lowestYPos + 3, stdiPhoneWidth, stdiPhoneHeight - (_lowestYPos + 10))];
     [_mainView addSubview:_bizBaseView];
@@ -84,6 +84,28 @@
         [self showMyCoupons];
     }
     
+    [self refreshBizView];
+    
+    if (_updatingUserInfo || _updatingBusinesses)
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Updating";
+    }
+}
+
+#pragma mark - private functions
+
+- (void)removeProgressSpinnerIfNecessary
+{
+    if (!_updatingUserInfo && !_updatingBusinesses)
+    {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
+        _hud = nil;
+    }
+}
+
+- (void)refreshBizView
+{
     if ([[User getInstance] useZipcodeForLocation])
     {
         // Indicate that location does not need to be refreshed
@@ -112,23 +134,6 @@
         {
             [self createHomePageView:[[HiAccuracyLocator getInstance] bestLocation]];
         }
-    }
-    
-    if (_updatingUserInfo || _updatingBusinesses)
-    {
-        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        _hud.labelText = @"Updating";
-    }
-}
-
-#pragma mark - private functions
-
-- (void)removeProgressSpinnerIfNecessary
-{
-    if (!_updatingUserInfo && !_updatingBusinesses)
-    {
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:NO];
-        _hud = nil;
     }
 }
 
@@ -230,18 +235,21 @@
     return newButton;
 }
 
-- (void)createSuggestBusinessButton
+- (void)createTopButtons
 {
+    CGFloat sideSpacing = 10;
+    
+    // Create green suggestion button
     UIFont* textFont = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"green-suggest-button" ofType:@"png"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"large-green-button" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     UIButton* suggestButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     CGRect originalRect = CGRectMake(0, _lowestYPos + 3, image.size.width, image.size.height);
-    CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:(stdiPhoneWidth - 60) maxHeight:stdiPhoneHeight];
-    finalRect.origin.x = (stdiPhoneWidth - finalRect.size.width)/2;
+    CGRect finalRect = [Utilities resizeProportionally:originalRect maxWidth:(stdiPhoneWidth - 80) maxHeight:stdiPhoneHeight];
+    finalRect.origin.x = stdiPhoneWidth - (finalRect.size.width + sideSpacing);
     
     suggestButton.frame = finalRect;
     [suggestButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -250,7 +258,18 @@
     suggestButton.titleLabel.font = textFont;
     [suggestButton addTarget:self action:@selector(didPressSuggestBusinessButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    // Create refresh button    
+    NSString *refreshFilePath = [[NSBundle mainBundle] pathForResource:@"refresh" ofType:@"png"];
+    NSData *refreshImageData = [NSData dataWithContentsOfFile:refreshFilePath];
+    UIImage *refreshImage = [[UIImage alloc] initWithData:refreshImageData];
+    UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    refreshButton.frame = CGRectMake(sideSpacing, _lowestYPos + 3, finalRect.size.height, finalRect.size.height);
+    [refreshButton setImage:refreshImage forState:UIControlStateNormal];
+    [refreshButton addTarget:self action:@selector(didPressRefreshButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     [_mainView addSubview:suggestButton];
+    [_mainView addSubview:refreshButton];
     
     _lowestYPos = finalRect.origin.y + finalRect.size.height;
 }
@@ -327,6 +346,17 @@
 {
     [_paidpunchButton stopPPGlow];
     [self showMyCoupons];
+}
+
+- (void)didPressRefreshButton:(id)sender
+{
+    [[User getInstance] forceLocationRefresh];
+    [self refreshBizView];
+    if (_updatingBusinesses)
+    {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"Updating";
+    }
 }
 
 - (void)surveyBecameAvailable:(NSNotification *)notification
