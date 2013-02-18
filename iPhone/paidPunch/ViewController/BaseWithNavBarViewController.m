@@ -180,6 +180,7 @@
 {
     [_emailTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
+    [_scrollview setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (UIButton*)createButton:(NSString*)buttonText xpos:(CGFloat)xpos ypos:(CGFloat)ypos justification:(JustificationType)justification maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight action:(SEL)action
@@ -306,6 +307,7 @@
     CGRect emailFrame = CGRectMake(xpos, emailLabel.frame.size.height + emailLabel.frame.origin.y + 15, textfieldWidth, textHeight);
     _emailTextField = [self initializeUITextField:emailFrame placeholder:@"Email: example@example.com" font:textFont];
     _emailTextField.returnKeyType = UIReturnKeyNext;
+    [_emailTextField setKeyboardType:UIKeyboardTypeEmailAddress];
     [_scrollview addSubview:_emailTextField];
     
     // Create textfield for password

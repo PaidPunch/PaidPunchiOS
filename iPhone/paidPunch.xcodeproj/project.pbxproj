@@ -37,6 +37,8 @@
 		38177F3916D019F90019C9FC /* step3background.png in Resources */ = {isa = PBXBuildFile; fileRef = 38177F3616D019F90019C9FC /* step3background.png */; };
 		38177F3C16D01CEE0019C9FC /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38177F3B16D01CEC0019C9FC /* TutorialViewController.m */; };
 		38177F3E16D166870019C9FC /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 38177F3D16D166870019C9FC /* refresh.png */; };
+		38177F4116D1EDB60019C9FC /* EmailVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38177F4016D1EDB20019C9FC /* EmailVerifyViewController.m */; };
+		38177F4316D1EEAD0019C9FC /* emailverifybackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 38177F4216D1EEAD0019C9FC /* emailverifybackground.png */; };
 		38280354169FF56C005A8A32 /* InfoChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38280353169FF56C005A8A32 /* InfoChangeViewController.m */; };
 		382BF26C16C58A6E00711781 /* PunchPurchaseCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382BF26B16C58A6E00711781 /* PunchPurchaseCompleteViewController.m */; };
 		382BF27116C58F5300711781 /* large-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 382BF26F16C58F5300711781 /* large-green-button.png */; };
@@ -564,6 +566,9 @@
 		38177F3A16D01CEB0019C9FC /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		38177F3B16D01CEC0019C9FC /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		38177F3D16D166870019C9FC /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		38177F3F16D1EDAF0019C9FC /* EmailVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailVerifyViewController.h; sourceTree = "<group>"; };
+		38177F4016D1EDB20019C9FC /* EmailVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailVerifyViewController.m; sourceTree = "<group>"; };
+		38177F4216D1EEAD0019C9FC /* emailverifybackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emailverifybackground.png; sourceTree = "<group>"; };
 		38280352169FF56C005A8A32 /* InfoChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoChangeViewController.h; path = TabBar/Home/MyAccount/InfoChangeViewController.h; sourceTree = "<group>"; };
 		38280353169FF56C005A8A32 /* InfoChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoChangeViewController.m; path = TabBar/Home/MyAccount/InfoChangeViewController.m; sourceTree = "<group>"; };
 		382BF26A16C58A6D00711781 /* PunchPurchaseCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchPurchaseCompleteViewController.h; sourceTree = "<group>"; };
@@ -1634,6 +1639,8 @@
 				382BF27A16C5B9AE00711781 /* HomePaidPunchButtonDelegate.h */,
 				38177F3A16D01CEB0019C9FC /* TutorialViewController.h */,
 				38177F3B16D01CEC0019C9FC /* TutorialViewController.m */,
+				38177F3F16D1EDAF0019C9FC /* EmailVerifyViewController.h */,
+				38177F4016D1EDB20019C9FC /* EmailVerifyViewController.m */,
 			);
 			name = ViewController;
 			path = paidPunch/ViewController;
@@ -2039,6 +2046,7 @@
 		8A7D081C1519BF9900B98387 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38177F4216D1EEAD0019C9FC /* emailverifybackground.png */,
 				38177F3D16D166870019C9FC /* refresh.png */,
 				38177F3416D019F90019C9FC /* step1background.png */,
 				38177F3516D019F90019C9FC /* step2background.png */,
@@ -2892,6 +2900,7 @@
 				38177F3816D019F90019C9FC /* step2background.png in Resources */,
 				38177F3916D019F90019C9FC /* step3background.png in Resources */,
 				38177F3E16D166870019C9FC /* refresh.png in Resources */,
+				38177F4316D1EEAD0019C9FC /* emailverifybackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3014,6 +3023,7 @@
 				38B5A5C716C801F8002DDE8A /* BizView.m in Sources */,
 				38B5A5D216C87C4F002DDE8A /* BizButtonView.m in Sources */,
 				38177F3C16D01CEE0019C9FC /* TutorialViewController.m in Sources */,
+				38177F4116D1EDB60019C9FC /* EmailVerifyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
