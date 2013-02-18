@@ -11,7 +11,7 @@
 NSString* const kUserLocated = @"UserLocated";
 NSString* const kUserLocationFailed = @"UserLocationFailed";
 
-static NSTimeInterval kLocationUpdateTimeout = 4.0;
+static NSTimeInterval kLocationUpdateTimeout = 10.0;
 
 @interface HiAccuracyLocator ()
 {
