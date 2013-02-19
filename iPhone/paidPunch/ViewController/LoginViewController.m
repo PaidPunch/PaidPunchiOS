@@ -143,10 +143,7 @@
             [[User getInstance] loginUserWithFacebookToPaidPunch:self];
         }
         else
-        {
-            [[DatabaseManager sharedInstance] deleteAllPunchCards];
-            [[DatabaseManager sharedInstance] deleteBusinesses];
-            
+        {            
             if (_loginViaEmail && ![[User getInstance] launchedInvitesForEmailUsers])
             {
                 [[User getInstance] setLaunchedInvitesForEmailUsers:TRUE];

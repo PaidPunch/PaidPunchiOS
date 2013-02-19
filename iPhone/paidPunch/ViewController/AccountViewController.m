@@ -12,6 +12,7 @@
 #import "AccountViewController.h"
 #import "ATConnect.h"
 #import "BalanceViewController.h"
+#import "Businesses.h"
 #import "CreditCardSettingsViewController.h"
 #import "HiAccuracyLocator.h"
 #import "InfoChangeViewController.h"
@@ -109,6 +110,9 @@ static NSString* const kTextSpacing = @"  ";
 
 - (void) signOut
 {
+    [[DatabaseManager sharedInstance] deleteAllPunchCards];
+    [[DatabaseManager sharedInstance] deleteBusinesses];
+    [[Businesses getInstance] forceRefresh];
     [[User getInstance] clearUser];
     [[Punches getInstance] forceRefresh];
     

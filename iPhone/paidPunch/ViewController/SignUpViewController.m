@@ -171,10 +171,7 @@ static NSString* termsURL = @"http://home.paidpunch.com/terms-of-use.jsp";
             [[User getInstance] registerUserWithFacebookToPaidPunch:self];
         }
         else
-        {
-            [[DatabaseManager sharedInstance] deleteAllPunchCards];
-            [[DatabaseManager sharedInstance] deleteBusinesses];
-            
+        {            
             if ([type compare:kKeyUsersEmailRegister] == NSOrderedSame)
             {
                 EmailVerifyViewController *emailverifyViewController = [[EmailVerifyViewController alloc] init];
