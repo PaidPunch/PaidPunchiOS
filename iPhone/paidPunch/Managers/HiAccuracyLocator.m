@@ -55,7 +55,7 @@ static NSTimeInterval kLocationUpdateTimeout = 10.0;
     self = [super init];
     if(self)
     {
-        [self internalInitWithAccuracy:kCLLocationAccuracyHundredMeters];
+        [self internalInitWithAccuracy:kCLLocationAccuracyKilometer];
     }
     return self;
 }
@@ -80,8 +80,16 @@ static NSTimeInterval kLocationUpdateTimeout = 10.0;
     }
     else 
     {
-        // otherwise, just timeout
-        [self stopUpdatingLocation:kStopReasonTimedOut];
+        if ([self bestLocation])
+        {
+            // timeout occurred, but a best location exists, so let's use that.
+            [self stopUpdatingLocation:kStopReasonDesiredAccuracy];
+        }
+        else
+        {
+            // otherwise, just timeout
+            [self stopUpdatingLocation:kStopReasonTimedOut];
+        }
     }
 }
 
