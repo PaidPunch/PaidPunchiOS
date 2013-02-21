@@ -27,6 +27,7 @@ NSString * const BUSINESS_LOGO_URL=@"bussinesslogo_url";
 NSString * const PUNCH_CARD_ID=@"punchcardid";
 NSString * const PUNCH_CARD_NAME=@"punchcardname";
 NSString * const PUNCH_CARD_DESC=@"pucnchcarddesc";
+NSString * const PUNCH_CARD_CODE=@"punchcard_code";
 NSString * const TOTAL_NO_PUNCHES=@"totalnoofpunches";
 NSString * const EACH_PUNCH_VALUE=@"eachpunchvalue";
 NSString * const ACTUAL_PRICE=@"actualprice";

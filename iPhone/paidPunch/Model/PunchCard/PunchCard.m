@@ -37,6 +37,7 @@
 @dynamic minimum_value;
 @dynamic expire_days;
 @dynamic redeem_time_diff;
+@dynamic code;
 @dynamic business;
 
 - (NSString*)getRemainingAmountAsString

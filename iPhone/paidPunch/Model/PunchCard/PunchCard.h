@@ -38,6 +38,7 @@
 @property (nonatomic, strong) NSNumber * minimum_value;
 @property (nonatomic, strong) NSNumber * expire_days;
 @property (nonatomic, strong) NSString * redeem_time_diff;
+@property (nonatomic, strong) NSString * code;
 @property (nonatomic, strong) Business *business;
 
 - (NSString*)getRemainingAmountAsString;

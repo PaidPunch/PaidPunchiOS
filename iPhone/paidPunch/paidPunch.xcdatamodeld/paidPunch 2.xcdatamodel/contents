@@ -107,6 +107,7 @@
         <attribute name="business_name" optional="YES" attributeType="String">
             <userInfo/>
         </attribute>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="discount" optional="YES" attributeType="Float" defaultValueString="0.0">
             <userInfo/>
         </attribute>
@@ -208,7 +209,7 @@
     <elements>
         <element name="Business" positionX="160" positionY="192" width="128" height="285"/>
         <element name="Feed" positionX="160" positionY="192" width="128" height="240"/>
-        <element name="PunchCard" positionX="160" positionY="192" width="128" height="390"/>
+        <element name="PunchCard" positionX="160" positionY="192" width="128" height="450"/>
         <element name="Registration" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Zipcodes_Cache" positionX="160" positionY="192" width="128" height="90"/>
     </elements>

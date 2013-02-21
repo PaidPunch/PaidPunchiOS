@@ -124,6 +124,7 @@ static double const refreshTime = -(60 * 60);
             [current setRedeem_time_diff:[newPunch redeem_time_diff]];
             [current setMinimum_value:[newPunch minimum_value]];
             [current setExpire_days:[newPunch expire_days]];
+            [current setCode:[newPunch code]];
         }
         index++;
     }

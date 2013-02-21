@@ -27,6 +27,7 @@ extern NSString * const BUSINESS_LOGO_URL;
 extern NSString * const PUNCH_CARD_ID;
 extern NSString * const PUNCH_CARD_NAME;
 extern NSString * const PUNCH_CARD_DESC;
+extern NSString * const PUNCH_CARD_CODE;
 extern NSString * const TOTAL_NO_PUNCHES;
 extern NSString * const EACH_PUNCH_VALUE;
 extern NSString * const ACTUAL_PRICE;

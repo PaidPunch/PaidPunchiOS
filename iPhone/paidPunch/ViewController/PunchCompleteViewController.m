@@ -86,11 +86,22 @@
 
 - (void) createLabels
 {
-    CGFloat gapsBetweenLabels = 10;
+    CGFloat gapsBetweenLabels;
+    if ([[_punchcard code] length] > 0)
+    {
+        gapsBetweenLabels = 10;
+    }
+    else
+    {
+        gapsBetweenLabels = 15;
+    }
     
     // Name of business
-    UIFont* bizFont = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
-    UILabel* bizLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, 60)];
+    UIFont* bizFont = [UIFont fontWithName:@"Helvetica-Bold" size:30.0f];
+    CGSize sizeBizText = [[_punchcard business_name] sizeWithFont:bizFont
+                                                constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
+                                                    lineBreakMode:UILineBreakModeWordWrap];
+    UILabel* bizLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, sizeBizText.height + 2)];
     bizLabel.backgroundColor = [UIColor clearColor];
     bizLabel.textColor = [UIColor blackColor];
     bizLabel.textAlignment = UITextAlignmentCenter;
@@ -102,26 +113,52 @@
     
     // terms
     UIFont* termsFont = [UIFont fontWithName:@"Helvetica-Bold" size:30.0f];
-    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, 100)];
+    NSString* termsText = [NSString stringWithFormat:@"%@ off purchase of\n %@ or more", [Utilities currencyAsString:[_punchcard each_punch_value]], [Utilities currencyAsString:[_punchcard minimum_value]]];
+    CGSize sizeTermsText = [termsText sizeWithFont:termsFont
+                                 constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
+                                     lineBreakMode:UILineBreakModeWordWrap];
+    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, sizeTermsText.height + 2)];
     termsLabel.backgroundColor = [UIColor clearColor];
     termsLabel.textColor = [UIColor orangeColor];
     termsLabel.textAlignment = UITextAlignmentCenter;
-    termsLabel.text = [NSString stringWithFormat:@"%@ off purchase of\n %@ or more", [Utilities currencyAsString:[_punchcard each_punch_value]], [Utilities currencyAsString:[_punchcard minimum_value]]];
+    termsLabel.text = termsText;
     [termsLabel setAdjustsFontSizeToFitWidth:YES];
     [termsLabel setNumberOfLines:2];
     [termsLabel setFont:termsFont];
     [_mainView addSubview:termsLabel];
     _lowestYPos = termsLabel.frame.size.height + termsLabel.frame.origin.y;
     
-    // TODO: Add Code if necessary
+    // Code
+    if ([[_punchcard code] length] > 0)
+    {
+        UIFont* codeFont = [UIFont fontWithName:@"ArialMT" size:30.0f];
+        NSString* codeText = [NSString stringWithFormat:@"CODE: %@", [_punchcard code]];
+        CGSize sizeCodeText = [codeText sizeWithFont:codeFont
+                                   constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
+                                       lineBreakMode:UILineBreakModeWordWrap];
+        UILabel* codeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, sizeCodeText.height + 2)];
+        codeLabel.backgroundColor = [UIColor clearColor];
+        codeLabel.textColor = [UIColor blackColor];
+        codeLabel.textAlignment = UITextAlignmentCenter;
+        codeLabel.text = codeText;
+        [codeLabel setAdjustsFontSizeToFitWidth:YES];
+        [codeLabel setNumberOfLines:1];
+        [codeLabel setFont:codeFont];
+        [_mainView addSubview:codeLabel];
+        _lowestYPos = codeLabel.frame.size.height + codeLabel.frame.origin.y;
+    }
     
     // condition
     UIFont* conditionFont = [UIFont fontWithName:@"Helvetica" size:14.0f];
-    UILabel* conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, 60)];
+    NSString* conditionText = @"Cannot be used in combination with\n other coupons or discounts";
+    CGSize sizeConditionText = [conditionText sizeWithFont:conditionFont
+                                         constrainedToSize:CGSizeMake(stdiPhoneWidth, CGFLOAT_MAX)
+                                             lineBreakMode:UILineBreakModeWordWrap];
+    UILabel* conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos + gapsBetweenLabels, stdiPhoneWidth, sizeConditionText.height + 2)];
     conditionLabel.backgroundColor = [UIColor clearColor];
     conditionLabel.textColor = [UIColor blackColor];
     conditionLabel.textAlignment = UITextAlignmentCenter;
-    conditionLabel.text = @"Cannot be used in combination with\n other coupons or discounts";
+    conditionLabel.text = conditionText;
     [conditionLabel setAdjustsFontSizeToFitWidth:YES];
     [conditionLabel setFont:conditionFont];
     [conditionLabel setNumberOfLines:2];

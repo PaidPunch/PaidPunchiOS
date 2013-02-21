@@ -108,6 +108,10 @@
     {
         [punchCardDetails setValue:newCurrentValue forKey:@"punch_card_name"];
     }
+    if([elementName isEqualToString:PUNCH_CARD_CODE])
+    {
+        [punchCardDetails setValue:newCurrentValue forKey:@"code"];
+    }
     if([elementName isEqualToString:PUNCH_CARD_DESC])
     {
         [punchCardDetails setValue:newCurrentValue forKey:@"punch_card_desc"];
