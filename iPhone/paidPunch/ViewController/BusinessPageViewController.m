@@ -10,6 +10,7 @@
 #import "BusinessDescView.h"
 #import "BusinessMapView.h"
 #import "BusinessPageViewController.h"
+#import "LocalyticsSession.h"
 #import "Punches.h"
 #import "User.h"
 
@@ -66,6 +67,8 @@ static CGFloat const kButtonHeight = 40;
             [_business retrieveOffersFromServer:self];
         }
     }
+    
+    [self logViewBusiness:_bizname];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,6 +78,24 @@ static CGFloat const kButtonHeight = 40;
 }
 
 #pragma mark - private functions
+
+- (void)logViewBusiness:(NSString*)businessName
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                businessName,
+                                @"BusinessName",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"ViewBusiness" attributes:dictionary];
+}
+
+- (void)logCallBusiness:(NSString*)businessName
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                businessName,
+                                @"BusinessName",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"CallBusiness" attributes:dictionary];
+}
 
 - (void)createBusinessView
 {
@@ -209,6 +230,10 @@ static CGFloat const kButtonHeight = 40;
     {
         UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"No Phone Available" message:@"This device is incapable of making phonecalls." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
+    }
+    else
+    {
+        [self logCallBusiness:_bizname];
     }
 }
 

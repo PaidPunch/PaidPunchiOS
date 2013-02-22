@@ -8,6 +8,7 @@
 
 #import "VoteBusinessesViewController.h"
 #import "InviteFriendsViewController.h"
+#import "LocalyticsSession.h"
 #import "Templates.h"
 #import "User.h"
 #import "Utilities.h"
@@ -121,12 +122,22 @@ typedef enum
     // Dispose of any resources that can be recreated.
 }
 
+- (void)logInviteFriends:(NSString*)inviteType
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                inviteType,
+                                @"InviteType",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"InviteFriends" attributes:dictionary];
+}
+
 #pragma mark - private functions
 
 - (void)sendInvite
 {
     if (_alertType == facebook_response)
     {
+        [self logInviteFriends:@"Facebook"];
         [[User getInstance] updateFacebookFeed:[[Templates getInstance] getTemplateByName:@"facebook"]];
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Invite posted to your Facebook wall"
                                                           message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
@@ -332,6 +343,7 @@ typedef enum
 {
     if (result == MFMailComposeResultSent)
     {
+        [self logInviteFriends:@"Email"];
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Email Sent"
                                                           message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
                                                          delegate:nil
@@ -347,6 +359,7 @@ typedef enum
 {
     if (result == MessageComposeResultSent)
     {
+        [self logInviteFriends:@"SMS"];
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Text Sent"
                                                           message:@"When your friends sign up with PaidPunch using your invite code, you'll earn free credit."
                                                          delegate:nil

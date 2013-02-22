@@ -7,6 +7,7 @@
 //
 
 #import "BusinessMapView.h"
+#import "LocalyticsSession.h"
 
 @implementation BusinessMapView
 
@@ -19,10 +20,29 @@
         _business = business;
         [self createMap:frame];
     }
+    [self logViewBusinessMap];
     return self;
 }
 
 #pragma mark - private functions
+
+- (void)logViewBusinessMap
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                _business.business_name,
+                                @"BusinessName",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"ViewBusinessMap" attributes:dictionary];
+}
+
+- (void)logGetDirections
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                _business.business_name,
+                                @"BusinessName",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"GetDirections" attributes:dictionary];
+}
 
 - (void)createMap:(CGRect)frame
 {
@@ -90,6 +110,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    [self logGetDirections];
     MKUserLocation *userLocation = _businessMap.userLocation;
     NSString *urlToLaunch =[NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",userLocation.coordinate.latitude,userLocation.coordinate.longitude,[[_business latitude] doubleValue],[[_business longitude] doubleValue]];
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlToLaunch]];

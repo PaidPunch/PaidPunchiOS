@@ -13,6 +13,7 @@
 #import "BizView.h"
 #import "Businesses.h"
 #import "HiAccuracyLocator.h"
+#import "LocalyticsSession.h"
 #import "MyCouponsView.h"
 #import "NoBizView.h"
 #import "PaidPunchHomeViewController.h"
@@ -288,6 +289,8 @@
 - (void)createHomePageView:(CLLocation*)location
 {
     NSArray* businesses = [[Businesses getInstance] getBusinessesCloseby:location];
+    // Log analytics to backend indicates how many businesses were closeby
+    [self logBusinessesCloseBy:[businesses count]];
     if ([businesses count] > 0)
     {
         [self createBizView:businesses];
@@ -327,6 +330,15 @@
     _launchMyCouponsOnWillAppear = FALSE;
     MyCouponsView* myCouponsView = [[MyCouponsView alloc] initWithFrame:self.view.frame];
     [_mainView addSubview:myCouponsView];
+}
+
+- (void)logBusinessesCloseBy:(unsigned int)num
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithUnsignedInt:num],
+                                @"NumOfBusinesses",
+                                nil];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"BusinessesCloseBy" attributes:dictionary];
 }
 
 #pragma mark - event actions
