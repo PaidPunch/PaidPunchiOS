@@ -61,7 +61,7 @@ static double const refreshTime = -(60 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Punches";
+    NSString* path = @"Punches";
     [httpClient postPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){

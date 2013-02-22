@@ -297,7 +297,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = @"Users";
     [httpClient postPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -333,7 +333,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users";
+    NSString* path = @"Users";
     [httpClient postPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -364,7 +364,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users/login";
+    NSString* path = @"Users/login";
     [httpClient putPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -399,7 +399,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users/login";
+    NSString* path = @"Users/login";
     [httpClient putPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -428,7 +428,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@/password", _userId];
+    NSString* path = [NSString stringWithFormat:@"Users/%@/password", _userId];
     [httpClient putPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -450,7 +450,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@", _userId];
+    NSString* path = [NSString stringWithFormat:@"Users/%@", _userId];
     [httpClient putPath:path
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -530,7 +530,7 @@ static double const locationRefreshTime = -(5 * 60);
 {    
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = [NSString stringWithFormat:@"paid_punch/Users/%@", _userId];
+    NSString* path = [NSString stringWithFormat:@"Users/%@", _userId];
     [httpClient getPath:path
              parameters:nil
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -556,7 +556,7 @@ static double const locationRefreshTime = -(5 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    NSString* path = @"paid_punch/Users/requestinvite";
+    NSString* path = @"Users/requestinvite";
     [httpClient postPath:path
               parameters:parameters
                  success:^(AFHTTPRequestOperation *operation, id responseObject){

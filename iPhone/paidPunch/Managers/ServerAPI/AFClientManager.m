@@ -10,12 +10,16 @@
 #import "AFJSONRequestOperation.h"
 #import "User.h"
 
-#if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
-static NSString* const kPaidPunchBaseURLString = @"paidpunch.com";
+#define USE_PRODUCTION_SERVER 1
+
+#if defined(USE_PRODUCTION_SERVER)
+static NSString* const kPaidPunchBaseURLString = @"api.paidpunch.com";
 static NSString* const kPaidPunchPort = @"443";
+static NSString* const kPaidPunchFullPath = @"https://api.paidpunch.com";
 #else
 static NSString* const kPaidPunchBaseURLString = @"test.paidpunch.com";
 static NSString* const kPaidPunchPort = @"80";
+static NSString* const kPaidPunchFullPath = @"http://test.paidpunch.com/paid_punch";
 #endif
 
 
@@ -32,8 +36,7 @@ static NSString* const kPaidPunchPort = @"80";
         
         [self resetPaidPunchWithIp:kPaidPunchBaseURLString];
 
-        // TODO: Merge this into the BaseURLString above
-        _appUrl = @"http://test.paidpunch.com/paid_punch";
+        _appUrl = kPaidPunchFullPath;
     }
     return self;
 }
@@ -56,7 +59,7 @@ static NSString* const kPaidPunchPort = @"80";
     }
 
 #if defined(FINAL) || defined(USE_PRODUCTION_SERVER)
-    NSString* urlString = [NSString stringWithFormat:@"https://%@:%@/", serverIp, kTraderPogPort];
+    NSString* urlString = [NSString stringWithFormat:@"https://%@:%@/", serverIp, kPaidPunchPort];
 #else
     NSString* urlString = [NSString stringWithFormat:@"http://%@:%@/", serverIp, kPaidPunchPort];
 #endif

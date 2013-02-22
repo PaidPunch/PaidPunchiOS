@@ -138,7 +138,7 @@ static double const refreshTime = -(60 * 60);
 {
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient getPath:@"paid_punch/Products"
+    [httpClient getPath:@"Products"
              parameters:nil
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
@@ -168,7 +168,7 @@ static double const refreshTime = -(60 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient putPath:@"paid_punch/Products"
+    [httpClient putPath:@"Products"
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);

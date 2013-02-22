@@ -17,7 +17,7 @@
 #import "UrlImageManager.h"
 #import "WelcomePageViewController.h"
 
-#define TESTING 1
+//#define TESTFLIGHT 0
 
 @implementation AppDelegate
 
@@ -170,7 +170,11 @@ static NSString* kAppId = @"159848747459550";
     connection.apiKey = kApptentiveAPIKey;
     
     // Localytics
+#if defined(USE_PRODUCTION_SERVER)
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"c3480e724e3348b546a0971-76c66272-5fa0-11e2-3c41-004b50a28849"];
+#else
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"add06e1e22ef9ab10bc2e72-5406e6da-5fa0-11e2-3c3f-004b50a28849"];
+#endif
     
     // Testflight
 #ifdef TESTFLIGHT

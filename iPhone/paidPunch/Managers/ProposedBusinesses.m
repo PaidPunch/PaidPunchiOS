@@ -155,7 +155,7 @@ static double const refreshTime = -(24 * 60 * 60);
 {
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient getPath:@"paid_punch/ProposedBusinesses"
+    [httpClient getPath:@"ProposedBusinesses"
              parameters:nil
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
@@ -179,7 +179,7 @@ static double const refreshTime = -(24 * 60 * 60);
                                 [[User getInstance] userId], kKeyUserId,
                                 nil];
     
-    NSString* path = [NSString stringWithFormat:@"paid_punch/ProposedBusinesses/%@/vote", [[_proposedBusinessesArray objectAtIndex:index] proposedBusinessId]];
+    NSString* path = [NSString stringWithFormat:@"ProposedBusinesses/%@/vote", [[_proposedBusinessesArray objectAtIndex:index] proposedBusinessId]];
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
@@ -207,7 +207,7 @@ static double const refreshTime = -(24 * 60 * 60);
     
     // make a post request
     AFHTTPClient* httpClient = [[AFClientManager sharedInstance] paidpunch];
-    [httpClient putPath:@"paid_punch/ProposedBusinesses/suggest"
+    [httpClient putPath:@"ProposedBusinesses/suggest"
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject){
                     NSLog(@"Retrieved: %@", responseObject);
