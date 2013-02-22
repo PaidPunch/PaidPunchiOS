@@ -234,9 +234,9 @@ static CGFloat const kLabelHeight = 40;
     {
         // Not enough credits to purchase
         _notEnoughCreditsAlert = [[UIAlertView alloc] initWithTitle:@"Insufficient Credits"
-                                                          message:@"You don't have enough credits to purchase the current punchcard. Would you like to add more credits to your account?"
+                                                          message:@"You don't have enough credits. Would you like to add more credits to your account?"
                                                          delegate:self
-                                                cancelButtonTitle:@"OK"
+                                                cancelButtonTitle:@"YES"
                                                 otherButtonTitles:@"Cancel",nil];
         
         [_notEnoughCreditsAlert show];
