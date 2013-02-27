@@ -14,3 +14,6 @@
     #import <CoreData/CoreData.h>
     #import "TestFlight.h"
 #endif
+
+// Enable when it's time for a production build
+// #define USE_PRODUCTION_SERVER 1

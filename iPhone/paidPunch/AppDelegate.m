@@ -17,8 +17,6 @@
 #import "UrlImageManager.h"
 #import "WelcomePageViewController.h"
 
-//#define TESTFLIGHT 0
-
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -177,7 +175,7 @@ static NSString* kAppId = @"159848747459550";
 #endif
     
     // Testflight
-#ifdef TESTFLIGHT
+#ifndef USE_PRODUCTION_SERVER
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     [TestFlight takeOff:@"48283637a453926066c478613208a5ec_MTg2MTg4MjAxMy0wMi0xMiAxMTo0Mjo1Mi4wMjU2Mjg"];
 #endif

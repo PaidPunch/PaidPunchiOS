@@ -10,8 +10,6 @@
 #import "AFJSONRequestOperation.h"
 #import "User.h"
 
-#define USE_PRODUCTION_SERVER 1
-
 #if defined(USE_PRODUCTION_SERVER)
 static NSString* const kPaidPunchBaseURLString = @"api.paidpunch.com";
 static NSString* const kPaidPunchPort = @"443";
@@ -19,7 +17,7 @@ static NSString* const kPaidPunchFullPath = @"https://api.paidpunch.com";
 #else
 static NSString* const kPaidPunchBaseURLString = @"test.paidpunch.com";
 static NSString* const kPaidPunchPort = @"80";
-static NSString* const kPaidPunchFullPath = @"http://test.paidpunch.com/paid_punch";
+static NSString* const kPaidPunchFullPath = @"http://test.paidpunch.com";
 #endif
 
 

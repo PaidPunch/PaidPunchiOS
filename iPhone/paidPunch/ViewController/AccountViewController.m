@@ -47,6 +47,16 @@ static NSString* const kTextSpacing = @"  ";
     
     [self createSilverBackgroundWithImage];
     
+    // Add version number
+    NSString* version = [self versionNumberDisplayString];
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _lowestYPos, stdiPhoneWidth, 15)];
+    versionLabel.backgroundColor=[UIColor clearColor];
+    versionLabel.textColor = [UIColor blackColor];
+    versionLabel.font = [UIFont boldSystemFontOfSize:10];
+    [versionLabel setText:version];
+    [versionLabel setTextAlignment:NSTextAlignmentRight];
+    [_mainView addSubview:versionLabel];
+    
     [self createAccountTable];
 }
 
@@ -58,6 +68,16 @@ static NSString* const kTextSpacing = @"  ";
 }
 
 #pragma mark - private functions
+
+- (NSString *)versionNumberDisplayString
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+    
+    return [NSString stringWithFormat:@"Version %@ (%@)",
+            majorVersion, minorVersion];
+}
 
 - (void) createAccountTable
 {
